@@ -1,0 +1,159 @@
+/* ===== File: syaa16/admin_style.css (Versi Sempurna) ===== */
+:root {
+  --bg-main: #f4f7fe;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #151d48;
+  --text-secondary: #737791;
+  --color-primary: #3b82f6; /* Biru keren */
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --border-color: #e2e8f0;
+}
+
+body {
+  background-color: var(--bg-main);
+  font-family: "Poppins", sans-serif;
+  color: var(--text-primary);
+  display: flex; /* Ini penting biar layoutnya pas */
+}
+
+#content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: none;
+  background-color: var(--bg-card);
+}
+
+/* ===== CSS BARU UNTUK SIDEBAR KEREN KAMU ===== */
+
+.sidebar-wrapper {
+  background-color: var(--bg-sidebar);
+  width: 260px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  transition: margin-left 0.3s;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar-brand i {
+  color: var(--color-success); /* Warna ikon daun jadi hijau */
+}
+
+.sidebar-menu {
+  padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.menu-header {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.5rem 0.5rem;
+}
+
+.sidebar-menu .components a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+/* INI YANG BIKIN HIGHLIGHT MENU AKTIF */
+.sidebar-menu .components li.active > a {
+  background-color: var(--color-primary);
+  color: white;
+}
+.sidebar-menu .components a:hover {
+  background-color: var(--color-primary);
+  color: white !important; /* Paksa warna jadi putih saat di hover */
+}
+
+.sidebar-menu .components a .badge {
+  font-size: 0.7rem;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+}
+
+.user-profile-block {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.logout-icon {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.logout-icon:hover {
+  color: var(--color-danger);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+

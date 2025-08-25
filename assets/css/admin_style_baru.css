@@ -1,0 +1,443 @@
+/* File: syaa16/admin_style_baru.css */
+:root {
+  --sidebar-bg: #fff;
+  --sidebar-text: #555;
+  --sidebar-hover-bg: #f0f2f5;
+  --sidebar-active-bg: #e6f0ff;
+  --sidebar-active-text: #0d6efd;
+  --main-bg: #f0f2f5;
+  --card-bg: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #e9ecef;
+}
+
+body {
+  font-family: "outfit", sans-serif;
+  background-color: var(--main-bg);
+}
+
+.admin-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1030;
+  transition: left 0.3s;
+  background: #fff;
+  border-right: 1px solid #eee;
+}
+.sidebar-header {
+  padding: 1.25rem;
+}
+.sidebar-brand {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.sidebar-brand i {
+  color: #28a745;
+  margin-right: 10px;
+}
+.sidebar-nav {
+  list-style: none;
+  padding: 1rem;
+  flex-grow: 1;
+}
+.sidebar-item {
+  margin-bottom: 5px;
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.sidebar-link i {
+  width: 20px;
+  margin-right: 15px;
+  text-align: center;
+}
+.sidebar-link:hover {
+  background-color: var(--sidebar-hover-bg);
+  color: var(--text-primary);
+}
+.sidebar-item.active > .sidebar-link {
+  background-color: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
+}
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    left: -220px;
+    position: fixed;
+  }
+  .sidebar.active {
+    left: 0;
+  }
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+
+/* Main content shift when sidebar open (desktop) */
+@media (min-width: 992px) {
+  .main-content {
+    margin-left: 220px;
+    transition: margin-left 0.3s;
+  }
+}
+
+/* ===== KONTEN UTAMA ===== */
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  height: 100vh;
+}
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.content-header h2 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.content-header p {
+  margin-bottom: 0;
+}
+
+/* ===== KARTU STATISTIK ===== */
+.stat-card {
+  background-color: var(--card-bg);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.stat-card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.icon-earnings {
+  background-color: #5a6acf;
+}
+.icon-visitors {
+  background-color: #3b82f6;
+}
+.icon-orders {
+  background-color: #f59e0b;
+}
+.icon-sales {
+  background-color: #10b981;
+}
+
+.stat-card-title {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+.stat-card-value {
+  font-weight: 600;
+}
+.stat-card-change {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ===== SECTION LAINNYA ===== */
+.dashboard-section {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.section-header h5 {
+  font-weight: 600;
+  margin: 0;
+}
+.table img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.activity-list .list-group-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-color: var(--border-color) !important;
+}
+
+.activity-list .list-group-item:first-child {
+  border-top: none;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: #fff;
+}
+
+.activity-content {
+  line-height: 1.4;
+}
+
+/* Warna-warni ikon dan badge notifikasi */
+.icon-completed {
+  background-color: #10b981;
+}
+.icon-delivery {
+  background-color: #0dcaf0;
+}
+.icon-pending {
+  background-color: #ffc107;
+}
+.icon-new {
+  background-color: #0d6efd;
+}
+
+.badge.bg-success-soft {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+.badge.bg-info-soft {
+  background-color: rgba(13, 202, 240, 0.1);
+}
+.badge.bg-warning-soft {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+.badge.bg-primary-soft {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Warna semi-transparan */
+  z-index: 999; /* Pastikan overlay berada di atas semua elemen lain */
+  display: none; /* Sembunyikan secara default */
+}
+
+#overlay.active {
+  display: block; /* Tampilkan saat kelas 'active' ditambahkan oleh JS */
+}
+
+/* ===== STYLE UNTUK HALAMAN CHAT (TAMBAHKAN INI DI BAWAH) ===== */
+
+.main-content.p-0 {
+  padding: 0 !important; /* Hapus padding default untuk halaman chat */
+}
+
+.chat-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Kolom Daftar Kontak */
+.chat-list-col {
+  width: 320px;
+  min-width: 320px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+.chat-list-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.contact-list {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+.contact-item {
+  padding: 1rem 1.25rem;
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.contact-item.active {
+  background-color: var(--sidebar-active-bg);
+}
+.contact-item.active h6,
+.contact-item.active p {
+  color: var(--sidebar-active-text) !important;
+}
+.contact-item h6 {
+  font-weight: 600;
+}
+.contact-item p {
+  font-size: 0.875rem;
+}
+
+/* Kolom Jendela Chat */
+.chat-window-col {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #e9ecef; /* Warna latar belakang area chat */
+}
+.chat-header {
+  background-color: var(--card-bg);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+.chat-messages {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.message {
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  max-width: 70%;
+  line-height: 1.5;
+}
+.message.received {
+  background-color: var(--card-bg);
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+.message.sent {
+  background-color: var(--sidebar-active-bg);
+  color: #fff;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+.chat-input-area {
+  padding: 1rem 1.5rem;
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+}
+.chat-input-area .form-control {
+  border-radius: 50px;
+  background-color: #f0f2f5;
+  border: none;
+}
+.chat-input-area .btn {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+/* ===== STYLE UNTUK FORM (TAMBAHKAN INI DI BAWAH) ===== */
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-control,
+.form-select {
+  border-color: var(--border-color);
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--sidebar-active-text);
+  box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.15);
+}
+
+.form-check-input:checked {
+  background-color: var(--green-light);
+  border-color: var(--green-light);
+}
+
+.btn-primary {
+  background-color: var(--sidebar-active-bg);
+  border-color: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #d8eee4;
+  border-color: #d8eee4;
+  color: var(--sidebar-active-text);
+}
+
+/* ===== STYLE UNTUK FORM (TAMBAHKAN INI DI BAWAH) ===== */
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-control,
+.form-select {
+    border-color: var(--border-color);
+    padding: .75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--sidebar-active-text);
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.15);
+}
+
+.form-check-input:checked {
+    background-color: var(--green-light);
+    border-color: var(--green-light);
+}
+
+.btn-primary {
+    background-color: var(--sidebar-active-bg);
+    border-color: var(--sidebar-active-bg);
+    color: var(--sidebar-active-text);
+    font-weight: 600;
+    padding: .75rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #d8eee4;
+    border-color: #d8eee4;
+    color: var(--sidebar-active-text);
+}
