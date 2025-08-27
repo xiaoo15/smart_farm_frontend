@@ -441,3 +441,6 @@ body {
     border-color: #d8eee4;
     color: var(--sidebar-active-text);
 }
+#underlinetext:hover {
+  text-decoration: underline !important;
+}

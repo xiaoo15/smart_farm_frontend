@@ -16,13 +16,17 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="admin_style_baru.css" />
+    <link rel="stylesheet" href="../../assets/css/admin_style_baru.css" />
   </head>
   <body>
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
+      
       <div class="main-content">
+        <button class="hamburger-btn me-3 mb-2 border-0 d-block d-sm-none" id="sidebarCollapse">
+            <i class="fas fa-bars"></i>
+          </button>
         <button class="hamburger-btn me-3 mb-2 border-0 d-block d-sm-none" id="sidebarCollapse">
             <i class="fas fa-bars"></i>
           </button>
@@ -31,7 +35,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="my_product.html">Products</a>
+                <a href="my_product.html" id="underlinetext" style="color: black; text-decoration: none;">Products</a>
               </li>
               <li class="breadcrumb-item active">Add New</li>
             </ol>
@@ -56,6 +60,6 @@
         </div>
       </div>
     </div>
-    <script src="app.js"></script>
+    <script src="../../assets/css/js/app.js"></script>
   </body>
 </html>
