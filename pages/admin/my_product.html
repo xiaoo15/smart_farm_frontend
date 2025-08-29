@@ -16,59 +16,212 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-     rel="stylesheet"
-     />
     <link rel="stylesheet" href="../../assets/css/admin_style_baru.css" />
+    <link rel="stylesheet" href="../../assets/css/my_product_style.css" />
   </head>
   <body>
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
       <div class="main-content">
-        <button class="hamburger-btn me-3 mb-2 border-0 d-block d-sm-none" id="sidebarCollapse">
-            <i class="fas fa-bars"></i>
-          </button>
-        <header class="page-header">
-          <h1 class="page-title">My Products</h1>
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="admin.html" id="underlinetext" style="color: black; text-decoration: none;">Dashboard</a>
-              </li>
-              <li class="breadcrumb-item active">My Products</li>
-            </ol>
-          </nav>
-        </header>
-        <div class="page-content">
-          <div class="d-flex justify-content-end mb-3">
-            <a href="add.html" class="btn btn-primary"
-              ><i class="fas fa-plus me-2"></i>Add New Product</a
-            >
+        <header class="content-header">
+          <div>
+            <h2>My Products</h2>
+            <p>Manage your smart farm products here.</p>
           </div>
-          <div class="row g-4">
-            <div class="col-md-6 col-lg-4 col-xl-3">
-              <div class="card product-card">
-                <img
-                  src="images/images (1).jpeg"
-                  class="card-img-top"
-                  alt="Product Image"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Monstera Deliciosa</h5>
-                  <p class="product-price">Rp 120.000</p>
-                </div>
-                <div class="card-footer">
-                  <a href="#" class="btn btn-outline-secondary btn-sm">Edit</a>
-                  <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
-                </div>
-              </div>
+        </header>
+
+        <div class="dashboard-section">
+          <div class="section-header">
+            <div class="d-flex flex-wrap gap-2">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Cari nama produk..."
+                style="width: 250px"
+              />
+              <select
+                id="categoryFilter"
+                class="form-select"
+                style="width: 150px"
+              >
+                <option value="all" selected>All Category</option>
+                <option value="plant">Plant</option>
+                <option value="seed">Seed</option>
+                <option value="vegetables">Vegetables</option>
+              </select>
             </div>
+            <a
+              href="add.html"
+              class="btn btn-primary-custom"
+              style="
+                background-color: #28a745;
+                border-color: #28a745;
+                color: white;
+              "
+            >
+              <i class="fas fa-plus me-2"></i>Add New Product
+            </a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Gambar</th>
+                  <th>Kode</th>
+                  <th>Nama Produk</th>
+                  <th>Satuan</th>
+                  <th>Harga</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody">
+                <tr data-category="plant">
+                  <td data-label="Gambar">
+                    <img
+                      src="../../assets/css/images/unnamed.png"
+                      alt="Produk 01"
+                      class="product-img"
+                    />
+                  </td>
+                  <td data-label="Kode">P001</td>
+                  <td data-label="Nama Produk" class="product-name">
+                    Caladium Red Star
+                  </td>
+                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Harga">Rp 75.000</td>
+                  <td data-label="Action" class="text-center">
+                    <a
+                      href="update.html"
+                      class="btn btn-sm btn-outline-secondary"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+                <tr data-category="vegetables">
+                  <td data-label="Gambar">
+                    <img
+                      src="../../assets/css/images/download (1).png"
+                      alt="Produk 02"
+                      class="product-img"
+                    />
+                  </td>
+                  <td data-label="Kode">P002</td>
+                  <td data-label="Nama Produk" class="product-name">
+                    Peace Lily
+                  </td>
+                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Harga">Rp 90.000</td>
+                  <td data-label="Action" class="text-center">
+                    <a
+                      href="update.html"
+                      class="btn btn-sm btn-outline-secondary"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+                <tr data-category="seed">
+                  <td data-label="Gambar">
+                    <img
+                      src="../../assets/css/images/pngtree-home-plant-in-pot-png-image_11520726.png"
+                      alt="Produk 03"
+                      class="product-img"
+                    />
+                  </td>
+                  <td data-label="Kode">P003</td>
+                  <td data-label="Nama Produk" class="product-name">
+                    Bibit Aglaonema
+                  </td>
+                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Harga">Rp 120.000</td>
+                  <td data-label="Action" class="text-center">
+                    <a
+                      href="update.html"
+                      class="btn btn-sm btn-outline-secondary"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p
+              id="noResult"
+              class="text-center text-muted"
+              style="display: none"
+            >
+              Produk tidak ditemukan :(
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <script src="../../assets/css/js/app.js"></script>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="notificationToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <i class="fas fa-check-circle text-success me-2"></i>
+          <strong class="me-auto">Sukses!</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">Aksi berhasil dilakukan.</div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../../assets/js/app.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        function filterProducts() {
+          var searchText = $("#searchInput").val().toLowerCase();
+          var category = $("#categoryFilter").val();
+          var found = 0;
+
+          // Loop setiap baris (tr) di dalam tbody
+          $("#productTableBody tr").each(function () {
+            var productName = $(this)
+              .find(".product-name")
+              .text()
+              .toLowerCase();
+            var productCategory = $(this).data("category");
+
+            // Cek kondisi pencarian DAN kondisi filter kategori
+            var searchMatch = productName.includes(searchText);
+            var categoryMatch =
+              category === "all" || productCategory === category;
+
+            if (searchMatch && categoryMatch) {
+              $(this).show(); // Tampilkan baris jika cocok
+              found++;
+            } else {
+              $(this).hide(); // Sembunyikan jika tidak cocok
+            }
+          });
+
+          // Tampilkan pesan "tidak ditemukan" jika perlu
+          if (found === 0) {
+            $("#noResult").show();
+          } else {
+            $("#noResult").hide();
+          }
+        }
+
+        // Jalankan fungsi filter setiap kali user mengetik atau mengubah kategori
+        $("#searchInput").on("keyup", filterProducts);
+        $("#categoryFilter").on("change", filterProducts);
+      });
+    </script>
   </body>
 </html>

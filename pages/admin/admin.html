@@ -14,10 +14,14 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../assets/css/admin_style_baru.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard_style.css" />
+    <style>
+      
+    </style>
   </head>
   <body>
     <div class="admin-wrapper">
@@ -26,9 +30,6 @@
       <div id="overlay"></div>
 
       <div class="main-content">
-        <button class="hamburger-btn me-3 mb-2 border-0 d-block d-sm-none" id="sidebarCollapse">
-            <i class="fas fa-bars"></i>
-          </button>
         <header class="content-header">
           <div class="header-welcome">
             <h2>Welcome back, Syaa!</h2>
@@ -153,17 +154,20 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../assets/css/js/app.js"></script>
+  <script src="../../assets/js/app.js"></script>
     <script>
-      // Kode untuk Chart.js (biarkan sama seperti sebelumnya)
+      // Kode untuk Chart.js dengan desain yang lebih baik
       document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           const salesChartCanvas = document.getElementById("salesChart");
           if (salesChartCanvas) {
             const ctx = salesChartCanvas.getContext("2d");
+            
+            // Membuat gradient yang lebih halus
             let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, "rgba(40, 167, 69, 0.3)");
-            gradient.addColorStop(1, "rgba(40, 167, 69, 0)");
+            gradient.addColorStop(0, "rgba(67, 97, 238, 0.3)");
+            gradient.addColorStop(0.7, "rgba(67, 97, 238, 0.1)");
+            gradient.addColorStop(1, "rgba(67, 97, 238, 0)");
 
             new Chart(ctx, {
               type: "line",
@@ -173,25 +177,65 @@
                   {
                     label: "Sales",
                     data: [120, 190, 300, 500, 200, 350, 450],
-                    borderColor: "#28a745",
+                    borderColor: "#4361ee",
                     backgroundColor: gradient,
                     fill: true,
                     tension: 0.4,
+                    borderWidth: 3,
                     pointBackgroundColor: "#fff",
-                    pointBorderColor: "#28a745",
+                    pointBorderColor: "#4361ee",
+                    pointBorderWidth: 3,
+                    pointRadius: 5,
                     pointHoverRadius: 7,
-                    pointHoverBackgroundColor: "#28a745",
+                    pointHoverBackgroundColor: "#4361ee",
                     pointHoverBorderColor: "#fff",
+                    pointHoverBorderWidth: 2,
                   },
                 ],
               },
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: { 
+                  legend: { display: false },
+                  tooltip: {
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    titleColor: '#212529',
+                    bodyColor: '#212529',
+                    borderColor: '#e2e8f0',
+                    borderWidth: 1,
+                    padding: 12,
+                    boxPadding: 6,
+                    usePointStyle: true,
+                    callbacks: {
+                      label: function(context) {
+                        return `Rp ${context.parsed.y.toLocaleString('id-ID')}`;
+                      }
+                    }
+                  }
+                },
                 scales: {
-                  y: { grid: { display: false }, ticks: { display: false } },
-                  x: { grid: { display: false } },
+                  y: { 
+                    grid: { 
+                      display: true,
+                      color: 'rgba(0, 0, 0, 0.05)'
+                    }, 
+                    ticks: { 
+                      display: true,
+                      callback: function(value) {
+                        return 'Rp ' + value.toLocaleString('id-ID');
+                      }
+                    } 
+                  },
+                  x: { 
+                    grid: { 
+                      display: false 
+                    } 
+                  },
+                },
+                interaction: {
+                  intersect: false,
+                  mode: 'index',
                 },
               },
             });

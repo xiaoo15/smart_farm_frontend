@@ -1,0 +1,56 @@
+/* File: /assets/css/form_style.css */
+
+/* Menggunakan variabel warna biar gampang diganti nanti */
+:root {
+    --primary-green: #28a745; /* Hijau Segar untuk tombol utama */
+    --neutral-gray: #6c757d;  /* Abu-abu Netral untuk tombol sekunder */
+    --tech-blue: #0d6efd;     /* Biru Teknologi untuk aksen/focus */
+    --danger-red: #dc3545;    /* Merah untuk tombol hapus */
+}
+
+/* Style Tombol Utama (Save, Update) */
+.btn-primary-custom {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #218838; /* Versi lebih gelap dari --primary-green */
+    border-color: #1e7e34;
+    color: white;
+}
+
+/* Style Tombol Hapus (Delete) */
+.btn-danger-custom {
+    background-color: var(--danger-red);
+    border-color: var(--danger-red);
+    color: white;
+}
+
+.btn-danger-custom:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: white;
+}
+
+
+/* Style Tombol Sekunder (Cancel) */
+.btn-secondary-custom {
+    background-color: var(--neutral-gray);
+    border-color: var(--neutral-gray);
+    color: white;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: white;
+}
+
+
+/* Efek focus pada input, pake warna biru "Smart" */
+.form-control:focus, .form-select:focus {
+  border-color: var(--tech-blue);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
