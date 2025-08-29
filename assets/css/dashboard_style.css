@@ -1,290 +1,207 @@
+/* File: /assets/css/admin_style_final.css */
 :root {
-        --primary: #4361ee;
-        --secondary: #6c757d;
-        --success: #28a745;
-        --info: #17a2b8;
-        --warning: #ffc107;
-        --danger: #dc3545;
-        --light: #f8f9fa;
-        --dark: #212529;
-        --background: #f9fafb;
-        --card-bg: #ffffff;
-        --text-primary: #212529;
-        --text-secondary: #6c757d;
-        --border-radius: 12px;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-        --shadow-md: 0 4px 6px rgba(0,0,0,0.05);
-        --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-        --transition: all 0.3s ease;
-      }
+  --primary: #4361ee;
+  --primary-light: #eef2ff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --background: #f9fafb;
+  --card-bg: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-radius: 12px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 80px;
+  --transition: all 0.3s ease;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  display: flex;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--sidebar-width);
+  background: var(--card-bg);
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: var(--transition);
+}
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+.sidebar-header {
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.sidebar-brand i {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-right: 12px;
+}
+.sidebar-brand span {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.sidebar.collapsed .sidebar-brand span {
+  opacity: 0;
+  display: none;
+}
+.sidebar-nav {
+  list-style: none;
+  flex: 1;
+  padding: 20px 16px;
+  overflow-y: auto;
+}
+.sidebar-item {
+  margin-bottom: 4px;
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+.sidebar-link:hover,
+.sidebar-link.active {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+.sidebar-link.active {
+  font-weight: 600;
+}
+.sidebar-link i {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+  margin-right: 16px;
+}
+.sidebar-link span {
+  opacity: 1;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.sidebar.collapsed .sidebar-link span {
+  opacity: 0;
+  display: none;
+}
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 30px;
+  transition: var(--transition);
+}
+.main-content.expanded {
+  margin-left: var(--sidebar-collapsed-width);
+}
+.sidebar-toggle {
+  position: absolute;
+  top: 24px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.sidebar-toggle:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+.sidebar.collapsed .sidebar-toggle {
+  transform: rotate(180deg);
+}
+@media (max-width: 992px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .main-content,
+  .main-content.expanded {
+    margin-left: 0;
+  }
+  .sidebar-toggle {
+    display: none;
+  } /* Sembunyikan toggle collapse di mobile */
+  .mobile-toggle {
+    display: flex !important;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1100; /* Tombol baru untuk mobile */
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+  .overlay.active {
+    display: block;
+  }
+}
+/* Tambahkan ini di file CSS-mu, gabungin sama .icon-completed, dll. */
 
-      /* Gaya dasar */
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--background);
-        color: var(--text-primary);
-        padding-top: 20px;
-      }
+.icon-processing {
+  background: linear-gradient(45deg, #4361ee, #637efd); /* Biru Kece */
+  color: white;
+}
 
-      /* Header yang lebih minimalis */
-      .content-header {
-        background: transparent;
-        padding: 0;
-        margin-bottom: 24px;
-        border: none;
-      }
+.icon-cancelled {
+  background: linear-gradient(45deg, #dc3545, #fd5e6e); /* Merah Ngeri */
+  color: white;
+}
 
-      .header-welcome h2 {
-        font-weight: 600;
-        font-size: 1.75rem;
-        margin-bottom: 4px;
-        color: var(--text-primary);
-      }
+/* Jangan lupa badge-nya juga */
+.badge.bg-primary-soft {
+  background-color: rgba(67, 97, 238, 0.1);
+  color: #4361ee;
+}
 
-      .header-welcome p {
-        color: var(--text-secondary);
-        margin-bottom: 0;
-      }
-
-      /* Pencarian dan notifikasi yang lebih halus */
-      .header-actions input {
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        padding: 10px 16px;
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-      }
-
-      .header-actions input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
-      }
-
-      .header-actions .btn {
-        width: 42px;
-        height: 42px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-        border: 1px solid #e2e8f0;
-        color: var(--text-secondary);
-        transition: var(--transition);
-      }
-
-      .header-actions .btn:hover {
-        background-color: var(--light);
-        color: var(--primary);
-      }
-
-      /* Kartu statistik yang lebih modern */
-      .stat-card {
-        background: var(--card-bg);
-        border-radius: var(--border-radius);
-        padding: 24px;
-        box-shadow: var(--shadow-md);
-        border: none;
-        transition: var(--transition);
-        height: 100%;
-      }
-
-      .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-lg);
-      }
-
-      .stat-card-icon {
-        width: 56px;
-        height: 56px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 16px;
-        font-size: 1.25rem;
-      }
-
-      .icon-earnings {
-        background-color: rgba(67, 97, 238, 0.1);
-        color: var(--primary);
-      }
-
-      .icon-orders {
-        background-color: rgba(40, 167, 69, 0.1);
-        color: var(--success);
-      }
-
-      .icon-visitors {
-        background-color: rgba(23, 162, 184, 0.1);
-        color: var(--info);
-      }
-
-      .icon-sales {
-        background-color: rgba(255, 193, 7, 0.1);
-        color: var(--warning);
-      }
-
-      .stat-card-title {
-        color: var(--text-secondary);
-        margin-bottom: 8px;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      .stat-card-value {
-        font-weight: 600;
-        font-size: 1.5rem;
-        margin-bottom: 0;
-        color: var(--text-primary);
-      }
-
-      /* Bagian dashboard */
-      .dashboard-section {
-        background: var(--card-bg);
-        border-radius: var(--border-radius);
-        padding: 24px;
-        box-shadow: var(--shadow-md);
-        margin-bottom: 24px;
-        border: none;
-      }
-
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid #e2e8f0;
-      }
-
-      .section-header h5 {
-        font-weight: 600;
-        margin-bottom: 0;
-        color: var(--text-primary);
-      }
-
-      .section-header a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 500;
-        transition: var(--transition);
-      }
-
-      .section-header a:hover {
-        color: #2c4ecd;
-      }
-
-      /* Grafik */
-      .chart-container {
-        position: relative;
-        height: 350px;
-        width: 100%;
-      }
-
-      /* Daftar aktivitas */
-      .activity-list {
-        border-radius: var(--border-radius);
-        overflow: hidden;
-      }
-
-      .activity-list .list-group-item {
-        border: none;
-        border-bottom: 1px solid #e2e8f0;
-        padding: 16px 0;
-        display: flex;
-        align-items: flex-start;
-        background: transparent;
-      }
-
-      .activity-list .list-group-item:last-child {
-        border-bottom: none;
-      }
-
-      .activity-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 16px;
-        flex-shrink: 0;
-      }
-
-      .icon-completed {
-        background-color: rgba(40, 167, 69, 0.1);
-        color: var(--success);
-      }
-
-      .icon-delivery {
-        background-color: rgba(23, 162, 184, 0.1);
-        color: var(--info);
-      }
-
-      .icon-pending {
-        background-color: rgba(255, 193, 7, 0.1);
-        color: var(--warning);
-      }
-
-      .activity-content {
-        flex-grow: 1;
-      }
-
-      .activity-content strong {
-        font-weight: 600;
-        color: var(--text-primary);
-      }
-
-      .activity-content small {
-        margin-top: 4px;
-        display: block;
-      }
-
-      .badge {
-        padding: 6px 10px;
-        border-radius: 6px;
-        font-weight: 500;
-        font-size: 0.75rem;
-      }
-
-      .bg-success-soft {
-        background-color: rgba(40, 167, 69, 0.1);
-        color: var(--success);
-      }
-
-      .bg-info-soft {
-        background-color: rgba(23, 162, 184, 0.1);
-        color: var(--info);
-      }
-
-      .bg-warning-soft {
-        background-color: rgba(255, 193, 7, 0.1);
-        color: var(--warning);
-      }
-
-      /* Responsivitas tambahan */
-      @media (max-width: 768px) {
-        .header-actions {
-          margin-top: 16px;
-          width: 100%;
-        }
-        
-        .header-actions .d-flex {
-          width: 100%;
-        }
-        
-        .header-actions input {
-          flex-grow: 1;
-        }
-        
-        .stat-card {
-          padding: 16px;
-        }
-        
-        .stat-card-icon {
-          width: 48px;
-          height: 48px;
-          margin-bottom: 12px;
-        }
-      }
+.badge.bg-danger-soft {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
