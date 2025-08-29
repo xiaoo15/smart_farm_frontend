@@ -37,6 +37,7 @@ body {
 .sidebar-header {
   padding: 1.25rem;
 }
+
 .sidebar-brand {
   color: var(--text-primary);
   text-decoration: none;
@@ -102,6 +103,57 @@ body {
     margin-left: 220px;
     transition: margin-left 0.3s;
   }
+}
+
+/* Atur link dropdown */
+.sidebar-link[data-bs-toggle="collapse"] {
+  position: relative;
+}
+
+/* Ikon panah dropdown */
+.sidebar-link .dropdown-toggle::after {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+  border: none !important;
+  font-family: "Font Awesome 5 Free"; /* Panggil Font Awesome */
+  font-weight: 900;
+  content: "\f078"; /* Kode ikon chevron-down */
+  font-size: 0.8rem;
+}
+
+/* Putar ikon panah saat dropdown dibuka */
+.sidebar-link[aria-expanded="true"] .dropdown-toggle::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Styling untuk submenu */
+.sidebar-submenu {
+  padding-left: 2.8rem; /* Bikin submenu agak menjorok ke dalam */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.sidebar-submenu .sidebar-link {
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+.sidebar-submenu .sidebar-item.active .sidebar-link {
+  background: none !important; /* Hilangkan background gradient di sub-item */
+  color: var(
+    --primary-color
+  ) !important; /* Cukup ganti warna teksnya jadi biru */
+  font-weight: 600;
+}
+
+/* Tampilkan submenu saat dicollapse */
+.collapse.show + .sidebar-submenu,
+.collapsing + .sidebar-submenu {
+  max-height: 500px; /* Atur tinggi maksimal yg cukup besar */
 }
 
 /* ===== KONTEN UTAMA ===== */
@@ -407,39 +459,39 @@ body {
 /* ===== STYLE UNTUK FORM (TAMBAHKAN INI DI BAWAH) ===== */
 
 .form-label {
-    font-weight: 500;
-    color: var(--text-primary);
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .form-control,
 .form-select {
-    border-color: var(--border-color);
-    padding: .75rem 1rem;
+  border-color: var(--border-color);
+  padding: 0.75rem 1rem;
 }
 
 .form-control:focus,
 .form-select:focus {
-    border-color: var(--sidebar-active-text);
-    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.15);
+  border-color: var(--sidebar-active-text);
+  box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.15);
 }
 
 .form-check-input:checked {
-    background-color: var(--green-light);
-    border-color: var(--green-light);
+  background-color: var(--green-light);
+  border-color: var(--green-light);
 }
 
 .btn-primary {
-    background-color: var(--sidebar-active-bg);
-    border-color: var(--sidebar-active-bg);
-    color: var(--sidebar-active-text);
-    font-weight: 600;
-    padding: .75rem 1.5rem;
+  background-color: var(--sidebar-active-bg);
+  border-color: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
 }
 
 .btn-primary:hover {
-    background-color: #d8eee4;
-    border-color: #d8eee4;
-    color: var(--sidebar-active-text);
+  background-color: #d8eee4;
+  border-color: #d8eee4;
+  color: var(--sidebar-active-text);
 }
 #underlinetext:hover {
   text-decoration: underline !important;
