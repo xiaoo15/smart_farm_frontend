@@ -50,10 +50,15 @@
 
       .main-content {
         flex: 1;
-        padding: 36px 6vw 36px 6vw;
+        padding: 36px 24px 36px 24px;
         transition: var(--transition);
         min-width: 0;
         background: var(--background);
+      }
+      @media (max-width: 991px) {
+        .main-content {
+          padding: 24px 8px 24px 8px;
+        }
       }
 
       .content-header {
