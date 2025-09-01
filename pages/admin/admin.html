@@ -23,7 +23,6 @@
   </head>
   <body>
     <div class="admin-wrapper">
-        
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
 
@@ -108,7 +107,7 @@
                     <i class="fas fa-check"></i>
                   </div>
                   <div class="activity-content">
-                    <strong>Order #1256</strong> from Revan Putra has been
+                    <strong>Order #1253</strong> from Revan Putra has been
                     completed.
                     <small class="text-muted d-block">Today, 10:42 AM</small>
                   </div>
@@ -145,6 +144,63 @@
                   >
                 </li>
               </ul>
+              <ul class="list-group list-group-flush activity-list">
+                <li class="list-group-item">
+                  <div class="activity-icon icon-cancelled">
+                    <i class="fas fa-times"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1256</strong> from Arsya Aji has been
+                    cancelled.
+                    <small class="text-muted d-block">Today, 11:30 AM</small>
+                  </div>
+                  <span class="badge bg-danger-soft text-danger ms-auto"
+                    >Cancelled</span
+                  >
+                </li>
+
+                <li class="list-group-item">
+                  <div class="activity-icon icon-processing">
+                    <i class="fas fa-box-open"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1257</strong> for Siska is now being
+                    processed.
+                    <small class="text-muted d-block">Today, 10:30 AM</small>
+                  </div>
+                  <span class="badge bg-primary-soft text-primary ms-auto"
+                    >Processing</span
+                  >
+                </li>
+                <li class="list-group-item">
+                  <div class="activity-icon icon-delivery">
+                    <i class="fas fa-truck"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1254</strong> for Citra Lestari is out for
+                    delivery.
+                    <small class="text-muted d-block">Today, 09:15 AM</small>
+                  </div>
+                  <span class="badge bg-info-soft text-info ms-auto"
+                    >Delivery</span
+                  >
+                </li>
+                <li class="list-group-item">
+                  <div class="activity-icon icon-pending">
+                    <i class="fas fa-hourglass-half"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1255</strong> from Andi Budi is awaiting
+                    payment.
+                    <small class="text-muted d-block"
+                      >Yesterday, 08:30 PM</small
+                    >
+                  </div>
+                  <span class="badge bg-warning-soft text-warning ms-auto"
+                    >Pending</span
+                  >
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -152,7 +208,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="../../assets/js/app.js"></script>
+    <script src="../../assets/js/app.js"></script>
     <script>
       // Kode untuk Chart.js dengan desain yang lebih baik
       document.addEventListener("DOMContentLoaded", () => {
@@ -160,7 +216,7 @@
           const salesChartCanvas = document.getElementById("salesChart");
           if (salesChartCanvas) {
             const ctx = salesChartCanvas.getContext("2d");
-            
+
             // Membuat gradient yang lebih halus
             let gradient = ctx.createLinearGradient(0, 0, 0, 300);
             gradient.addColorStop(0, "rgba(67, 97, 238, 0.3)");
@@ -175,17 +231,17 @@
                   {
                     label: "Sales",
                     data: [120, 190, 300, 500, 200, 350, 450],
-                    borderColor: "#4361ee",
-                    backgroundColor: gradient,
+                    borderColor: "#7cfc00",
+                    backgroundColor: "#90ee90",
                     fill: true,
                     tension: 0.4,
                     borderWidth: 3,
                     pointBackgroundColor: "#fff",
-                    pointBorderColor: "#4361ee",
+                    pointBorderColor: "#7cfc00",
                     pointBorderWidth: 3,
                     pointRadius: 5,
                     pointHoverRadius: 7,
-                    pointHoverBackgroundColor: "#4361ee",
+                    pointHoverBackgroundColor: "#7cfc00",
                     pointHoverBorderColor: "#fff",
                     pointHoverBorderWidth: 2,
                   },
@@ -194,46 +250,46 @@
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { 
+                plugins: {
                   legend: { display: false },
                   tooltip: {
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    titleColor: '#212529',
-                    bodyColor: '#212529',
-                    borderColor: '#e2e8f0',
+                    backgroundColor: "#90ee90",
+                    titleColor: "#212529",
+                    bodyColor: "#212529",
+                    borderColor: "#7cfc00",
                     borderWidth: 1,
                     padding: 12,
                     boxPadding: 6,
                     usePointStyle: true,
                     callbacks: {
-                      label: function(context) {
-                        return `Rp ${context.parsed.y.toLocaleString('id-ID')}`;
-                      }
-                    }
-                  }
+                      label: function (context) {
+                        return `Rp ${context.parsed.y.toLocaleString("id-ID")}`;
+                      },
+                    },
+                  },
                 },
                 scales: {
-                  y: { 
-                    grid: { 
+                  y: {
+                    grid: {
                       display: true,
-                      color: 'rgba(0, 0, 0, 0.05)'
-                    }, 
-                    ticks: { 
+                      color: "rgba(0, 0, 0, 0.05)",
+                    },
+                    ticks: {
                       display: true,
-                      callback: function(value) {
-                        return 'Rp ' + value.toLocaleString('id-ID');
-                      }
-                    } 
+                      callback: function (value) {
+                        return "Rp " + value.toLocaleString("id-ID");
+                      },
+                    },
                   },
-                  x: { 
-                    grid: { 
-                      display: false 
-                    } 
+                  x: {
+                    grid: {
+                      display: false,
+                    },
                   },
                 },
                 interaction: {
                   intersect: false,
-                  mode: 'index',
+                  mode: "index",
                 },
               },
             });

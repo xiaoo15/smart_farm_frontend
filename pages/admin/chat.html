@@ -26,30 +26,6 @@
     <link rel="stylesheet" href="../../assets/css/sidebar_style.css" />
 
     <style>
-      :root {
-        --primary: #4361ee;
-        --primary-light: #eef2ff;
-        --primary-dark: #3651d3;
-        --secondary: #6c757d;
-        --success: #28a745;
-        --info: #17a2b8;
-        --warning: #ffc107;
-        --danger: #dc3545;
-        --light: #f8f9fa;
-        --dark: #212529;
-        --background: #f9fafb;
-        --card-bg: #ffffff;
-        --text-primary: #212529;
-        --text-secondary: #6c757d;
-        --border-radius: 10px;
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
-        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.07);
-        --transition: all 0.2s ease;
-        --border-color: #e2e8f0;
-        --sidebar-width: 250px;
-      }
-
       body {
         font-family: "Inter", sans-serif;
         background-color: var(--background);
@@ -72,7 +48,8 @@
         flex-shrink: 0;
         z-index: 1020;
         background: transparent;
-        transition: flex-basis 0.3s, min-width 0.3s, max-width 0.3s, width 0.3s, left 0.3s;
+        transition: flex-basis 0.3s, min-width 0.3s, max-width 0.3s, width 0.3s,
+          left 0.3s;
       }
       #sidebar-container.collapsed {
         flex-basis: var(--sidebar-collapsed-width);
@@ -81,7 +58,8 @@
         width: var(--sidebar-collapsed-width);
       }
 
-      .main-content, #content {
+      .main-content,
+      #content {
         flex: 1 1 0%;
         min-width: 0;
         display: flex;
@@ -125,7 +103,7 @@
       }
 
       .navbar-brand img {
-        border: 2px solid var(--primary);
+        border: 2px solid #ffffff;
       }
 
       .chat-container {
@@ -154,11 +132,11 @@
       .chat-header {
         padding: 15px 20px;
         border-bottom: 1px solid var(--border-color);
-        background-color: var(--primary-light);
+        background-color: #ffffff;
       }
 
       .chat-header h6 {
-        color: var(--primary);
+        color: #000000;
       }
 
       .chat-messages {
@@ -178,8 +156,8 @@
       }
 
       .message.sent {
-        background-color: var(--primary);
-        color: white;
+        background-color: #111;
+        color: #fff;
         margin-left: auto;
         border-bottom-right-radius: 5px;
       }
@@ -221,7 +199,7 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: var(--primary);
+        background-color: #111;
         border: none;
         display: flex;
         align-items: center;
@@ -229,7 +207,7 @@
       }
 
       #sendButton:hover {
-        background-color: var(--primary-dark);
+        background-color: #ffffff;
       }
 
       .contact-item {
@@ -240,11 +218,11 @@
 
       .contact-item:hover,
       .contact-item.active {
-        background-color: var(--primary-light);
+        background-color: #ceffcf;
       }
 
       .contact-item.active {
-        border-left: 3px solid var(--primary);
+        border-left: 3px solid #111;
       }
 
       .contact-item .text-muted {
@@ -327,7 +305,7 @@
       }
 
       #backToChatList {
-        color: var(--primary);
+        color: #111;
       }
 
       .image-message img {
@@ -347,7 +325,8 @@
           height: 100vh;
           z-index: 1050;
           background: white;
-          transition: left 0.3s, flex-basis 0.3s, min-width 0.3s, max-width 0.3s, width 0.3s;
+          transition: left 0.3s, flex-basis 0.3s, min-width 0.3s, max-width 0.3s,
+            width 0.3s;
         }
         #sidebar-container.active {
           left: 0;
@@ -358,7 +337,8 @@
         #overlay.active {
           display: block;
         }
-        .main-content, #content {
+        .main-content,
+        #content {
           width: 100vw;
           margin-left: 0;
         }
@@ -397,9 +377,8 @@
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
       <div id="content">
-
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <button class="btn btn-primary d-md-none" id="sidebarCollapse">
+          <button class="btn btn-dark d-md-none" id="sidebarCollapse">
             <i class="bi bi-list"></i> Menu
           </button>
         </div>
@@ -578,7 +557,7 @@
 
                   <button
                     type="submit"
-                    class="btn btn-primary rounded-circle ms-2"
+                    class="btn btn-dark rounded-circle ms-2"
                     id="sendButton"
                   >
                     <i class="bi bi-send-fill"></i>

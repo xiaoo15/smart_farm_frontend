@@ -1,153 +1,182 @@
-<style>
-  
-</style>
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
 
-<!-- Sidebar Toggle Button -->
-<div class="sidebar-toggle hamburger-btn" id="sidebarToggle">
-  <i class="fas fa-bars"></i>
-</div>
+    <!-- Sidebar Toggle Button -->
+    <div class="sidebar-toggle hamburger-btn" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+    </div>
 
-<!-- Sidebar -->
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <a href="admin.html" class="sidebar-brand">
-      <i class="fas fa-leaf"></i>
-      <span>SmartFarm</span>
-    </a>
-  </div>
-  <ul class="sidebar-nav">
-    <li class="sidebar-item" data-page="admin.html">
-      <a href="admin.html" class="sidebar-link"
-        ><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a
-      >
-    </li>
-  <li class="sidebar-item" data-page="product.html">
-      <a href="product.html" class="sidebar-link"
-        ><i class="fas fa-box"></i><span>Products</span></a
-      >
-    </li>
-    <li class="sidebar-item" data-page="orders.html">
-      <a href="orders.html" class="sidebar-link"
-        ><i class="fas fa-shopping-cart"></i><span>Orders</span></a
-      >
-    </li>
-    <li class="sidebar-item" data-page="chat.html">
-      <a href="chat.html" class="sidebar-link active"
-        ><i class="fas fa-comments"></i><span>Messages</span></a
-      >
-    </li>
-    <li class="sidebar-item" data-page="store.html">
-      <a href="store.html" class="sidebar-link"
-        ><i class="fas fa-store"></i><span>Store Settings</span></a
-      >
-    </li>
-    <li class="sidebar-item" data-page="customers.html">
-      <a href="customers.html" class="sidebar-link"
-        ><i class="fas fa-users"></i><span>Customers</span></a
-      >
-    </li>
-  </ul>
-  <div class="sidebar-footer">
-    <a href="#" class="logout-link"
-      ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
-    >
-  </div>
-</nav>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Elements
-    const sidebar = document.getElementById("sidebar");
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <a href="admin.html" class="sidebar-brand">
+        <i class="fas fa-leaf"></i>
+        <span class="sidebar-brand-text">SmartFarm</span>
+        </a>
+        <button class="sidebar-toggle hamburger-btn desktop-toggle" id="sidebarToggleDesktop" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <ul class="sidebar-nav">
+        <li class="sidebar-item" data-page="admin.html">
+        <a href="admin.html" class="sidebar-link"
+            ><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a
+        >
+        </li>
+    <li class="sidebar-item" data-page="product.html">
+        <a href="product.html" class="sidebar-link"
+            ><i class="fas fa-box"></i><span>Products</span></a
+        >
+        </li>
+        <li class="sidebar-item" data-page="orders.html">
+        <a href="orders.html" class="sidebar-link"
+            ><i class="fas fa-shopping-cart"></i><span>Orders</span></a
+        >
+        </li>
+        <li class="sidebar-item" data-page="chat.html">
+        <a href="chat.html" class="sidebar-link active"
+            ><i class="fas fa-comments"></i><span>Messages</span></a
+        >
+        </li>
+        <li class="sidebar-item" data-page="store.html">
+        <a href="store.html" class="sidebar-link"
+            ><i class="fas fa-store"></i><span>Store Settings</span></a
+        >
+        </li>
+        <li class="sidebar-item" data-page="customers.html">
+        <a href="customers.html" class="sidebar-link"
+            ><i class="fas fa-users"></i><span>Customers</span></a
+        >
+        </li>
+    </ul>
+    <div class="sidebar-footer">
+        <a href="#" class="logout-link"
+        ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+        >
+    </div>
+    </nav>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Elements
+        const sidebar = document.getElementById("sidebar");
     const sidebarToggle = document.getElementById("sidebarToggle");
-    const overlay = document.getElementById("overlay");
-    const mainContent = document.getElementById("mainContent");
+    const sidebarToggleDesktop = document.getElementById("sidebarToggleDesktop");
+        const overlay = document.getElementById("overlay");
+        const mainContent = document.getElementById("mainContent");
 
-    // Toggle sidebar visibility
-    function toggleSidebar(e) {
-      if (e) e.stopPropagation();
+        // Toggle sidebar visibility
+        function toggleSidebar(e) {
+        if (e) e.stopPropagation();
 
-      const isMobile = window.innerWidth < 993;
+        const isMobile = window.innerWidth < 993;
 
-      if (isMobile) {
-        sidebar.classList.toggle("open");
-        overlay.classList.toggle("active");
-        document.body.style.overflow = sidebar.classList.contains("open")
-          ? "hidden"
-          : "";
-      } else {
-        sidebar.classList.toggle("collapsed");
-        if (mainContent) {
-          mainContent.classList.toggle("expanded");
+        if (isMobile) {
+            sidebar.classList.toggle("open");
+            overlay.classList.toggle("active");
+            document.body.style.overflow = sidebar.classList.contains("open")
+            ? "hidden"
+            : "";
+        } else {
+            sidebar.classList.toggle("collapsed");
+            if (mainContent) {
+            mainContent.classList.toggle("expanded");
+            }
         }
-      }
-    }
+        }
 
-    // Initialize sidebar state
-    function initSidebar() {
-      const isMobile = window.innerWidth < 993;
+        // Initialize sidebar state
+        function initSidebar() {
+        const isMobile = window.innerWidth < 993;
 
-      if (isMobile) {
-        sidebar.classList.remove("collapsed", "open");
-        overlay.classList.remove("active");
-        document.body.style.overflow = "";
-      } else {
+        if (isMobile) {
+            sidebar.classList.remove("collapsed", "open");
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+        } else {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("active");
+        }
+        }
+
+        // Set active nav item based on current page
+        function setActivePage() {
+        const currentPage =
+            window.location.pathname.split("/").pop() || "admin.html";
+        const navItems = document.querySelectorAll(".sidebar-item");
+
+        navItems.forEach((item) => {
+            const link = item.querySelector(".sidebar-link");
+            if (link) {
+            link.classList.remove("active");
+            if (item.getAttribute("data-page") === currentPage) {
+                link.classList.add("active");
+            }
+            }
+        });
+        }
+
+        // Close sidebar when clicking on overlay
+        function closeSidebar() {
         sidebar.classList.remove("open");
         overlay.classList.remove("active");
-      }
-    }
-
-    // Set active nav item based on current page
-    function setActivePage() {
-      const currentPage =
-        window.location.pathname.split("/").pop() || "admin.html";
-      const navItems = document.querySelectorAll(".sidebar-item");
-
-      navItems.forEach((item) => {
-        const link = item.querySelector(".sidebar-link");
-        if (link) {
-          link.classList.remove("active");
-          if (item.getAttribute("data-page") === currentPage) {
-            link.classList.add("active");
-          }
+        document.body.style.overflow = "";
         }
-      });
-    }
 
-    // Close sidebar when clicking on overlay
-    function closeSidebar() {
-      sidebar.classList.remove("open");
-      overlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-
-    // Event Listeners
-    sidebarToggle.addEventListener("click", toggleSidebar);
-    overlay.addEventListener("click", closeSidebar);
-
-    // Close sidebar when clicking on a link (mobile only)
-    const sidebarLinks = document.querySelectorAll(
-      ".sidebar-link, .logout-link"
-    );
-    sidebarLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        if (window.innerWidth < 993) {
-          closeSidebar();
+        // Event Listeners
+        sidebarToggle.addEventListener("click", toggleSidebar);
+        if (sidebarToggleDesktop) {
+        sidebarToggleDesktop.addEventListener("click", function(e) {
+            toggleSidebar(e);
+            // Sembunyikan tombol jika sidebar sudah collapsed
+            setTimeout(() => {
+            if (sidebar.classList.contains('collapsed')) {
+                sidebarToggleDesktop.setAttribute('hidden', '');
+            } else {
+                sidebarToggleDesktop.removeAttribute('hidden');
+            }
+            }, 300);
+        });
         }
-      });
+        // Tampilkan/hide tombol saat resize atau init
+        function updateDesktopToggleBtn() {
+        if (window.innerWidth >= 993) {
+            if (sidebar.classList.contains('collapsed')) {
+            sidebarToggleDesktop.setAttribute('hidden', '');
+            } else {
+            sidebarToggleDesktop.removeAttribute('hidden');
+            }
+        } else {
+            sidebarToggleDesktop.removeAttribute('hidden');
+        }
+        }
+        window.addEventListener('resize', updateDesktopToggleBtn);
+        updateDesktopToggleBtn();
+        overlay.addEventListener("click", closeSidebar);
+
+        // Close sidebar when clicking on a link (mobile only)
+        const sidebarLinks = document.querySelectorAll(
+        ".sidebar-link, .logout-link"
+        );
+        sidebarLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+            if (window.innerWidth < 993) {
+            closeSidebar();
+            }
+        });
+        });
+
+        // Close sidebar when pressing Escape key
+        document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && sidebar.classList.contains("open")) {
+            closeSidebar();
+        }
+        });
+
+        // Reinitialize on window resize
+        window.addEventListener("resize", initSidebar);
+
+        // Initialize
+        setActivePage();
+        initSidebar();
     });
-
-    // Close sidebar when pressing Escape key
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && sidebar.classList.contains("open")) {
-        closeSidebar();
-      }
-    });
-
-    // Reinitialize on window resize
-    window.addEventListener("resize", initSidebar);
-
-    // Initialize
-    setActivePage();
-    initSidebar();
-  });
-</script>
+    </script>
