@@ -41,42 +41,10 @@
         <div class="header-icons d-inline-flex align-items-center">
           <!-- Keranjang -->
           <div class="nav-item dropdown me-3">
-            <a href="#" class="nav-link position-relative" id="navbarCartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="../pages/public/keranjang.html" class="nav-link position-relative" id="navbarCartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fas fa-shopping-cart"></i>
               <span class="cart-badge badge rounded-circle bg-danger position-absolute top-0 start-100 translate-middle">1</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="navbarCartDropdown" style="width: 320px; min-width: 280px;">
-              <li class="dropdown-header fw-bold mb-2">Keranjang Anda</li>
-              <li class="d-flex align-items-center mb-2">
-                <img src="https://via.placeholder.com/40" alt="Produk 1" class="me-2 rounded" />
-                <div class="flex-grow-1">
-                  <div>Produk 1</div>
-                  <small>Qty: 1</small>
-                </div>
-                <div class="text-success fw-bold">Rp 50.000</div>
-              </li>
-              <!-- Tambah produk lain jika perlu -->
-              <li><hr class="dropdown-divider"></li>
-              <li><a href="../pages/public/keranjang.html" class="btn btn-success w-auto">Lihat Keranjang</a></li>
-            </ul>
-          </div>
-
-          <!-- Chat AI -->
-          <div class="nav-item dropdown me-3">
-            <a class="nav-link position-relative" href="#" id="navbarChatDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-comment"></i>
-              <span class="cart-badge badge rounded-circle bg-danger position-absolute top-0 start-100 translate-middle">!</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end p-3 chat-dropdown" aria-labelledby="navbarChatDropdown" style="width: 320px; min-width: 280px; min-height: 400px;">
-              <div class="chat-header fw-bold mb-2">Chat AI SmartFarm</div>
-              <div class="chat-messages" id="chatMessages" style="height: 280px; overflow-y: auto; border: 1px solid #ddd; border-radius: 6px; padding: 10px; background: #f9f9f9;">
-                <!-- Bubble chat akan muncul di sini -->
-              </div>
-              <form id="chatForm" class="d-flex mt-2" autocomplete="off">
-                <input type="text" id="chatInput" class="form-control me-2" placeholder="Tanya sesuatu..." required />
-                <button type="submit" class="btn btn-success">Kirim</button>
-              </form>
-            </div>
           </div>
 
           <!-- User icon -->
@@ -121,89 +89,3 @@
   }
 </style>
 
-<!-- JS -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Data contoh untuk notifikasi (ganti dengan data API sungguhan)
-    const notifications = [
-      { title: "Pesanan Anda #12345 sedang dikirim!", time: "10 menit yang lalu" },
-      { title: "Promo baru! Diskon 50% untuk bibit!", time: "2 jam yang lalu" },
-      { title: "Barang di wishlist Anda sudah tersedia.", time: "1 hari yang lalu" }
-    ];
-
-    const notifDropdownTrigger = document.getElementById('navbarNotifDropdown');
-    const notificationDropdown = document.getElementById('notification-dropdown');
-
-    // Fungsi untuk memuat notifikasi
-    function loadNotifications() {
-      if (!notificationDropdown) return;
-      let html = `<li class="dropdown-header">Notifikasi Terbaru</li>`;
-
-      if (notifications.length > 0) {
-        notifications.forEach(notif => {
-          html += `
-            <li>
-              <a class="dropdown-item" href="#">
-                <div class="fw-bold">${notif.title}</div>
-                <small class="text-muted">${notif.time}</small>
-              </a>
-            </li>`;
-        });
-        html += `<li><hr class="dropdown-divider"></li><li><a class="dropdown-item text-center" href="#">Lihat Semua Notifikasi</a></li>`;
-      } else {
-        html += `<li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="#">Tidak ada notifikasi baru.</a></li>`;
-      }
-      notificationDropdown.innerHTML = html;
-    }
-
-    if (notifDropdownTrigger) {
-      notifDropdownTrigger.addEventListener('show.bs.dropdown', loadNotifications);
-    }
-
-    // Chat AI sederhana
-    const chatForm = document.getElementById('chatForm');
-    const chatInput = document.getElementById('chatInput');
-    const chatMessages = document.getElementById('chatMessages');
-
-    // Fungsi menambahkan bubble chat
-    function addChatBubble(message, sender = 'ai') {
-      const bubble = document.createElement('div');
-      bubble.classList.add('chat-bubble', sender);
-      bubble.textContent = message;
-      chatMessages.appendChild(bubble);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    // Respon AI sederhana (demo)
-    function getAIResponse(userMessage) {
-      const msg = userMessage.toLowerCase();
-      if (msg.includes('halo') || msg.includes('hai')) {
-        return 'Halo! Ada yang bisa saya bantu?';
-      } else if (msg.includes('harga')) {
-        return 'Harga bibit dan sayuran bervariasi, silakan cek katalog kami.';
-      } else if (msg.includes('cara beli')) {
-        return 'Untuk membeli, pilih produk lalu klik tombol "Beli".';
-      } else if (msg.includes('terima kasih') || msg.includes('makasih')) {
-        return 'Sama-sama! Senang bisa membantu.';
-      } else {
-        return 'Maaf, saya belum mengerti. Bisa ulangi dengan kata lain?';
-      }
-    }
-
-    chatForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const userMessage = chatInput.value.trim();
-      if (!userMessage) return;
-
-      // Tampilkan pesan user
-      addChatBubble(userMessage, 'user');
-      chatInput.value = '';
-
-      // Simulasi delay balasan AI
-      setTimeout(() => {
-        const aiResponse = getAIResponse(userMessage);
-        addChatBubble(aiResponse, 'ai');
-      }, 700);
-    });
-  });
-</script>

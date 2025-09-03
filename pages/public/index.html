@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-
+          
         <div class="voucher-section row g-3 mb-4">
           <div class="col-md-6">
             <a href="#" class="voucher-card"
@@ -138,22 +138,48 @@
         </div>
       </div>
     </main>
-
+    <div id="chat-placeholder"></div>
     <script>
       async function loadHeader() {
-  try {
-    const response = await fetch("../../components/_navbar_public.html");
-    if (response.ok) {
-      const headerContent = await response.text();
-      document.getElementById("header-placeholder").innerHTML = headerContent;
-    } else {
-      console.error("Gagal memuat _navbar_public.html:", response.statusText);
+    try {
+      const response = await fetch("../../components/_navbar_public.html");
+      if (response.ok) {
+        const headerContent = await response.text();
+        document.getElementById("header-placeholder").innerHTML = headerContent;
+      } else {
+        console.error(
+          "Gagal memuat _navbar_public.html:",
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error saat memuat file:", error);
     }
-  } catch (error) {
-    console.error("Error saat memuat file:", error);
   }
-}
-document.addEventListener("DOMContentLoaded", loadHeader);
+
+  async function loadChatDropdown() {
+    try {
+      const response = await fetch("./chat.html");
+      if (response.ok) {
+        const chatContent = await response.text();
+        document.getElementById("chat-placeholder").innerHTML = chatContent;
+
+        // PANGGIL SKRIP CHAT DI SINI!
+        const chatScript = document.createElement("script");
+        chatScript.src = "../../assets/js/chat.js";
+        document.body.appendChild(chatScript);
+
+      } else {
+        console.error("Gagal memuat chat.html:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error saat memuat file:", error);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    loadHeader();
+    loadChatDropdown();
+  });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>

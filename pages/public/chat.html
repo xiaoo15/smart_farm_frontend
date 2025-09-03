@@ -1,0 +1,46 @@
+<div class="chat-container">
+  <div class="nav-item dropdown">
+    <a
+      class="nav-link"
+      href="#"
+      id="navbarChatDropdown"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <div class="chat-icon-btn">
+        <i class="fas fa-comment"></i>
+      </div>
+    </a>
+    <div
+      class="dropdown-menu dropdown-menu-end p-3 chat-dropdown"
+      aria-labelledby="navbarChatDropdown"
+      style="width: 320px; min-width: 280px; min-height: 400px"
+    >
+      <div class="chat-header fw-bold mb-2">Chat dengan admin</div>
+      <div
+        class="chat-messages"
+        id="chatMessages"
+        style="
+          height: 280px;
+          overflow-y: auto;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          padding: 10px;
+          background: #f9f9f9;
+        "
+      >
+        </div>
+      <form id="chatForm" class="d-flex mt-2" autocomplete="off">
+        <input
+          type="text"
+          id="chatInput"
+          class="form-control me-2"
+          placeholder="Tanya sesuatu..."
+          required
+        />
+        <button type="submit" class="btn btn-success">Kirim</button>
+      </form>
+    </div>
+  </div>
+</div>
