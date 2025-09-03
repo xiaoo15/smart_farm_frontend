@@ -480,3 +480,23 @@ body {
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
   background: #a5a5a5;
 }
+
+/* Tambahkan ini di akhir file /assets/css/admin_style_final.css */
+
+.notification-badge {
+    background-color: var(--danger);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 50px; /* Bikin jadi kapsul */
+    line-height: 1.5;
+    transition: var(--transition);
+    opacity: 1;
+}
+
+/* Sembunyikan badge saat sidebar di-collapse (biar nggak aneh) */
+.sidebar.collapsed .notification-badge {
+    opacity: 0;
+    display: none;
+}
