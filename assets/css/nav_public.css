@@ -9,6 +9,22 @@
         font-family: "Poppins", sans-serif;
         background-color: var(--light-grey);
       }
+      .login{
+        text-decoration: none;
+        color: #000000;
+      }
+      .login:hover{
+        text-decoration: underline;
+      }
+      
+      .cart-badge {
+    width: 20px; /* Atur lebar */
+    height: 20px; /* Atur tinggi agar sama dengan lebar */
+    display: flex; /* Gunakan flexbox untuk menengahkan konten */
+    justify-content: center; /* Tengahkan horizontal */
+    align-items: center; /* Tengahkan vertikal */
+    padding: 0; /* Hapus padding default Bootstrap */
+  }
       .top-bar {
         background-color: var(--primary-green);
         padding: 0.25rem 0;
@@ -172,3 +188,5 @@
         font-size: 0.75rem;
         color: #6c757d;
       }
+
+      
