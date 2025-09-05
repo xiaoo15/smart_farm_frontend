@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Dashboard Analytics</title>
-
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,9 +22,8 @@
     />
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
     <style>
-      /* Style tambahan untuk animasi dan tampilan yang lebih baik */
       .stat-card {
-        opacity: 0; /* Sembunyikan kartu awalnya */
+        opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.5s ease-out, transform 0.5s ease-out;
       }
@@ -178,36 +176,90 @@
         </div>
 
         <div class="row g-4 mb-4">
-          <div class="col-lg-8">
-            <div class="dashboard-section">
-              <div class="section-header">
-                <h5>Sales Statistics</h5>
-                <div>
-                  <button class="btn btn-sm btn-outline-secondary active">
-                    Week
-                  </button>
-                  <button class="btn btn-sm btn-outline-secondary">
-                    Month
-                  </button>
-                  <button class="btn btn-sm btn-outline-secondary">Year</button>
-                </div>
-              </div>
-              <div class="chart-container">
-                <canvas id="salesChart"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="dashboard-section">
-              <div class="section-header">
-                <h5>Traffic Sources</h5>
-              </div>
-              <div class="chart-container">
-                <canvas id="trafficChart"></canvas>
-              </div>
-            </div>
-          </div>
+  <div class="col-lg-8">
+    <div class="dashboard-section">
+      <div class="section-header">
+        <h5><i class="fas fa-chart-line me-2 text-primary"></i>Sales Statistics</h5>
+        <div class="btn-group btn-group-sm" role="group">
+          <button type="button" class="btn btn-outline-primary active">Week</button>
+          <button type="button" class="btn btn-outline-primary">Month</button>
+          <button type="button" class="btn btn-outline-primary">Year</button>
         </div>
+      </div>
+      <div class="chart-container" style="height: 300px;">
+        <canvas id="salesChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="dashboard-section">
+      <div class="section-header">
+        <h5><i class="fas fa-bullseye me-2 text-info"></i>Traffic Sources</h5>
+      </div>
+      
+      <ul class="list-unstyled traffic-sources-list">
+        
+        <li class="traffic-source-item">
+          <div class="source-info">
+            <i class="fab fa-google source-icon google"></i>
+            <div>
+              <div class="source-name">Google Search</div>
+              <small class="text-muted">Direct Organic</small>
+            </div>
+          </div>
+          <div class="source-value">1,234</div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45"></div>
+          </div>
+        </li>
+
+        <li class="traffic-source-item">
+          <div class="source-info">
+            <i class="fab fa-instagram source-icon instagram"></i>
+            <div>
+              <div class="source-name">Instagram</div>
+              <small class="text-muted">Social Media</small>
+            </div>
+          </div>
+          <div class="source-value">876</div>
+           <div class="progress" style="height: 6px;">
+            <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30"></div>
+          </div>
+        </li>
+
+        <li class="traffic-source-item">
+          <div class="source-info">
+            <i class="fas fa-envelope source-icon email"></i>
+            <div>
+              <div class="source-name">Email Campaign</div>
+              <small class="text-muted">Marketing</small>
+            </div>
+          </div>
+          <div class="source-value">543</div>
+           <div class="progress" style="height: 6px;">
+            <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15"></div>
+          </div>
+        </li>
+
+         <li class="traffic-source-item">
+          <div class="source-info">
+            <i class="fas fa-link source-icon direct"></i>
+            <div>
+              <div class="source-name">Direct Visit</div>
+              <small class="text-muted">Direct</small>
+            </div>
+          </div>
+          <div class="source-value">321</div>
+           <div class="progress" style="height: 6px;">
+            <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10"></div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
 
         <div class="row g-4">
           <div class="col-lg-7">
@@ -218,69 +270,72 @@
                   >View All Orders</a
                 >
               </div>
-              <ul class="list-group list-group-flush activity-list">
-                <li class="list-group-item d-flex align-items-center">
-                  <div class="activity-icon icon-completed">
-                    <i class="fas fa-check"></i>
-                  </div>
+
+              <ul class="list-group list-group-flush activity-feed">
+                <li class="list-group-item activity-item">
+                  <div class="activity-avatar avatar-success">RP</div>
                   <div class="activity-content">
-                    <strong>Order #1253</strong> from Revan Putra has been
-                    completed.
-                    <small class="text-muted d-block">Today, 10:42 AM</small>
+                    <p class="mb-0">
+                      <strong>Revan Putra</strong> just completed an order
+                      (#1253).
+                    </p>
+                    <small class="text-muted">Today, 10:42 AM</small>
                   </div>
                   <span class="badge bg-success-soft text-success ms-auto"
                     >Completed</span
                   >
                 </li>
-                <li class="list-group-item d-flex align-items-center">
-                  <div class="activity-icon icon-delivery">
-                    <i class="fas fa-truck"></i>
-                  </div>
+
+                <li class="list-group-item activity-item">
+                  <div class="activity-avatar avatar-info">CL</div>
                   <div class="activity-content">
-                    <strong>Order #1254</strong> for Citra Lestari is out for
-                    delivery.
-                    <small class="text-muted d-block">Today, 09:15 AM</small>
+                    <p class="mb-0">
+                      Order #1254 for <strong>Citra Lestari</strong> is out for
+                      delivery.
+                    </p>
+                    <small class="text-muted">Today, 09:15 AM</small>
                   </div>
                   <span class="badge bg-info-soft text-info ms-auto"
-                    >Delivery</span
+                    >Shipped</span
                   >
                 </li>
-                <li class="list-group-item d-flex align-items-center">
-                  <div class="activity-icon icon-pending">
-                    <i class="fas fa-hourglass-half"></i>
-                  </div>
+
+                <li class="list-group-item activity-item">
+                  <div class="activity-avatar avatar-warning">AB</div>
                   <div class="activity-content">
-                    <strong>Order #1255</strong> from Andi Budi is awaiting
-                    payment confirmation.
-                    <small class="text-muted d-block"
-                      >Yesterday, 08:30 PM</small
-                    >
+                    <p class="mb-0">
+                      <strong>Andi Budi</strong> has a pending payment for order
+                      #1255.
+                    </p>
+                    <small class="text-muted">Yesterday, 08:30 PM</small>
                   </div>
                   <span class="badge bg-warning-soft text-warning ms-auto"
                     >Pending</span
                   >
                 </li>
-                <li class="list-group-item d-flex align-items-center">
-                  <div class="activity-icon icon-cancelled">
-                    <i class="fas fa-times"></i>
-                  </div>
+
+                <li class="list-group-item activity-item">
+                  <div class="activity-avatar avatar-danger">AA</div>
                   <div class="activity-content">
-                    <strong>Order #1256</strong> from Arsya Aji has been
-                    cancelled.
-                    <small class="text-muted d-block">Today, 11:30 AM</small>
+                    <p class="mb-0">
+                      Order #1256 from <strong>Arsya Aji</strong> has been
+                      cancelled.
+                    </p>
+                    <small class="text-muted">Today, 11:30 AM</small>
                   </div>
                   <span class="badge bg-danger-soft text-danger ms-auto"
                     >Cancelled</span
                   >
                 </li>
-                <li class="list-group-item d-flex align-items-center">
-                  <div class="activity-icon icon-processing">
-                    <i class="fas fa-box-open"></i>
-                  </div>
+
+                <li class="list-group-item activity-item">
+                  <div class="activity-avatar avatar-primary">S</div>
                   <div class="activity-content">
-                    <strong>Order #1257</strong> for Siska is now being
-                    processed.
-                    <small class="text-muted d-block">Today, 10:30 AM</small>
+                    <p class="mb-0">
+                      New order #1257 from <strong>Siska</strong> is now
+                      processing.
+                    </p>
+                    <small class="text-muted">Today, 10:30 AM</small>
                   </div>
                   <span class="badge bg-primary-soft text-primary ms-auto"
                     >Processing</span
@@ -294,107 +349,128 @@
             <div class="dashboard-section">
               <div class="section-header">
                 <h5>Top Selling Products</h5>
+                <a href="products.html" class="btn btn-sm btn-outline-primary"
+                  >View All</a
+                >
               </div>
-              <div class="list-group list-group-flush">
-                <div class="list-group-item d-flex align-items-center">
+
+              <ul class="list-group list-group-flush top-products-list">
+                <li class="list-group-item top-product-item">
+                  <div class="product-rank gold">
+                    <i class="fas fa-trophy"></i>
+                  </div>
                   <img
-                    src="https://via.placeholder.com/40"
-                    class="rounded me-3"
-                    alt="Product"
+                    src="https://images.unsplash.com/photo-1584589167171-541ce45f1eea?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    class="product-avatar"
+                    alt="Monstera"
                   />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Premium Smartwatch</h6>
-                    <small class="text-muted">Electronics</small>
+                  <div class="product-info">
+                    <h6 class="mb-0">Monstera Deliciosa</h6>
+                    <small class="text-muted">Tanaman Hias</small>
                   </div>
-                  <div class="text-end">
-                    <div class="fw-bold">Rp 1.250.000</div>
-                    <small class="text-success">24 sold</small>
-                  </div>
-                </div>
-                <div class="list-group-item d-flex align-items-center">
-                  <img
-                    src="https://via.placeholder.com/40"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Wireless Headphones</h6>
-                    <small class="text-muted">Audio</small>
-                  </div>
-                  <div class="text-end">
-                    <div class="fw-bold">Rp 850.000</div>
-                    <small class="text-success">18 sold</small>
-                  </div>
-                </div>
-                <div class="list-group-item d-flex align-items-center">
-                  <img
-                    src="https://via.placeholder.com/40"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Fitness Tracker</h6>
-                    <small class="text-muted">Wearables</small>
-                  </div>
-                  <div class="text-end">
-                    <div class="fw-bold">Rp 450.000</div>
-                    <small class="text-success">15 sold</small>
-                  </div>
-                </div>
-                <div class="list-group-item d-flex align-items-center">
-                  <img
-                    src="https://via.placeholder.com/40"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Leather Wallet</h6>
-                    <small class="text-muted">Accessories</small>
-                  </div>
-                  <div class="text-end">
-                    <div class="fw-bold">Rp 320.000</div>
-                    <small class="text-success">12 sold</small>
-                  </div>
-                </div>
-                <div class="list-group-item d-flex align-items-center">
-                  <img
-                    src="https://via.placeholder.com/40"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Phone Case</h6>
-                    <small class="text-muted">Accessories</small>
-                  </div>
-                  <div class="text-end">
+                  <div class="product-sales">
                     <div class="fw-bold">Rp 150.000</div>
-                    <small class="text-success">10 sold</small>
+                    <small class="text-success">5k+ sold</small>
                   </div>
-                </div>
-              </div>
+                </li>
+
+                <li class="list-group-item top-product-item">
+                  <div class="product-rank silver">
+                    <i class="fas fa-medal"></i>
+                  </div>
+                  <img
+                    src="https://plus.unsplash.com/premium_photo-1724249990837-f6dfcb7f3eaa?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    class="product-avatar"
+                    alt="Caladium"
+                  />
+                  <div class="product-info">
+                    <h6 class="mb-0">Caladium Red Star</h6>
+                    <small class="text-muted">Tanaman Hias</small>
+                  </div>
+                  <div class="product-sales">
+                    <div class="fw-bold">Rp 75.000</div>
+                    <small class="text-success">1.2k sold</small>
+                  </div>
+                </li>
+
+                <li class="list-group-item top-product-item">
+                  <div class="product-rank bronze">
+                    <i class="fas fa-award"></i>
+                  </div>
+                  <img
+                    src="https://images.unsplash.com/photo-1591656884447-8562e2373a66?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    class="product-avatar"
+                    alt="Ficus Elastica"
+                  />
+                  <div class="product-info">
+                    <h6 class="mb-0">Ficus Elastica</h6>
+                    <small class="text-muted">Tanaman Meja</small>
+                  </div>
+                  <div class="product-sales">
+                    <div class="fw-bold">Rp 55.000</div>
+                    <small class="text-success">2.1k sold</small>
+                  </div>
+                </li>
+              </ul>
             </div>
 
             <div class="dashboard-section mt-4">
               <div class="section-header">
                 <h5>Quick Stats</h5>
               </div>
-              <div class="row text-center">
-                <div class="col-4">
-                  <div class="p-3">
-                    <div class="fw-bold text-primary">78%</div>
-                    <small>Customer Satisfaction</small>
+
+              <div class="quick-stats-container">
+                <div class="quick-stat-item">
+                  <div class="stat-info">
+                    <i class="fas fa-smile text-primary"></i>
+                    <span class="stat-label">Customer Satisfaction</span>
+                  </div>
+                  <div class="stat-value">78%</div>
+                  <div class="progress" style="height: 8px">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 78%"
+                      aria-valuenow="78"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
                   </div>
                 </div>
-                <div class="col-4">
-                  <div class="p-3">
-                    <div class="fw-bold text-info">32 min</div>
-                    <small>Avg. Response Time</small>
+
+                <div class="quick-stat-item">
+                  <div class="stat-info">
+                    <i class="fas fa-clock text-info"></i>
+                    <span class="stat-label">Avg. Response Time</span>
+                  </div>
+                  <div class="stat-value">32 min</div>
+                  <div class="progress" style="height: 8px">
+                    <div
+                      class="progress-bar bg-info"
+                      role="progressbar"
+                      style="width: 60%"
+                      aria-valuenow="60"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
                   </div>
                 </div>
-                <div class="col-4">
-                  <div class="p-3">
-                    <div class="fw-bold text-success">92%</div>
-                    <small>Delivery Success</small>
+
+                <div class="quick-stat-item">
+                  <div class="stat-info">
+                    <i class="fas fa-check-circle text-success"></i>
+                    <span class="stat-label">Delivery Success</span>
+                  </div>
+                  <div class="stat-value">92%</div>
+                  <div class="progress" style="height: 8px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 92%"
+                      aria-valuenow="92"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -402,7 +478,7 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
 
     <script src="../assets/js/admin_script.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
