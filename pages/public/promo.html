@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Promo</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -16,19 +16,49 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../../assets/css/nav_public.css">
+    <link rel="stylesheet" href="../../assets/css/nav_public.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <style>
-        
-        
+      .cart-badge {
+        font-size: 0.7rem;
+        padding: 0.3em 0.5em;
+      }
+      @media (max-width: 991.98px) {
+        .navbar .form-control {
+          width: 100%;
+          margin-bottom: 0.5rem;
+        }
+        .navbar .btn {
+          width: 100%;
+        }
+        .navbar .navbar-nav {
+          flex-direction: row;
+          justify-content: flex-end;
+          gap: 0.5rem;
+        }
+      }
+      @media (max-width: 575.98px) {
+        .navbar-brand {
+          font-size: 1.1rem;
+        }
+        .navbar .form-control {
+          font-size: 0.9rem;
+        }
+        .navbar .btn {
+          font-size: 0.9rem;
+        }
+        .cart-badge {
+          font-size: 0.6rem;
+        }
+      }
     </style>
 </head>
 <body>
 <div id="header-placeholder"></div>
-
     <div class="main-container">
         <h1 class="mb-4 fw-bold">PROMO BARANG</h1>
+        
        <div class="product-section bg-white rounded-3 p-3">
     <div class="section-header">
         <h4 class="section-title">RECOMMENDATIONS FOR YOU</h4>
@@ -37,32 +67,73 @@
     <div class="row g-3">
         <script>
             const farmProducts = [
-                "Organic Carrot Seeds", "Heirloom Tomato Seeds", "Gardening Gloves", "Potting Soil Mix",
-                "Harvesting Basket", "Watering Can", "Small Hand Trowel", "Pruning Shears",
-                "Organic Compost", "Grow Light Panel", "Plant Fertilizer", "Garden Hose",
-                "Raised Garden Bed Kit", "Pest Repellent Spray", "Herb Garden Starter Kit", "Seedling Trays",
-                "Chicken Coop Feeder", "Goat Feed Pellets", "Rabbit Hutch", "Farm Fresh Eggs",
-                "Burlap Sacks", "Farmer's Straw Hat", "Leather Work Boots", "Protective Bee Suit",
-                "Small Tractor Toy", "Barn Owl House", "Snail Bait", "Garden Cultivator",
-                "Wheelbarrow", "Seedling Heat Mat", "Rain Barrel", "Greenhouse Plastic Film",
-                "Hand Hoe", "Canning Jars", "Apple Picker", "Berry Rake",
-                "Manure Spreader", "Garden Sprayer", "Potato Planter", "Soil pH Meter",
-                "Beekeeping Starter Kit", "Chicken Incubator", "Bird Netting", "Fruit Tree Sapling",
-                "Compost Tumbler", "Green Onion Seeds", "Bell Pepper Seeds", "Squash Seeds",
-                "Sunflower Seeds", "Pumpkin Seeds"
+              "Organic Carrot Seeds",
+              "Heirloom Tomato Seeds",
+              "Gardening Gloves",
+              "Potting Soil Mix",
+              "Harvesting Basket",
+              "Watering Can",
+              "Small Hand Trowel",
+              "Pruning Shears",
+              "Organic Compost",
+              "Grow Light Panel",
+              "Plant Fertilizer",
+              "Garden Hose",
+              "Raised Garden Bed Kit",
+              "Pest Repellent Spray",
+              "Herb Garden Starter Kit",
+              "Seedling Trays",
+              "Chicken Coop Feeder",
+              "Goat Feed Pellets",
+              "Rabbit Hutch",
+              "Farm Fresh Eggs",
+              "Burlap Sacks",
+              "Farmer's Straw Hat",
+              "Leather Work Boots",
+              "Protective Bee Suit",
+              "Small Tractor Toy",
+              "Barn Owl House",
+              "Snail Bait",
+              "Garden Cultivator",
+              "Wheelbarrow",
+              "Seedling Heat Mat",
+              "Rain Barrel",
+              "Greenhouse Plastic Film",
+              "Hand Hoe",
+              "Canning Jars",
+              "Apple Picker",
+              "Berry Rake",
+              "Manure Spreader",
+              "Garden Sprayer",
+              "Potato Planter",
+              "Soil pH Meter",
+              "Beekeeping Starter Kit",
+              "Chicken Incubator",
+              "Bird Netting",
+              "Fruit Tree Sapling",
+              "Compost Tumbler",
+              "Green Onion Seeds",
+              "Bell Pepper Seeds",
+              "Squash Seeds",
+              "Sunflower Seeds",
+              "Pumpkin Seeds",
             ];
-            
+
             for (let i = 0; i < 50; i++) {
-                const productName = farmProducts[i % farmProducts.length];
-                const price = (Math.random() * 50000 + 5000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                const sold = Math.floor(Math.random() * 1000);
-                
-                document.write(`
+              const productName = farmProducts[i % farmProducts.length];
+              const price = (Math.random() * 50000 + 5000)
+                .toFixed(0)
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+              const sold = Math.floor(Math.random() * 1000);
+
+              document.write(`
                     <div class="col-6 col-md-4 col-lg-2">
                         <a href="#" class="product-card-link">
                             <div class="card h-100 product-card">
                                 <div class="img-container">
-                                    <img src="https://via.placeholder.com/300x200?text=Farm+Product+${i + 1}" class="card-img-top" alt="${productName}">
+                                    <img src="https://via.placeholder.com/300x200?text=Farm+Product+${
+                                      i + 1
+                                    }" class="card-img-top" alt="${productName}">
                                 </div>
                                 <div class="card-body">
                                     <p class="product-title">${productName}</p>
@@ -76,18 +147,21 @@
                     </div>
                 `);
             }
-        </script>
+          </script>
+        </div>
+      </div>
     </div>
-</div>
-</div>;
-<div id="chat-placeholder"></div>
+    ;
+    <div id="chat-placeholder"></div>
+  <script src="../../assets/js/public_app.js"></script>
     <script>
-   async function loadHeader() {
+      async function loadHeader() {
         try {
           const response = await fetch("../../components/_navbar_public.html");
           if (response.ok) {
             const headerContent = await response.text();
-            document.getElementById("header-placeholder").innerHTML = headerContent;
+            document.getElementById("header-placeholder").innerHTML =
+              headerContent;
           } else {
             console.error(
               "Gagal memuat _navbar_public.html:",
@@ -110,7 +184,6 @@
             const chatScript = document.createElement("script");
             chatScript.src = "../../assets/js/chat.js";
             document.body.appendChild(chatScript);
-
           } else {
             console.error("Gagal memuat chat.html:", response.statusText);
           }
@@ -122,7 +195,11 @@
         loadHeader();
         loadChatDropdown();
       });
-</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

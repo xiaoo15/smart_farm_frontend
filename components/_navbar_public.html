@@ -1,52 +1,91 @@
+<!-- Header atas -->
 <div style="background-color: #7fdb6a; padding: 8px 0; font-size: 14px;">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div>
-            <a href="https://www.google.com/maps" class="login text-dark ms-1 me-1">Seller center</a> |
-            <a href="https://apkpure.com/" class="login text-dark ms-1 me-1">Download</a> |
-            <span class="text-dark">Ikuti Kami di</span>
-            <a href="https://www.youtube.com/" class="text-dark ms-1 me-1"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
-        </div>
-        <div>
-            <a href="../pages/public/help.html" class="login text-dark ms-1 me-1">notification </a> |
-            <a href="../pages/public/help.html" class="login text-dark ms-1 me-1"> help </a> 
-            
-        </div>
+  <div class="container d-flex justify-content-between align-items-center">
+    <div>
+      <a href="https://www.google.com/maps" class="login text-dark ms-1 me-1">Seller center</a> |
+      <a href="https://apkpure.com/" class="login text-dark ms-1 me-1">Download</a> |
+      <span class="text-dark">Ikuti Kami di</span>
+      <a href="https://www.youtube.com/" class="text-dark ms-1 me-1"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com" class="text-dark"><i class="fab fa-instagram"></i></a>
     </div>
+    <div>
+      <a href="../pages/public/help.html"  class="login text-dark ms-1 me-1">notification </a> |
+      <a href="../pages/public/help.html" class="login text-dark ms-1 me-1"> help </a> |
+      <a href="../pages/public/login.html" class="login" style="font-weight: bold;"> Login</a>
+    </div>
+  </div>
 </div>
 
+<!-- Header utama -->
 <header class="main-header sticky-top">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="navbar-brand" href="index.html">
-                    <i class="fas fa-leaf me-2"></i>SmartFarm
-                </a>
-            </div>
-            <div class="col-lg-6 col-md-8 col-6 order-lg-2 order-3 mt-3 mt-md-0">
-                <form class="search-form d-flex">
-                    <input
-                        class="form-control"
-                        type="search"
-                        placeholder="Cari bibit, sayuran, dan lainnya..."
-                    />
-                    <button type="submit" class="btn btn-success ms-2">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="col-lg-3 col-12 order-lg-3 order-2 text-end">
-                <div class="header-icons d-inline-flex align-items-center">
-                    <div class="nav-item dropdown me-3">
-                        <a href="../pages/public/keranjang.html" class="nav-link position-relative" id="navbarCartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-badge badge rounded-circle bg-danger position-absolute top-0 start-100 translate-middle">1</span>
-                        </a>
-                    </div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-6">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-leaf me-2"></i>SmartFarm
+        </a>
+      </div>
+      <div class="col-lg-6 col-md-8 col-6 order-lg-2 order-3 mt-3 mt-md-0">
+        <form class="search-form d-flex">
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Cari bibit, sayuran, dan lainnya..."
+          />
+          <button type="submit" class="btn btn-success ms-2">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+      <div class="col-lg-3 col-12 order-lg-3 order-2 text-end">
+        <div class="header-icons d-inline-flex align-items-center">
+          <!-- Keranjang -->
+          <div class="nav-item dropdown me-3">
+            <a href="../pages/public/keranjang.html" class="nav-link position-relative" id="navbarCartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-badge badge rounded-circle bg-danger position-absolute top-0 start-100 translate-middle">1</span>
+            </a>
+          </div>
 
-                    <a href="#" class="text-dark"><i class="fas fa-user"></i></a>
-                </div>
-            </div>
+          <!-- User icon -->
+          <a href="#" class="text-dark"><i class="fas fa-user"></i></a>
         </div>
+      </div>
     </div>
+  </div>
 </header>
+
+<!-- CSS tambahan -->
+<style>
+  .cart-badge {
+    font-size: 0.7rem;
+    padding: 0.3em 0.5em;
+  }
+
+  /* Bubble chat style */
+  .chat-bubble {
+    max-width: 80%;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.3;
+    clear: both;
+    word-wrap: break-word;
+  }
+
+  .chat-bubble.user {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    float: right;
+    border-bottom-right-radius: 0;
+  }
+
+  .chat-bubble.ai {
+    background-color: #e2e3e5;
+    color: #41464b;
+    float: left;
+    border-bottom-left-radius: 0;
+  }
+</style>
+
