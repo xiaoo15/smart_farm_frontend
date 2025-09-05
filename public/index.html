@@ -66,22 +66,20 @@
           <div class="row g-2">
             <script>
               const categories = [
-                { icon: "fa-tags", text: "Promo" },
-                { icon: "fa-store", text: "Mall" },
-                { icon: "fa-bolt", text: "Flash Sale" },
-                { icon: "fa-seedling", text: "Bibit" },
-                { icon: "fa-carrot", text: "Panen" },
-                { icon: "fa-tractor", text: "Alat" },
-                { icon: "fa-gift", text: "Gratis Ongkir" },
-                { icon: "fa-percent", text: "Diskon" },
-                { icon: "fa-boxes-stacked", text: "Paket Hemat" },
-                { icon: "fa-ellipsis-h", text: "Lainnya" },
-              ];
+          { icon: "fa-tags", text: "Promo", href: "promo.html" },
+          { icon: "fa-seedling", text: "Bibit", href: "benih.html" },
+          { icon: "fa-carrot", text: "Panen", href: "panen.html" },
+          { icon: "fa-tractor", text: "Alat", href: "alat.html" },
+          { icon: "fa-gift", text: "Gratis Ongkir", href: "gratis_ongkir.html" },
+          { icon: "fa-percent", text: "Diskon", href: "discount.html" },
+          { icon: "fa-boxes-stacked", text: "Paket Hemat", href: "bundle.html" },
+          { icon: "fa-ellipsis-h", text: "Lainnya", href: "#" },
+        ];
               categories.forEach((cat) => {
-                document.write(
-                  `<div class="col-3 col-md-2 col-lg-1 text-center"><a href="#" class="category-icon-item"><div class="icon-wrapper"><i class="fas ${cat.icon}"></i></div><span class="icon-text">${cat.text}</span></a></div>`
-                );
-              });
+    document.write(
+      `<div class="col-3 col-md-2 col-lg-1 text-center"><a href="${cat.href}" class="category-icon-item"><div class="icon-wrapper"><i class="fas ${cat.icon}"></i></div><span class="icon-text">${cat.text}</span></a></div>`
+    );
+  });
             </script>
           </div>
         </div>

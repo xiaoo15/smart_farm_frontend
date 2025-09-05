@@ -57,7 +57,7 @@
 <body>
 <div id="header-placeholder"></div>
     <div class="main-container">
-        <h1 class="mb-4 fw-bold">PROMO BARANG</h1>
+        <h1 class="mb-4 fw-bold">PRODUCT BENIH</h1>
         
        <div class="product-section bg-white rounded-3 p-3">
     <div class="section-header">
@@ -66,61 +66,62 @@
     </div>
     <div class="row g-3">
         <script>
-            const farmProducts = [
-              "Organic Carrot Seeds",
-              "Heirloom Tomato Seeds",
-              "Gardening Gloves",
-              "Potting Soil Mix",
-              "Harvesting Basket",
-              "Watering Can",
-              "Small Hand Trowel",
-              "Pruning Shears",
-              "Organic Compost",
-              "Grow Light Panel",
-              "Plant Fertilizer",
-              "Garden Hose",
-              "Raised Garden Bed Kit",
-              "Pest Repellent Spray",
-              "Herb Garden Starter Kit",
-              "Seedling Trays",
-              "Chicken Coop Feeder",
-              "Goat Feed Pellets",
-              "Rabbit Hutch",
-              "Farm Fresh Eggs",
-              "Burlap Sacks",
-              "Farmer's Straw Hat",
-              "Leather Work Boots",
-              "Protective Bee Suit",
-              "Small Tractor Toy",
-              "Barn Owl House",
-              "Snail Bait",
-              "Garden Cultivator",
-              "Wheelbarrow",
-              "Seedling Heat Mat",
-              "Rain Barrel",
-              "Greenhouse Plastic Film",
-              "Hand Hoe",
-              "Canning Jars",
-              "Apple Picker",
-              "Berry Rake",
-              "Manure Spreader",
-              "Garden Sprayer",
-              "Potato Planter",
-              "Soil pH Meter",
-              "Beekeeping Starter Kit",
-              "Chicken Incubator",
-              "Bird Netting",
-              "Fruit Tree Sapling",
-              "Compost Tumbler",
-              "Green Onion Seeds",
-              "Bell Pepper Seeds",
-              "Squash Seeds",
-              "Sunflower Seeds",
-              "Pumpkin Seeds",
-            ];
+            const jenisBenih = [
+              "Benih Wortel Organik",
+              "Benih Tomat Heirloom",
+              "Benih Cabai Rawit",
+              "Benih Bayam Hijau",
+              "Benih Kangkung",
+              "Benih Mentimun",
+              "Benih Sawi Hijau",
+              "Benih Selada",
+              "Benih Kacang Panjang",
+              "Benih Terong Ungu",
+              "Benih Jagung Manis",
+              "Benih Kacang Merah",
+              "Benih Bawang Merah",
+              "Benih Labu",
+              "Benih Buncis",
+              "Benih Stroberi",
+              "Benih Melon",
+              "Benih Semangka",
+              "Benih Pepaya",
+              "Benih Bunga Matahari",
+              "Benih Bunga Mawar",
+              "Benih Bunga Kamboja",
+              "Benih Jati",
+              "Benih Mangga",
+              "Benih Alpukat",
+              "Benih Durian",
+              "Benih Jahe",
+              "Benih Kunyit",
+              "Benih Lengkuas",
+              "Benih Sereh",
+              "Benih Jambu Air",
+              "Benih Belimbing",
+              "Benih Rambutan",
+              "Benih Nangka",
+              "Benih Cempedak",
+              "Benih Jengkol",
+              "Benih Petai",
+              "Benih Kopi",
+              "Benih Coklat",
+              "Benih Teh",
+              "Benih Ketumbar",
+              "Benih Lada",
+              "Benih Pala",
+              "Benih Cengkeh",
+              "Benih Vanili",
+              "Benih Kapas",
+              "Benih Tebu",
+              "Benih Bawang Putih",
+              "Benih Ubi Jalar",
+              "Benih Singkong",
+            ];
+
 
             for (let i = 0; i < 50; i++) {
-              const productName = farmProducts[i % farmProducts.length];
+              const productName = jenisBenih[i % jenisBenih.length];
               const price = (Math.random() * 50000 + 5000)
                 .toFixed(0)
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -133,10 +134,10 @@
                                 <div class="img-container">
                                     <img src="https://via.placeholder.com/300x200?text=Farm+Product+${
                                       i + 1
-                                    }" class="card-img-top" alt="${productName}">
+                                    }" class="card-img-top" alt="${jenisBenih}">
                                 </div>
                                 <div class="card-body">
-                                    <p class="product-title">${productName}</p>
+                                    <p class="product-title">${jenisBenih}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="product-price mb-0">Rp${price}</p>
                                         <p class="product-sold mb-0">${sold}+ sold</p>
