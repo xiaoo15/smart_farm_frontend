@@ -123,3 +123,11 @@ body {
   font-size: 0.7rem;
   font-weight: 600;
 }
+
+.login{
+        text-decoration: none;
+        color: #000000;
+      }
+      .login:hover{
+        text-decoration: underline;
+      }
