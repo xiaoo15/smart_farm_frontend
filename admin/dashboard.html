@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Dashboard Analytics</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../assets/css/admin_style.css" />
+    <style>
+      /* Style tambahan untuk animasi dan tampilan yang lebih baik */
+      .stat-card {
+        opacity: 0; /* Sembunyikan kartu awalnya */
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .stat-card.animate-fade-in-up {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--danger);
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-wrapper">
+      <div id="sidebar-container"></div>
+
+      <div id="overlay"></div>
+
+      <div class="main-content">
+        <header class="content-header">
+          <div class="header-welcome">
+            <h2>Dashboard Analytics</h2>
+            <p>Here's what's happening with your store today.</p>
+          </div>
+          <div class="header-actions d-flex align-items-center">
+            <input
+              type="text"
+              class="form-control me-2"
+              placeholder="Search..."
+            />
+            <button class="btn btn-light position-relative">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">3</span>
+            </button>
+            <button class="btn btn-light">
+              <i class="fas fa-user-circle"></i>
+            </button>
+          </div>
+        </header>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-earnings">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <p class="stat-card-title">Today's Sales</p>
+              <h4 class="stat-card-value">Rp 1.250.000</h4>
+              <div class="stat-card-change change-positive">
+                <i class="fas fa-arrow-up me-1"></i> 12.5% from yesterday
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-orders">
+                <i class="fas fa-receipt"></i>
+              </div>
+              <p class="stat-card-title">Total Orders</p>
+              <h4 class="stat-card-value">32</h4>
+              <div class="stat-card-change change-positive">
+                <i class="fas fa-arrow-up me-1"></i> 8.2% from yesterday
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-visitors">
+                <i class="fas fa-users"></i>
+              </div>
+              <p class="stat-card-title">Today's Visitors</p>
+              <h4 class="stat-card-value">1,234</h4>
+              <div class="stat-card-change change-negative">
+                <i class="fas fa-arrow-down me-1"></i> 3.2% from yesterday
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-sales">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <p class="stat-card-title">Conversion Rate</p>
+              <h4 class="stat-card-value">5.8%</h4>
+              <div class="stat-card-change change-positive">
+                <i class="fas fa-arrow-up me-1"></i> 1.2% from yesterday
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-customers">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <p class="stat-card-title">New Customers</p>
+              <h4 class="stat-card-value">24</h4>
+              <div class="stat-card-change change-positive">
+                <i class="fas fa-arrow-up me-1"></i> 15.8% from yesterday
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-products">
+                <i class="fas fa-box-open"></i>
+              </div>
+              <p class="stat-card-title">Products Sold</p>
+              <h4 class="stat-card-value">78</h4>
+              <div class="stat-card-change change-positive">
+                <i class="fas fa-arrow-up me-1"></i> 9.6% from yesterday
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-returns">
+                <i class="fas fa-undo"></i>
+              </div>
+              <p class="stat-card-title">Return Rate</p>
+              <h4 class="stat-card-value">2.3%</h4>
+              <div class="stat-card-change change-negative">
+                <i class="fas fa-arrow-up me-1"></i> 0.4% from yesterday
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="stat-card">
+              <div class="stat-card-icon icon-profit">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+              <p class="stat-card-title">Profit Margin</p>
+              <h4 class="stat-card-value">28.5%</h4>
+              <div class="stat-card-change change-positive">
+                <i class="fas fa-arrow-up me-1"></i> 2.1% from yesterday
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+          <div class="col-lg-8">
+            <div class="dashboard-section">
+              <div class="section-header">
+                <h5>Sales Statistics</h5>
+                <div>
+                  <button class="btn btn-sm btn-outline-secondary active">
+                    Week
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary">
+                    Month
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary">Year</button>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="dashboard-section">
+              <div class="section-header">
+                <h5>Traffic Sources</h5>
+              </div>
+              <div class="chart-container">
+                <canvas id="trafficChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="dashboard-section">
+              <div class="section-header">
+                <h5>Recent Activity</h5>
+                <a href="transaksi.html" class="btn btn-sm btn-outline-primary"
+                  >View All Orders</a
+                >
+              </div>
+              <ul class="list-group list-group-flush activity-list">
+                <li class="list-group-item d-flex align-items-center">
+                  <div class="activity-icon icon-completed">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1253</strong> from Revan Putra has been
+                    completed.
+                    <small class="text-muted d-block">Today, 10:42 AM</small>
+                  </div>
+                  <span class="badge bg-success-soft text-success ms-auto"
+                    >Completed</span
+                  >
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <div class="activity-icon icon-delivery">
+                    <i class="fas fa-truck"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1254</strong> for Citra Lestari is out for
+                    delivery.
+                    <small class="text-muted d-block">Today, 09:15 AM</small>
+                  </div>
+                  <span class="badge bg-info-soft text-info ms-auto"
+                    >Delivery</span
+                  >
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <div class="activity-icon icon-pending">
+                    <i class="fas fa-hourglass-half"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1255</strong> from Andi Budi is awaiting
+                    payment confirmation.
+                    <small class="text-muted d-block"
+                      >Yesterday, 08:30 PM</small
+                    >
+                  </div>
+                  <span class="badge bg-warning-soft text-warning ms-auto"
+                    >Pending</span
+                  >
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <div class="activity-icon icon-cancelled">
+                    <i class="fas fa-times"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1256</strong> from Arsya Aji has been
+                    cancelled.
+                    <small class="text-muted d-block">Today, 11:30 AM</small>
+                  </div>
+                  <span class="badge bg-danger-soft text-danger ms-auto"
+                    >Cancelled</span
+                  >
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <div class="activity-icon icon-processing">
+                    <i class="fas fa-box-open"></i>
+                  </div>
+                  <div class="activity-content">
+                    <strong>Order #1257</strong> for Siska is now being
+                    processed.
+                    <small class="text-muted d-block">Today, 10:30 AM</small>
+                  </div>
+                  <span class="badge bg-primary-soft text-primary ms-auto"
+                    >Processing</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="dashboard-section">
+              <div class="section-header">
+                <h5>Top Selling Products</h5>
+              </div>
+              <div class="list-group list-group-flush">
+                <div class="list-group-item d-flex align-items-center">
+                  <img
+                    src="https://via.placeholder.com/40"
+                    class="rounded me-3"
+                    alt="Product"
+                  />
+                  <div class="flex-grow-1">
+                    <h6 class="mb-0">Premium Smartwatch</h6>
+                    <small class="text-muted">Electronics</small>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold">Rp 1.250.000</div>
+                    <small class="text-success">24 sold</small>
+                  </div>
+                </div>
+                <div class="list-group-item d-flex align-items-center">
+                  <img
+                    src="https://via.placeholder.com/40"
+                    class="rounded me-3"
+                    alt="Product"
+                  />
+                  <div class="flex-grow-1">
+                    <h6 class="mb-0">Wireless Headphones</h6>
+                    <small class="text-muted">Audio</small>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold">Rp 850.000</div>
+                    <small class="text-success">18 sold</small>
+                  </div>
+                </div>
+                <div class="list-group-item d-flex align-items-center">
+                  <img
+                    src="https://via.placeholder.com/40"
+                    class="rounded me-3"
+                    alt="Product"
+                  />
+                  <div class="flex-grow-1">
+                    <h6 class="mb-0">Fitness Tracker</h6>
+                    <small class="text-muted">Wearables</small>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold">Rp 450.000</div>
+                    <small class="text-success">15 sold</small>
+                  </div>
+                </div>
+                <div class="list-group-item d-flex align-items-center">
+                  <img
+                    src="https://via.placeholder.com/40"
+                    class="rounded me-3"
+                    alt="Product"
+                  />
+                  <div class="flex-grow-1">
+                    <h6 class="mb-0">Leather Wallet</h6>
+                    <small class="text-muted">Accessories</small>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold">Rp 320.000</div>
+                    <small class="text-success">12 sold</small>
+                  </div>
+                </div>
+                <div class="list-group-item d-flex align-items-center">
+                  <img
+                    src="https://via.placeholder.com/40"
+                    class="rounded me-3"
+                    alt="Product"
+                  />
+                  <div class="flex-grow-1">
+                    <h6 class="mb-0">Phone Case</h6>
+                    <small class="text-muted">Accessories</small>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold">Rp 150.000</div>
+                    <small class="text-success">10 sold</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-section mt-4">
+              <div class="section-header">
+                <h5>Quick Stats</h5>
+              </div>
+              <div class="row text-center">
+                <div class="col-4">
+                  <div class="p-3">
+                    <div class="fw-bold text-primary">78%</div>
+                    <small>Customer Satisfaction</small>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-3">
+                    <div class="fw-bold text-info">32 min</div>
+                    <small>Avg. Response Time</small>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-3">
+                    <div class="fw-bold text-success">92%</div>
+                    <small>Delivery Success</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+    <script src="../assets/js/admin_script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Animasi untuk kartu statistik
+      $(document).ready(function () {
+        $(".stat-card").each(function (i) {
+          $(this)
+            .delay(100 * i)
+            .queue(function () {
+              $(this).addClass("animate-fade-in-up").dequeue();
+            });
+        });
+
+        // Responsive sidebar toggle
+        $("#sidebar-toggle").click(function () {
+          $("#sidebar-container").toggleClass("show");
+          $("#overlay").toggleClass("show");
+        });
+
+        $("#overlay").click(function () {
+          $("#sidebar-container").removeClass("show");
+          $("#overlay").removeClass("show");
+        });
+      });
+
+      // Grafik penjualan
+      document.addEventListener("DOMContentLoaded", () => {
+        // Sales Chart
+        const salesChartCanvas = document.getElementById("salesChart");
+        if (salesChartCanvas) {
+          const ctx = salesChartCanvas.getContext("2d");
+
+          // Membuat gradient
+          let gradient = ctx.createLinearGradient(0, 0, 0, 300);
+          gradient.addColorStop(0, "rgba(67, 97, 238, 0.3)");
+          gradient.addColorStop(0.7, "rgba(67, 97, 238, 0.1)");
+          gradient.addColorStop(1, "rgba(67, 97, 238, 0)");
+
+          let gradient2 = ctx.createLinearGradient(0, 0, 0, 300);
+          gradient2.addColorStop(0, "rgba(247, 37, 133, 0.3)");
+          gradient2.addColorStop(0.7, "rgba(247, 37, 133, 0.1)");
+          gradient2.addColorStop(1, "rgba(247, 37, 133, 0)");
+
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+              datasets: [
+                {
+                  label: "Current Week",
+                  data: [120, 190, 300, 500, 200, 350, 450],
+                  borderColor: "#4361ee",
+                  backgroundColor: gradient,
+                  fill: true,
+                  tension: 0.4,
+                  borderWidth: 3,
+                  pointBackgroundColor: "#fff",
+                  pointBorderColor: "#4361ee",
+                  pointBorderWidth: 3,
+                  pointRadius: 5,
+                  pointHoverRadius: 7,
+                },
+                {
+                  label: "Previous Week",
+                  data: [80, 150, 200, 300, 250, 400, 350],
+                  borderColor: "#f72585",
+                  backgroundColor: gradient2,
+                  fill: true,
+                  tension: 0.4,
+                  borderWidth: 3,
+                  pointBackgroundColor: "#fff",
+                  pointBorderColor: "#f72585",
+                  pointBorderWidth: 3,
+                  pointRadius: 5,
+                  pointHoverRadius: 7,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                  labels: {
+                    usePointStyle: true,
+                    padding: 20,
+                  },
+                },
+                tooltip: {
+                  backgroundColor: "#fff",
+                  titleColor: "#212529",
+                  bodyColor: "#212529",
+                  borderColor: "#e9ecef",
+                  borderWidth: 1,
+                  padding: 12,
+                  boxPadding: 6,
+                  usePointStyle: true,
+                  callbacks: {
+                    label: function (context) {
+                      return `Rp ${context.parsed.y.toLocaleString("id-ID")}`;
+                    },
+                  },
+                },
+              },
+              scales: {
+                y: {
+                  grid: {
+                    display: true,
+                    color: "rgba(0, 0, 0, 0.05)",
+                  },
+                  ticks: {
+                    display: true,
+                    callback: function (value) {
+                      return "Rp " + value.toLocaleString("id-ID");
+                    },
+                  },
+                },
+                x: {
+                  grid: {
+                    display: false,
+                  },
+                },
+              },
+              interaction: {
+                intersect: false,
+                mode: "index",
+              },
+            },
+          });
+        }
+
+        // Traffic Sources Chart
+        const trafficChartCanvas = document.getElementById("trafficChart");
+        if (trafficChartCanvas) {
+          const ctx = trafficChartCanvas.getContext("2d");
+
+          new Chart(ctx, {
+            type: "doughnut",
+            data: {
+              labels: ["Direct", "Social Media", "Email", "Search Engines"],
+              datasets: [
+                {
+                  data: [40, 25, 15, 20],
+                  backgroundColor: ["#4361ee", "#f72585", "#4cc9f0", "#3a0ca3"],
+                  borderWidth: 0,
+                  hoverOffset: 10,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "70%",
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: {
+                    usePointStyle: true,
+                    padding: 20,
+                  },
+                },
+              },
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

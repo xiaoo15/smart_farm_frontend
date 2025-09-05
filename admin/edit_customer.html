@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Edit Customer</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../assets/css/admin_style.css" />
+  </head>
+  <body>
+    <div class="admin-wrapper">
+      <div id="sidebar-container"></div>
+
+      <div class="main-content">
+        <header class="content-header">
+          <div>
+            <h2>Edit Customer</h2>
+            <p>Update customer details below.</p>
+          </div>
+        </header>
+
+        <div class="dashboard-section">
+          <form>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="userId" class="form-label">User ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userId"
+                  value="2"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  value="revan_putra"
+                />
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <label for="userRole" class="form-label">Role</label>
+                <select id="userRole" class="form-select">
+                  <option value="customer" selected>Customer</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary-custom">
+                  <i class="fas fa-sync-alt me-2"></i>Update
+                </button>
+                <a href="customers.html" class="btn btn-secondary-custom">
+                  Cancel
+                </a>
+              </div>
+              <button
+                type="button"
+                class="btn btn-danger-custom"
+                id="deleteCustomerBtn"
+              >
+                <i class="fas fa-trash me-2"></i>Delete Customer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="deleteCustomerModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Konfirmasi Hapus</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              YAKIN mau hapus customer
+              <strong id="customerNameToDelete"></strong>? Aksi ini tidak bisa
+              dibatalkan!
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger-custom"
+              id="confirmDeleteCustomerBtn"
+            >
+              Ya, Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/admin_script.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        const deleteModal = new bootstrap.Modal(
+          document.getElementById("deleteCustomerModal")
+        );
+
+        // Tampilkan modal saat tombol delete diklik
+        $("#deleteCustomerBtn").on("click", function () {
+          const customerName = $("#username").val();
+          $("#customerNameToDelete").text(customerName);
+          deleteModal.show();
+        });
+
+        // Aksi saat konfirmasi hapus
+        $("#confirmDeleteCustomerBtn").on("click", function () {
+          sessionStorage.setItem("toastMessage", "Customer berhasil dihapus!");
+          deleteModal.hide();
+          window.location.href = "customers.html";
+        });
+      });
+    </script>
+  </body>
+</html>
