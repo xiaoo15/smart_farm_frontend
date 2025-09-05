@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Update Product</title>
+    <title>Admin - My Products</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,12 +13,40 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../assets/css/admin_style_baru.css" />
+    <link rel="stylesheet" href="../../assets/css/sidebar_style.css" />
     <link rel="stylesheet" href="../../assets/css/form_style.css" />
-    <link rel="stylesheet" href="/assets/css/sidebar_style.css" />
+
+    <style>
+      /* Style yang sudah ada dari langkah sebelumnya, biarkan saja */
+      body { font-family: "Inter", sans-serif; background-color: var(--background); color: var(--text-primary); }
+      .admin-wrapper { display: flex; min-height: 100vh; background: var(--background); }
+      .main-content { flex: 1; padding: 36px 24px; transition: var(--transition); min-width: 0; }
+      .content-header { margin-bottom: 30px; }
+      .content-header h2 { font-weight: 600; font-size: 1.8rem; }
+      .dashboard-section { background: var(--card-bg); border-radius: var(--border-radius); padding: 32px 20px; box-shadow: var(--shadow-md); margin-bottom: 24px; border: none; }
+      .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+      .filter-container { display: flex; gap: 12px; flex-wrap: wrap; }
+      .form-control, .form-select { border-radius: 8px; border: 1px solid #e2e8f0; padding: 10px 14px; box-shadow: var(--shadow-sm); font-size: 0.9rem; }
+      .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1); }
+      .btn-primary-custom { background: var(--primary); border: none; color: #fff; border-radius: 8px; padding: 10px 22px; font-weight: 600; transition: var(--transition); display: flex; align-items: center; gap: 8px; }
+      .btn-primary-custom:hover { background: #1b5e20; transform: translateY(-2px); }
+      .table-responsive { border-radius: var(--border-radius); overflow: hidden; border: 1px solid #e2e8f0; }
+      table { margin-bottom: 0; width: 100%; }
+      thead { background-color: #f8f9fa; }
+      thead th { border-bottom: 2px solid #e9ecef; padding: 16px 14px; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; }
+      tbody tr:hover { background-color: var(--primary-light); }
+      tbody td { padding: 16px 14px; vertical-align: middle; }
+      .product-img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+      .product-name { font-weight: 500; }
+      .category-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; }
+      .category-plant { background-color: rgba(40, 167, 69, 0.1); color: #198754; }
+      .category-seed { background-color: rgba(23, 162, 184, 0.1); color: #0dcaf0; }
+      .category-vegetables { background-color: rgba(255, 193, 7, 0.1); color: #ffc107; }
+    </style>
   </head>
   <body>
     <div class="admin-wrapper">
@@ -27,167 +55,228 @@
       <div class="main-content">
         <header class="content-header">
           <div>
-            <h2>Update Product</h2>
-            <p>Change the product details below.</p>
+            <h2>My Products</h2>
+            <p>Manage your smart farm products here.</p>
           </div>
         </header>
-
         <div class="dashboard-section">
-          <form>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="productCode" class="form-label">Kode</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="productCode"
-                  value="P001"
-                  readonly
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="productName" class="form-label">Nama</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="productName"
-                  value="Produk 01"
-                />
-              </div>
+          <div class="section-header">
+            <div class="filter-container">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Cari nama produk..."
+                style="width: 250px"
+              />
+              <select
+                id="categoryFilter"
+                class="form-select"
+                style="width: 150px"
+              >
+                <option value="all" selected>All Category</option>
+                <option value="plant">Plant</option>
+                <option value="seed">Seed</option>
+                <option value="vegetables">Vegetables</option>
+              </select>
             </div>
-
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="productUnit" class="form-label">Satuan</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="productUnit"
-                  value="Pcs"
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="productPrice" class="form-label">Harga</label>
-                <div class="input-group">
-                  <span class="input-group-text">Rp</span>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="productPrice"
-                    value="200000"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <label for="productImage" class="form-label">Gambar</label>
-              <input class="form-control" type="file" id="productImage" />
-              <div class="form-text">
-                Pilih gambar baru untuk mengganti gambar lama.
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-between">
-              <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary-custom">
-                  <i class="fas fa-sync-alt me-2"></i>Update
-                </button>
-                <a href="my_product.html" class="btn btn-secondary-custom">
-                  Cancel
-                </a>
-              </div>
-              <button type="button" class="btn btn-danger-custom">
-                <i class="fas fa-trash me-2"></i>Delete
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div
-      class="modal fade"
-      id="deleteConfirmModal"
-      tabindex="-1"
-      aria-labelledby="deleteModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <a href="/pages/admin/add.html" class="btn btn-primary-custom">
+              <i class="fas fa-plus me-2"></i>Add New Product
+            </a>
           </div>
-          <div class="modal-body">
-            <p>
-              YAKIN mau hapus produk <strong id="productNameToDelete"></strong>?
-              Data yang udah dihapus nggak bisa balik lagi loh!
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Gambar</th>
+                  <th>Kode</th>
+                  <th>Nama Produk</th>
+                  <th>Satuan</th>
+                  <th>Harga</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody">
+                <tr data-category="plant">
+                  <td><img src="https://i.pravatar.cc/150?img=1" alt="Caladium Red Star" class="product-img"/></td>
+                  <td class="product-code">P001</td>
+                  <td>
+                    <div class="product-name">Caladium Red Star</div>
+                    <span class="category-badge category-plant">Plant</span>
+                  </td>
+                  <td class="product-unit">Pcs</td>
+                  <td class="product-price fw-bold" data-price="75000">Rp 75.000</td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-outline-secondary btn-edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr data-category="vegetables">
+                  <td><img src="https://i.pravatar.cc/150?img=2" alt="Peace Lily" class="product-img"/></td>
+                  <td class="product-code">P002</td>
+                  <td>
+                    <div class="product-name">Peace Lily</div>
+                    <span class="category-badge category-vegetables">Vegetables</span>
+                  </td>
+                  <td class="product-unit">Pcs</td>
+                  <td class="product-price fw-bold" data-price="90000">Rp 90.000</td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-outline-secondary btn-edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr data-category="seed">
+                  <td><img src="https://i.pravatar.cc/150?img=3" alt="Bibit Aglaonema" class="product-img"/></td>
+                  <td class="product-code">P003</td>
+                  <td>
+                    <div class="product-name">Bibit Aglaonema</div>
+                    <span class="category-badge category-seed">Seed</span>
+                  </td>
+                  <td class="product-unit">Pcs</td>
+                  <td class="product-price fw-bold" data-price="120000">Rp 120.000</td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-outline-secondary btn-edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr data-category="plant">
+                  <td><img src="https://i.pravatar.cc/150?img=4" alt="Monstera Deliciosa" class="product-img"/></td>
+                  <td class="product-code">P004</td>
+                  <td>
+                    <div class="product-name">Monstera Deliciosa</div>
+                    <span class="category-badge category-plant">Plant</span>
+                  </td>
+                  <td class="product-unit">Pcs</td>
+                  <td class="product-price fw-bold" data-price="150000">Rp 150.000</td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-outline-secondary btn-edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger btn-delete"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p id="noResult" class="text-center text-muted p-4" style="display: none;">
+              Produk tidak ditemukan :(
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProductModalLabel">Update Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editProductForm">
+              <div class="mb-3">
+                <label for="editProductCode" class="form-label">Kode</label>
+                <input type="text" class="form-control" id="editProductCode" readonly />
+              </div>
+              <div class="mb-3">
+                <label for="editProductName" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="editProductName" required />
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="editProductUnit" class="form-label">Satuan</label>
+                  <input type="text" class="form-control" id="editProductUnit" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="editProductPrice" class="form-label">Harga</label>
+                  <div class="input-group">
+                    <span class="input-group-text">Rp</span>
+                    <input type="number" class="form-control" id="editProductPrice" required />
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="editProductImage" class="form-label">Gambar</label>
+                <input class="form-control" type="file" id="editProductImage" />
+                <div class="form-text">Biarkan kosong jika tidak ingin mengubah gambar.</div>
+              </div>
+            </form>
+          </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Batal
-            </button>
-            <button
-              type="button"
-              class="btn btn-danger-custom"
-              id="confirmDeleteBtn"
-            >
-              Ya, Hapus Aja
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" form="editProductForm" class="btn btn-primary-custom">
+              <i class="fas fa-sync-alt me-2"></i>Update
             </button>
           </div>
         </div>
       </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script src="../../assets/js/app.js"></script>
-
+    <script src="../../assets/js/app.js"></script>
+    
     <script>
-      // Script ini akan berjalan setelah halaman siap
       $(document).ready(function () {
-        // Tangkap event klik pada tombol delete
-        $(".btn-danger-custom").on("click", function () {
-          // 1. Ambil nama produk dari input form
-          var productName = $("#productName").val();
+        // --- Kode Filter dari langkah sebelumnya ---
+        function filterProducts() {
+          var searchText = $("#searchInput").val().toLowerCase();
+          var category = $("#categoryFilter").val();
+          var visibleRows = 0;
+          $("#productTableBody tr").each(function () {
+            var row = $(this);
+            var productName = row.find(".product-name").text().toLowerCase();
+            var productCategory = row.data("category");
+            var searchMatch = productName.includes(searchText);
+            var categoryMatch = category === "all" || productCategory === category;
+            if (searchMatch && categoryMatch) { row.fadeIn(300); visibleRows++; } 
+            else { row.fadeOut(300); }
+          });
+          setTimeout(function() {
+            if (visibleRows === 0) { $("#noResult").show(); } 
+            else { $("#noResult").hide(); }
+          }, 350);
+        }
+        $("#searchInput").on("keyup", filterProducts);
+        $("#categoryFilter").on("change", filterProducts);
+        // --- Akhir Kode Filter ---
 
-          // 2. Tampilkan nama produk itu di dalam modal
-          $("#productNameToDelete").text(productName);
+        // ======================================================= //
+        // WOW FAKTOR #3: JQUERY UNTUK MENAMPILKAN & MENGISI MODAL //
+        // ======================================================= //
+        var editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
 
-          // 3. Tampilkan modalnya!
-          var myModal = new bootstrap.Modal(
-            document.getElementById("deleteConfirmModal")
-          );
-          myModal.show();
+        // 1. Saat tombol .btn-edit di-klik
+        $("#productTableBody").on("click", ".btn-edit", function () {
+          var row = $(this).closest("tr");
+          
+          // 2. Ambil data dari baris tabel
+          var code = row.find(".product-code").text();
+          var name = row.find(".product-name").text();
+          var unit = row.find(".product-unit").text();
+          var price = row.find(".product-price").data("price"); // Ambil dari data-price
+
+          // 3. Masukkan data ke dalam form di modal
+          $("#editProductCode").val(code);
+          $("#editProductName").val(name);
+          $("#editProductUnit").val(unit);
+          $("#editProductPrice").val(price);
+          
+          // 4. Tampilkan modalnya!
+          editModal.show();
+        });
+        
+        // Aksi saat form di dalam modal di-submit
+        $("#editProductForm").on("submit", function(e) {
+            e.preventDefault(); // Mencegah form reload halaman
+            alert("Produk dengan kode " + $("#editProductCode").val() + " berhasil diupdate! (Simulasi)");
+            editModal.hide(); // Sembunyikan modal setelah update
         });
 
-        // Kalo tombol "Ya, Hapus Aja" di dalam modal diklik
-        // Kalo tombol "Ya, Hapus Aja" di dalam modal diklik
-        $("#confirmDeleteBtn").on("click", function () {
-          // Hapus alert lama
-          // alert('Produk berhasil dihapus! (simulasi)');
 
-          // Simpan pesan sukses di sessionStorage
-          sessionStorage.setItem("toastMessage", "Produk berhasil dihapus!");
-
-          // Tutup modal
-          var myModalEl = document.getElementById("deleteConfirmModal");
-          var modal = bootstrap.Modal.getInstance(myModalEl);
-          modal.hide();
-
-          // Redirect (arahkan) kembali ke halaman daftar produk
-          window.location.href = "my_product.html";
+        // --- Tombol Hapus dari langkah sebelumnya ---
+        $("#productTableBody").on("click", ".btn-delete", function () {
+            if (confirm("Yakin mau hapus produk ini?")) {
+                $(this).closest("tr").fadeOut(500, function() { $(this).remove(); });
+            }
         });
       });
     </script>
