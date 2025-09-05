@@ -1400,3 +1400,197 @@ body {
   margin-bottom: 0.5rem;
   color: var(--text-secondary);
 }
+
+/* =================================================================== */
+/* ACTIVITY FEED STYLES - TAMBAHKAN INI DI AKHIR FILE */
+/* =================================================================== */
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.5rem !important;
+  gap: 1rem;
+}
+
+.activity-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Warna Avatar Sesuai Status */
+.avatar-success { background-color: var(--success); }
+.avatar-info { background-color: var(--info); }
+.avatar-warning { background-color: var(--warning); }
+.avatar-danger { background-color: var(--danger); }
+.avatar-primary { background-color: #4361ee; } /* Warna biru dari chart */
+
+
+.activity-content {
+  flex-grow: 1;
+}
+
+.activity-content p {
+  margin-bottom: 0.1rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.activity-content small {
+  font-size: 0.8rem;
+}
+
+.activity-item .badge {
+  padding: 0.4em 0.8em;
+  font-size: 0.75rem;
+}
+
+/* =================================================================== */
+/* TOP SELLING PRODUCTS STYLES - TAMBAHKAN INI DI AKHIR FILE */
+/* =================================================================== */
+
+.top-product-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0.5rem !important;
+  gap: 0.75rem;
+}
+
+.product-rank {
+  font-size: 1.2rem;
+  width: 30px;
+  text-align: center;
+}
+
+.product-rank.gold { color: #ffc107; }
+.product-rank.silver { color: #c0c0c0; }
+.product-rank.bronze { color: #cd7f32; }
+
+.product-avatar {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.product-info h6 {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.product-sales {
+  text-align: right;
+}
+.product-sales .fw-bold {
+  font-size: 0.9rem;
+}
+.product-sales small {
+  font-size: 0.8rem;
+}
+
+/* =================================================================== */
+/* QUICK STATS STYLES - TAMBAHKAN INI DI AKHIR FILE */
+/* =================================================================== */
+
+.quick-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Jarak antar item statistik */
+}
+
+.quick-stat-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-basis: 60%; /* Lebar untuk ikon dan label */
+}
+
+.stat-info i {
+  font-size: 1.2rem;
+}
+
+.stat-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  flex-basis: 35%; /* Lebar untuk nilai/angka */
+  text-align: right;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.quick-stat-item .progress {
+  flex-basis: 100%; /* Progress bar ambil lebar penuh */
+  border-radius: 20px;
+}
+
+/* =================================================================== */
+/* TRAFFIC SOURCES STYLES - TAMBAHKAN INI DI AKHIR FILE */
+/* =================================================================== */
+
+.traffic-sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.traffic-source-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.source-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-basis: 70%;
+}
+
+.source-icon {
+  font-size: 1.5rem;
+  width: 30px;
+  text-align: center;
+}
+/* Warna Ikon Sesuai Brand */
+.source-icon.google { color: #DB4437; }
+.source-icon.instagram { color: #E4405F; }
+.source-icon.email { color: #757575; }
+.source-icon.direct { color: #0d6efd; }
+
+.source-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.source-value {
+  flex-basis: 25%;
+  text-align: right;
+  font-weight: 600;
+}
+
+.traffic-source-item .progress {
+  flex-basis: 100%;
+  border-radius: 20px;
+  background-color: #e9ecef;
+}
