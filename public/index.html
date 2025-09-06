@@ -1,283 +1,514 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartFarm - Tanam, Panen, Nikmati!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../assets/css/public_style.css" />
-    <style>
-        
-    </style>
-</head>
-<body>
+    <style></style>
+  </head>
+  <body>
     <div id="header-placeholder"></div>
-  
-    <main class="main-content-container">
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img
-                                    src="https://images.unsplash.com/photo-1464306208223-e0b4495a5553?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                    class="d-block w-100"
-                                    alt="Promo SmartFarm"
-                                />
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                    class="d-block w-100"
-                                    alt="Promo SmartFarm"
-                                />
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="voucher-section row g-3 mb-4">
-                <div class="col-md-6">
-                    <a href="#" class="voucher-card">
-                        <img
-                            src="https://images.unsplash.com/photo-1464297162577-f5295c892194?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                            alt="Voucher SmartFarm"
-                        />
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="voucher-card">
-                        <img
-                            src="https://images.unsplash.com/photo-1463320898484-cdee8141c787?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                            alt="Voucher SmartFarm"
-                        />
-                    </a>
-                </div>
-            </div>
 
-            <div class="category-icons-grid mb-4">
-                <div class="row g-2">
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="promo.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-tags"></i>
-                            </div>
-                            <span class="icon-text">Promo</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="benih.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-seedling"></i>
-                            </div>
-                            <span class="icon-text">Bibit</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="panen.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-carrot"></i>
-                            </div>
-                            <span class="icon-text">Panen</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="alat.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-tractor"></i>
-                            </div>
-                            <span class="icon-text">Alat</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="gratis_ongkir.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-gift"></i>
-                            </div>
-                            <span class="icon-text">Gratis Ongkir</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="discount.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-percent"></i>
-                            </div>
-                            <span class="icon-text">Diskon</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="bundle.html" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-boxes-stacked"></i>
-                            </div>
-                            <span class="icon-text">Paket Hemat</span>
-                        </a>
-                    </div>
-                    <div class="col-3 col-md-2 col-lg-1 text-center">
-                        <a href="#" class="category-icon-item">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-                            <span class="icon-text">Lainnya</span>
-                        </a>
-                    </div>
-                </div>
+    <section class="hero-cta-minimalist mb-5 mt-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 p-0">
+            <div class="hero-image-container">
+              <img
+                src="https://images.unsplash.com/photo-1487700160041-babef9c3cb55?q=80&w=1152&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Tanaman Hias Berkualitas"
+              />
             </div>
+          </div>
+          <div class="col-md-6">
+            <div class="hero-content-container">
+              <p class="hero-subtitle">KOLEKSI TERBAIK KAMI</p>
+              <h1 class="hero-title">Kualitas Terbaik Untuk Kebun Anda</h1>
+              <p class="hero-description">
+                Setiap tanaman dan bibit kami rawat dengan penuh cinta untuk
+                memastikan kualitas terbaik sampai di tangan Anda.
+              </p>
+              <a href="products.html" class="btn-smartfarm-primary">Jelajahi Sekarang</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="product-section">
-                <div class="section-header">
-                    <h4 class="section-title">REKOMENDASI UNTUKMU</h4>
-                    <a href="#" class="section-see-all">Lihat Semua <i class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="row g-3">
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="text-decoration-none">
-                            <div class="card h-100 product-card">
-                                <div class="img-container">
-                                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Bibit Tomat">
-                                </div>
-                                <div class="card-body">
-                                    <p class="product-title">Bibit Tomat Organik Premium</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="product-price mb-0">Rp25.000</p>
-                                        <p class="product-sold mb-0">452+ terjual</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="text-decoration-none">
-                            <div class="card h-100 product-card">
-                                <div class="img-container">
-                                    <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pupuk Organik">
-                                </div>
-                                <div class="card-body">
-                                    <p class="product-title">Pupuk Organik 5kg</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="product-price mb-0">Rp75.000</p>
-                                        <p class="product-sold mb-0">289+ terjual</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="text-decoration-none">
-                            <div class="card h-100 product-card">
-                                <div class="img-container">
-                                    <img src="https://images.unsplash.com/photo-1598034992937-91e6a1014a3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Bibit Cabai">
-                                </div>
-                                <div class="card-body">
-                                    <p class="product-title">Bibit Cabai Rawit Unggul</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="product-price mb-0">Rp18.000</p>
-                                        <p class="product-sold mb-0">623+ terjual</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="text-decoration-none">
-                            <div class="card h-100 product-card">
-                                <div class="img-container">
-                                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d5b4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pot Tanaman">
-                                </div>
-                                <div class="card-body">
-                                    <p class="product-title">Pot Tanaman Modern 30cm</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="product-price mb-0">Rp45.000</p>
-                                        <p class="product-sold mb-0">187+ terjual</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="text-decoration-none">
-                            <div class="card h-100 product-card">
-                                <div class="img-container">
-                                    <img src="https://images.unsplash.com/photo-1585011650347-c59dbef5c8bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Bibit Sayuran">
-                                </div>
-                                <div class="card-body">
-                                    <p class="product-title">Paket Bibit Sayuran Organik</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="product-price mb-0">Rp55.000</p>
-                                        <p class="product-sold mb-0">341+ terjual</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="col-6 col-md-4 col-lg-2">
-                        <a href="#" class="text-decoration-none">
-                            <div class="card h-100 product-card">
-                                <div class="img-container">
-                                    <img src="https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Alat Berkebun">
-                                </div>
-                                <div class="card-body">
-                                    <p class="product-title">Set Alat Berkebun Lengkap</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="product-price mb-0">Rp120.000</p>
-                                        <p class="product-sold mb-0">156+ terjual</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+    <section class="features-section container my-5 py-5">
+      <div class="section-header-minimalist text-center mb-5">
+        <h2 class="section-title">KENAPA MEMILIH SMARTFARM?</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="feature-title">Kualitas Terjamin</h3>
+            <p class="feature-description">
+              Semua bibit dan tanaman melewati proses seleksi ketat untuk
+              memastikan kualitas terbaik sampai di tanganmu.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3 class="feature-title">100% Organik</h3>
+            <p class="feature-description">
+              Produk kami bebas dari pestisida berbahaya, aman untuk kamu,
+              keluarga, dan lingkungan.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shipping-fast"></i>
+            </div>
+            <h3 class="feature-title">Pengiriman Aman</h3>
+            <p class="feature-description">
+              Kami menggunakan kemasan khusus untuk menjaga setiap tanaman tetap
+              segar dan aman selama perjalanan.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3 class="feature-title">Dukungan Ahli</h3>
+            <p class="feature-description">
+              Punya pertanyaan? Tim ahli dan asisten AI kami siap membantumu
+              kapan saja.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kategori-pilihan-section container my-5 py-5">
+    <div class="section-header-minimalist text-center mb-5">
+        <h2 class="section-title">KATEGORI PILIHAN</h2>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="category-card-colored card-green">
+                <div class="card-icon"><i class="fas fa-seedling"></i></div>
+                <h3 class="card-title">Bibit & Benih</h3>
+                <p class="card-description">Mulai petualangan berkebunmu dengan bibit hidroponik kualitas terbaik yang cepat tumbuh.</p>
+                <a href="products.html?category=bibit" class="btn-category">Lihat Produk</a>
             </div>
         </div>
-    </main>
+
+        <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="category-card-colored card-orange">
+                <div class="card-icon"><i class="fas fa-carrot"></i></div>
+                <h3 class="card-title">Tanaman Siap Panen</h3>
+                <p class="card-description">Ingin langsung panen? Pilih dari koleksi sayuran segar siap petik dari kebun kami.</p>
+                <a href="products.html?category=panen" class="btn-category">Lihat Produk</a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="category-card-colored card-blue">
+                <div class="card-icon"><i class="fas fa-tools"></i></div>
+                <h3 class="card-title">Alat & Perlengkapan</h3>
+                <p class="card-description">Lengkapi kebutuhan kebun pintarmu, mulai dari nutrisi, media tanam, hingga toolkit hidroponik.</p>
+                <a href="products.html?category=alat" class="btn-category">Lihat Produk</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="offers-section container my-5 py-5">
+      <div class="section-header-offers">
+        <a href="products.html" class="btn btn-view-offers">Lihat Semua</a>
+        <h2 class="section-title">Produk Pilihan Untukmu</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-6">
+              <div class="product-card-offer">
+                <div class="product-image-wrapper">
+                  <a href="product_detail.html">
+                    <img
+                      src="https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg"
+                      alt="Caladium Red Star"
+                    />
+                  </a>
+                  <div class="product-badge">BEST SELLER</div>
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <p class="product-category">Tanaman Hias</p>
+                  <h3 class="product-title">
+                    <a href="product_detail.html">Caladium Red Star</a>
+                  </h3>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star-half-alt"></i>
+                    <span class="review-count">(1.2k)</span>
+                  </div>
+                  <p class="product-price">Rp 75.000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <div class="product-card-offer">
+                <div class="product-image-wrapper">
+                  <a href="product_detail.html">
+                    <img
+                      src="https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg"
+                      alt="Monstera Deliciosa"
+                    />
+                  </a>
+                  <div class="product-badge">BEST SELLER</div>
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <p class="product-category">Tanaman Hias</p>
+                  <h3 class="product-title">
+                    <a href="product_detail.html">Monstera Deliciosa</a>
+                  </h3>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i>
+                    <span class="review-count">(5k+)</span>
+                  </div>
+                  <p class="product-price">
+                    <span class="discount-price">Rp 125.000</span>
+                    <span class="original-price">Rp 150.000</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <div class="product-card-offer">
+                <div class="product-image-wrapper">
+                  <a href="product_detail.html">
+                    <img
+                      src="https://i.pinimg.com/1200x/54/f9/a3/54f9a320809a58939f42820b0c27db12.jpg"
+                      alt="Nutrisi AB Mix"
+                    />
+                  </a>
+                  <div class="product-badge">NEW</div>
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <p class="product-category">Nutrisi Tanaman</p>
+                  <h3 class="product-title">
+                    <a href="product_detail.html"
+                      >Nutrisi AB Mix Premium 500ml</a
+                    >
+                  </h3>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="far fa-star"></i>
+                    <span class="review-count">(920)</span>
+                  </div>
+                  <p class="product-price">Rp 45.000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <div class="product-card-offer">
+                <div class="product-image-wrapper">
+                  <a href="product_detail.html">
+                    <img
+                      src="https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg"
+                      alt="Rockwool"
+                    />
+                  </a>
+                  <div class="product-badge">SALE</div>
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <p class="product-category">Media Tanam</p>
+                  <h3 class="product-title">
+                    <a href="product_detail.html"
+                      >Rockwool Cultilene (Potongan)</a
+                    >
+                  </h3>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star-half-alt"></i>
+                    <span class="review-count">(4.1k)</span>
+                  </div>
+                  <p class="product-price">
+                    <span class="discount-price">Rp 15.000</span>
+                    <span class="original-price">Rp 20.000</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <a href="promo.html" class="special-offer-card">
+            <div
+              class="offer-image"
+              style="
+                background-image: url('https://i.pinimg.com/736x/e6/75/cb/e675cbe88be7f5bbb622fb9db1f0b6fe.jpg');
+              "
+            ></div>
+            <div class="offer-content">
+              <h3 class="offer-title">Paket Hemat Mulai</h3>
+              <p class="offer-price">Rp 55.000</p>
+              <div class="btn btn-offer-cta">Belanja Sekarang</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-product-focused mb-5">
+      <div class="container-fluid p-0">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-7">
+            <div class="hero-image-full">
+              <img
+                src="https://i.pinimg.com/1200x/bd/0a/7e/bd0a7e6581fec54ae40315e5ca6b59ca.jpg"
+                alt="Produk SmartFarm Skincare"
+              />
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="hero-content-text">
+              <h1 class="hero-title">
+                Panen Sayuran Sendiri <br />
+                Dari Rumahmu
+              </h1>
+              <p class="hero-description">
+                Dengan HydroKit dari SmartFarm, kamu bisa menanam sayuran segar
+                bebas pestisida di lahan terbatas sekalipun. Cukup 15 menit
+                sehari untuk hasil maksimal!
+              </p>
+              <a href="products.html" class="btn-smartfarm-secondary">LIHAT PAKETNYA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="offers-section container my-5 py-5">
+      <div class="section-header-offers">
+        <a href="products.html" class="btn btn-view-offers">Lihat Penawaran</a>
+        <h2 class="section-title">Penawaran Terbaik</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-6">
+              <div class="product-card-offer">
+                <div class="product-image-wrapper">
+                  <a href="product_detail.html">
+                    <img
+                      src="https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg"
+                      alt="Hydroponic Starter Kit"
+                    />
+                  </a>
+                  <div class="product-badge">BEST SELLER</div>
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <p class="product-category">Hidroponik Kit</p>
+                  <h3 class="product-title">
+                    <a href="product_detail.html">HydroKit Mini Starter</a>
+                  </h3>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star-half-alt"></i>
+                    <span class="review-count">(3.2k)</span>
+                  </div>
+                  <p class="product-price">Rp 185.000</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <div class="product-card-offer">
+                <div class="product-image-wrapper">
+                  <a href="product_detail.html">
+                    <img
+                      src="https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg"
+                      alt="Bibit Selada Hidroponik"
+                    />
+                  </a>
+                  <div class="product-badge">PILIHAN</div>
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <p class="product-category">Bibit Unggul</p>
+                  <h3 class="product-title">
+                    <a href="product_detail.html"
+                      >Bibit Selada Romaine (Hydro Grade)</a
+                    >
+                  </h3>
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i>
+                    <span class="review-count">(8k+)</span>
+                  </div>
+                  <p class="product-price">Rp 25.000</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <a href="promo.html" class="special-offer-card">
+            <div
+              class="offer-image"
+              style="
+                background-image: url('https://i.pinimg.com/736x/e6/75/cb/e675cbe88be7f5bbb622fb9db1f0b6fe.jpg');
+              "
+            ></div>
+            <div class="offer-content">
+              <h3 class="offer-title">Paket Hemat Mulai</h3>
+              <p class="offer-price">Rp 55.000</p>
+              <div class="btn btn-offer-cta">Belanja Sekarang</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonial-clean-section container my-5 py-5">
+      <div class="section-title-wrapper text-center mb-5">
+        <h2 class="section-title">Testimoni Pelanggan</h2>
+        <div class="title-underline"></div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-8">
+          <div class="testimonial-card-clean">
+            <img
+              src="https://i.pravatar.cc/150?img=1"
+              alt="Avatar Pelanggan"
+              class="testimonial-avatar"
+            />
+            <div class="testimonial-content">
+              <h5 class="customer-name">Suci Larisha</h5>
+              <p class="customer-location">Tangerang</p>
+              <blockquote class="testimonial-quote">
+                "Kak ini serius mantap looh, biasanya satu pohon bunganya cuma 1
+                ini satu pohon bunganya ada 3-4. Gitu aja udah seneng"
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-dots-nav mt-4">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
 
     <div class="chat-container">
-        <button class="chat-button">
-            <i class="fas fa-comment-dots"></i>
-            <span class="notification">1</span>
-        </button>
-        <div class="chat-box">
-            <div class="chat-header">
-                <div class="chat-title">
-                    <i class="fas fa-robot"></i> SmartFarm Assistant
-                </div>
-                <button class="chat-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chat-messages">
-                <div class="message ai-message">
-                    Halo! Saya asisten virtual SmartFarm. Ada yang bisa saya bantu terkait produk pertanian?
-                </div>
-            </div>
-            <div class="chat-input-container">
-                <input type="text" class="chat-input" placeholder="Ketik pesan Anda...">
-                <button class="chat-send">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
+      <button class="chat-button">
+        <i class="fas fa-comment-dots"></i>
+        <span class="notification">1</span>
+      </button>
+      <div class="chat-box">
+        <div class="chat-header">
+          <div class="chat-title">
+            <i class="fas fa-robot"></i> SmartFarm Assistant
+          </div>
+          <button class="chat-close">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+        <div class="chat-messages">
+          <div class="message ai-message">
+            Halo! Saya asisten virtual SmartFarm. Ada yang bisa saya bantu
+            terkait produk pertanian?
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input
+            type="text"
+            class="chat-input"
+            placeholder="Ketik pesan Anda..."
+          />
+          <button class="chat-send">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <div id="footer-placeholder"></div>
     <script src="../assets/js/public_script.js"></script>
-</body>
+  </body>
 </html>
