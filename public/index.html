@@ -16,6 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="../assets/css/public_style.css" />
     <style></style>
   </head>
@@ -41,7 +45,9 @@
                 Setiap tanaman dan bibit kami rawat dengan penuh cinta untuk
                 memastikan kualitas terbaik sampai di tangan Anda.
               </p>
-              <a href="products.html" class="btn-smartfarm-primary">Jelajahi Sekarang</a>
+              <a href="products.html" class="btn-smartfarm-primary"
+                >Jelajahi Sekarang</a
+              >
             </div>
           </div>
         </div>
@@ -108,210 +114,194 @@
     </section>
 
     <section class="kategori-pilihan-section container my-5 py-5">
-    <div class="section-header-minimalist text-center mb-5">
+      <div class="section-header-minimalist text-center mb-5">
         <h2 class="section-title">KATEGORI PILIHAN</h2>
-    </div>
-    <div class="row g-4">
-        <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="category-card-colored card-green">
-                <div class="card-icon"><i class="fas fa-seedling"></i></div>
-                <h3 class="card-title">Bibit & Benih</h3>
-                <p class="card-description">Mulai petualangan berkebunmu dengan bibit hidroponik kualitas terbaik yang cepat tumbuh.</p>
-                <a href="products.html?category=bibit" class="btn-category">Lihat Produk</a>
-            </div>
-        </div>
-
-        <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="category-card-colored card-orange">
-                <div class="card-icon"><i class="fas fa-carrot"></i></div>
-                <h3 class="card-title">Tanaman Siap Panen</h3>
-                <p class="card-description">Ingin langsung panen? Pilih dari koleksi sayuran segar siap petik dari kebun kami.</p>
-                <a href="products.html?category=panen" class="btn-category">Lihat Produk</a>
-            </div>
-        </div>
-
-        <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="category-card-colored card-blue">
-                <div class="card-icon"><i class="fas fa-tools"></i></div>
-                <h3 class="card-title">Alat & Perlengkapan</h3>
-                <p class="card-description">Lengkapi kebutuhan kebun pintarmu, mulai dari nutrisi, media tanam, hingga toolkit hidroponik.</p>
-                <a href="products.html?category=alat" class="btn-category">Lihat Produk</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <section class="offers-section container my-5 py-5">
-      <div class="section-header-offers">
-        <a href="products.html" class="btn btn-view-offers">Lihat Semua</a>
-        <h2 class="section-title">Produk Pilihan Untukmu</h2>
       </div>
       <div class="row g-4">
-        <div class="col-lg-8">
-          <div class="row g-4">
-            <div class="col-md-6 col-lg-6">
-              <div class="product-card-offer">
-                <div class="product-image-wrapper">
-                  <a href="product_detail.html">
-                    <img
-                      src="https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg"
-                      alt="Caladium Red Star"
-                    />
-                  </a>
-                  <div class="product-badge">BEST SELLER</div>
-                  <div class="product-actions">
-                    <button class="action-btn">
-                      <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Tanaman Hias</p>
-                  <h3 class="product-title">
-                    <a href="product_detail.html">Caladium Red Star</a>
-                  </h3>
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                    <span class="review-count">(1.2k)</span>
-                  </div>
-                  <p class="product-price">Rp 75.000</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-              <div class="product-card-offer">
-                <div class="product-image-wrapper">
-                  <a href="product_detail.html">
-                    <img
-                      src="https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg"
-                      alt="Monstera Deliciosa"
-                    />
-                  </a>
-                  <div class="product-badge">BEST SELLER</div>
-                  <div class="product-actions">
-                    <button class="action-btn">
-                      <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Tanaman Hias</p>
-                  <h3 class="product-title">
-                    <a href="product_detail.html">Monstera Deliciosa</a>
-                  </h3>
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i>
-                    <span class="review-count">(5k+)</span>
-                  </div>
-                  <p class="product-price">
-                    <span class="discount-price">Rp 125.000</span>
-                    <span class="original-price">Rp 150.000</span>
-                  </p>
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="category-card-colored card-green">
+            <div class="card-icon"><i class="fas fa-seedling"></i></div>
+            <h3 class="card-title">Bibit & Benih</h3>
+            <p class="card-description">
+              Mulai petualangan berkebunmu dengan bibit hidroponik kualitas
+              terbaik yang cepat tumbuh.
+            </p>
+            <a href="products.html?category=bibit" class="btn-category"
+              >Lihat Produk</a
+            >
+          </div>
+        </div>
+
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="category-card-colored card-orange">
+            <div class="card-icon"><i class="fas fa-carrot"></i></div>
+            <h3 class="card-title">Tanaman Siap Panen</h3>
+            <p class="card-description">
+              Ingin langsung panen? Pilih dari koleksi sayuran segar siap petik
+              dari kebun kami.
+            </p>
+            <a href="products.html?category=panen" class="btn-category"
+              >Lihat Produk</a
+            >
+          </div>
+        </div>
+
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="category-card-colored card-blue">
+            <div class="card-icon"><i class="fas fa-tools"></i></div>
+            <h3 class="card-title">Alat & Perlengkapan</h3>
+            <p class="card-description">
+              Lengkapi kebutuhan kebun pintarmu, mulai dari nutrisi, media
+              tanam, hingga toolkit hidroponik.
+            </p>
+            <a href="products.html?category=alat" class="btn-category"
+              >Lihat Produk</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container my-5 py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title mb-0">Produk Pilihan Untukmu</h2>
+        <a href="products.html" class="btn-smartfarm-secondary">Lihat Semua</a>
+      </div>
+
+      <div class="swiper product-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="product-card-offer h-100">
+              <div class="product-image-wrapper">
+                <a href="product_detail.html"
+                  ><img
+                    src="https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg"
+                    alt="Caladium Red Star"
+                /></a>
+                <div class="product-badge">BEST SELLER</div>
+                <div class="product-actions">
+                  <button class="action-btn">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="action-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-              <div class="product-card-offer">
-                <div class="product-image-wrapper">
-                  <a href="product_detail.html">
-                    <img
-                      src="https://i.pinimg.com/1200x/54/f9/a3/54f9a320809a58939f42820b0c27db12.jpg"
-                      alt="Nutrisi AB Mix"
-                    />
-                  </a>
-                  <div class="product-badge">NEW</div>
-                  <div class="product-actions">
-                    <button class="action-btn">
-                      <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
+              <div class="product-info">
+                <p class="product-category">Tanaman Hias</p>
+                <h3 class="product-title">
+                  <a href="product_detail.html">Caladium Red Star</a>
+                </h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star-half-alt"></i>
                 </div>
-                <div class="product-info">
-                  <p class="product-category">Nutrisi Tanaman</p>
-                  <h3 class="product-title">
-                    <a href="product_detail.html"
-                      >Nutrisi AB Mix Premium 500ml</a
-                    >
-                  </h3>
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="far fa-star"></i>
-                    <span class="review-count">(920)</span>
-                  </div>
-                  <p class="product-price">Rp 45.000</p>
-                </div>
+                <p class="product-price mt-auto">Rp 75.000</p>
               </div>
             </div>
-            <div class="col-md-6 col-lg-6">
-              <div class="product-card-offer">
-                <div class="product-image-wrapper">
-                  <a href="product_detail.html">
-                    <img
-                      src="https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg"
-                      alt="Rockwool"
-                    />
-                  </a>
-                  <div class="product-badge">SALE</div>
-                  <div class="product-actions">
-                    <button class="action-btn">
-                      <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-card-offer h-100">
+              <div class="product-image-wrapper">
+                <a href="product_detail.html"
+                  ><img
+                    src="https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg"
+                    alt="Monstera Deliciosa"
+                /></a>
+                <div class="product-badge">BEST SELLER</div>
+                <div class="product-actions">
+                  <button class="action-btn">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="action-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
                 </div>
-                <div class="product-info">
-                  <p class="product-category">Media Tanam</p>
-                  <h3 class="product-title">
-                    <a href="product_detail.html"
-                      >Rockwool Cultilene (Potongan)</a
-                    >
-                  </h3>
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                    <span class="review-count">(4.1k)</span>
-                  </div>
-                  <p class="product-price">
-                    <span class="discount-price">Rp 15.000</span>
-                    <span class="original-price">Rp 20.000</span>
-                  </p>
+              </div>
+              <div class="product-info">
+                <p class="product-category">Tanaman Hias</p>
+                <h3 class="product-title">
+                  <a href="product_detail.html">Monstera Deliciosa</a>
+                </h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star"></i>
                 </div>
+                <p class="product-price mt-auto">Rp 125.000</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-card-offer h-100">
+              <div class="product-image-wrapper">
+                <a href="product_detail.html"
+                  ><img
+                    src="https://i.pinimg.com/1200x/54/f9/a3/54f9a320809a58939f42820b0c27db12.jpg"
+                    alt="Nutrisi AB Mix"
+                /></a>
+                <div class="product-badge">NEW</div>
+                <div class="product-actions">
+                  <button class="action-btn">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="action-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="product-info">
+                <p class="product-category">Nutrisi Tanaman</p>
+                <h3 class="product-title">
+                  <a href="product_detail.html">Nutrisi AB Mix Premium</a>
+                </h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="far fa-star"></i>
+                </div>
+                <p class="product-price mt-auto">Rp 45.000</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-card-offer h-100">
+              <div class="product-image-wrapper">
+                <a href="product_detail.html"
+                  ><img
+                    src="https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg"
+                    alt="Rockwool"
+                /></a>
+                <div class="product-badge">SALE</div>
+                <div class="product-actions">
+                  <button class="action-btn">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="action-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="product-info">
+                <p class="product-category">Media Tanam</p>
+                <h3 class="product-title">
+                  <a href="product_detail.html">Rockwool Cultilene</a>
+                </h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="product-price mt-auto">Rp 15.000</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <a href="promo.html" class="special-offer-card">
-            <div
-              class="offer-image"
-              style="
-                background-image: url('https://i.pinimg.com/736x/e6/75/cb/e675cbe88be7f5bbb622fb9db1f0b6fe.jpg');
-              "
-            ></div>
-            <div class="offer-content">
-              <h3 class="offer-title">Paket Hemat Mulai</h3>
-              <p class="offer-price">Rp 55.000</p>
-              <div class="btn btn-offer-cta">Belanja Sekarang</div>
-            </div>
-          </a>
-        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
     </section>
 
@@ -337,7 +327,9 @@
                 bebas pestisida di lahan terbatas sekalipun. Cukup 15 menit
                 sehari untuk hasil maksimal!
               </p>
-              <a href="products.html" class="btn-smartfarm-secondary">LIHAT PAKETNYA</a>
+              <a href="products.html" class="btn-smartfarm-secondary"
+                >LIHAT PAKETNYA</a
+              >
             </div>
           </div>
         </div>
@@ -509,6 +501,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <div id="footer-placeholder"></div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../assets/js/public_script.js"></script>
+    <script>
+        // Inisialisasi Swiper untuk produk pilihan
+        var productSwiper = new Swiper('.product-swiper', {
+            slidesPerView: 1, // Default 1 slide per view (untuk mobile)
+            spaceBetween: 20, // Jarak antar slide
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                // Ketika lebar layar >= 576px (ukuran tablet)
+                576: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                // Ketika lebar layar >= 992px (ukuran desktop)
+                992: {
+                    slidesPerView: 4, // 4 slide per view
+                    spaceBetween: 20,
+                }
+            }
+        });
+    </script>
+</body>
+</html>
   </body>
 </html>
