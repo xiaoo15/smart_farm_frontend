@@ -356,3 +356,41 @@ document.addEventListener("DOMContentLoaded", function () {
   // Make notification function globally available
   window.showNotification = showNotification;
 });
+
+// Chart.js untuk Dashboard
+document.addEventListener("DOMContentLoaded", () => {
+    // Cek jika kita berada di halaman dashboard
+    if (document.getElementById("salesChart")) {
+        const salesChartCanvas = document.getElementById("salesChart");
+        const ctx = salesChartCanvas.getContext("2d");
+
+        let gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, "rgba(67, 97, 238, 0.3)"); // Warna biru primer
+        gradient.addColorStop(1, "rgba(67, 97, 238, 0)");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                datasets: [{
+                    label: "Sales",
+                    data: [120, 190, 300, 500, 200, 350, 450],
+                    borderColor: "#4361ee", // Warna biru primer
+                    backgroundColor: gradient,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: "#fff",
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: "#e0e6ed" } },
+                    x: { grid: { display: false } }
+                }
+            },
+        });
+    }
+});

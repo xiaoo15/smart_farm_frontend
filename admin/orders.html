@@ -1,134 +1,187 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Orders</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Cukup panggil SATU file CSS utama -->
-        <link rel="stylesheet" href="../assets/css/admin_style.css">
-</head>
-<body>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../assets/css/admin_style.css" />
+  </head>
+  <body>
     <div class="admin-wrapper">
-        <div id="sidebar-container"></div>
-        <div class="overlay" id="overlay"></div>
+      <div id="sidebar-container"></div>
+      <div id="overlay"></div>
 
-        <div class="main-content" id="mainContent">
-            <div class="mobile-toggle d-lg-none" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </div>
+      <div class="main-content" id="mainContent">
+        <header class="content-header">
+          <div class="header-welcome">
+            <h2 class="mb-0">Orders</h2>
+            <p class="text-muted">
+              Welcome back, Revan! Here's your order list.
+            </p>
+          </div>
+        </header>
 
-            <header class="content-header">
-                <div>
-                    <h2>Orders</h2>
-                    <p>Manage all customer orders from one place.</p>
+        <section class="order-summary-cards mb-4">
+          <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+              <div class="summary-card-order bg-primary-light">
+                <div class="icon-wrapper-order bg-primary-dark">
+                  <i class="fas fa-box"></i>
                 </div>
-            </header>
-
-            <div class="row g-4 mb-4">
-                <div class="col-xl-3 col-md-6"><div class="summary-card"><div class="icon" style="color: var(--warning);"><i class="fas fa-hourglass-half"></i></div><h4>5</h4><p>Need Process</p></div></div>
-                <div class="col-xl-3 col-md-6"><div class="summary-card"><div class="icon" style="color: var(--info);"><i class="fas fa-truck"></i></div><h4>12</h4><p>On Delivery</p></div></div>
-                <div class="col-xl-3 col-md-6"><div class="summary-card"><div class="icon" style="color: var(--success);"><i class="fas fa-check-circle"></i></div><h4>8</h4><p>Completed Today</p></div></div>
-                <div class="col-xl-3 col-md-6"><div class="summary-card"><div class="icon" style="color: var(--danger);"><i class="fas fa-times-circle"></i></div><h4>1</h4><p>Cancelled</p></div></div>
-            </div>
-
-            <div class="filter-section">
-                <div class="row g-3 align-items-center">
-                    <div class="col-xl-6 col-lg-12 d-flex flex-wrap gap-2">
-                        <input type="text" class="form-control" placeholder="Search ID or Customer..." style="width: 200px;">
-                        <input type="date" class="form-control" style="width: 180px;">
-                        <input type="date" class="form-control" style="width: 180px;">
-                    </div>
-                    <div class="col-xl-6 col-lg-12 d-flex justify-content-start justify-content-xl-end gap-2">
-                        <select class="form-select" style="width: 180px;">
-                            <option selected>Bulk Actions</option>
-                            <option>Set Status to Shipped</option>
-                            <option>Delete Selected</option>
-                        </select>
-                        <button class="btn btn-outline-secondary">Apply</button>
-                    </div>
+                <div class="info-wrapper-order">
+                  <p>Total Orders</p>
+                  <h4>1,250</h4>
                 </div>
+              </div>
             </div>
-
-            <div class="dashboard-section">
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th><input class="form-check-input" type="checkbox"></th>
-                                <th>Order ID</th>
-                                <th>Customer</th>
-                                <th>Amount</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="Select"><input class="form-check-input" type="checkbox"></td>
-                                <td data-label="Order ID" class="fw-bold">#1256</td>
-                                <td data-label="Customer">Revan Putra</td>
-                                <td data-label="Amount">Rp 150.000</td>
-                                <td data-label="Status" class="text-center"><span class="status-badge status-completed">Completed</span></td>
-                                <td data-label="Action" class="text-center">
-                                    <a href="order_details.html" class="btn btn-sm btn-outline-secondary">Details</a>
-                                </td>
-                            </tr>
-                            <tbody>
-                        <tr>
-                            <td data-label="Select"><input class="form-check-input" type="checkbox"></td>
-                            <td data-label="Order ID" class="fw-bold">#1256</td>
-                            <td data-label="Customer">Revan Putra</td>
-                            <td data-label="Amount">Rp 150.000</td>
-                            <td data-label="Status" class="text-center"><span class="status-badge status-completed">Completed</span></td>
-                            <td data-label="Action" class="text-center">
-                                <a href="order_details.html" class="btn btn-sm btn-outline-secondary">Details</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Select"><input class="form-check-input" type="checkbox"></td>
-                            <td data-label="Order ID" class="fw-bold">#1257</td>
-                            <td data-label="Customer">Siska Amelia</td>
-                            <td data-label="Amount">Rp 85.000</td>
-                            <td data-label="Status" class="text-center"><span class="status-badge status-shipped">Shipped</span></td>
-                            <td data-label="Action" class="text-center">
-                                <a href="order_details.html" class="btn btn-sm btn-outline-secondary">Details</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Select"><input class="form-check-input" type="checkbox"></td>
-                            <td data-label="Order ID" class="fw-bold">#1258</td>
-                            <td data-label="Customer">Budi Santoso</td>
-                            <td data-label="Amount">Rp 210.000</td>
-                            <td data-label="Status" class="text-center"><span class="status-badge status-pending">Pending</span></td>
-                            <td data-label="Action" class="text-center">
-                                <a href="order_details.html" class="btn btn-sm btn-outline-secondary">Details</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Select"><input class="form-check-input" type="checkbox"></td>
-                            <td data-label="Order ID" class="fw-bold">#1259</td>
-                            <td data-label="Customer">Arsya Aji</td>
-                            <td data-label="Amount">Rp 55.000</td>
-                            <td data-label="Status" class="text-center"><span class="status-badge status-cancelled">Cancelled</span></td>
-                            <td data-label="Action" class="text-center">
-                                <a href="order_details.html" class="btn btn-sm btn-outline-secondary">Details</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                        </tbody>
-                    </table>
+            <div class="col-lg-3 col-md-6">
+              <div class="summary-card-order bg-success-light">
+                <div class="icon-wrapper-order bg-success-dark">
+                  <i class="fas fa-check-circle"></i>
                 </div>
+                <div class="info-wrapper-order">
+                  <p>Completed</p>
+                  <h4>950</h4>
+                </div>
+              </div>
             </div>
-        </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="summary-card-order bg-warning-light">
+                <div class="icon-wrapper-order bg-warning-dark">
+                  <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div class="info-wrapper-order">
+                  <p>Pending</p>
+                  <h4>250</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="summary-card-order bg-danger-light">
+                <div class="icon-wrapper-order bg-danger-dark">
+                  <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="info-wrapper-order">
+                  <p>Canceled</p>
+                  <h4>50</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="recent-orders-section">
+          <div class="card dashboard-card">
+            <div class="card-body">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2"
+              >
+                <h5 class="card-title-custom mb-0">Recent Orders</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="fas fa-search"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Search orders..."
+                    />
+                  </div>
+                  <button class="btn btn-outline-secondary">
+                    <i class="fas fa-download me-2"></i>Download
+                  </button>
+                  <button class="btn btn-outline-secondary">
+                    <i class="fas fa-filter me-2"></i>Filter
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table align-middle orders-table-new">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ordersTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/admin_script.js"></script>
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Nanti, data ini bisa kamu ambil dari database/API
+            const ordersData = [
+                { id: "#876364", customer: "Revan Putra", date: "07 Sep, 2025", total: "Rp 50.000", status: "Completed" },
+                { id: "#876365", customer: "Citra Lestari", date: "07 Sep, 2025", total: "Rp 75.000", status: "Pending" },
+                { id: "#876366", customer: "Andi Budi", date: "06 Sep, 2025", total: "Rp 120.000", status: "Canceled" },
+                { id: "#876367", customer: "Siska Amelia", date: "05 Sep, 2025", total: "Rp 25.000", status: "Completed" },
+                { id: "#876368", customer: "Arsya Aji", date: "05 Sep, 2025", total: "Rp 30.000", status: "Pending" },
+                { id: "#876369", customer: "Dewi Anggraini", date: "04 Sep, 2025", total: "Rp 250.000", status: "Completed" },
+                { id: "#876370", customer: "Bagas Perkasa", date: "03 Sep, 2025", total: "Rp 88.000", status: "Canceled" },
+                { id: "#876371", customer: "Rina Wijaya", date: "02 Sep, 2025", total: "Rp 150.000", status: "Completed" }
+            ];
+
+            const tableBody = document.getElementById('ordersTableBody');
+            
+            // Hapus isi tabel yang mungkin ada sebelumnya
+            tableBody.innerHTML = ''; 
+
+            // Loop untuk setiap data order
+            ordersData.forEach(order => {
+                // Buat fungsi untuk badge status biar lebih rapi
+                const getStatusBadge = (status) => {
+                    const statusClass = `status-badge-${status.toLowerCase()}`;
+                    return `<span class="badge ${statusClass}">${status}</span>`;
+                };
+
+                // Buat baris tabel (tr) baru
+                const row = `
+                    <tr>
+                        <td class="fw-bold">${order.id}</td>
+                        <td>${order.customer}</td>
+                        <td>${order.date}</td>
+                        <td class="fw-bold">${order.total}</td>
+                        <td>${getStatusBadge(order.status)}</td>
+                        <td>
+                            <a href="order_details.html?id=${order.id.replace('#','')}" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="btn btn-icon btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="#" class="btn btn-icon btn-sm"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                `;
+
+                // Masukkan baris baru ke dalam tbody
+                tableBody.innerHTML += row;
+            });
+        });
+    </script>
+  </body>
 </html>

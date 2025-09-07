@@ -613,69 +613,117 @@ body {
 /* CATEGORY SECTION */
 /* =================================================================== */
 
-.section-header-clean {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 1.5rem;
-}
-
-.section-header-clean .section-title {
-  font-size: 1.5rem;
+.kategori-pilihan-section .section-header-minimalist .section-title {
+  color: #051F20; /* Warna judul jadi hijau paling gelap */
   font-weight: 700;
-  color: var(--dark-text);
+  letter-spacing: 1px;
 }
 
-.section-header-clean .section-link {
-  font-weight: 600;
-  color: var(--primary);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.section-header-clean .section-link:hover {
-  color: var(--primary-dark);
-}
-
-.category-card-link {
-  text-decoration: none;
-}
-
-.category-card {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow);
-  border-color: var(--primary-light);
-}
-
-.category-image-wrapper {
+.category-card-colored {
   width: 100%;
-  height: 250px;
-  overflow: hidden;
-  margin-bottom: 1rem;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 8px 20px rgba(5, 31, 32, 0.08);
 }
 
-.category-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
+.category-card-colored:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(5, 31, 32, 0.12);
 }
 
-.category-title {
-  font-size: 1.1rem;
+.category-card-colored .card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-card-colored .card-title {
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--dark-text);
-  margin: 0;
+  margin-bottom: 0.75rem;
 }
 
+.category-card-colored .card-description {
+  margin-bottom: 2rem;
+  flex-grow: 1; /* Bikin deskripsi menempati ruang sisa */
+}
+
+.btn-category {
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 2px solid;
+}
+
+
+/* Variasi Warna Kartu Sesuai Palet Kamu */
+
+/* CARD 1 (Hijau Tua) */
+.category-card-colored.card-green {
+  background-color: #235347;
+  color: #FFFFFF;
+}
+.category-card-colored.card-green .card-icon {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+.category-card-colored.card-green .btn-category {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+.category-card-colored.card-green .btn-category:hover {
+  background-color: #FFFFFF;
+  color: #235347;
+}
+
+/* CARD 2 (Hijau Terang - Menggantikan Oranye) */
+.category-card-colored.card-light-green {
+  background-color: #DAF1DE;
+  color: #051F20;
+}
+.category-card-colored.card-light-green .card-icon {
+  background-color: #FFFFFF;
+  color: #235347;
+}
+.category-card-colored.card-light-green .btn-category {
+  color: #163832;
+  border-color: #163832;
+}
+.category-card-colored.card-light-green .btn-category:hover {
+  background-color: #163832;
+  color: #FFFFFF;
+}
+
+/* CARD 3 (Hijau Sedang - Menggantikan Biru) */
+.category-card-colored.card-mid-green {
+  background-color: #8EB69B;
+  color: #051F20;
+}
+.category-card-colored.card-mid-green .card-icon {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #163832;
+}
+.category-card-colored.card-mid-green .btn-category {
+  color: #051F20;
+  border-color: #051F20;
+}
+.category-card-colored.card-mid-green .btn-category:hover {
+  background-color: #051F20;
+  color: #FFFFFF;
+}
 /* =================================================================== */
 /* PRODUCT PREMIUM STYLES */
 /* =================================================================== */

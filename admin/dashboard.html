@@ -17,11 +17,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../../assets/css/admin_style_baru.css" />
-    <link rel="stylesheet" href="../../assets/css/dashboard_style.css" />
-    <link rel="stylesheet" href="../../assets/css/sidebar_style.css" />
+    <link rel="stylesheet" href="../assets/css/admin_style.css" />
   </head>
   <body>
+    
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
@@ -42,259 +41,519 @@
           </div>
         </header>
 
-        <section class="today-sales mb-4">
-          <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
-              <div class="stat-card">
-                <div class="stat-card-icon icon-earnings">
-                  <i class="fas fa-dollar-sign"></i>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-3"
+                >
+                  <div class="icon-wrapper primary-bg">
+                    <i class="fas fa-dollar-sign"></i>
+                  </div>
+                  <span class="badge badge-success-light">
+                    <i class="fas fa-arrow-up"></i> 20%
+                  </span>
                 </div>
-                <p class="stat-card-title">Today's Sales</p>
-                <h4 class="stat-card-value">Rp 1.250.000</h4>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="stat-card">
-                <div class="stat-card-icon icon-orders">
-                  <i class="fas fa-receipt"></i>
-                </div>
-                <p class="stat-card-title">Total Orders</p>
-                <h4 class="stat-card-value">32</h4>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="stat-card">
-                <div class="stat-card-icon icon-visitors">
-                  <i class="fas fa-users"></i>
-                </div>
-                <p class="stat-card-title">Today's Visitors</p>
-                <h4 class="stat-card-value">1,234</h4>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="stat-card">
-                <div class="stat-card-icon icon-sales">
-                  <i class="fas fa-chart-line"></i>
-                </div>
-                <p class="stat-card-title">Conversion Rate</p>
-                <h4 class="stat-card-value">5.8%</h4>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="row g-4">
-          <div class="col-12">
-            <div class="dashboard-section">
-              <div class="section-header">
-                <h5>Sales Statistics</h5>
-              </div>
-              <div class="chart-container">
-                <canvas id="salesChart"></canvas>
+                <p class="card-title-modern">Total Revenue</p>
+                <h3 class="card-value-modern">$26,35,262</h3>
+                <p class="card-text-modern text-muted">in last week</p>
               </div>
             </div>
           </div>
 
-          <div class="col-12">
-            <div class="dashboard-section">
-              <div class="section-header">
-                <h5>Recent Activity</h5>
-                <a href="transaksi.html" class="small">View All Orders</a>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-3"
+                >
+                  <div class="icon-wrapper info-bg">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                  </div>
+                  <span class="badge badge-danger-light">
+                    <i class="fas fa-arrow-down"></i> 1.8%
+                  </span>
+                </div>
+                <p class="card-title-modern">Total Sales</p>
+                <h3 class="card-value-modern">$56,35,262</h3>
+                <p class="card-text-modern text-muted">in last week</p>
               </div>
-              <ul class="list-group list-group-flush activity-list">
-                <li class="list-group-item">
-                  <div class="activity-icon icon-completed">
-                    <i class="fas fa-check"></i>
-                  </div>
-                  <div class="activity-content">
-                    <strong>Order #1253</strong> from Revan Putra has been
-                    completed.
-                    <small class="text-muted d-block">Today, 10:42 AM</small>
-                  </div>
-                  <span class="badge bg-success-soft text-success ms-auto"
-                    >Completed</span
-                  >
-                </li>
-                <li class="list-group-item">
-                  <div class="activity-icon icon-delivery">
-                    <i class="fas fa-truck"></i>
-                  </div>
-                  <div class="activity-content">
-                    <strong>Order #1254</strong> for Citra Lestari is out for
-                    delivery.
-                    <small class="text-muted d-block">Today, 09:15 AM</small>
-                  </div>
-                  <span class="badge bg-info-soft text-info ms-auto"
-                    >Delivery</span
-                  >
-                </li>
-                <li class="list-group-item">
-                  <div class="activity-icon icon-pending">
-                    <i class="fas fa-hourglass-half"></i>
-                  </div>
-                  <div class="activity-content">
-                    <strong>Order #1255</strong> from Andi Budi is awaiting
-                    payment confirmation.
-                    <small class="text-muted d-block"
-                      >Yesterday, 08:30 PM</small
-                    >
-                  </div>
-                  <span class="badge bg-warning-soft text-warning ms-auto"
-                    >Pending</span
-                  >
-                </li>
-              </ul>
-              <ul class="list-group list-group-flush activity-list">
-                <li class="list-group-item">
-                  <div class="activity-icon icon-cancelled">
-                    <i class="fas fa-times"></i>
-                  </div>
-                  <div class="activity-content">
-                    <strong>Order #1256</strong> from Arsya Aji has been
-                    cancelled.
-                    <small class="text-muted d-block">Today, 11:30 AM</small>
-                  </div>
-                  <span class="badge bg-danger-soft text-danger ms-auto"
-                    >Cancelled</span
-                  >
-                </li>
+            </div>
+          </div>
 
-                <li class="list-group-item">
-                  <div class="activity-icon icon-processing">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-3"
+                >
+                  <div class="icon-wrapper warning-bg">
                     <i class="fas fa-box-open"></i>
                   </div>
-                  <div class="activity-content">
-                    <strong>Order #1257</strong> for Siska is now being
-                    processed.
-                    <small class="text-muted d-block">Today, 10:30 AM</small>
+                  <span class="badge badge-warning-light">
+                    <i class="fas fa-arrow-up"></i> 1.8%
+                  </span>
+                </div>
+                <p class="card-title-modern">Total Products</p>
+                <h3 class="card-value-modern">$4,262</h3>
+                <p class="card-text-modern text-muted">in last week</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-3"
+                >
+                  <div class="icon-wrapper success-bg">
+                    <i class="fas fa-money-bill-wave"></i>
                   </div>
-                  <span class="badge bg-primary-soft text-primary ms-auto"
-                    >Processing</span
-                  >
-                </li>
-                <li class="list-group-item">
-                  <div class="activity-icon icon-delivery">
-                    <i class="fas fa-truck"></i>
-                  </div>
-                  <div class="activity-content">
-                    <strong>Order #1254</strong> for Citra Lestari is out for
-                    delivery.
-                    <small class="text-muted d-block">Today, 09:15 AM</small>
-                  </div>
-                  <span class="badge bg-info-soft text-info ms-auto"
-                    >Delivery</span
-                  >
-                </li>
-                <li class="list-group-item">
-                  <div class="activity-icon icon-pending">
-                    <i class="fas fa-hourglass-half"></i>
-                  </div>
-                  <div class="activity-content">
-                    <strong>Order #1255</strong> from Andi Budi is awaiting
-                    payment.
-                    <small class="text-muted d-block"
-                      >Yesterday, 08:30 PM</small
+                  <span class="badge badge-success-light">
+                    <i class="fas fa-arrow-up"></i> 1.2%
+                  </span>
+                </div>
+                <p class="card-title-modern">Total Expenses</p>
+                <h3 class="card-value-modern">$35,262</h3>
+                <p class="card-text-modern text-muted">in last week</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-lg-8">
+            <div class="card dashboard-card h-100">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="card-title-custom">Sales Statistics</h5>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
                     >
+                      This Week
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </ul>
                   </div>
-                  <span class="badge bg-warning-soft text-warning ms-auto"
-                    >Pending</span
-                  >
-                </li>
-              </ul>
+                </div>
+                <div class="chart-container" style="height: 300px">
+                  <canvas id="salesChartNew"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card dashboard-card h-100">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Orders Statistics</h5>
+                <div
+                  class="chart-container-doughnut mx-auto"
+                  style="height: 200px; max-width: 200px"
+                >
+                  <canvas id="ordersChart"></canvas>
+                </div>
+                <div class="mt-4">
+                  <ul class="list-unstyled">
+                    <li
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <span
+                        ><span class="legend-dot bg-success"></span>
+                        Completed</span
+                      >
+                      <strong>1.2k</strong>
+                    </li>
+                    <li
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <span
+                        ><span class="legend-dot bg-warning"></span>
+                        Pending</span
+                      >
+                      <strong>345</strong>
+                    </li>
+                    <li
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <span
+                        ><span class="legend-dot bg-danger"></span>
+                        Canceled</span
+                      >
+                      <strong>123</strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card dashboard-card mt-4">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Product Statistics</h5>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item product-stat-item">
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://i.pinimg.com/736x/80/5d/69/805d6987ade84a4bca8a8c6a5ec9092c.jpg"
+                        alt="Product"
+                        class="rounded me-3"
+                      />
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Bibit Cabai Rawit Unggul</h6>
+                        <small class="text-muted">ID: #PROD-001</small>
+                      </div>
+                    </div>
+                    <div class="ms-auto text-end" style="width: 200px">
+                      <div class="d-flex justify-content-between">
+                        <small>Sales</small>
+                        <small class="fw-bold">1,250</small>
+                      </div>
+                      <div class="progress" style="height: 6px">
+                        <div
+                          class="progress-bar bg-primary"
+                          role="progressbar"
+                          style="width: 85%"
+                          aria-valuenow="85"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item product-stat-item">
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://i.pinimg.com/736x/7d/a7/b9/7da7b99ff39d5c65084802fc29de8f03.jpg"
+                        alt="Product"
+                        class="rounded me-3"
+                      />
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Pupuk Organik Cair</h6>
+                        <small class="text-muted">ID: #PROD-002</small>
+                      </div>
+                    </div>
+                    <div class="ms-auto text-end" style="width: 200px">
+                      <div class="d-flex justify-content-between">
+                        <small>Sales</small>
+                        <small class="fw-bold">980</small>
+                      </div>
+                      <div class="progress" style="height: 6px">
+                        <div
+                          class="progress-bar bg-info"
+                          role="progressbar"
+                          style="width: 70%"
+                          aria-valuenow="70"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item product-stat-item">
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://i.pinimg.com/1200x/d7/65/92/d76592ddfd5d0e46d83a0f3ac188ce49.jpg"
+                        alt="Product"
+                        class="rounded me-3"
+                      />
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Alat Siram Otomatis</h6>
+                        <small class="text-muted">ID: #PROD-003</small>
+                      </div>
+                    </div>
+                    <div class="ms-auto text-end" style="width: 200px">
+                      <div class="d-flex justify-content-between">
+                        <small>Sales</small>
+                        <small class="fw-bold">450</small>
+                      </div>
+                      <div class="progress" style="height: 6px">
+                        <div
+                          class="progress-bar bg-warning"
+                          role="progressbar"
+                          style="width: 45%"
+                          aria-valuenow="45"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+          <div class="col-lg-8">
+            <div class="card dashboard-card">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Recent Orders</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="fw-bold">#876364</td>
+                        <td>Revan Putra</td>
+                        <td>Bibit Cabai</td>
+                        <td>2</td>
+                        <td class="fw-bold">Rp 50.000</td>
+                        <td>
+                          <span class="badge status-badge-completed"
+                            >Completed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold">#876365</td>
+                        <td>Citra Lestari</td>
+                        <td>Pupuk Organik</td>
+                        <td>1</td>
+                        <td class="fw-bold">Rp 75.000</td>
+                        <td>
+                          <span class="badge status-badge-pending"
+                            >Pending</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold">#876366</td>
+                        <td>Andi Budi</td>
+                        <td>Alat Siram</td>
+                        <td>1</td>
+                        <td class="fw-bold">Rp 120.000</td>
+                        <td>
+                          <span class="badge status-badge-canceled"
+                            >Canceled</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold">#876367</td>
+                        <td>Siska Amelia</td>
+                        <td>Polybag (x50)</td>
+                        <td>5</td>
+                        <td class="fw-bold">Rp 25.000</td>
+                        <td>
+                          <span class="badge status-badge-completed"
+                            >Completed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold">#876368</td>
+                        <td>Arsya Aji</td>
+                        <td>Benih Selada</td>
+                        <td>10</td>
+                        <td class="fw-bold">Rp 30.000</td>
+                        <td>
+                          <span class="badge status-badge-pending"
+                            >Pending</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card dashboard-card">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Top Customers</h5>
+                <ul class="list-unstyled">
+                  <li class="top-customer-item">
+                    <img
+                      src="https://via.placeholder.com/40"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info">
+                      <h6 class="mb-0">Revan Putra</h6>
+                      <small class="text-muted">@revanputra</small>
+                    </div>
+                    <div class="customer-orders ms-auto">
+                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                      <span class="fw-bold">125</span>
+                    </div>
+                  </li>
+                  <li class="top-customer-item">
+                    <img
+                      src="https://via.placeholder.com/40"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info">
+                      <h6 class="mb-0">Citra Lestari</h6>
+                      <small class="text-muted">@citra</small>
+                    </div>
+                    <div class="customer-orders ms-auto">
+                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                      <span class="fw-bold">98</span>
+                    </div>
+                  </li>
+                  <li class="top-customer-item">
+                    <img
+                      src="https://via.placeholder.com/40"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info">
+                      <h6 class="mb-0">Andi Budi</h6>
+                      <small class="text-muted">@andib</small>
+                    </div>
+                    <div class="customer-orders ms-auto">
+                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                      <span class="fw-bold">76</span>
+                    </div>
+                  </li>
+                  <li class="top-customer-item">
+                    <img
+                      src="https://via.placeholder.com/40"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info">
+                      <h6 class="mb-0">Siska Amelia</h6>
+                      <small class="text-muted">@siska_a</small>
+                    </div>
+                    <div class="customer-orders ms-auto">
+                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                      <span class="fw-bold">54</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../assets/js/app.js"></script>
+    <script src="../assets/js/admin_script.js"></script>
     <script>
-      // Kode untuk Chart.js dengan desain yang lebih baik
       document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-          const salesChartCanvas = document.getElementById("salesChart");
-          if (salesChartCanvas) {
-            const ctx = salesChartCanvas.getContext("2d");
-
-            // Membuat gradient yang lebih halus
-            let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, "rgba(67, 97, 238, 0.3)");
-            gradient.addColorStop(0.7, "rgba(67, 97, 238, 0.1)");
-            gradient.addColorStop(1, "rgba(67, 97, 238, 0)");
-
-            new Chart(ctx, {
-              type: "line",
-              data: {
-                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-                datasets: [
-                  {
-                    label: "Sales",
-                    data: [120, 190, 300, 500, 200, 350, 450],
-                    borderColor: "#7cfc00",
-                    backgroundColor: "#90ee90",
-                    fill: true,
-                    tension: 0.4,
-                    borderWidth: 3,
-                    pointBackgroundColor: "#fff",
-                    pointBorderColor: "#7cfc00",
-                    pointBorderWidth: 3,
-                    pointRadius: 5,
-                    pointHoverRadius: 7,
-                    pointHoverBackgroundColor: "#7cfc00",
-                    pointHoverBorderColor: "#fff",
-                    pointHoverBorderWidth: 2,
-                  },
-                ],
-              },
-              options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: { display: false },
-                  tooltip: {
-                    backgroundColor: "#90ee90",
-                    titleColor: "#212529",
-                    bodyColor: "#212529",
-                    borderColor: "#7cfc00",
-                    borderWidth: 1,
-                    padding: 12,
-                    boxPadding: 6,
+        // Chart.js untuk Sales Statistics (WARNA BARU)
+        const salesChartCanvasNew = document.getElementById("salesChartNew");
+        if (salesChartCanvasNew) {
+          const ctxSales = salesChartCanvasNew.getContext("2d");
+          new Chart(ctxSales, {
+            type: "line",
+            data: {
+              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+              datasets: [
+                {
+                  label: "Sales",
+                  data: [65, 59, 80, 81, 56, 55, 40],
+                  fill: false,
+                  borderColor: "#235347", // GANTI ke warna Hijau Tua (Primary)
+                  tension: 0.4,
+                  pointBackgroundColor: "#235347", // GANTI ke warna Hijau Tua (Primary)
+                  pointRadius: 5,
+                },
+                {
+                  label: "Revenue",
+                  data: [28, 48, 40, 19, 86, 27, 90],
+                  fill: false,
+                  borderColor: "#8EB69B", // GANTI ke warna Hijau Abu-abu (Border Color)
+                  tension: 0.4,
+                  pointBackgroundColor: "#8EB69B", // GANTI ke warna Hijau Abu-abu
+                  pointRadius: 5,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "top",
+                  align: "end",
+                  labels: {
                     usePointStyle: true,
-                    callbacks: {
-                      label: function (context) {
-                        return `Rp ${context.parsed.y.toLocaleString("id-ID")}`;
-                      },
-                    },
+                    boxWidth: 8,
+                    color: "#051F20" // GANTI warna teks legenda
                   },
-                },
-                scales: {
-                  y: {
-                    grid: {
-                      display: true,
-                      color: "rgba(0, 0, 0, 0.05)",
-                    },
-                    ticks: {
-                      display: true,
-                      callback: function (value) {
-                        return "Rp " + value.toLocaleString("id-ID");
-                      },
-                    },
-                  },
-                  x: {
-                    grid: {
-                      display: false,
-                    },
-                  },
-                },
-                interaction: {
-                  intersect: false,
-                  mode: "index",
                 },
               },
-            });
-          }
-        }, 500);
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    color: "#163832" // GANTI warna teks di sumbu Y
+                  },
+                  grid: {
+                    color: '#DAF1DE' // GANTI warna garis grid
+                  }
+                },
+                x: {
+                   ticks: {
+                    color: "#163832" // GANTI warna teks di sumbu X
+                  }
+                }
+              },
+            },
+          });
+        }
+
+        // Chart.js untuk Orders Statistics (WARNA BARU)
+        const ordersChartCanvas = document.getElementById("ordersChart");
+        if (ordersChartCanvas) {
+          const ctxOrders = ordersChartCanvas.getContext("2d");
+          new Chart(ctxOrders, {
+            type: "doughnut",
+            data: {
+              labels: ["Completed", "Pending", "Canceled"],
+              datasets: [
+                {
+                  label: "Orders",
+                  data: [1200, 345, 123],
+                  backgroundColor: [
+                    "#235347", // GANTI Completed ke Hijau Tua (Primary)
+                    "#ffc107", // Biarkan Pending tetap Kuning (universal)
+                    "#dc3545", // Biarkan Canceled tetap Merah (universal)
+                  ],
+                  borderColor: "#FFFFFF", // Ganti ke warna kartu (putih)
+                  borderWidth: 4,
+                  hoverOffset: 8,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "75%",
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            },
+          });
+        }
       });
     </script>
   </body>

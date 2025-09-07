@@ -3,23 +3,31 @@
 /* =================================================================== */
 
 :root {
-  --primary: #2e7d32; /* Hijau Utama */
-  --primary-light: #e8f5e9; /* Hijau Muda untuk hover/background aktif */
-  --secondary: #4caf50;
-  --success: #28a745;
+  /* PALET WARNA BARU KAMU */
+  --primary: #235347; /* Hijau Tua untuk tombol, link aktif, dan highlight */
+  --primary-light: rgba(
+    142,
+    182,
+    155,
+    0.2
+  ); /* Versi terang dari card-bg untuk hover */
+  --secondary: #0b2b26; /* Hijau Sangat Tua untuk sidebar/header */
+  --success: #28a745; /* Tetap pakai hijau standar untuk notif sukses */
   --info: #17a2b8;
   --warning: #ffc107;
-  --danger: #dc3545;
+  --danger: #dc3545; /* Tetap pakai merah standar untuk notif error */
   --light: #f8f9fa;
-  --dark: #263238;
-  --text-primary: #212529; /* Teks Hitam Pekat */
-  --text-secondary: #6c757d; /* Teks Abu-abu */
-  --background: #f8f9fa; /* Latar Belakang Utama */
-  --card-bg: #ffffff; /* Latar Belakang Kartu */
-  --border-color: #dee2e6; /* Warna Border */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --dark: #051f20; /* Hijau Paling Gelap untuk Teks */
+  --text-primary: #051f20; /* Teks utama jadi hijau paling gelap */
+  --text-secondary: #163832; /* Teks sekunder/abu-abu jadi hijau lebih terang */
+  --background: #daf1de; /* Latar Belakang Utama (Hijau Paling Terang) */
+  --card-bg: #ffffff; /* Kartu kita buat putih bersih agar konten menonjol */
+  --border-color: #8eb69b; /* Warna Border (Hijau Abu-abu) */
+
+  /* Properti lainnya tetap sama */
+  --shadow-sm: 0 1px 3px rgba(5, 31, 32, 0.05);
+  --shadow-md: 0 4px 10px rgba(5, 31, 32, 0.07);
+  --shadow-lg: 0 10px 15px rgba(5, 31, 32, 0.1);
   --border-radius: 12px;
   --transition: all 0.3s ease;
   --sidebar-width: 250px;
@@ -73,8 +81,8 @@ body {
   left: 0;
   height: 100%;
   width: var(--sidebar-width);
-  background: var(--card-bg);
-  border-right: 1px solid #e0e0e0;
+  background: var(--secondary); /* Sidebar pakai warna hijau sangat tua */
+  border-right: 1px solid var(--primary);
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -91,8 +99,8 @@ body {
   padding: 20px 24px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
-  background-color: var(--primary-light);
+  border-bottom: 1px solid var(--primary);
+  background-color: transparent;
   position: relative;
 }
 
@@ -100,7 +108,7 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: var(--primary);
+  color: #DAF1DE; /* Teks di sidebar jadi hijau terang */
   font-weight: 700;
   font-size: 1.25rem;
   transition: var(--transition);
@@ -108,7 +116,7 @@ body {
 
 .sidebar-brand i {
   font-size: 1.5rem;
-  color: var(--primary);
+  color: #DAF1DE;
   margin-right: 12px;
   transition: var(--transition);
 }
@@ -148,7 +156,7 @@ body {
   align-items: center;
   padding: 12px 16px;
   text-decoration: none;
-  color: var(--text-primary);
+  color: #DAF1DE; /* Teks link sidebar */
   border-radius: var(--border-radius);
   transition: var(--transition);
   position: relative;
@@ -156,18 +164,18 @@ body {
 }
 
 .sidebar-link:hover {
-  background-color: var(--primary-light);
-  color: var(--primary);
+  background-color: var(--primary); /* Hover jadi hijau tua */
+  color: #fff;
 }
 
 .sidebar-link:active {
-  background-color: var(--primary-light);
-  color: var(--primary);
+  background-color: var(--primary);
+  color: #fff;
 }
 
 .sidebar-link.active {
-  background-color: var(--primary) !important;
-  color: #fff !important;
+  background-color: var(--card-bg) !important; /* Menu aktif warna putih */
+  color: var(--primary) !important; /* Teks menu aktif warna hijau tua */
   font-weight: 600 !important;
 }
 
@@ -196,7 +204,7 @@ body {
 
 .sidebar-footer {
   padding: 16px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--primary);
 }
 
 .logout-link {
@@ -204,14 +212,14 @@ body {
   align-items: center;
   padding: 12px 16px;
   text-decoration: none;
-  color: var(--text-secondary);
+  color: #DAF1DE;
   border-radius: var(--border-radius);
   transition: var(--transition);
 }
 
 .logout-link:hover {
-  background-color: rgba(211, 47, 47, 0.1);
-  color: var(--danger);
+  background-color: rgba(220, 53, 69, 0.8); /* Hover jadi merah */
+  color: #fff;
 }
 
 .logout-link i {
@@ -383,9 +391,136 @@ body {
 }
 
 /* =================================================================== */
-/* STATISTICS CARDS */
+/* ADMIN DASHBOARD STYLES */
 /* =================================================================== */
 
+.stat-card-modern {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden; /* Penting untuk icon wrapper */
+}
+
+.stat-card-modern:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card-modern .card-body {
+  padding: 1.5rem;
+}
+
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px; /* Border radius yang sama dengan card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #fff;
+  /* Opacity untuk background icon */
+  position: relative;
+}
+
+.icon-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  opacity: 0.1; /* Opacity untuk efek warna background */
+}
+
+/* Warna untuk Icon Wrappers */
+.primary-bg .fa-dollar-sign {
+  color: #8a74f4;
+}
+.primary-bg::before {
+  background-color: #8a74f4;
+} /* Warna icon bg Total Revenue */
+
+.info-bg .fa-file-invoice-dollar {
+  color: #40c0e7;
+}
+.info-bg::before {
+  background-color: #40c0e7;
+} /* Warna icon bg Total Sales */
+
+.warning-bg .fa-box-open {
+  color: #f4b400;
+}
+.warning-bg::before {
+  background-color: #f4b400;
+} /* Warna icon bg Total Products */
+
+.success-bg .fa-money-bill-wave {
+  color: #48d17b;
+}
+.success-bg::before {
+  background-color: #48d17b;
+} /* Warna icon bg Total Expenses */
+
+.card-title-modern {
+  font-size: 0.95rem;
+  color: #6c757d; /* Warna teks abu-abu */
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.card-value-modern {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #212529; /* Warna teks gelap */
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.card-text-modern.text-muted {
+  font-size: 0.85rem;
+  color: #adb5bd !important; /* Warna teks sangat abu-abu */
+  margin-top: 0.5rem;
+}
+
+/* Badge untuk Persentase */
+.badge-success-light {
+  background-color: #e6ffed; /* Hijau muda */
+  color: #28a745; /* Hijau terang */
+  padding: 0.4em 0.7em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-danger-light {
+  background-color: #fff0f0; /* Merah muda */
+  color: #dc3545; /* Merah terang */
+  padding: 0.4em 0.7em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-warning-light {
+  background-color: #fff8e6; /* Kuning muda */
+  color: #ffc107; /* Kuning terang */
+  padding: 0.4em 0.7em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-success-light .fas,
+.badge-danger-light .fas,
+.badge-warning-light .fas {
+  margin-right: 5px;
+  font-size: 0.65rem; /* Ukuran icon panah */
+}
+
+/* Kartu Statistik */
 .stat-card {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
@@ -393,13 +528,6 @@ body {
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   transition: var(--transition);
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.stat-card.animate-fade-in-up {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .stat-card:hover {
@@ -410,7 +538,7 @@ body {
 .stat-card-icon {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 12px; /* Dibuat agak kotak */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -421,76 +549,31 @@ body {
 
 .stat-card-title {
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   margin-bottom: 0.25rem;
 }
 
 .stat-card-value {
-  font-weight: 600;
+  font-weight: 700; /* Dibuat lebih tebal */
   font-size: 1.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
-.stat-card-change {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.change-positive {
-  color: #28a745;
-}
-
-.change-negative {
-  color: #dc3545;
-}
-
-/* Icon colors for statistics */
+/* Warna Ikon Kartu Statistik */
 .icon-earnings {
-  background-color: #20c997;
+  background: #20c997;
 }
-
 .icon-orders {
-  background-color: #6610f2;
+  background: #6610f2;
 }
-
 .icon-visitors {
-  background-color: #fd7e14;
+  background: #fd7e14;
 }
-
 .icon-sales {
-  background-color: #0d6efd;
+  background: #0d6efd;
 }
 
-.icon-customers {
-  background-color: #6f42c1;
-}
-
-.icon-products {
-  background-color: #d63384;
-}
-
-.icon-returns {
-  background-color: #dc3545;
-}
-
-.icon-profit {
-  background-color: #198754;
-}
-
-.icon-processing {
-  background: linear-gradient(45deg, #4361ee, #637efd);
-  color: white;
-}
-
-.icon-cancelled {
-  background: linear-gradient(45deg, #dc3545, #fd5e6e);
-  color: white;
-}
-
-/* =================================================================== */
-/* DASHBOARD SECTIONS */
-/* =================================================================== */
-
+/* Section Umum di Dashboard */
 .dashboard-section {
   background-color: var(--card-bg);
   padding: 1.5rem;
@@ -511,6 +594,297 @@ body {
 .section-header h5 {
   font-weight: 600;
   margin: 0;
+}
+
+/* Daftar Aktivitas */
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.5rem !important;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.list-group-item:last-child.activity-item {
+  border-bottom: none;
+}
+
+.activity-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+.activity-content {
+  flex-grow: 1;
+}
+
+/* Warna Avatar Sesuai Status */
+.avatar-success {
+  background-color: var(--success);
+}
+.avatar-info {
+  background-color: var(--info);
+}
+.avatar-warning {
+  background-color: var(--warning);
+}
+.avatar-danger {
+  background-color: var(--danger);
+}
+
+/* Badge (Label Status) */
+.badge.bg-success-soft {
+  background-color: rgba(25, 135, 84, 0.1);
+}
+.badge.bg-info-soft {
+  background-color: rgba(13, 202, 240, 0.1);
+}
+.badge.bg-warning-soft {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+.badge.bg-danger-soft {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* =================================================================== */
+/* ANIMASI SAMBUTAN AESTHETIC ✨ */
+/* =================================================================== */
+
+/* Definisikan animasinya dulu */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Terapkan animasi ke elemen yang kita mau */
+
+/* 1. Animasi untuk Header */
+.content-header .header-welcome h2,
+.content-header .header-welcome p {
+  /* Sembunyikan dulu elemennya */
+  opacity: 0;
+  /* Terapkan animasi */
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+
+/* Kasih jeda sedikit untuk paragrafnya */
+.content-header .header-welcome p {
+  animation-delay: 0.2s;
+}
+
+/* 2. Animasi untuk Kartu Statistik (Efek Muncul Satu per Satu) */
+.today-sales .stat-card,
+.stat-card-modern {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Ini bagian penting untuk bikin munculnya satu per satu (staggered) */
+.today-sales .col-lg-3:nth-child(1) .stat-card,
+.row .col-lg-3:nth-child(1) .stat-card-modern {
+  animation-delay: 0.3s;
+}
+
+.today-sales .col-lg-3:nth-child(2) .stat-card,
+.row .col-lg-3:nth-child(2) .stat-card-modern {
+  animation-delay: 0.4s;
+}
+
+.today-sales .col-lg-3:nth-child(3) .stat-card,
+.row .col-lg-3:nth-child(3) .stat-card-modern {
+  animation-delay: 0.5s;
+}
+
+.today-sales .col-lg-3:nth-child(4) .stat-card,
+.row .col-lg-3:nth-child(4) .stat-card-modern {
+  animation-delay: 0.6s;
+}
+
+/* 3. Animasi untuk Konten di Bawahnya (Chart dan Tabel) */
+.dashboard-card {
+  opacity: 0;
+  animation: fadeInUp 0.7s ease-out forwards;
+  /* Muncul setelah semua kartu statistik selesai */
+  animation-delay: 0.8s;
+}
+
+/* =================================================================== */
+/* STATISTIK DASHBOARD (DESAIN GAMBAR) */
+/* =================================================================== */
+
+.dashboard-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.dashboard-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.card-title-custom {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Legenda untuk Donut Chart */
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Statistik Produk */
+.product-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem !important;
+}
+
+.product-stat-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.product-stat-item h6 {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.progress {
+  border-radius: 50px;
+}
+
+/* =================================================================== */
+/* RECENT ORDERS & TOP CUSTOMERS */
+/* =================================================================== */
+
+/* Tabel Recent Orders */
+.table {
+  border-collapse: separate;
+  border-spacing: 0 8px; /* Memberi jarak antar baris */
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  border: none;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.table tbody tr {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.table tbody tr:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-sm);
+}
+
+.table tbody td {
+  vertical-align: middle;
+  border: none;
+  padding: 1rem;
+}
+
+.table tbody td:first-child {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.table tbody td:last-child {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+/* Badge Status untuk Tabel */
+.status-badge-completed,
+.status-badge-pending,
+.status-badge-canceled {
+  padding: 0.4em 0.8em;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge-completed {
+  background-color: #e6ffed;
+  color: #28a745;
+}
+
+.status-badge-pending {
+  background-color: #fff8e6;
+  color: #ffc107;
+}
+
+.status-badge-canceled {
+  background-color: #fff0f0;
+  color: #dc3545;
+}
+
+/* List Top Customers */
+.top-customer-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: var(--transition);
+}
+
+.top-customer-item:last-child {
+  border-bottom: none;
+}
+
+.top-customer-item:hover {
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+}
+
+.top-customer-item img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
+
+.customer-info h6 {
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 /* =================================================================== */
@@ -553,7 +927,8 @@ body {
   color: white;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: #0d6efd;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
@@ -1121,11 +1496,11 @@ body {
   .main-content {
     margin-left: 0 !important;
   }
-  
+
   .admin-wrapper {
     flex-direction: column;
   }
-  
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -1137,11 +1512,11 @@ body {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
-  
+
   .sidebar.open {
     transform: translateX(0);
   }
-  
+
   .hamburger-btn {
     display: flex !important;
     position: fixed !important;
@@ -1162,11 +1537,11 @@ body {
     cursor: pointer;
     transition: background 0.2s;
   }
-  
+
   .desktop-toggle {
     display: none;
   }
-  
+
   .chat-list-col {
     width: 300px;
   }
@@ -1176,7 +1551,7 @@ body {
   .hamburger-btn {
     display: none;
   }
-  
+
   .sidebar.collapsed ~ .main-content {
     margin-left: var(--sidebar-collapsed-width);
   }
@@ -1186,21 +1561,21 @@ body {
   .dashboard-section {
     padding: 1rem 0.2rem;
   }
-  
+
   .section-header {
     flex-direction: column;
     align-items: stretch;
     gap: 0.7rem;
   }
-  
+
   .table-responsive {
     overflow-x: auto;
   }
-  
+
   .table thead {
     display: none;
   }
-  
+
   .table tbody tr {
     display: block;
     margin-bottom: 1rem !important;
@@ -1208,9 +1583,9 @@ body {
     border-radius: 8px;
     padding: 1rem;
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
-  
+
   .table tbody td {
     display: flex;
     justify-content: space-between;
@@ -1220,7 +1595,7 @@ body {
     text-align: right;
     font-size: 1rem;
   }
-  
+
   .table tbody td::before {
     content: attr(data-label);
     font-weight: 600;
@@ -1229,41 +1604,41 @@ body {
     color: #333;
     flex: 1 1 50%;
   }
-  
+
   .table tbody td[data-label="Gambar"] {
     justify-content: center;
     margin-bottom: 0.5rem;
   }
-  
+
   .table tbody td[data-label="Gambar"]::before {
     display: none;
   }
-  
+
   .table tbody td[data-label="Action"] {
     justify-content: center;
     margin-top: 0.5rem;
   }
-  
+
   .product-img {
     width: 40px;
     height: 40px;
   }
-  
+
   .section-header input,
   .section-header select {
     width: 100% !important;
     min-width: 0;
   }
-  
+
   .btn.btn-primary-custom {
     width: 100%;
     margin-top: 0.5rem;
   }
-  
+
   .chat-wrapper {
     position: relative;
   }
-  
+
   .chat-list-col {
     position: absolute;
     left: 0;
@@ -1275,11 +1650,11 @@ body {
     transition: transform 0.3s ease;
     box-shadow: var(--shadow-lg);
   }
-  
+
   .chat-list-col.active {
     transform: translateX(0);
   }
-  
+
   .chat-toggle-btn {
     display: block !important;
     position: absolute;
@@ -1295,7 +1670,7 @@ body {
     align-items: center;
     justify-content: center;
   }
-  
+
   .message {
     max-width: 85%;
   }
@@ -1305,18 +1680,19 @@ body {
   .dashboard-section {
     padding: 1.5rem 0.5rem;
   }
-  
+
   .section-header {
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
   }
-  
-  .table th, .table td {
+
+  .table th,
+  .table td {
     font-size: 0.98rem;
     padding: 0.6rem 0.4rem;
   }
-  
+
   .product-img {
     width: 48px;
     height: 48px;
@@ -1425,12 +1801,21 @@ body {
 }
 
 /* Warna Avatar Sesuai Status */
-.avatar-success { background-color: var(--success); }
-.avatar-info { background-color: var(--info); }
-.avatar-warning { background-color: var(--warning); }
-.avatar-danger { background-color: var(--danger); }
-.avatar-primary { background-color: #4361ee; } /* Warna biru dari chart */
-
+.avatar-success {
+  background-color: var(--success);
+}
+.avatar-info {
+  background-color: var(--info);
+}
+.avatar-warning {
+  background-color: var(--warning);
+}
+.avatar-danger {
+  background-color: var(--danger);
+}
+.avatar-primary {
+  background-color: #4361ee;
+} /* Warna biru dari chart */
 
 .activity-content {
   flex-grow: 1;
@@ -1468,9 +1853,15 @@ body {
   text-align: center;
 }
 
-.product-rank.gold { color: #ffc107; }
-.product-rank.silver { color: #c0c0c0; }
-.product-rank.bronze { color: #cd7f32; }
+.product-rank.gold {
+  color: #ffc107;
+}
+.product-rank.silver {
+  color: #c0c0c0;
+}
+.product-rank.bronze {
+  color: #cd7f32;
+}
 
 .product-avatar {
   width: 45px;
@@ -1573,10 +1964,18 @@ body {
   text-align: center;
 }
 /* Warna Ikon Sesuai Brand */
-.source-icon.google { color: #DB4437; }
-.source-icon.instagram { color: #E4405F; }
-.source-icon.email { color: #757575; }
-.source-icon.direct { color: #0d6efd; }
+.source-icon.google {
+  color: #db4437;
+}
+.source-icon.instagram {
+  color: #e4405f;
+}
+.source-icon.email {
+  color: #757575;
+}
+.source-icon.direct {
+  color: #0d6efd;
+}
 
 .source-name {
   font-weight: 600;
@@ -1593,4 +1992,191 @@ body {
   flex-basis: 100%;
   border-radius: 20px;
   background-color: #e9ecef;
+}
+
+/* =================================================================== */
+/* HALAMAN ORDERS (DESAIN BARU) */
+/* =================================================================== */
+
+/* Kartu Ringkasan Order */
+.summary-card-order {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.summary-card-order:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.icon-wrapper-order {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.info-wrapper-order p {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.info-wrapper-order h4 {
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+}
+
+/* Variasi Warna Kartu */
+.bg-primary-light {
+  background-color: #e3f2fd;
+}
+.bg-primary-dark .fa-box {
+  color: #1e88e5;
+}
+
+.bg-success-light {
+  background-color: #e8f5e9;
+}
+.bg-success-dark .fa-check-circle {
+  color: #43a047;
+}
+
+.bg-warning-light {
+  background-color: #fff8e1;
+}
+.bg-warning-dark .fa-hourglass-half {
+  color: #ffb300;
+}
+
+.bg-danger-light {
+  background-color: #ffebee;
+}
+.bg-danger-dark .fa-times-circle {
+  color: #e53935;
+}
+
+/* Tabel Order Baru */
+.orders-table-new thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.orders-table-new tbody td {
+  vertical-align: middle;
+}
+
+.btn-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  color: #6c757d;
+  border: none;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.input-group-text {
+  background-color: #fff;
+  border-right: 0;
+}
+.form-control {
+  border-left: 0;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #dee2e6;
+}
+
+/* =================================================================== */
+/* HALAMAN PENGATURAN (SETTINGS PAGE) */
+/* =================================================================== */
+
+.settings-nav .nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+}
+
+.settings-nav .nav-link.active {
+  color: var(--primary);
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-card .card-header {
+  background-color: #f8f9fa;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.settings-card .card-body {
+  padding: 2rem;
+}
+
+.settings-card .card-footer {
+  background-color: #f8f9fa;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.logo-upload-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  border: 2px dashed var(--border-color);
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.logo-preview.is-favicon {
+    width: 60px;
+    height: 60px;
+}
+
+.logo-upload-wrapper .btn {
+  width: 100%;
 }
