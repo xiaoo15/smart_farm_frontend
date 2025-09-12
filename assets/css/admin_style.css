@@ -20,7 +20,7 @@
   --dark: #051f20; /* Hijau Paling Gelap untuk Teks */
   --text-primary: #051f20; /* Teks utama jadi hijau paling gelap */
   --text-secondary: #163832; /* Teks sekunder/abu-abu jadi hijau lebih terang */
-  --background: #daf1de; /* Latar Belakang Utama (Hijau Paling Terang) */
+  --background: #ffffff; /* Latar Belakang Utama (Hijau Paling Terang) */
   --card-bg: #ffffff; /* Kartu kita buat putih bersih agar konten menonjol */
   --border-color: #8eb69b; /* Warna Border (Hijau Abu-abu) */
 
@@ -145,7 +145,7 @@ body {
 }
 
 .sidebar-item {
-  margin: 4px 16px;
+  margin: 10px 16px;
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: var(--transition);
@@ -161,6 +161,7 @@ body {
   transition: var(--transition);
   position: relative;
   background: transparent;
+  
 }
 
 .sidebar-link:hover {
@@ -903,6 +904,7 @@ body {
   color: white;
 }
 
+
 .btn-danger-custom {
   background-color: var(--danger);
   border-color: var(--danger);
@@ -1011,6 +1013,16 @@ body {
 
 .status-cancelled::before {
   background-color: #dc3545;
+
+}
+
+.status-delivery {
+  color: #6610f2;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.status-delivery::before {
+  background-color: #6610f2;
 }
 
 /* Role badges */
@@ -2180,3 +2192,4 @@ body {
 .logo-upload-wrapper .btn {
   width: 100%;
 }
+

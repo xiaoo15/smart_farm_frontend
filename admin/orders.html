@@ -8,20 +8,50 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
     />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
+
+    <style>
+      /* CSS untuk badge status */
+      .status-badge-completed { background-color: #198754; color: #fff; }
+      .status-badge-pending { background-color: #ffc107; color: #000; }
+      .status-badge-canceled { background-color: #dc3545; color: #fff; }
+      .status-badge-delivery { background-color: #6610f2; color: #fff; }
+
+      /* Penambahan CSS untuk warna kartu summary baru */
+      .bg-indigo-light { background-color: #e0cffc; }
+      .bg-indigo-dark { background-color: #6610f2; }
+    </style>
   </head>
   <body>
+    <div class="modal fade" id="deleteConfirmationModal" ...>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Konfirmasi Hapus</h5>
+        ...
+      </div>
+      <div class="modal-body">
+        <p id="deleteModalMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
@@ -37,54 +67,64 @@
         </header>
 
         <section class="order-summary-cards mb-4">
-          <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
-              <div class="summary-card-order bg-primary-light">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+        <div class="col">
+            <div class="summary-card-order bg-primary-light h-100 d-flex align-items-center justify-content-center">
                 <div class="icon-wrapper-order bg-primary-dark">
-                  <i class="fas fa-box"></i>
+                    <i class="fas fa-box"></i>
                 </div>
                 <div class="info-wrapper-order">
-                  <p>Total Orders</p>
-                  <h4>1,250</h4>
+                    <p class="text-nowrap">Total Orders</p>
+                    <h4 id="total-orders-count">0</h4>
                 </div>
-              </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="summary-card-order bg-success-light">
+        </div>
+        <div class="col">
+            <div class="summary-card-order bg-success-light h-100 d-flex align-items-center justify-content-center">
                 <div class="icon-wrapper-order bg-success-dark">
-                  <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-check-circle"></i>
                 </div>
                 <div class="info-wrapper-order">
-                  <p>Completed</p>
-                  <h4>950</h4>
+                    <p class="text-nowrap">Completed</p>
+                    <h4 id="completed-orders-count">0</h4>
                 </div>
-              </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="summary-card-order bg-warning-light">
+        </div>
+        <div class="col">
+            <div class="summary-card-order bg-warning-light h-100 d-flex align-items-center justify-content-center">
                 <div class="icon-wrapper-order bg-warning-dark">
-                  <i class="fas fa-hourglass-half"></i>
+                    <i class="fas fa-hourglass-half"></i>
                 </div>
                 <div class="info-wrapper-order">
-                  <p>Pending</p>
-                  <h4>250</h4>
+                    <p class="text-nowrap">Pending</p>
+                    <h4 id="pending-orders-count">0</h4>
                 </div>
-              </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-              <div class="summary-card-order bg-danger-light">
+        </div>
+        <div class="col">
+            <div class="summary-card-order bg-indigo-light h-100 d-flex align-items-center justify-content-center">
+                <div class="icon-wrapper-order bg-indigo-dark">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="info-wrapper-order">
+                    <p class="text-nowrap">Delivery</p>
+                    <h4 id="delivery-orders-count">0</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="summary-card-order bg-danger-light h-100 d-flex align-items-center justify-content-center">
                 <div class="icon-wrapper-order bg-danger-dark">
-                  <i class="fas fa-times-circle"></i>
+                    <i class="fas fa-times-circle"></i>
                 </div>
                 <div class="info-wrapper-order">
-                  <p>Canceled</p>
-                  <h4>50</h4>
+                    <p class="text-nowrap">Canceled</p>
+                    <h4 id="canceled-orders-count">0</h4>
                 </div>
-              </div>
             </div>
-          </div>
-        </section>
-
+        </div>
+    </div>
+</section>
         <section class="recent-orders-section">
           <div class="card dashboard-card">
             <div class="card-body">
@@ -94,21 +134,54 @@
                 <h5 class="card-title-custom mb-0">Recent Orders</h5>
                 <div class="d-flex flex-wrap gap-2">
                   <div class="input-group">
-                    <span class="input-group-text"
-                      ><i class="fas fa-search"></i
-                    ></span>
+                    <span class="input-group-text">
+                      <i class="fas fa-search"></i>
+                    </span>
                     <input
                       type="text"
                       class="form-control"
                       placeholder="Search orders..."
+                      id="searchInput"
                     />
                   </div>
-                  <button class="btn btn-outline-secondary">
-                    <i class="fas fa-download me-2"></i>Download
-                  </button>
-                  <button class="btn btn-outline-secondary">
-                    <i class="fas fa-filter me-2"></i>Filter
-                  </button>
+
+                  <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-filter me-2"></i>
+                      <span id="filter-btn-text">Filter</span>
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                      <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="all">Semua Pesanan</a>
+                      </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="pending">
+                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #ffc107;"></span>
+                          Pending
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="completed">
+                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #198754;"></span>
+                          Completed
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="canceled">
+                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #dc3545;"></span>
+                          Canceled
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="delivery">
+                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #6610f2;"></span>
+                          Delivery
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -136,52 +209,156 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/admin_script.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Nanti, data ini bisa kamu ambil dari database/API
-            const ordersData = [
-                { id: "#876364", customer: "Revan Putra", date: "07 Sep, 2025", total: "Rp 50.000", status: "Completed" },
-                { id: "#876365", customer: "Citra Lestari", date: "07 Sep, 2025", total: "Rp 75.000", status: "Pending" },
-                { id: "#876366", customer: "Andi Budi", date: "06 Sep, 2025", total: "Rp 120.000", status: "Canceled" },
-                { id: "#876367", customer: "Siska Amelia", date: "05 Sep, 2025", total: "Rp 25.000", status: "Completed" },
-                { id: "#876368", customer: "Arsya Aji", date: "05 Sep, 2025", total: "Rp 30.000", status: "Pending" },
-                { id: "#876369", customer: "Dewi Anggraini", date: "04 Sep, 2025", total: "Rp 250.000", status: "Completed" },
-                { id: "#876370", customer: "Bagas Perkasa", date: "03 Sep, 2025", total: "Rp 88.000", status: "Canceled" },
-                { id: "#876371", customer: "Rina Wijaya", date: "02 Sep, 2025", total: "Rp 150.000", status: "Completed" }
-            ];
+      document.addEventListener("DOMContentLoaded", function () {
+  // Data Awal Pesanan
+  let ordersData = [
+    { id: "#876364", customer: "Revan Putra", date: "07 Sep, 2025", total: "Rp 160.000", status: "Completed", href: "order/order_detailRevanPutra.html", edit_href: "confirm_orders/confirm_RevanArya.html" },
+    { id: "#876365", customer: "Citra Lestari", date: "07 Sep, 2025", total: "Rp 135.000", status: "Pending", href: "order/order_detailCitraLestari.html", edit_href: "confirm_orders/confirm_CitraLestari.html" },
+    { id: "#876366", customer: "Andi Budi", date: "06 Sep, 2025", total: "Rp 120.000", status: "Canceled", href: "order/order_detailAndiBudi.html", edit_href: "confirm_orders/confirm_AndiBudi.html" },
+    { id: "#876367", customer: "Dewi Lestari", date: "05 Sep, 2025", total: "Rp 90.000", status: "delivery", href: "order/order_detailDewiLestari.html", edit_href: "confirm_orders/confirm_DewiLestari.html" },
+    { id: "#876368", customer: "Siska Amelia", date: "05 Sep, 2025", total: "Rp 25.000", status: "Completed", href: "order/order_detailSiskaAmelia.html", edit_href: "confirm_orders/confirm_SiskaAmelia.html" },
+    { id: "#876369", customer: "Arsya Aji", date: "05 Sep, 2025", total: "Rp 35.000", status: "Pending", href: "order/order_detailArsyaAji.html", edit_href: "confirm_orders/confirm_ArsyaAji.html" },
+    { id: "#876370", customer: "Dewi Anggraini", date: "04 Sep, 2025", total: "Rp 150.000", status: "Completed", href: "order/order_detailDewiAnggraini.html", edit_href: "confirm_orders/confirm_DewiAnggraini.htmll" },
+    { id: "#876371", customer: "Budi Santoso", date: "03 Sep, 2025", total: "Rp 150.000", status: "delivery", href: "order/order_detailBudiSantoso.html", edit_href: "confirm_orders/confirm_BudiSantoso.html" },
+    { id: "#876372", customer: "Bagas Perkasa", date: "03 Sep, 2025", total: "Rp 120.000", status: "Canceled", href: "order/order_detailBagasPerkasa.html", edit_href: "confirm_orders/confirm_BagasPerkasa.html" },
+    { id: "#876373", customer: "Rina Wijaya", date: "02 Sep, 2025", total: "Rp 150.000", status: "Completed", href: "order/order_detailRinaWijaya.html", edit_href: "confirm_orders/confirm_RinaWijaya.html" }
+];
 
-            const tableBody = document.getElementById('ordersTableBody');
-            
-            // Hapus isi tabel yang mungkin ada sebelumnya
-            tableBody.innerHTML = ''; 
+  // Pemilihan Elemen DOM
+  const tableBody = document.getElementById('ordersTableBody');
+  const filterBtnText = document.getElementById('filter-btn-text');
+  const searchInput = document.getElementById('searchInput');
+  let currentFilterStatus = 'all';
 
-            // Loop untuk setiap data order
-            ordersData.forEach(order => {
-                // Buat fungsi untuk badge status biar lebih rapi
-                const getStatusBadge = (status) => {
-                    const statusClass = `status-badge-${status.toLowerCase()}`;
-                    return `<span class="badge ${statusClass}">${status}</span>`;
-                };
+  // Fungsi untuk Memperbarui Kartu Ringkasan
+  const updateSummaryCards = () => {
+      const totalOrders = ordersData.length;
+      const completedOrders = ordersData.filter(o => o.status.toLowerCase() === 'completed').length;
+      const pendingOrders = ordersData.filter(o => o.status.toLowerCase() === 'pending').length;
+      const canceledOrders = ordersData.filter(o => o.status.toLowerCase() === 'canceled').length;
+      const deliveryOrders = ordersData.filter(o => o.status.toLowerCase() === 'delivery').length;
 
-                // Buat baris tabel (tr) baru
-                const row = `
-                    <tr>
-                        <td class="fw-bold">${order.id}</td>
-                        <td>${order.customer}</td>
-                        <td>${order.date}</td>
-                        <td class="fw-bold">${order.total}</td>
-                        <td>${getStatusBadge(order.status)}</td>
-                        <td>
-                            <a href="order_details.html?id=${order.id.replace('#','')}" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-icon btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="#" class="btn btn-icon btn-sm"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                `;
+      document.getElementById('total-orders-count').textContent = totalOrders;
+      document.getElementById('completed-orders-count').textContent = completedOrders;
+      document.getElementById('pending-orders-count').textContent = pendingOrders;
+      document.getElementById('canceled-orders-count').textContent = canceledOrders;
+      document.getElementById('delivery-orders-count').textContent = deliveryOrders;
+  };
 
-                // Masukkan baris baru ke dalam tbody
-                tableBody.innerHTML += row;
-            });
-        });
+  // Fungsi untuk Membuat Badge Status
+  const getStatusBadge = (status) => {
+      const statusClass = `status-badge-${status.toLowerCase()}`;
+      return `<span class="badge rounded-pill ${statusClass}">${status}</span>`;
+  };
+
+  // Fungsi untuk Merender Ulang Tabel
+  const renderTable = (data) => {
+    
+      tableBody.innerHTML = '';
+      if (data.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Tidak ada pesanan yang ditemukan.</td></tr>';
+          return;
+      }
+      data.forEach(order => {
+          const row = `
+              <tr>
+                  <td class="fw-bold">${order.id}</td>
+                  <td>${order.customer}</td>
+                  <td>${order.date}</td>
+                  <td class="fw-bold">${order.total}</td>
+                  <td>${getStatusBadge(order.status)}</td>
+                  <td>
+                      <a href="${order.href}" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
+                      <a href="${order.edit_href}" class="btn btn-icon btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                      <a href="#" class="btn btn-icon btn-sm delete-btn" 
+                          data-order-id="${order.id}" 
+                          data-order-customer="${order.customer}">
+                          <i class="fas fa-trash"></i>
+                      </a>
+                  </td>
+              </tr>
+          `;
+          tableBody.innerHTML += row;
+      });
+  };
+
+  // Fungsi untuk Menerapkan Filter dan Pencarian
+  const applyFiltersAndSearch = () => {
+      const searchText = searchInput.value.toLowerCase();
+      const filteredByStatus = currentFilterStatus === 'all'
+          ? ordersData
+          : ordersData.filter(order => order.status.toLowerCase() === currentFilterStatus.toLowerCase());
+      const finalFilteredData = filteredByStatus.filter(order => {
+          return order.id.toLowerCase().includes(searchText) ||
+              order.customer.toLowerCase().includes(searchText);
+      });
+      renderTable(finalFilteredData);
+  };
+  
+  // --- LOGIKA FUNGSI HAPUS DENGAN MODAL ---
+
+  // Fungsi Inti Penghapusan
+  const deleteOrder = (orderId) => {
+    const orderIndex = ordersData.findIndex(order => order.id === orderId);
+    if (orderIndex > -1) {
+      ordersData.splice(orderIndex, 1);
+      updateSummaryCards();
+      applyFiltersAndSearch();
+    }
+  };
+
+  // Inisialisasi Modal Bootstrap dari HTML
+  const deleteModalElement = document.getElementById('deleteConfirmationModal');
+  const deleteModal = new bootstrap.Modal(deleteModalElement);
+  const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+  const deleteModalMessage = document.getElementById('deleteModalMessage');
+
+  // Event Listener untuk mendeteksi klik pada tombol hapus di tabel
+  tableBody.addEventListener('click', function (event) {
+    const deleteButton = event.target.closest('.delete-btn');
+    if (deleteButton) {
+      event.preventDefault();
+      const orderId = deleteButton.dataset.orderId;
+      const customerName = deleteButton.dataset.orderCustomer;
+      // Mengisi pesan konfirmasi dan menampilkan modal
+      deleteModalMessage.innerHTML = `YAKIN mau hapus pesanan dari <strong>${customerName}</strong> (ID: ${orderId})? Aksi ini tidak bisa dibatalkan!`;
+      confirmDeleteBtn.dataset.deleteId = orderId;
+      deleteModal.show();
+    }
+  });
+
+  // Event Listener untuk tombol "Ya, Hapus" di dalam modal
+  confirmDeleteBtn.addEventListener('click', function () {
+    const orderIdToDelete = this.dataset.deleteId;
+    if (orderIdToDelete) {
+      deleteOrder(orderIdToDelete);
+      deleteModal.hide();
+    }
+  });
+
+  // --- AKHIR LOGIKA FUNGSI HAPUS ---
+
+  // Panggilan Fungsi Awal saat Halaman Dimuat
+  updateSummaryCards();
+  applyFiltersAndSearch();
+
+  // Event Listener untuk Dropdown Filter
+  document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (event) => {
+          const newStatus = event.target.closest('.dropdown-item').getAttribute('data-filter-status');
+          currentFilterStatus = newStatus;
+          if (newStatus === 'all') {
+              filterBtnText.textContent = 'Semua Pesanan';
+          } else {
+              filterBtnText.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+          }
+          applyFiltersAndSearch();
+      });
+  });
+
+  // Event Listener untuk Input Pencarian
+  searchInput.addEventListener('input', applyFiltersAndSearch);
+});
     </script>
   </body>
 </html>
