@@ -3,247 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartFarm Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../assets/css/public_style.css" />
-    
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Mencegah scroll saat animasi */
-        }
-        .login-container {
-            display: flex;
-            width: 900px;
-            height: 550px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            opacity: 0; /* Awalnya sembunyikan untuk animasi intro */
-            transform: translateY(20px); /* Posisikan sedikit ke bawah untuk efek */
-            transition: all 0.8s ease-out; /* Transisi untuk intro */
-        }
-        .login-container.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .left-panel {
-            background-color: #38b000;
-            color: white;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            flex: 1;
-            transition: transform 0.5s ease; /* Transisi untuk geser */
-        }
-        .qr-code {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            width: 250px;
-            height: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .qr-code img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .left-panel h4 {
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .left-panel p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        .right-panel {
-            background-color: white;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex: 1;
-            transition: transform 0.5s ease; /* Transisi untuk geser */
-        }
-        .right-panel .logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .right-panel .logo img {
-            height: 30px;
-            margin-right: 10px;
-        }
-        .right-panel h2 {
-            font-weight: 600;
-            color: #38b000;
-            margin-bottom: 5px;
-        }
-        .right-panel p.welcome-text {
-            color: #555;
-            margin-bottom: 40px;
-        }
-        .form-control {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 12px 15px;
-            background-color: #f7f7f7;
-        }
-        .form-control:focus {
-            box-shadow: 0 0 0 0.25rem rgba(56, 176, 0, 0.25);
-            border-color: #38b000;
-        }
-        .btn-success {
-            background-color: #38b000;
-            border: none;
-            border-radius: 8px;
-            padding: 12px;
-            font-weight: 600;
-        }
-        .btn-success:hover {
-            background-color: #2b8400;
-        }
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
-        .register-link a {
-            color: #38b000;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* Container untuk form ganti */
-        .form-content {
-            position: relative;
-            height: 350px; /* Sesuaikan tinggi agar form tidak meluber */
-            overflow: hidden;
-        }
-
-        /* Form Login dan Register */
-        .form-box {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            transition: transform 0.5s ease;
-        }
-        .register-form {
-            transform: translateX(100%);
-        }
-        .login-form.hidden {
-            transform: translateX(-100%);
-        }
-    </style>
+    <title>Masuk atau Daftar - SmartFarm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/public_style.css" />
 </head>
-<body>
+<body class="login-body">
 
 <div class="login-container">
-    <div class="left-panel d-none d-md-flex">
-        <div class="qr-code">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://github.com/xiaoo15&bgcolor=ffffff&color=28a745&qzone=2" alt="QR Code Login">
+    <div class="login-left-panel">
+        <div class="login-overlay-text">
+            <h2>Tumbuh Bersama Kami</h2>
+            <p>Mulai petualangan berkebunmu hari ini. Tanam, panen, dan nikmati hasilnya.</p>
         </div>
-        <h4>Login via Aplikasi?</h4>
-        <p>Scan QR code di atas untuk masuk lebih cepat melalui aplikasi mobile SmartFarm.</p>
     </div>
 
-    <div class="right-panel">
-        <div class="logo">
-            <img src="https://via.placeholder.com/100x30?text=SmartFarm" alt="Logo SmartFarm">
-            <h2>SmartFarm</h2>
-        </div>
-        <p class="welcome-text">Selamat datang kembali!</p>
-
-        <div class="form-content">
-            <div id="login-form" class="form-box login-form">
-                <form>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-success w-100 mt-3">Login</button>
-                </form>
+    <div class="login-right-panel">
+        <div class="login-form-wrapper">
+            <div class="login-header">
+                <a href="index.html" class="login-brand"><i class="fas fa-leaf"></i> SmartFarm</a>
+                <h3 id="form-title">Selamat Datang!</h3>
+                <p id="form-subtitle">Silakan masuk untuk melanjutkan.</p>
             </div>
 
-            <div id="register-form" class="form-box register-form">
-                <form>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Nama Lengkap">
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-success w-100 mt-3">Buat Akun</button>
-                </form>
+            <div class="form-container-inner" id="form-inner">
+                <div class="form-box">
+                    <form id="login-form">
+                        <div id="login-error" class="form-error"></div>
+                        <div class="mb-3"><label for="login-email" class="form-label">Email</label><input type="email" class="form-control" id="login-email" placeholder="contoh@email.com" required></div>
+                        <div class="mb-3"><label for="login-password" class="form-label">Password</label><input type="password" class="form-control" id="login-password" placeholder="••••••••" required></div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="rememberMe"><label class="form-check-label" for="rememberMe">Ingat Saya</label></div>
+                            <a href="#" class="forgot-password-link">Lupa Password?</a>
+                        </div>
+                        <button type="submit" class="btn-login w-100">Masuk</button>
+                    </form>
+                </div>
+                <div class="form-box">
+                    <form id="register-form">
+                        <div id="register-error" class="form-error"></div>
+                        <div class="mb-3"><label for="register-name" class="form-label">Nama Lengkap</label><input type="text" class="form-control" id="register-name" placeholder="Nama Kamu" required></div>
+                        <div class="mb-3"><label for="register-email" class="form-label">Email</label><input type="email" class="form-control" id="register-email" placeholder="Email aktif" required></div>
+                        <div class="mb-3"><label for="register-password" class="form-label">Password</label><input type="password" class="form-control" id="register-password" placeholder="Buat password yang kuat" required></div>
+                        <button type="submit" class="btn-login w-100">Buat Akun</button>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="register-link">
-            <p id="toggle-link">Belum punya akun? <a href="#" id="show-register">Daftar di sini!</a></p>
+            <p class="toggle-form-text text-center mt-4">
+                <span id="toggle-to-register">Belum punya akun? <a href="#">Daftar sekarang</a></span>
+                <span id="toggle-to-login" class="d-none">Sudah punya akun? <a href="#">Masuk di sini</a></span>
+            </p>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-    // Animasi Intro
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const loginContainer = document.querySelector('.login-container');
-        loginContainer.classList.add('show');
+document.addEventListener('DOMContentLoaded', function() {
+    const formInner = document.getElementById('form-inner');
+    const toggleToRegister = document.getElementById('toggle-to-register');
+    const toggleToLogin = document.getElementById('toggle-to-login');
+    const formTitle = document.getElementById('form-title');
+    const formSubtitle = document.getElementById('form-subtitle');
+
+    toggleToRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        formInner.classList.add('show-register');
+        toggleToRegister.classList.add('d-none');
+        toggleToLogin.classList.remove('d-none');
+        formTitle.textContent = 'Buat Akun Baru';
+        formSubtitle.textContent = 'Hanya butuh beberapa detik untuk memulai.';
     });
 
-    // Transisi Form
-    // Hapus semua script JS yang lama, ganti dengan ini
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
-const toggleLinkContainer = document.getElementById('toggle-link');
-
-toggleLinkContainer.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Cek apakah yang diklik adalah link "Daftar di sini!"
-    if (e.target.id === 'show-register') {
-        loginForm.style.transform = 'translateX(-100%)';
-        registerForm.style.transform = 'translateX(0)';
-        toggleLinkContainer.innerHTML = 'Sudah punya akun? <a href="#" id="show-login">Login di sini!</a>';
-    } 
-    // Cek apakah yang diklik adalah link "Login di sini!"
-    else if (e.target.id === 'show-login') {
-        loginForm.style.transform = 'translateX(0)';
-        registerForm.style.transform = 'translateX(100%)';
-        toggleLinkContainer.innerHTML = 'Belum punya akun? <a href="#" id="show-register">Daftar di sini!</a>';
-    }
-});
-
-// Animasi intro tetap sama
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.login-container').classList.add('show');
+    toggleToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        formInner.classList.remove('show-register');
+        toggleToLogin.classList.add('d-none');
+        toggleToRegister.classList.remove('d-none');
+        formTitle.textContent = 'Selamat Datang!';
+        formSubtitle.textContent = 'Silakan masuk untuk melanjutkan.';
+    });
 });
 </script>
 

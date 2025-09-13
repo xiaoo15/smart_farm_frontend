@@ -1,265 +1,230 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semua Produk - SmartFarm</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/public_style.css" />
-  </head>
-  <body>
+</head>
+<body>
     <div id="header-placeholder"></div>
 
     <main class="container my-5">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="filter-sidebar">
-            <h5 class="filter-title">Filter Produk</h5>
-            <div class="filter-group">
-              <h6>Kategori</h6>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="kategori"
-                  id="kat_semua"
-                  checked
-                />
-                <label class="form-check-label" for="kat_semua">Semua</label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="kategori"
-                  id="kat_kit"
-                />
-                <label class="form-check-label" for="kat_kit"
-                  >Hidroponik Kit</label
-                >
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="kategori"
-                  id="kat_bibit"
-                />
-                <label class="form-check-label" for="kat_bibit"
-                  >Bibit & Benih</label
-                >
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="kategori"
-                  id="kat_nutrisi"
-                />
-                <label class="form-check-label" for="kat_nutrisi"
-                  >Nutrisi</label
-                >
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="kategori"
-                  id="kat_media"
-                />
-                <label class="form-check-label" for="kat_media"
-                  >Media Tanam</label
-                >
-              </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="filter-sidebar">
+                    <h5 class="filter-title">Filter Produk</h5>
+                    <div class="filter-group">
+                        <h6>Kategori</h6>
+                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_semua" value="semua" checked /><label class="form-check-label" for="kat_semua">Semua</label></div>
+                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_kit" value="kit" /><label class="form-check-label" for="kat_kit">Hidroponik Kit</label></div>
+                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_bibit" value="bibit" /><label class="form-check-label" for="kat_bibit">Bibit & Benih</label></div>
+                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_hias" value="hias" /><label class="form-check-label" for="kat_hias">Tanaman Hias</label></div>
+                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_nutrisi" value="nutrisi" /><label class="form-check-label" for="kat_nutrisi">Nutrisi</label></div>
+                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_media" value="media" /><label class="form-check-label" for="kat_media">Media Tanam</label></div>
+                    </div>
+                    <div class="filter-group">
+                        <h6>Rentang Harga</h6>
+                        <label for="hargaRange" class="form-label" id="hargaLabel">Maks: Rp 500.000</label>
+                        <input type="range" class="form-range" min="0" max="500000" step="10000" id="hargaRange" value="500000" />
+                    </div>
+                </div>
             </div>
-            <div class="filter-group">
-              <h6>Rentang Harga</h6>
-              <label for="hargaRange" class="form-label">Max: Rp 500.000</label>
-              <input
-                type="range"
-                class="form-range"
-                min="0"
-                max="500000"
-                step="10000"
-                id="hargaRange"
-              />
-            </div>
-            <button class="btn btn-smartfarm-primary w-100">
-              Terapkan Filter
-            </button>
-          </div>
-        </div>
 
-        <div class="col-lg-9">
-          <div
-            class="search-header d-flex flex-column flex-md-row gap-3 align-items-md-center"
-          >
-            <div class="input-group">
-              <span class="search-icon"><i class="fas fa-search"></i></span>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Cari HydroKit, bibit, atau nutrisi..."
-              />
+            <div class="col-lg-9">
+                <div class="search-header d-flex flex-column flex-md-row gap-3 align-items-md-center mb-4">
+                    <div class="input-group"><span class="search-icon"><i class="fas fa-search"></i></span><input type="text" class="form-control" placeholder="Cari HydroKit, bibit, atau nutrisi..." id="searchInput" /></div>
+                    <div class="dropdown">
+                        <button class="btn btn-sort dropdown-toggle" type="button" data-bs-toggle="dropdown">Urutkan: Terbaru</button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Terbaru</a></li>
+                            <li><a class="dropdown-item" href="#">Harga: Terendah ke Tertinggi</a></li>
+                            <li><a class="dropdown-item" href="#">Harga: Tertinggi ke Terendah</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="product-list"></div>
             </div>
-            <div class="dropdown">
-              <button
-                class="btn btn-sort dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-              >
-                Urutkan: Terbaru
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Terbaru</a></li>
-                <li>
-                  <a class="dropdown-item" href="#"
-                    >Harga: Terendah ke Tertinggi</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#"
-                    >Harga: Tertinggi ke Terendah</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col">
-              <div class="product-card-unggulan">
-                <div class="product-image">
-                  <img
-                    src="https://i.pinimg.com/736x/8f/3a/0b/8f3a0b0d3e5e3e7b1a1b1e948192b6a5.jpg"
-                    alt="HydroKit"
-                  />
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Hidroponik Kit</p>
-                  <a href="product_detail.html" class="product-title"
-                    >HydroKit Mini Starter</a
-                  >
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                  </div>
-                  <p class="product-price">Rp 185.000</p>
-                  <a href="#" class="btn btn-add-to-cart">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="product-card-unggulan">
-                <div class="product-image">
-                  <img
-                    src="https://i.pinimg.com/73x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg"
-                    alt="Caladium Red Star"
-                  />
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Tanaman Hias</p>
-                  <a href="product_detail.html" class="product-title"
-                    >Caladium Red Star</a
-                  >
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                  </div>
-                  <p class="product-price">Rp 75.000</p>
-                  <a href="#" class="btn btn-add-to-cart">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="product-card-unggulan">
-                <div class="product-image">
-                  <img
-                    src="https://i.pinimg.com/73x/0a/5b/a3/0a5ba3e7a1e7b1a1b1e948192b6a5.jpg"
-                    alt="Bibit Selada"
-                  />
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Bibit Unggul</p>
-                  <a href="product_detail.html" class="product-title"
-                    >Bibit Selada Romaine (Hydro)</a
-                  >
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i>
-                  </div>
-                  <p class="product-price">Rp 25.000</p>
-                  <a href="#" class="btn btn-add-to-cart">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="product-card-unggulan">
-                <div class="product-image">
-                  <img
-                    src="https://i.pinimg.com/73x/d7/04/4b/d7044b7d915718642cdb66fa5390ee15.jpg"
-                    alt="Nutrisi AB Mix"
-                  />
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Nutrisi Tanaman</p>
-                  <a href="product_detail.html" class="product-title"
-                    >Nutrisi AB Mix Premium 500ml</a
-                  >
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="far fa-star"></i>
-                  </div>
-                  <p class="product-price">Rp 45.000</p>
-                  <a href="#" class="btn btn-add-to-cart">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="product-card-unggulan">
-                <div class="product-image">
-                  <img
-                    src="https://i.pinimg.com/73x/81/e2/48/81e2480dd38552d64e79ff76f5342fc5.jpg"
-                    alt="Rockwool"
-                  />
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Media Tanam</p>
-                  <a href="product_detail.html" class="product-title"
-                    >Rockwool Cultilene (Potongan)</a
-                  >
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                  </div>
-                  <p class="product-price">Rp 15.000</p>
-                  <a href="#" class="btn btn-add-to-cart">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </main>
 
     <div id="footer-placeholder"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/public_script.js"></script>
-  </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===================================================================
+            // DATA PRODUK (PUSAT DATA)
+            // ===================================================================
+            const allProducts = [
+                {
+                    id: 1,
+                    name: "HydroKit Mini Starter",
+                    category: "kit",
+                    price: 185000,
+                    image: "https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg",
+                    rating: 4.5,
+                    sold: "3.2k",
+                    badge: { text: "BEST SELLER", class: "badge-bestseller" }
+                },
+                {
+                    id: 2,
+                    name: "Caladium Red Star",
+                    category: "hias",
+                    price: 75000,
+                    image: "https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg",
+                    rating: 4.5,
+                    sold: "230",
+                    badge: { text: "PRODUK BARU", class: "badge-new" }
+                },
+                {
+                    id: 3,
+                    name: "Bibit Selada Romaine (Hydro)",
+                    category: "bibit",
+                    price: 25000,
+                    image: "https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg",
+                    rating: 5,
+                    sold: "8k+",
+                    badge: { text: "PILIHAN", class: "badge-limited" }
+                },
+                {
+                    id: 4,
+                    name: "Nutrisi AB Mix Premium",
+                    category: "nutrisi",
+                    price: 45000,
+                    originalPrice: 55000,
+                    image: "https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg",
+                    rating: 4,
+                    sold: "400+",
+                    badge: { text: "DISKON", class: "badge-sale" }
+                },
+                {
+                    id: 5,
+                    name: "Rockwool Cultilene",
+                    category: "media",
+                    price: 15000,
+                    image: "https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg",
+                    rating: 4.5,
+                    sold: "312",
+                    badge: null // Tidak ada badge
+                },
+                {
+                    id: 6,
+                    name: "Monstera Deliciosa",
+                    category: "hias",
+                    price: 125000,
+                    image: "https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg",
+                    rating: 5,
+                    sold: "185",
+                    badge: { text: "PRODUK BARU", class: "badge-new" }
+                }
+            ];
+
+            const productListContainer = document.getElementById('product-list');
+
+            // ===================================================================
+            // FUNGSI UNTUK MENAMPILKAN PRODUK (LOOP)
+            // ===================================================================
+            function renderProducts(productsToRender) {
+                productListContainer.innerHTML = ''; // Kosongkan dulu containernya
+                
+                if (productsToRender.length === 0) {
+                    productListContainer.innerHTML = '<p class="text-center col-12">Yah, produk yang kamu cari nggak ketemu nih :(</p>';
+                    return;
+                }
+
+                productsToRender.forEach(product => {
+                    // Membuat bintang rating
+                    let ratingStars = '';
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= product.rating) {
+                            ratingStars += '<i class="fas fa-star"></i>';
+                        } else if (i - 0.5 <= product.rating) {
+                            ratingStars += '<i class="fas fa-star-half-alt"></i>';
+                        } else {
+                            ratingStars += '<i class="far fa-star"></i>';
+                        }
+                    }
+                    const badgeHTML = product.badge ? `<div class="product-badge ${product.badge.class}">${product.badge.text}</div>` : '';
+                    
+                    const priceHTML = product.originalPrice 
+                        ? `<span class="price-original">Rp ${product.originalPrice.toLocaleString('id-ID')}</span> Rp ${product.price.toLocaleString('id-ID')}`
+                        : `Rp ${product.price.toLocaleString('id-ID')}`;
+
+                    // Template HTML untuk satu kartu produk
+                    const productCardHTML = `
+                        <div class="col product-item" data-category="${product.category}" data-price="${product.price}" data-name="${product.name}">
+                            <div class="product-card-offer h-100">
+                                <div class="product-image-wrapper">
+                                    <a href="product_detail.html?id=${product.id}"><img src="${product.image}" alt="${product.name}"/></a>
+                                    ${badgeHTML}
+                                    <div class="product-actions">
+                                        <button class="action-btn" title="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                        <button class="action-btn" title="Tambah ke Keranjang"><i class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
+                                    <h3 class="product-title"><a href="product_detail.html?id=${product.id}">${product.name}</a></h3>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="product-rating">${ratingStars}</div>
+                                        <small class="product-sold ms-2">(${product.sold} terjual)</small>
+                                    </div>
+                                    <p class="product-price mt-auto">${priceHTML}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    productListContainer.innerHTML += productCardHTML;
+                });
+            }
+
+
+            // ===================================================================
+            // FUNGSI UNTUK FILTER
+            // ===================================================================
+            const categoryFilters = document.querySelectorAll('.category-filter');
+            const priceRange = document.getElementById('hargaRange');
+            const priceLabel = document.getElementById('hargaLabel');
+            const searchInput = document.getElementById('searchInput');
+
+            function applyFilters() {
+                const selectedCategory = document.querySelector('.category-filter:checked').value;
+                const maxPrice = parseInt(priceRange.value);
+                const searchTerm = searchInput.value.toLowerCase();
+
+                let filteredProducts = allProducts.filter(product => {
+                    const categoryMatch = selectedCategory === 'semua' || product.category === selectedCategory;
+                    const priceMatch = product.price <= maxPrice;
+                    const searchMatch = product.name.toLowerCase().includes(searchTerm);
+                    return categoryMatch && priceMatch && searchMatch;
+                });
+
+                renderProducts(filteredProducts);
+            }
+
+            function updatePriceLabel() {
+                const value = parseInt(priceRange.value);
+                priceLabel.textContent = `Maks: Rp ${value.toLocaleString('id-ID')}`;
+            }
+
+            // Event listener untuk semua filter
+            categoryFilters.forEach(filter => filter.addEventListener('change', applyFilters));
+            priceRange.addEventListener('input', () => {
+                updatePriceLabel();
+                applyFilters();
+            });
+            searchInput.addEventListener('input', applyFilters);
+
+            // ===================================================================
+            // INISIALISASI
+            // ===================================================================
+            renderProducts(allProducts); // Tampilkan semua produk saat halaman pertama kali dimuat
+            updatePriceLabel(); // Update label harga awal
+        });
+    </script>
+</body>
 </html>
