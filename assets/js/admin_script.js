@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Muat sidebar dari _sidebar.html
-  fetch("../components/_sidebar.html")
+  fetch("/components/_sidebar.html")
     .then((response) =>
       response.ok ? response.text() : Promise.reject("Sidebar not found")
     )
