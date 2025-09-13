@@ -529,7 +529,7 @@
     <script src="../assets/js/admin_script.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-  // --- FUNGSI SEARCH BAR (TETAP ADA) ---
+  // --- FUNGSI SEARCH BAR ---
   const searchInput = document.getElementById("searchInput");
   if (searchInput) {
     searchInput.addEventListener("keyup", function (event) {
@@ -544,7 +544,7 @@
 
   // --- GRAFIK (CHARTS) DENGAN DATA DINAMIS ---
 
-  // 1. Siapkan semua data untuk Sales Statistics
+  // 1. Data untuk Sales Statistics
   const salesData = {
     week: {
       labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -562,54 +562,51 @@
       revenue: [250, 220, 300, 350, 270, 320, 370],
     },
   };
-
-  // 2. Inisialisasi variabel chart di luar agar bisa diakses
-  let salesChart;
   
-  // 3. Buat fungsi untuk mengupdate grafik
-  const updateSalesChart = (period) => {
-    if (!salesChart) return; // Pastikan chart sudah ada
-    const data = salesData[period];
-    salesChart.data.labels = data.labels;
-    salesChart.data.datasets[0].data = data.sales;
-    salesChart.data.datasets[1].data = data.revenue;
-    salesChart.update();
+  // Data BARU untuk Orders Statistics
+  const ordersChartData = {
+      week: [1200, 345, 123],
+      month: [4800, 1200, 510],
+      year: [15000, 3500, 1800]
   };
 
 
-  // Inisialisasi Chart.js untuk Sales Statistics
+  // 2. Inisialisasi variabel untuk kedua chart
+  let salesChart;
+  let ordersChart;
+  
+  // 3. Fungsi untuk mengupdate KEDUA grafik
+  const updateCharts = (period) => {
+    // Update Sales Chart
+    if (salesChart) {
+        const salesPeriodData = salesData[period];
+        salesChart.data.labels = salesPeriodData.labels;
+        salesChart.data.datasets[0].data = salesPeriodData.sales;
+        salesChart.data.datasets[1].data = salesPeriodData.revenue;
+        salesChart.update();
+    }
+    // Update Orders Chart
+    if (ordersChart) {
+        ordersChart.data.datasets[0].data = ordersChartData[period];
+        ordersChart.update();
+    }
+  };
+
+  // Inisialisasi Chart Sales Statistics
   const salesChartCanvasNew = document.getElementById("salesChartNew");
   if (salesChartCanvasNew) {
     const ctxSales = salesChartCanvasNew.getContext("2d");
-    // Gunakan 'let' dan simpan instance chart ke variabel 'salesChart'
     salesChart = new Chart(ctxSales, {
       type: "line",
       data: {
-        labels: salesData.week.labels, // Data awal: Mingguan
+        labels: salesData.week.labels,
         datasets: [
-          {
-            label: "Sales",
-            data: salesData.week.sales, // Data awal: Mingguan
-            fill: false,
-            borderColor: "#235347",
-            tension: 0.4,
-            pointBackgroundColor: "#235347",
-            pointRadius: 5,
-          },
-          {
-            label: "Revenue",
-            data: salesData.week.revenue, // Data awal: Mingguan
-            fill: false,
-            borderColor: "#8EB69B",
-            tension: 0.4,
-            pointBackgroundColor: "#8EB69B",
-            pointRadius: 5,
-          },
+          { label: "Sales", data: salesData.week.sales, fill: false, borderColor: "#235347", tension: 0.4, pointBackgroundColor: "#235347", pointRadius: 5, },
+          { label: "Revenue", data: salesData.week.revenue, fill: false, borderColor: "#8EB69B", tension: 0.4, pointBackgroundColor: "#8EB69B", pointRadius: 5, },
         ],
       },
-      options: { /* Opsi chart tetap sama */
-        responsive: true,
-        maintainAspectRatio: false,
+      options: {
+        responsive: true, maintainAspectRatio: false,
         plugins: { legend: { position: "top", align: "end", labels: { usePointStyle: true, boxWidth: 8, color: "#051F20" }}},
         scales: {
           y: { beginAtZero: true, ticks: { color: "#163832" }, grid: { color: "#DAF1DE" } },
@@ -619,7 +616,33 @@
     });
   }
   
-  // 4. Tambahkan event listener untuk dropdown
+  // Inisialisasi Chart Orders Statistics
+  const ordersChartCanvas = document.getElementById("ordersChart");
+  if (ordersChartCanvas) {
+    const ctxOrders = ordersChartCanvas.getContext("2d");
+    ordersChart = new Chart(ctxOrders, { // Simpan instance ke variabel ordersChart
+      type: "doughnut",
+      data: {
+        labels: ["Completed", "Pending", "Canceled"],
+        datasets: [
+          {
+            label: "Orders",
+            data: ordersChartData.week, // Gunakan data awal dari objek baru
+            backgroundColor: ["#235347", "#ffc107", "#dc3545"],
+            borderColor: "#FFFFFF",
+            borderWidth: 4,
+            hoverOffset: 8,
+          },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: "75%",
+        plugins: { legend: { display: false } },
+      },
+    });
+  }
+
+  // 4. Event listener untuk dropdown (sekarang memanggil updateCharts)
   const salesPeriodBtn = document.getElementById('salesPeriodBtn');
   const salesPeriodOptions = document.getElementById('salesPeriodOptions');
 
@@ -630,45 +653,9 @@
             const period = event.target.dataset.period;
             const periodText = event.target.textContent;
             
-            // Update teks tombol
             salesPeriodBtn.textContent = periodText;
-            
-            // Panggil fungsi update
-            updateSalesChart(period);
+            updateCharts(period); // Panggil fungsi update gabungan
         }
-    });
-  }
-
-
-  // Chart.js untuk Orders Statistics (Tidak Berubah)
-  const ordersChartCanvas = document.getElementById("ordersChart");
-  if (ordersChartCanvas) {
-    const ctxOrders = ordersChartCanvas.getContext("2d");
-    new Chart(ctxOrders, {
-      type: "doughnut",
-      data: {
-        labels: ["Completed", "Pending", "Canceled"],
-        datasets: [
-          {
-            label: "Orders",
-            data: [1200, 345, 123],
-            backgroundColor: ["#235347", "#ffc107", "#dc3545"],
-            borderColor: "#FFFFFF",
-            borderWidth: 4,
-            hoverOffset: 8,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: "75%",
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
     });
   }
 });
