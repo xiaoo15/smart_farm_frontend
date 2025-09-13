@@ -23,6 +23,9 @@
         .dropdown-item p {
             white-space: normal; /* Memastikan teks panjang di notifikasi bisa wrap */
         }
+        .clickable-row {
+    cursor: pointer;
+}
     </style>
   </head>
   <body>
@@ -384,67 +387,47 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td class="fw-bold">#876364</td>
-                        <td>Revan Putra</td>
-                        <td>Bibit Cabai</td>
-                        <td>2</td>
-                        <td class="fw-bold">Rp 50.000</td>
-                        <td>
-                          <span class="badge status-badge-completed"
-                            >Completed</span
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="fw-bold">#876365</td>
-                        <td>Citra Lestari</td>
-                        <td>Pupuk Organik</td>
-                        <td>1</td>
-                        <td class="fw-bold">Rp 75.000</td>
-                        <td>
-                          <span class="badge status-badge-pending"
-                            >Pending</span
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="fw-bold">#876366</td>
-                        <td>Andi Budi</td>
-                        <td>Alat Siram</td>
-                        <td>1</td>
-                        <td class="fw-bold">Rp 120.000</td>
-                        <td>
-                          <span class="badge status-badge-canceled"
-                            >Canceled</span
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="fw-bold">#876367</td>
-                        <td>Siska Amelia</td>
-                        <td>Polybag (x50)</td>
-                        <td>5</td>
-                        <td class="fw-bold">Rp 25.000</td>
-                        <td>
-                          <span class="badge status-badge-completed"
-                            >Completed</span
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="fw-bold">#876368</td>
-                        <td>Arsya Aji</td>
-                        <td>Benih Selada</td>
-                        <td>10</td>
-                        <td class="fw-bold">Rp 30.000</td>
-                        <td>
-                          <span class="badge status-badge-pending"
-                            >Pending</span
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
+  <tr class="clickable-row" data-href="order/order_detailRevanPutra.html">
+    <td class="fw-bold">#876364</td>
+    <td>Revan Putra</td>
+    <td>Bibit Cabai</td>
+    <td>2</td>
+    <td class="fw-bold">Rp 50.000</td>
+    <td><span class="badge status-badge-completed">Completed</span></td>
+  </tr>
+  <tr class="clickable-row" data-href="order/order_detailCitraLestari.html">
+    <td class="fw-bold">#876365</td>
+    <td>Citra Lestari</td>
+    <td>Pupuk Organik</td>
+    <td>1</td>
+    <td class="fw-bold">Rp 75.000</td>
+    <td><span class="badge status-badge-pending">Pending</span></td>
+  </tr>
+  <tr class="clickable-row" data-href="order/order_detailAndiBudi.html">
+    <td class="fw-bold">#876366</td>
+    <td>Andi Budi</td>
+    <td>Alat Siram</td>
+    <td>1</td>
+    <td class="fw-bold">Rp 120.000</td>
+    <td><span class="badge status-badge-canceled">Canceled</span></td>
+  </tr>
+  <tr class="clickable-row" data-href="order/order_detailSiskaAmelia.html">
+    <td class="fw-bold">#876367</td>
+    <td>Siska Amelia</td>
+    <td>Polybag (x50)</td>
+    <td>5</td>
+    <td class="fw-bold">Rp 25.000</td>
+    <td><span class="badge status-badge-completed">Completed</span></td>
+  </tr>
+  <tr class="clickable-row" data-href="order/order_detailArsyaAji.html">
+    <td class="fw-bold">#876368</td>
+    <td>Arsya Aji</td>
+    <td>Benih Selada</td>
+    <td>10</td>
+    <td class="fw-bold">Rp 30.000</td>
+    <td><span class="badge status-badge-pending">Pending</span></td>
+  </tr>
+</tbody>
                   </table>
                 </div>
               </div>
@@ -541,6 +524,14 @@
       }
     });
   }
+
+  // --- FUNGSI UNTUK MEMBUAT BARIS TABEL BISA DIKLIK ---
+document.querySelectorAll(".clickable-row").forEach(row => {
+    row.addEventListener("click", () => {
+        // Mengarahkan ke link yang ada di atribut data-href
+        window.location.href = row.dataset.href;
+    });
+});
 
   // --- GRAFIK (CHARTS) DENGAN DATA DINAMIS ---
 
