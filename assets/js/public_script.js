@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headerPlaceholder = document.getElementById("header-placeholder");
   if (headerPlaceholder) {
-    fetch("../components/_navbar_public.html")
+    fetch("/components/_navbar_public.html")
       .then((response) =>
         response.ok
           ? response.text()
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const footerPlaceholder = document.getElementById("footer-placeholder");
   if (footerPlaceholder) {
-    fetch("../components/_footer_public.html")
+    fetch("/components/_footer_public.html")
       .then((response) => response.text())
       .then((html) => {
         footerPlaceholder.innerHTML = html;
@@ -41,36 +41,102 @@ document.addEventListener("DOMContentLoaded", function () {
   // NAVBAR FUNCTIONALITY */
   // =================================================================== */
 
-  function initializeNavbar() {
-    // Handle mobile menu toggle
+/* assets/js/public_script.js */
+
+function initializeNavbar() {
+    // Definisi elemen-elemen penting
     const mobileMenuToggle = document.querySelector(".navbar-toggler");
     const mobileMenu = document.querySelector(".navbar-collapse");
 
+    // ===================================================================
+    // [1] LOGIKA BUKA/TUTUP MENU DARI TOMBOL HAMBURGER
+    // ===================================================================
     if (mobileMenuToggle && mobileMenu) {
-      mobileMenuToggle.addEventListener("click", function () {
-        mobileMenu.classList.toggle("show");
-      });
+        mobileMenuToggle.addEventListener("click", function (event) {
+            // Hentikan event agar tidak langsung ditangkap oleh listener dokumen
+            event.stopPropagation();
+            mobileMenu.classList.toggle("show");
+        });
+    }
+
+    // ===================================================================
+    // [2] [PERBAIKAN] LOGIKA MENUTUP MENU SAAT LINK DI DALAMNYA DI-KLIK
+    // ===================================================================
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (mobileMenu.classList.contains('show')) {
+                mobileMenu.classList.remove('show');
+            }
+        });
+    });
+
+    // ===================================================================
+    // [3] [BARU] LOGIKA MENUTUP MENU SAAT KLIK DI LUAR AREA NAVBAR
+    // ===================================================================
+    document.addEventListener('click', function(event) {
+        // Cek apakah menu mobile ada, sedang terbuka, dan kliknya terjadi di LUAR area menu & LUAR tombol hamburger
+        if (mobileMenu && mobileMenu.classList.contains('show')) {
+            const isClickInsideNavbar = mobileMenu.contains(event.target);
+            const isClickOnToggler = mobileMenuToggle.contains(event.target);
+            
+            if (!isClickInsideNavbar && !isClickOnToggler) {
+                mobileMenu.classList.remove('show');
+            }
+        }
+    });
+
+    // ===================================================================
+    // KODE LAINNYA (SEARCH & CART BADGE) - BIARKAN SEPERTI INI
+    // ===================================================================
+    
+    // Handle mobile search overlay
+    const mobileSearchIcon = document.getElementById("mobile-search-icon");
+    const searchOverlay = document.getElementById("search-overlay");
+    const closeSearchBtn = document.getElementById("close-search-btn");
+    const searchOverlayInput = document.getElementById("search-overlay-input");
+
+    if (mobileSearchIcon && searchOverlay && closeSearchBtn) {
+        mobileSearchIcon.addEventListener("click", function (e) {
+            e.preventDefault();
+            searchOverlay.classList.add("active");
+            setTimeout(() => searchOverlayInput.focus(), 300);
+        });
+
+        closeSearchBtn.addEventListener("click", function () {
+            searchOverlay.classList.remove("active");
+        });
+
+        searchOverlay.addEventListener('click', function (e) {
+            if (e.target === searchOverlay) {
+                searchOverlay.classList.remove('active');
+            }
+        });
     }
 
     // Handle search form submission
-    const searchForm = document.querySelector(".search-form");
-    if (searchForm) {
-      searchForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const searchInput = this.querySelector('input[type="search"]');
+    function handleSearch(event) {
+        event.preventDefault();
+        const searchInput = event.target.querySelector('input[type="search"]');
         if (searchInput && searchInput.value.trim()) {
-          // Redirect to products page with search query
-          window.location.href = `products.html?search=${encodeURIComponent(
-            searchInput.value.trim()
-          )}`;
+            const query = searchInput.value.trim();
+            window.location.href = `products.html?search=${encodeURIComponent(query)}`;
         }
-      });
+    }
+
+    const desktopSearchForm = document.querySelector(".search-form");
+    const overlaySearchForm = document.querySelector(".search-form-overlay");
+
+    if (desktopSearchForm) {
+        desktopSearchForm.addEventListener("submit", handleSearch);
+    }
+    if (overlaySearchForm) {
+        overlaySearchForm.addEventListener("submit", handleSearch);
     }
 
     // Update cart badge
     updateCartBadge();
-  }
-
+}
   // =================================================================== */
   // CART FUNCTIONALITY */
   // =================================================================== */

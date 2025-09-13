@@ -81,7 +81,7 @@ body {
   left: 0;
   height: 100%;
   width: var(--sidebar-width);
-  background: var(--secondary); /* Sidebar pakai warna hijau sangat tua */
+  background: var(--secondary); 
   border-right: 1px solid var(--primary);
   padding: 0;
   display: flex;
@@ -108,7 +108,7 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #DAF1DE; /* Teks di sidebar jadi hijau terang */
+  color: #DAF1DE;
   font-weight: 700;
   font-size: 1.25rem;
   transition: var(--transition);

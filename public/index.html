@@ -13,41 +13,37 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="../assets/css/public_style.css" />
-    <style></style>
   </head>
   <body>
     <div id="header-placeholder"></div>
 
-    <section class="hero-cta-minimalist mb-5 mt-5">
+    <section class="hero-cta-minimalist mb-5 mt-5" aria-labelledby="hero-title">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 p-0">
             <div class="hero-image-container">
               <img
                 src="https://images.unsplash.com/photo-1487700160041-babef9c3cb55?q=80&w=1152&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Tanaman Hias Berkualitas"
+                alt="Berbagai tanaman hias berkualitas di dalam pot"
+                loading="lazy"
               />
             </div>
           </div>
           <div class="col-md-6">
             <div class="hero-content-container">
               <p class="hero-subtitle">KOLEKSI TERBAIK KAMI</p>
-              <h1 class="hero-title">Kualitas Terbaik Untuk Kebun Anda</h1>
+              <h1 class="hero-title" id="hero-title">
+                Kualitas Terbaik Untuk Kebun Anda
+              </h1>
               <p class="hero-description">
                 Setiap tanaman dan bibit kami rawat dengan penuh cinta untuk
                 memastikan kualitas terbaik sampai di tangan Anda.
               </p>
-              <a href="products.html" class="btn-smartfarm-primary"
-                >Jelajahi Sekarang</a
-              >
+              <a href="products.html" class="btn-cta"> Jelajahi Sekarang </a>
             </div>
           </div>
         </div>
@@ -71,7 +67,6 @@
             </p>
           </div>
         </div>
-
         <div class="col-md-6 col-lg-3">
           <div class="feature-card">
             <div class="feature-icon">
@@ -84,7 +79,6 @@
             </p>
           </div>
         </div>
-
         <div class="col-md-6 col-lg-3">
           <div class="feature-card">
             <div class="feature-icon">
@@ -97,7 +91,6 @@
             </p>
           </div>
         </div>
-
         <div class="col-md-6 col-lg-3">
           <div class="feature-card">
             <div class="feature-icon">
@@ -114,64 +107,70 @@
     </section>
 
     <section class="kategori-pilihan-section container my-5 py-5">
-  <div class="section-header-minimalist text-center mb-5">
-    <h2 class="section-title">KATEGORI PILIHAN</h2>
-  </div>
-  <div class="row g-4">
-    <div class="col-lg-4 d-flex align-items-stretch">
-      <div class="category-card-colored card-green">
-        <div class="card-icon"><i class="fas fa-seedling"></i></div>
-        <h3 class="card-title">Bibit & Benih</h3>
-        <p class="card-description">
-          Mulai petualangan berkebunmu dengan bibit hidroponik kualitas
-          terbaik yang cepat tumbuh.
-        </p>
-        <a href="benih.html" class="btn-category">Lihat Produk</a>
+      <div class="section-header-minimalist text-center mb-5">
+        <h2 class="section-title">KATEGORI PILIHAN</h2>
       </div>
-    </div>
+      <div class="row g-4">
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="category-card-colored card-green">
+            <div class="card-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h3 class="card-title">Bibit & Benih</h3>
+            <p class="card-description">
+              Mulai petualangan berkebunmu dengan bibit hidroponik kualitas
+              terbaik yang cepat tumbuh.
+            </p>
+            <a href="benih.html" class="btn-category">Lihat Produk</a>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="category-card-colored card-light-green">
+            <div class="card-icon">
+              <i class="fas fa-carrot"></i>
+            </div>
+            <h3 class="card-title">Tanaman Siap Panen</h3>
+            <p class="card-description">
+              Ingin langsung panen? Pilih dari koleksi sayuran segar siap petik
+              dari kebun kami.
+            </p>
+            <a href="panen.html" class="btn-category">Lihat Produk</a>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="category-card-colored card-mid-green">
+            <div class="card-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3 class="card-title">Alat & Perlengkapan</h3>
+            <p class="card-description">
+              Lengkapi kebutuhan kebun pintarmu, mulai dari nutrisi, media
+              tanam, hingga toolkit hidroponik.
+            </p>
+            <a href="alat.html" class="btn-category">Lihat Produk</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="col-lg-4 d-flex align-items-stretch">
-      <div class="category-card-colored card-light-green">
-        <div class="card-icon"><i class="fas fa-carrot"></i></div>
-        <h3 class="card-title">Tanaman Siap Panen</h3>
-        <p class="card-description">
-          Ingin langsung panen? Pilih dari koleksi sayuran segar siap petik
-          dari kebun kami.
-        </p>
-        <a href="panen.html" class="btn-category">Lihat Produk</a>
-      </div>
-    </div>
-
-    <div class="col-lg-4 d-flex align-items-stretch">
-      <div class="category-card-colored card-mid-green">
-        <div class="card-icon"><i class="fas fa-tools"></i></div>
-        <h3 class="card-title">Alat & Perlengkapan</h3>
-        <p class="card-description">
-          Lengkapi kebutuhan kebun pintarmu, mulai dari nutrisi, media
-          tanam, hingga toolkit hidroponik.
-        </p>
-        <a href="alat.html" class="btn-category">Lihat Produk</a>
-      </div>
-    </div>
-  </div>
-</section>
     <section class="container my-5 py-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="section-title mb-0">Produk Pilihan Untukmu</h2>
         <a href="products.html" class="btn-smartfarm-secondary">Lihat Semua</a>
       </div>
-
       <div class="swiper product-swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="product-card-offer h-100">
               <div class="product-image-wrapper">
-                <a href="product_detail.html"
-                  ><img
+                <a href="product_detail.html">
+                  <img
                     src="https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg"
                     alt="Caladium Red Star"
-                /></a>
-                <div class="product-badge">BEST SELLER</div>
+                    loading="lazy"
+                  />
+                </a>
+                <div class="product-badge badge-bestseller">BEST SELLER</div>
                 <div class="product-actions">
                   <button class="action-btn">
                     <i class="far fa-heart"></i>
@@ -186,10 +185,15 @@
                 <h3 class="product-title">
                   <a href="product_detail.html">Caladium Red Star</a>
                 </h3>
-                <div class="product-rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half-alt"></i>
+                <div class="d-flex align-items-center mb-2">
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <small class="product-sold ms-2">(230 terjual)</small>
                 </div>
                 <p class="product-price mt-auto">Rp 75.000</p>
               </div>
@@ -198,12 +202,14 @@
           <div class="swiper-slide">
             <div class="product-card-offer h-100">
               <div class="product-image-wrapper">
-                <a href="product_detail.html"
-                  ><img
+                <a href="product_detail.html">
+                  <img
                     src="https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg"
                     alt="Monstera Deliciosa"
-                /></a>
-                <div class="product-badge">BEST SELLER</div>
+                    loading="lazy"
+                  />
+                </a>
+                <div class="product-badge badge-new">PRODUK BARU</div>
                 <div class="product-actions">
                   <button class="action-btn">
                     <i class="far fa-heart"></i>
@@ -218,10 +224,15 @@
                 <h3 class="product-title">
                   <a href="product_detail.html">Monstera Deliciosa</a>
                 </h3>
-                <div class="product-rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
+                <div class="d-flex align-items-center mb-2">
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <small class="product-sold ms-2">(185 terjual)</small>
                 </div>
                 <p class="product-price mt-auto">Rp 125.000</p>
               </div>
@@ -230,12 +241,14 @@
           <div class="swiper-slide">
             <div class="product-card-offer h-100">
               <div class="product-image-wrapper">
-                <a href="product_detail.html"
-                  ><img
-                    src="https://i.pinimg.com/1200x/54/f9/a3/54f9a320809a58939f42820b0c27db12.jpg"
+                <a href="product_detail.html">
+                  <img
+                    src="https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg"
                     alt="Nutrisi AB Mix"
-                /></a>
-                <div class="product-badge">NEW</div>
+                    loading="lazy"
+                  />
+                </a>
+                <div class="product-badge badge-sale">DISKON</div>
                 <div class="product-actions">
                   <button class="action-btn">
                     <i class="far fa-heart"></i>
@@ -250,24 +263,33 @@
                 <h3 class="product-title">
                   <a href="product_detail.html">Nutrisi AB Mix Premium</a>
                 </h3>
-                <div class="product-rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="far fa-star"></i>
+                <div class="d-flex align-items-center mb-2">
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                  <small class="product-sold ms-2">(400+ terjual)</small>
                 </div>
-                <p class="product-price mt-auto">Rp 45.000</p>
+                <p class="product-price mt-auto">
+                  <span class="price-original">Rp 55.000</span> Rp 45.000
+                </p>
               </div>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="product-card-offer h-100">
               <div class="product-image-wrapper">
-                <a href="product_detail.html"
-                  ><img
+                <a href="product_detail.html">
+                  <img
                     src="https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg"
                     alt="Rockwool"
-                /></a>
-                <div class="product-badge">SALE</div>
+                    loading="lazy"
+                  />
+                </a>
+                <div class="product-badge badge-limited">STOK TERBATAS</div>
                 <div class="product-actions">
                   <button class="action-btn">
                     <i class="far fa-heart"></i>
@@ -282,17 +304,21 @@
                 <h3 class="product-title">
                   <a href="product_detail.html">Rockwool Cultilene</a>
                 </h3>
-                <div class="product-rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half-alt"></i>
+                <div class="d-flex align-items-center mb-2">
+                  <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <small class="product-sold ms-2">(312 terjual)</small>
                 </div>
                 <p class="product-price mt-auto">Rp 15.000</p>
               </div>
             </div>
           </div>
         </div>
-
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
       </div>
@@ -306,6 +332,7 @@
               <img
                 src="https://i.pinimg.com/1200x/bd/0a/7e/bd0a7e6581fec54ae40315e5ca6b59ca.jpg"
                 alt="Produk SmartFarm Skincare"
+                loading="lazy"
               />
             </div>
           </div>
@@ -320,142 +347,61 @@
                 bebas pestisida di lahan terbatas sekalipun. Cukup 15 menit
                 sehari untuk hasil maksimal!
               </p>
-              <a href="products.html" class="btn-smartfarm-secondary"
-                >LIHAT PAKETNYA</a
-              >
+              <a href="products.html" class="btn-smartfarm-secondary">
+                LIHAT PAKETNYA
+              </a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="offers-section container my-5 py-5">
-      <div class="section-header-offers">
-        <a href="products.html" class="btn btn-view-offers">Lihat Penawaran</a>
-        <h2 class="section-title">Penawaran Terbaik</h2>
-      </div>
-      <div class="row g-4">
-        <div class="col-lg-8">
-          <div class="row g-4">
-            <div class="col-md-6 col-lg-6">
-              <div class="product-card-offer">
-                <div class="product-image-wrapper">
-                  <a href="product_detail.html">
-                    <img
-                      src="https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg"
-                      alt="Hydroponic Starter Kit"
-                    />
-                  </a>
-                  <div class="product-badge">BEST SELLER</div>
-                  <div class="product-actions">
-                    <button class="action-btn">
-                      <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Hidroponik Kit</p>
-                  <h3 class="product-title">
-                    <a href="product_detail.html">HydroKit Mini Starter</a>
-                  </h3>
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                    <span class="review-count">(3.2k)</span>
-                  </div>
-                  <p class="product-price">Rp 185.000</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-              <div class="product-card-offer">
-                <div class="product-image-wrapper">
-                  <a href="product_detail.html">
-                    <img
-                      src="https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg"
-                      alt="Bibit Selada Hidroponik"
-                    />
-                  </a>
-                  <div class="product-badge">PILIHAN</div>
-                  <div class="product-actions">
-                    <button class="action-btn">
-                      <i class="far fa-heart"></i>
-                    </button>
-                    <button class="action-btn">
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <p class="product-category">Bibit Unggul</p>
-                  <h3 class="product-title">
-                    <a href="product_detail.html"
-                      >Bibit Selada Romaine (Hydro Grade)</a
-                    >
-                  </h3>
-                  <div class="product-rating">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i>
-                    <span class="review-count">(8k+)</span>
-                  </div>
-                  <p class="product-price">Rp 25.000</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <a href="promo.html" class="special-offer-card">
-            <div
-              class="offer-image"
-              style="
-                background-image: url('https://i.pinimg.com/736x/e6/75/cb/e675cbe88be7f5bbb622fb9db1f0b6fe.jpg');
-              "
-            ></div>
-            <div class="offer-content">
-              <h3 class="offer-title">Paket Hemat Mulai</h3>
-              <p class="offer-price">Rp 55.000</p>
-              <div class="btn btn-offer-cta">Belanja Sekarang</div>
-            </div>
-          </a>
         </div>
       </div>
     </section>
 
     <section class="testimonial-clean-section container my-5 py-5">
       <div class="section-title-wrapper text-center mb-5">
-        <h2 class="section-title">Testimoni Pelanggan</h2>
-        <div class="title-underline"></div>
+        <h2 class="section-title">Apa Kata Mereka?</h2>
       </div>
-      <div class="row g-4 justify-content-center">
-        <div class="col-lg-8">
-          <div class="testimonial-card-clean">
-            <img
-              src="https://i.pravatar.cc/150?img=1"
-              alt="Avatar Pelanggan"
-              class="testimonial-avatar"
-            />
-            <div class="testimonial-content">
-              <h5 class="customer-name">Suci Larisha</h5>
-              <p class="customer-location">Tangerang</p>
-              <blockquote class="testimonial-quote">
-                "Kak ini serius mantap looh, biasanya satu pohon bunganya cuma 1
-                ini satu pohon bunganya ada 3-4. Gitu aja udah seneng"
-              </blockquote>
+
+      <div class="swiper testimonial-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-card-clean">
+              <img
+                src="https://i.pravatar.cc/150?img=1"
+                alt="Avatar Pelanggan"
+                class="testimonial-avatar"
+                loading="lazy"
+              />
+              <div class="testimonial-content">
+                <h5 class="customer-name">Suci Larisha</h5>
+                <p class="customer-location">Sidoarjo</p>
+                <blockquote class="testimonial-quote">
+                  "Kak ini serius mantap looh, biasanya satu pohon bunganya cuma
+                  1 ini satu pohon bunganya ada 3-4."
+                </blockquote>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card-clean">
+              <img
+                src="https://i.pravatar.cc/150?img=5"
+                alt="Avatar Pelanggan"
+                class="testimonial-avatar"
+                loading="lazy"
+              />
+              <div class="testimonial-content">
+                <h5 class="customer-name">Budi Santoso</h5>
+                <p class="customer-location">Jakarta</p>
+                <blockquote class="testimonial-quote">
+                  "Packingnya aman banget! Semua tanaman sampai dalam kondisi
+                  segar. Recommended seller!"
+                </blockquote>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="testimonial-dots-nav mt-4">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 
@@ -493,33 +439,47 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <div id="footer-placeholder"></div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <div id="footer-placeholder"></div>
     <script src="../assets/js/public_script.js"></script>
     <script>
-        // Inisialisasi Swiper untuk produk pilihan
-        var productSwiper = new Swiper('.product-swiper', {
-            slidesPerView: 1, // Default 1 slide per view (untuk mobile)
-            spaceBetween: 20, // Jarak antar slide
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                // Ketika lebar layar >= 576px (ukuran tablet)
-                576: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                // Ketika lebar layar >= 992px (ukuran desktop)
-                992: {
-                    slidesPerView: 4, // 4 slide per view
-                    spaceBetween: 20,
-                }
-            }
-        });
+      // Inisialisasi Swiper untuk produk pilihan
+      var productSwiper = new Swiper(".product-swiper", {
+        slidesPerView: 1, // Default 1 slide per view (untuk mobile)
+        spaceBetween: 20, // Jarak antar slide
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          576: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          // Ketika lebar layar >= 992px (ukuran desktop)
+          992: {
+            slidesPerView: 4, // 4 slide per view
+            spaceBetween: 20,
+          },
+        },
+      });
+
+      // Inisialisasi Swiper untuk testimoni
+      var testimonialSwiper = new Swiper(".testimonial-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+      });
+
+      
     </script>
-</body>
-</html>
   </body>
 </html>
