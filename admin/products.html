@@ -620,63 +620,98 @@
       </div>
     </div>
 
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        YAKIN mau hapus produk <strong id="productNameToDelete"></strong>? Aksi ini tidak bisa dibatalkan!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Sidebar loader & logic -->
     <script src="../assets/js/admin_script.js"></script>
     <script>
-      $(document).ready(function () {
-        function filterProducts() {
-          var searchText = $("#searchInput").val().toLowerCase();
-          var category = $("#categoryFilter").val();
-          var found = 0;
-          $("#productTableBody tr").each(function () {
-            var productName = $(this)
-              .find(".product-name")
-              .text()
-              .toLowerCase();
-            var productCategory = $(this).data("category");
-            var searchMatch = productName.includes(searchText);
-            var categoryMatch =
-              category === "all" || productCategory === category;
-            if (searchMatch && categoryMatch) {
-              $(this).show();
-              found++;
-            } else {
-              $(this).hide();
-            }
-          });
-          if (found === 0) {
-            $("#noResult").show();
-          } else {
-            $("#noResult").hide();
-          }
+  $(document).ready(function () {
+    // --- Inisialisasi Modal dan Toast ---
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+    const notificationToast = new bootstrap.Toast(document.getElementById('notificationToast'));
+    let productRowToDelete = null;
+
+    // --- Fungsi Filter Produk (Tidak Berubah) ---
+    function filterProducts() {
+      var searchText = $("#searchInput").val().toLowerCase();
+      var category = $("#categoryFilter").val();
+      var found = 0;
+      $("#productTableBody tr").each(function () {
+        var productName = $(this).find(".product-name").text().toLowerCase();
+        var productCategory = $(this).data("category");
+        var searchMatch = productName.includes(searchText);
+        var categoryMatch = category === "all" || productCategory === category;
+        if (searchMatch && categoryMatch) {
+          $(this).show();
+          found++;
+        } else {
+          $(this).hide();
         }
-        $("#searchInput").on("keyup", filterProducts);
-        $("#categoryFilter").on("change", filterProducts);
-
-        // Toast notification
-        $(".btn-outline-danger").click(function () {
-          var toast = new bootstrap.Toast(
-            document.getElementById("notificationToast")
-          );
-          $(".toast-body").text("Produk berhasil dihapus.");
-          toast.show();
-        });
-
-        // Confirmation before delete
-        $(".btn-outline-danger").click(function (e) {
-          e.preventDefault();
-          if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
-            $(this)
-              .closest("tr")
-              .fadeOut(500, function () {
-                $(this).remove();
-                filterProducts();
-              });
-          }
-        });
       });
-    </script>
+      if (found === 0) {
+        $("#noResult").show();
+      } else {
+        $("#noResult").hide();
+      }
+    }
+    $("#searchInput").on("keyup", filterProducts);
+    $("#categoryFilter").on("change", filterProducts);
+
+    // --- LOGIKA BARU UNTUK TOMBOL HAPUS DENGAN MODAL ---
+    
+    // 1. Saat tombol hapus di tabel diklik
+    $('#productTableBody').on('click', '.btn-outline-danger', function() {
+        // Simpan baris (tr) yang akan dihapus
+        productRowToDelete = $(this).closest('tr');
+        
+        // Ambil nama produk dari baris tersebut
+        const productName = productRowToDelete.find('.product-name').text();
+        
+        // Masukkan nama produk ke dalam modal
+        $('#productNameToDelete').text(productName);
+        
+        // Tampilkan modal
+        deleteModal.show();
+    });
+
+    // 2. Saat tombol "Ya, Hapus" di dalam modal diklik
+    $('#confirmDeleteBtn').on('click', function() {
+        if (productRowToDelete) {
+            // Sembunyikan baris produk dengan efek fade
+            productRowToDelete.fadeOut(500, function() {
+                $(this).remove(); // Hapus baris dari tabel
+                filterProducts(); // Perbarui filter jika diperlukan
+                
+                // Tampilkan notifikasi toast
+                $(".toast-body").text("Produk berhasil dihapus.");
+                notificationToast.show();
+            });
+            
+            // Sembunyikan modal
+            deleteModal.hide();
+            productRowToDelete = null; // Reset variabel
+        }
+    });
+
+  });
+</script>
   </body>
 </html>

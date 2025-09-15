@@ -20,12 +20,19 @@
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
 
     <style>
-        .dropdown-item p {
-            white-space: normal; /* Memastikan teks panjang di notifikasi bisa wrap */
-        }
-        .clickable-row {
-    cursor: pointer;
-}
+      .dropdown-item p {
+        white-space: normal; /* Memastikan teks panjang di notifikasi bisa wrap */
+      }
+      .clickable-row {
+        cursor: pointer;
+      }
+      .top-customer-item {
+        transition: background-color 0.2s ease-in-out;
+        cursor: pointer;
+      }
+      .top-customer-item:hover {
+        background-color: #f8f9fa;
+      }
     </style>
   </head>
   <body>
@@ -64,13 +71,16 @@
               <ul
                 class="dropdown-menu dropdown-menu-end p-2"
                 aria-labelledby="notificationDropdown"
-                style="min-width: 300px; max-height: 400px; overflow-y: auto;"
+                style="min-width: 300px; max-height: 400px; overflow-y: auto"
               >
                 <li>
                   <h6 class="dropdown-header">Notifications</h6>
                 </li>
                 <li>
-                  <a class="dropdown-item rounded d-flex align-items-start" href="#">
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="#"
+                  >
                     <i class="fas fa-shopping-cart text-success me-3 mt-1"></i>
                     <div>
                       <strong>Pesanan Baru #876369</strong>
@@ -83,7 +93,10 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item rounded d-flex align-items-start" href="#">
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="#"
+                  >
                     <i class="fas fa-box-open text-warning me-3 mt-1"></i>
                     <div>
                       <strong>Stok Rendah</strong>
@@ -96,7 +109,10 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item rounded d-flex align-items-start" href="#">
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="#"
+                  >
                     <i class="fas fa-user-plus text-primary me-3 mt-1"></i>
                     <div>
                       <strong>Customer Baru</strong>
@@ -206,19 +222,38 @@
           <div class="col-lg-8">
             <div class="card dashboard-card h-100">
               <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="card-title-custom">Sales Statistics</h5>
-                <div class="dropdown">
-                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="salesPeriodBtn" data-bs-toggle="dropdown">
-                  This Week
-                      </button>
-                      <ul class="dropdown-menu" id="salesPeriodOptions">
-                        <li><a class="dropdown-item" href="#" data-period="week">This Week</a></li>
-                        <li><a class="dropdown-item" href="#" data-period="month">This Month</a></li>
-                        <li><a class="dropdown-item" href="#" data-period="year">This Year</a></li>
-                      </ul>
-                    </div>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="card-title-custom">Sales Statistics</h5>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                      type="button"
+                      id="salesPeriodBtn"
+                      data-bs-toggle="dropdown"
+                    >
+                      This Week
+                    </button>
+                    <ul class="dropdown-menu" id="salesPeriodOptions">
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="week"
+                          >This Week</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="month"
+                          >This Month</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="year"
+                          >This Year</a
+                        >
+                      </li>
+                    </ul>
                   </div>
+                </div>
                 <div class="chart-container" style="height: 300px">
                   <canvas id="salesChartNew"></canvas>
                 </div>
@@ -387,47 +422,82 @@
                       </tr>
                     </thead>
                     <tbody>
-  <tr class="clickable-row" data-href="order/order_detailRevanPutra.html">
-    <td class="fw-bold">#876364</td>
-    <td>Revan Putra</td>
-    <td>Bibit Cabai</td>
-    <td>2</td>
-    <td class="fw-bold">Rp 50.000</td>
-    <td><span class="badge status-badge-completed">Completed</span></td>
-  </tr>
-  <tr class="clickable-row" data-href="order/order_detailCitraLestari.html">
-    <td class="fw-bold">#876365</td>
-    <td>Citra Lestari</td>
-    <td>Pupuk Organik</td>
-    <td>1</td>
-    <td class="fw-bold">Rp 75.000</td>
-    <td><span class="badge status-badge-pending">Pending</span></td>
-  </tr>
-  <tr class="clickable-row" data-href="order/order_detailAndiBudi.html">
-    <td class="fw-bold">#876366</td>
-    <td>Andi Budi</td>
-    <td>Alat Siram</td>
-    <td>1</td>
-    <td class="fw-bold">Rp 120.000</td>
-    <td><span class="badge status-badge-canceled">Canceled</span></td>
-  </tr>
-  <tr class="clickable-row" data-href="order/order_detailSiskaAmelia.html">
-    <td class="fw-bold">#876367</td>
-    <td>Siska Amelia</td>
-    <td>Polybag (x50)</td>
-    <td>5</td>
-    <td class="fw-bold">Rp 25.000</td>
-    <td><span class="badge status-badge-completed">Completed</span></td>
-  </tr>
-  <tr class="clickable-row" data-href="order/order_detailArsyaAji.html">
-    <td class="fw-bold">#876368</td>
-    <td>Arsya Aji</td>
-    <td>Benih Selada</td>
-    <td>10</td>
-    <td class="fw-bold">Rp 30.000</td>
-    <td><span class="badge status-badge-pending">Pending</span></td>
-  </tr>
-</tbody>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailRevanPutra.html"
+                      >
+                        <td class="fw-bold">#876364</td>
+                        <td>Revan Putra</td>
+                        <td>Bibit Cabai</td>
+                        <td>2</td>
+                        <td class="fw-bold">Rp 50.000</td>
+                        <td>
+                          <span class="badge status-badge-completed"
+                            >Completed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailCitraLestari.html"
+                      >
+                        <td class="fw-bold">#876365</td>
+                        <td>Citra Lestari</td>
+                        <td>Pupuk Organik</td>
+                        <td>1</td>
+                        <td class="fw-bold">Rp 75.000</td>
+                        <td>
+                          <span class="badge status-badge-pending"
+                            >Pending</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailAndiBudi.html"
+                      >
+                        <td class="fw-bold">#876366</td>
+                        <td>Andi Budi</td>
+                        <td>Alat Siram</td>
+                        <td>1</td>
+                        <td class="fw-bold">Rp 120.000</td>
+                        <td>
+                          <span class="badge status-badge-canceled"
+                            >Canceled</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailSiskaAmelia.html"
+                      >
+                        <td class="fw-bold">#876367</td>
+                        <td>Siska Amelia</td>
+                        <td>Polybag (x50)</td>
+                        <td>5</td>
+                        <td class="fw-bold">Rp 25.000</td>
+                        <td>
+                          <span class="badge status-badge-completed"
+                            >Completed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailArsyaAji.html"
+                      >
+                        <td class="fw-bold">#876368</td>
+                        <td>Arsya Aji</td>
+                        <td>Benih Selada</td>
+                        <td>10</td>
+                        <td class="fw-bold">Rp 30.000</td>
+                        <td>
+                          <span class="badge status-badge-pending"
+                            >Pending</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -438,65 +508,125 @@
             <div class="card dashboard-card">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Top Customers</h5>
-                <ul class="list-unstyled">
-                  <li class="top-customer-item">
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Revan Putra"
+                    data-username="@revanputra"
+                    data-orders="125"
+                    data-spending="Rp 15.750.000"
+                    data-profile-link="customer_detail_revan.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/150?img=1"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Revan Putra</h6>
                       <small class="text-muted">@revanputra</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">125</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
-                  <li class="top-customer-item">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Citra Lestari"
+                    data-username="@citra"
+                    data-orders="98"
+                    data-spending="Rp 12.120.000"
+                    data-profile-link="customer_detail_citra.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/150?img=37"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Citra Lestari</h6>
                       <small class="text-muted">@citra</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">98</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
-                  <li class="top-customer-item">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Andi Budi"
+                    data-username="@andib"
+                    data-orders="76"
+                    data-spending="Rp 9.850.000"
+                    data-profile-link="customer_detail_andi.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/400?img=33"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Andi Budi</h6>
                       <small class="text-muted">@andib</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">76</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
-                  <li class="top-customer-item">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Siska Amelia"
+                    data-username="@siska_a"
+                    data-orders="54"
+                    data-spending="Rp 7.200.000"
+                    data-profile-link="customer_detail_siska.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/400?img=49"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Siska Amelia</h6>
                       <small class="text-muted">@siska_a</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">54</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Arsya Aji"
+                    data-username="@arsya_aji"
+                    data-orders="51"
+                    data-spending="Rp 7.050.000"
+                    data-profile-link="customer_detail_arsya.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/150?img=52"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Arsya Aji</h6>
+                      <small class="text-muted">@arsya_aji</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">51</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
                 </ul>
@@ -506,150 +636,274 @@
         </div>
       </div>
     </div>
-    
+    <div
+      class="modal fade"
+      id="customerDetailModal"
+      tabindex="-1"
+      aria-labelledby="customerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="customerModalLabel">
+              Ringkasan Customer
+            </h5>
+          </div>
+          <div class="modal-body p-4">
+            <h4 id="modalCustomerName" class="mb-1"></h4>
+            <p id="modalCustomerUsername" class="text-muted mb-4"></p>
+
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Total Pesanan</small>
+                <p id="modalTotalOrders" class="fs-4 fw-bold text-prymary"></p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Total Belanja</small>
+                <p
+                  id="modalTotalSpending"
+                  class="fs-4 fw-bold text-success"
+                ></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary-custom"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/admin_script.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-  // --- FUNGSI SEARCH BAR ---
-  const searchInput = document.getElementById("searchInput");
-  if (searchInput) {
-    searchInput.addEventListener("keyup", function (event) {
-      if (event.key === "Enter") {
-        const query = searchInput.value.trim();
-        if (query) {
-          window.location.href = `search-results.html?q=${encodeURIComponent(query)}`;
+        // --- FUNGSI SEARCH BAR ---
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) {
+          searchInput.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+              const query = searchInput.value.trim();
+              if (query) {
+                window.location.href = `search-results.html?q=${encodeURIComponent(
+                  query
+                )}`;
+              }
+            }
+          });
         }
-      }
-    });
-  }
 
-  // --- FUNGSI UNTUK MEMBUAT BARIS TABEL BISA DIKLIK ---
-document.querySelectorAll(".clickable-row").forEach(row => {
-    row.addEventListener("click", () => {
-        // Mengarahkan ke link yang ada di atribut data-href
-        window.location.href = row.dataset.href;
-    });
-});
+        // --- JAVASCRIPT UNTUK MODAL CUSTOMER ---
+        const customerDetailModal = document.getElementById(
+          "customerDetailModal"
+        );
+        if (customerDetailModal) {
+          customerDetailModal.addEventListener(
+            "show.bs.modal",
+            function (event) {
+              // Tombol atau item <li> yang memicu modal
+              const triggerElement = event.relatedTarget;
 
-  // --- GRAFIK (CHARTS) DENGAN DATA DINAMIS ---
+              // Ekstrak data dari atribut data-*
+              const name = triggerElement.getAttribute("data-name");
+              const username = triggerElement.getAttribute("data-username");
+              const orders = triggerElement.getAttribute("data-orders");
+              const spending = triggerElement.getAttribute("data-spending");
+              const profileLink =
+                triggerElement.getAttribute("data-profile-link");
 
-  // 1. Data untuk Sales Statistics
-  const salesData = {
-    week: {
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      sales: [65, 59, 80, 81, 56, 55, 40],
-      revenue: [28, 48, 40, 19, 86, 27, 90],
-    },
-    month: {
-      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-      sales: [350, 410, 380, 500],
-      revenue: [180, 220, 190, 250],
-    },
-    year: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-      sales: [500, 450, 600, 700, 550, 650, 750],
-      revenue: [250, 220, 300, 350, 270, 320, 370],
-    },
-  };
-  
-  // Data BARU untuk Orders Statistics
-  const ordersChartData = {
-      week: [1200, 345, 123],
-      month: [4800, 1200, 510],
-      year: [15000, 3500, 1800]
-  };
+              // Dapatkan elemen-elemen di dalam modal
+              const modalName =
+                customerDetailModal.querySelector("#modalCustomerName");
+              const modalUsername = customerDetailModal.querySelector(
+                "#modalCustomerUsername"
+              );
+              const modalTotalOrders =
+                customerDetailModal.querySelector("#modalTotalOrders");
+              const modalTotalSpending = customerDetailModal.querySelector(
+                "#modalTotalSpending"
+              );
+              const modalProfileLink = customerDetailModal.querySelector(
+                "#modalCustomerProfileLink"
+              );
 
+              // Perbarui konten modal dengan data yang sesuai
+              modalName.textContent = name;
+              modalUsername.textContent = username;
+              modalTotalOrders.textContent = orders;
+              modalTotalSpending.textContent = spending;
+              modalProfileLink.href = profileLink;
+            }
+          );
+        }
 
-  // 2. Inisialisasi variabel untuk kedua chart
-  let salesChart;
-  let ordersChart;
-  
-  // 3. Fungsi untuk mengupdate KEDUA grafik
-  const updateCharts = (period) => {
-    // Update Sales Chart
-    if (salesChart) {
-        const salesPeriodData = salesData[period];
-        salesChart.data.labels = salesPeriodData.labels;
-        salesChart.data.datasets[0].data = salesPeriodData.sales;
-        salesChart.data.datasets[1].data = salesPeriodData.revenue;
-        salesChart.update();
-    }
-    // Update Orders Chart
-    if (ordersChart) {
-        ordersChart.data.datasets[0].data = ordersChartData[period];
-        ordersChart.update();
-    }
-  };
+        // --- FUNGSI UNTUK MEMBUAT BARIS TABEL BISA DIKLIK ---
+        document.querySelectorAll(".clickable-row").forEach((row) => {
+          row.addEventListener("click", () => {
+            // Mengarahkan ke link yang ada di atribut data-href
+            window.location.href = row.dataset.href;
+          });
+        });
 
-  // Inisialisasi Chart Sales Statistics
-  const salesChartCanvasNew = document.getElementById("salesChartNew");
-  if (salesChartCanvasNew) {
-    const ctxSales = salesChartCanvasNew.getContext("2d");
-    salesChart = new Chart(ctxSales, {
-      type: "line",
-      data: {
-        labels: salesData.week.labels,
-        datasets: [
-          { label: "Sales", data: salesData.week.sales, fill: false, borderColor: "#235347", tension: 0.4, pointBackgroundColor: "#235347", pointRadius: 5, },
-          { label: "Revenue", data: salesData.week.revenue, fill: false, borderColor: "#8EB69B", tension: 0.4, pointBackgroundColor: "#8EB69B", pointRadius: 5, },
-        ],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: "top", align: "end", labels: { usePointStyle: true, boxWidth: 8, color: "#051F20" }}},
-        scales: {
-          y: { beginAtZero: true, ticks: { color: "#163832" }, grid: { color: "#DAF1DE" } },
-          x: { ticks: { color: "#163832" } },
-        },
-      },
-    });
-  }
-  
-  // Inisialisasi Chart Orders Statistics
-  const ordersChartCanvas = document.getElementById("ordersChart");
-  if (ordersChartCanvas) {
-    const ctxOrders = ordersChartCanvas.getContext("2d");
-    ordersChart = new Chart(ctxOrders, { // Simpan instance ke variabel ordersChart
-      type: "doughnut",
-      data: {
-        labels: ["Completed", "Pending", "Canceled"],
-        datasets: [
-          {
-            label: "Orders",
-            data: ordersChartData.week, // Gunakan data awal dari objek baru
-            backgroundColor: ["#235347", "#ffc107", "#dc3545"],
-            borderColor: "#FFFFFF",
-            borderWidth: 4,
-            hoverOffset: 8,
+        // --- GRAFIK (CHARTS) DENGAN DATA DINAMIS ---
+
+        // 1. Data untuk Sales Statistics
+        const salesData = {
+          week: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            sales: [65, 59, 80, 81, 56, 55, 40],
+            revenue: [28, 48, 40, 19, 86, 27, 90],
           },
-        ],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false, cutout: "75%",
-        plugins: { legend: { display: false } },
-      },
-    });
-  }
+          month: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            sales: [350, 410, 380, 500],
+            revenue: [180, 220, 190, 250],
+          },
+          year: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            sales: [500, 450, 600, 700, 550, 650, 750],
+            revenue: [250, 220, 300, 350, 270, 320, 370],
+          },
+        };
 
-  // 4. Event listener untuk dropdown (sekarang memanggil updateCharts)
-  const salesPeriodBtn = document.getElementById('salesPeriodBtn');
-  const salesPeriodOptions = document.getElementById('salesPeriodOptions');
+        // Data BARU untuk Orders Statistics
+        const ordersChartData = {
+          week: [1200, 345, 123],
+          month: [4800, 1200, 510],
+          year: [15000, 3500, 1800],
+        };
 
-  if (salesPeriodOptions && salesPeriodBtn) {
-    salesPeriodOptions.addEventListener('click', (event) => {
-        if (event.target.tagName === 'A') {
-            event.preventDefault();
-            const period = event.target.dataset.period;
-            const periodText = event.target.textContent;
-            
-            salesPeriodBtn.textContent = periodText;
-            updateCharts(period); // Panggil fungsi update gabungan
+        // 2. Inisialisasi variabel untuk kedua chart
+        let salesChart;
+        let ordersChart;
+
+        // 3. Fungsi untuk mengupdate KEDUA grafik
+        const updateCharts = (period) => {
+          // Update Sales Chart
+          if (salesChart) {
+            const salesPeriodData = salesData[period];
+            salesChart.data.labels = salesPeriodData.labels;
+            salesChart.data.datasets[0].data = salesPeriodData.sales;
+            salesChart.data.datasets[1].data = salesPeriodData.revenue;
+            salesChart.update();
+          }
+          // Update Orders Chart
+          if (ordersChart) {
+            ordersChart.data.datasets[0].data = ordersChartData[period];
+            ordersChart.update();
+          }
+        };
+
+        // Inisialisasi Chart Sales Statistics
+        const salesChartCanvasNew = document.getElementById("salesChartNew");
+        if (salesChartCanvasNew) {
+          const ctxSales = salesChartCanvasNew.getContext("2d");
+          salesChart = new Chart(ctxSales, {
+            type: "line",
+            data: {
+              labels: salesData.week.labels,
+              datasets: [
+                {
+                  label: "Sales",
+                  data: salesData.week.sales,
+                  fill: false,
+                  borderColor: "#235347",
+                  tension: 0.4,
+                  pointBackgroundColor: "#235347",
+                  pointRadius: 5,
+                },
+                {
+                  label: "Revenue",
+                  data: salesData.week.revenue,
+                  fill: false,
+                  borderColor: "#8EB69B",
+                  tension: 0.4,
+                  pointBackgroundColor: "#8EB69B",
+                  pointRadius: 5,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "top",
+                  align: "end",
+                  labels: {
+                    usePointStyle: true,
+                    boxWidth: 8,
+                    color: "#051F20",
+                  },
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: "#163832" },
+                  grid: { color: "#DAF1DE" },
+                },
+                x: { ticks: { color: "#163832" } },
+              },
+            },
+          });
         }
-    });
-  }
-});
+
+        // Inisialisasi Chart Orders Statistics
+        const ordersChartCanvas = document.getElementById("ordersChart");
+        if (ordersChartCanvas) {
+          const ctxOrders = ordersChartCanvas.getContext("2d");
+          ordersChart = new Chart(ctxOrders, {
+            // Simpan instance ke variabel ordersChart
+            type: "doughnut",
+            data: {
+              labels: ["Completed", "Pending", "Canceled"],
+              datasets: [
+                {
+                  label: "Orders",
+                  data: ordersChartData.week, // Gunakan data awal dari objek baru
+                  backgroundColor: ["#235347", "#ffc107", "#dc3545"],
+                  borderColor: "#FFFFFF",
+                  borderWidth: 4,
+                  hoverOffset: 8,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "75%",
+              plugins: { legend: { display: false } },
+            },
+          });
+        }
+
+        // 4. Event listener untuk dropdown (sekarang memanggil updateCharts)
+        const salesPeriodBtn = document.getElementById("salesPeriodBtn");
+        const salesPeriodOptions =
+          document.getElementById("salesPeriodOptions");
+
+        if (salesPeriodOptions && salesPeriodBtn) {
+          salesPeriodOptions.addEventListener("click", (event) => {
+            if (event.target.tagName === "A") {
+              event.preventDefault();
+              const period = event.target.dataset.period;
+              const periodText = event.target.textContent;
+
+              salesPeriodBtn.textContent = periodText;
+              updateCharts(period); // Panggil fungsi update gabungan
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>
