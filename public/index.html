@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="../assets/css/public_style.css" />
   </head>
   <body>
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
     <div id="header-placeholder"></div>
 
     <section class="hero-cta-minimalist mb-5 mt-5" aria-labelledby="hero-title">
@@ -45,6 +48,49 @@
               </p>
               <a href="products.html" class="btn-cta"> Jelajahi Sekarang </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="as-seen-on-section py-5">
+      <div class="container">
+        <h6 class="text-center text-muted fw-bold mb-4">TELAH DILIPUT OLEH</h6>
+        <div class="row justify-content-center align-items-center g-4">
+          <div class="col-6 col-md-2 text-center">
+            <img
+              src="https://i.pinimg.com/originals/a9/a1/52/a9a15293077a597a763c333f24097477.png"
+              alt="Logo Media Partner 1"
+              class="partner-logo"
+            />
+          </div>
+          <div class="col-6 col-md-2 text-center">
+            <img
+              src="https://i.pinimg.com/originals/c7/27/7f/c7277f76906214586c96894c0a527027.png"
+              alt="Logo Media Partner 2"
+              class="partner-logo"
+            />
+          </div>
+          <div class="col-6 col-md-2 text-center">
+            <img
+              src="https://i.pinimg.com/originals/1c/17/a6/1c17a637a723e4a9a9b12872322a36b0.png"
+              alt="Logo Media Partner 3"
+              class="partner-logo"
+            />
+          </div>
+          <div class="col-6 col-md-2 text-center">
+            <img
+              src="https://i.pinimg.com/originals/8a/34/3c/8a343c3f91b7f8e1245a4a51e186e41b.png"
+              alt="Logo Media Partner 4"
+              class="partner-logo"
+            />
+          </div>
+          <div class="col-6 col-md-2 text-center">
+            <img
+              src="https://i.pinimg.com/originals/1e/8f/25/1e8f258a5c6c0d64a037b3f9479b8a10.png"
+              alt="Logo Media Partner 5"
+              class="partner-logo"
+            />
           </div>
         </div>
       </div>
@@ -106,6 +152,36 @@
       </div>
     </section>
 
+    <section class="limited-offer-section container my-5 py-5">
+      <div class="row align-items-center bg-white p-4 rounded shadow-sm">
+        <div class="col-md-6">
+          <img
+            src="https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg"
+            class="img-fluid rounded"
+            alt="HydroKit Mini Starter"
+          />
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0">
+          <p class="text-danger fw-bold">PENAWARAN SPESIAL MINGGU INI!</p>
+          <h2 class="section-title">Diskon 25% HydroKit Mini Starter</h2>
+          <p class="text-muted">
+            Mulai petualangan hidroponikmu sekarang! Paket lengkap untuk pemula
+            ini berisi semua yang kamu butuhkan untuk panen sayuran pertamamu.
+            Stok terbatas!
+          </p>
+          <div class="d-flex align-items-center mb-4">
+            <h3 class="fw-bold me-3 mb-0">Rp 185.000</h3>
+            <p class="text-muted text-decoration-line-through mb-0">
+              Rp 225.000
+            </p>
+          </div>
+          <a href="product_detail.html?id=1" class="btn-smartfarm-primary"
+            >Klaim Penawaran <i class="fas fa-arrow-right ms-2"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
     <section class="kategori-pilihan-section container my-5 py-5">
       <div class="section-header-minimalist text-center mb-5">
         <h2 class="section-title">KATEGORI PILIHAN</h2>
@@ -121,7 +197,9 @@
               Mulai petualangan berkebunmu dengan bibit hidroponik kualitas
               terbaik yang cepat tumbuh.
             </p>
-            <a href="benih.html" class="btn-category">Lihat Produk</a>
+            <a href="products.html?category=bibit" class="btn-category"
+              >Lihat Produk</a
+            >
           </div>
         </div>
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -129,12 +207,14 @@
             <div class="card-icon">
               <i class="fas fa-carrot"></i>
             </div>
-            <h3 class="card-title">Tanaman Siap Panen</h3>
+            <h3 class="card-title">Tanaman Hias</h3>
             <p class="card-description">
-              Ingin langsung panen? Pilih dari koleksi sayuran segar siap petik
-              dari kebun kami.
+              Pilih dari koleksi tanaman hias dan sayuran segar siap pajang atau
+              petik dari kebun kami.
             </p>
-            <a href="panen.html" class="btn-category">Lihat Produk</a>
+            <a href="products.html?category=hias" class="btn-category"
+              >Lihat Produk</a
+            >
           </div>
         </div>
         <div class="col-lg-4 d-flex align-items-stretch">
@@ -147,7 +227,41 @@
               Lengkapi kebutuhan kebun pintarmu, mulai dari nutrisi, media
               tanam, hingga toolkit hidroponik.
             </p>
-            <a href="alat.html" class="btn-category">Lihat Produk</a>
+            <a
+              href="products.html?category=kit,nutrisi,media"
+              class="btn-category"
+              >Lihat Produk</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works-section container text-center my-5 py-5">
+      <h2 class="section-title mb-2">
+        Mulai Berhidroponik dalam 3 Langkah Mudah
+      </h2>
+      <p class="text-muted mb-5">Semudah 1-2-3 untuk mulai panen dari rumah.</p>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-icon">1</div>
+            <h3 class="step-title mt-3">Pilih Kit & Benih</h3>
+            <p>Pilih paket hidroponik dan benih sayuran favoritmu.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-icon">2</div>
+            <h3 class="step-title mt-3">Tanam & Rawat</h3>
+            <p>Ikuti panduan mudah dari kami, cukup beri nutrisi & air.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-icon">3</div>
+            <h3 class="step-title mt-3">Panen & Nikmati!</h3>
+            <p>Dalam 30-40 hari, nikmati sayuran segar bebas pestisida!</p>
           </div>
         </div>
       </div>
@@ -438,6 +552,64 @@
       </div>
     </div>
 
+    <section class="instagram-gallery-section my-5 py-5">
+      <div class="container text-center">
+        <h2 class="section-title mb-2">#SmartFarmDiRumah</h2>
+        <p class="text-muted mb-5">
+          Lihat hasil panen dari para SmartFarmer lainnya!
+        </p>
+        <div class="row g-2 g-md-3">
+          <div class="col-4 col-md-2">
+            <a href="#"
+              ><img
+                src="https://i.pinimg.com/564x/a0/2a/3e/a02a3e0b23b1a29380a9e70188b90c1f.jpg"
+                class="img-fluid rounded"
+                alt="Hasil panen hidroponik"
+            /></a>
+          </div>
+          <div class="col-4 col-md-2">
+            <a href="#"
+              ><img
+                src="https://i.pinimg.com/564x/b8/63/1f/b8631f2d2b512c9a9ea0e616f1f3b23c.jpg"
+                class="img-fluid rounded"
+                alt="Sayuran segar hidroponik"
+            /></a>
+          </div>
+          <div class="col-4 col-md-2">
+            <a href="#"
+              ><img
+                src="https://i.pinimg.com/564x/e7/7b/0a/e77b0a3203c39381c107142d17c5b611.jpg"
+                class="img-fluid rounded"
+                alt="Kebun hidroponik di rumah"
+            /></a>
+          </div>
+          <div class="col-4 col-md-2">
+            <a href="#"
+              ><img
+                src="https://i.pinimg.com/564x/f3/f1/44/f3f144d184b2a8d387f3299732104cc7.jpg"
+                class="img-fluid rounded"
+                alt="Selada hidroponik siap panen"
+            /></a>
+          </div>
+          <div class="col-4 col-md-2">
+            <a href="#"
+              ><img
+                src="https://i.pinimg.com/564x/af/0f/52/af0f52b61f9d501d67e6c40a5a40a5a2.jpg"
+                class="img-fluid rounded"
+                alt="Tomat cherry hidroponik"
+            /></a>
+          </div>
+          <div class="col-4 col-md-2">
+            <a href="#"
+              ><img
+                src="https://i.pinimg.com/564x/9f/8e/3c/9f8e3c834a78c1b2c4d7e5d8a9e70188.jpg"
+                class="img-fluid rounded"
+                alt="Anak-anak dan hidroponik"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <div id="footer-placeholder"></div>
@@ -478,8 +650,6 @@
           disableOnInteraction: false,
         },
       });
-
-      
     </script>
   </body>
 </html>

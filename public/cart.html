@@ -1,95 +1,201 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Keranjang Belanja - SmartFarm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/public_style.css" />
 </head>
 <body>
+    <div id="preloader"><div class="spinner"></div></div>
     <div id="header-placeholder"></div>
 
-    <main class="container my-5 pt-4">
-        <div class="row">
+    <main class="main-content-container container my-5">
+        <div class="cart-header mb-4">
+            <h1 class="cart-title">Keranjang Belanja Kamu</h1>
+            <a href="products.html" class="continue-shopping-link">Lanjut Belanja <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+
+        <div class="row g-4">
             <div class="col-lg-8">
-                <div class="cart-header mb-4">
-                    <h1 class="cart-title">Keranjang Belanja</h1>
-                    <a href="products.html" class="continue-shopping-link">Lanjut Belanja <i class="fas fa-arrow-right ms-1"></i></a>
-                </div>
-
                 <div class="cart-items-wrapper">
-                    <div class="cart-item">
-                        <div class="cart-item-img">
-                            <img src="https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg" alt="HydroKit Mini Starter">
-                        </div>
-                        <div class="cart-item-details">
-                            <p class="cart-item-category">Hidroponik Kit</p>
-                            <h5 class="cart-item-name">HydroKit Mini Starter</h5>
-                            <button class="cart-item-remove"><i class="far fa-trash-alt me-1"></i> Hapus</button>
-                        </div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn">-</button>
-                            <input type="text" value="1" readonly>
-                            <button class="quantity-btn">+</button>
-                        </div>
-                        <div class="cart-item-price">
-                            <p>Rp 185.000</p>
-                        </div>
-                    </div>
-
-                    <div class="cart-item">
-                        <div class="cart-item-img">
-                            <img src="https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg" alt="Caladium Red Star">
-                        </div>
-                        <div class="cart-item-details">
-                            <p class="cart-item-category">Tanaman Hias</p>
-                            <h5 class="cart-item-name">Caladium Red Star</h5>
-                            <button class="cart-item-remove"><i class="far fa-trash-alt me-1"></i> Hapus</button>
-                        </div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn">-</button>
-                            <input type="text" value="2" readonly>
-                            <button class="quantity-btn">+</button>
-                        </div>
-                        <div class="cart-item-price">
-                            <p>Rp 75.000</p>
-                        </div>
+                    <div id="cart-items-container">
+                        <p id="empty-cart-message" class="text-center p-5">Keranjangmu masih kosong, nih. Yuk, belanja dulu!</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-4">
                 <div class="order-summary">
-                    <h4 class="summary-title">Ringkasan Pesanan</h4>
+                    <h5 class="summary-title">Ringkasan Pesanan</h5>
+                    
+                    <div class="summary-promo mb-3">
+                        <label for="promoCode" class="form-label">Punya Kode Promo?</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="promoCode" placeholder="Contoh: KIRIMGRATIS">
+                            <button class="btn btn-apply-promo" type="button" id="applyPromoBtn">Terapkan</button>
+                        </div>
+                        <div id="promo-feedback" class="mt-2"></div>
+                    </div>
+
                     <div class="summary-item">
                         <span>Subtotal</span>
-                        <span>Rp 260.000</span>
+                        <span id="summary-subtotal">Rp 0</span>
                     </div>
-                    <div class="summary-item">
-                        <span>Ongkos Kirim</span>
-                        <span>Rp 15.000</span>
-                    </div>
-                    <div class="summary-promo">
-                        <label for="promo-code" class="form-label">Kode Promo</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="promo-code" placeholder="Masukkan kode">
-                            <button class="btn btn-apply-promo" type="button">Terapkan</button>
-                        </div>
+                    <div class="summary-item" id="summary-discount-row" style="display: none;">
+                        <span>Diskon</span>
+                        <span id="summary-discount" class="text-success">- Rp 0</span>
                     </div>
                     <div class="summary-total">
                         <span>Total</span>
-                        <span>Rp 275.000</span>
+                        <span id="summary-total">Rp 0</span>
                     </div>
-                    <button class="btn btn-checkout w-100">Lanjut ke Checkout <i class="fas fa-lock ms-2"></i></button>
+                    <div class="d-grid mt-4">
+                        <a href="pembayaran.html" class="btn btn-checkout" id="checkout-btn">Lanjut ke Pembayaran</a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <div id="footer-placeholder"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/public_script.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+
+        // === DATABASE KODE PROMO (Sesuai promo.html) ===
+        const promoCodes = {
+            "KIRIMGRATIS": { type: "shipping", value: 15000, message: "Asyik! Gratis ongkir Rp 15.000." },
+            "SMARTFARM10": { type: "percentage", value: 0.10, message: "Hore! Dapat diskon 10%." },
+            "PANENRAYA": { type: "fixed", value: 25000, message: "Mantap! Dapat potongan Rp 25.000." }
+        };
+        let appliedPromo = null;
+
+        function renderCartItems() {
+            const cart = JSON.parse(localStorage.getItem('smartfarm_cart') || '[]');
+            cartItemsContainer.innerHTML = ''; // Kosongkan dulu
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cart.forEach((item, index) => {
+                    const itemHTML = `
+                        <div class="cart-item">
+                            <div class="cart-item-img">
+                                <img src="${item.image}" alt="${item.name}">
+                            </div>
+                            <div class="cart-item-details">
+                                <p class="cart-item-category mb-1">${item.category || ''}</p>
+                                <h6 class="cart-item-name mb-2">${item.name}</h6>
+                                <button class="cart-item-remove" data-index="${index}"><i class="fas fa-trash-alt me-1"></i> Hapus</button>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+                                <input type="text" class="form-control text-center" value="${item.quantity}" readonly>
+                                <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
+                            </div>
+                            <div class="cart-item-price">
+                                <p class="mb-0">Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.innerHTML += itemHTML;
+                });
+            }
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const cart = JSON.parse(localStorage.getItem('smartfarm_cart') || '[]');
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            
+            let discount = 0;
+            let total = subtotal;
+
+            if (appliedPromo) {
+                if (appliedPromo.type === 'shipping') {
+                    discount = appliedPromo.value;
+                } else if (appliedPromo.type === 'percentage') {
+                    discount = subtotal * appliedPromo.value;
+                } else if (appliedPromo.type === 'fixed') {
+                    discount = appliedPromo.value;
+                }
+            }
+
+            total = subtotal - discount;
+            if (total < 0) total = 0; // Pastikan total tidak minus
+
+            document.getElementById('summary-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            
+            const discountRow = document.getElementById('summary-discount-row');
+            if (discount > 0) {
+                document.getElementById('summary-discount').textContent = `- Rp ${discount.toLocaleString('id-ID')}`;
+                discountRow.style.display = 'flex';
+            } else {
+                discountRow.style.display = 'none';
+            }
+            
+            document.getElementById('summary-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function applyPromoCode() {
+            const promoInput = document.getElementById('promoCode');
+            const code = promoInput.value.toUpperCase();
+            const feedbackEl = document.getElementById('promo-feedback');
+            
+            const promo = promoCodes[code];
+
+            if (promo) {
+                appliedPromo = promo;
+                feedbackEl.innerHTML = `<span class="text-success">${promo.message}</span>`;
+                promoInput.classList.add('is-valid');
+                promoInput.classList.remove('is-invalid');
+                showNotification("Kode promo berhasil digunakan!", "success");
+            } else {
+                appliedPromo = null;
+                feedbackEl.innerHTML = `<span class="text-danger">Kode promo tidak valid.</span>`;
+                promoInput.classList.add('is-invalid');
+                promoInput.classList.remove('is-valid');
+            }
+            updateSummary();
+        }
+
+        cartItemsContainer.addEventListener('click', function(e) {
+            const target = e.target.closest('button');
+            if (!target) return;
+
+            const index = parseInt(target.dataset.index);
+            let cart = JSON.parse(localStorage.getItem('smartfarm_cart') || '[]');
+
+            if (target.classList.contains('cart-item-remove')) {
+                cart.splice(index, 1);
+            } else if (target.classList.contains('quantity-btn')) {
+                const action = target.dataset.action;
+                if (action === 'increase') {
+                    cart[index].quantity++;
+                } else if (action === 'decrease' && cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                }
+            }
+
+            localStorage.setItem('smartfarm_cart', JSON.stringify(cart));
+            renderCartItems();
+            updateCartBadge(); // Update badge di navbar juga
+        });
+
+        document.getElementById('applyPromoBtn').addEventListener('click', applyPromoCode);
+
+        // Inisialisasi
+        renderCartItems();
+    });
+    </script>
 </body>
 </html>

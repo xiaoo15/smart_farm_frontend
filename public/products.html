@@ -1,53 +1,163 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semua Produk - SmartFarm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../assets/css/public_style.css" />
-</head>
-<body>
+  </head>
+  <body>
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
+
     <div id="header-placeholder"></div>
 
     <main class="container my-5">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="filter-sidebar">
-                    <h5 class="filter-title">Filter Produk</h5>
-                    <div class="filter-group">
-                        <h6>Kategori</h6>
-                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_semua" value="semua" checked /><label class="form-check-label" for="kat_semua">Semua</label></div>
-                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_kit" value="kit" /><label class="form-check-label" for="kat_kit">Hidroponik Kit</label></div>
-                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_bibit" value="bibit" /><label class="form-check-label" for="kat_bibit">Bibit & Benih</label></div>
-                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_hias" value="hias" /><label class="form-check-label" for="kat_hias">Tanaman Hias</label></div>
-                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_nutrisi" value="nutrisi" /><label class="form-check-label" for="kat_nutrisi">Nutrisi</label></div>
-                        <div class="form-check"><input class="form-check-input category-filter" type="radio" name="kategori" id="kat_media" value="media" /><label class="form-check-label" for="kat_media">Media Tanam</label></div>
-                    </div>
-                    <div class="filter-group">
-                        <h6>Rentang Harga</h6>
-                        <label for="hargaRange" class="form-label" id="hargaLabel">Maks: Rp 500.000</label>
-                        <input type="range" class="form-range" min="0" max="500000" step="10000" id="hargaRange" value="500000" />
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="filter-sidebar">
+            <h5 class="filter-title">Filter Produk</h5>
+            <div class="filter-group">
+              <h6>Kategori</h6>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  name="kategori"
+                  id="kat_kit"
+                  value="kit"
+                /><label class="form-check-label" for="kat_kit"
+                  >Hidroponik Kit</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  name="kategori"
+                  id="kat_bibit"
+                  value="bibit"
+                /><label class="form-check-label" for="kat_bibit"
+                  >Bibit & Benih</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  name="kategori"
+                  id="kat_hias"
+                  value="hias"
+                /><label class="form-check-label" for="kat_hias"
+                  >Tanaman Hias</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  name="kategori"
+                  id="kat_nutrisi"
+                  value="nutrisi"
+                /><label class="form-check-label" for="kat_nutrisi"
+                  >Nutrisi</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  name="kategori"
+                  id="kat_media"
+                  value="media"
+                /><label class="form-check-label" for="kat_media"
+                  >Media Tanam</label
+                >
+              </div>
             </div>
-
-            <div class="col-lg-9">
-                <div class="search-header d-flex flex-column flex-md-row gap-3 align-items-md-center mb-4">
-                    <div class="input-group"><span class="search-icon"><i class="fas fa-search"></i></span><input type="text" class="form-control" placeholder="Cari HydroKit, bibit, atau nutrisi..." id="searchInput" /></div>
-                    <div class="dropdown">
-                        <button class="btn btn-sort dropdown-toggle" type="button" data-bs-toggle="dropdown">Urutkan: Terbaru</button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Terbaru</a></li>
-                            <li><a class="dropdown-item" href="#">Harga: Terendah ke Tertinggi</a></li>
-                            <li><a class="dropdown-item" href="#">Harga: Tertinggi ke Terendah</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="product-list"></div>
+            <div class="filter-group">
+              <h6>Rentang Harga</h6>
+              <label for="hargaRange" class="form-label" id="hargaLabel"
+                >Maks: Rp 500.000</label
+              >
+              <input
+                type="range"
+                class="form-range"
+                min="0"
+                max="500000"
+                step="10000"
+                id="hargaRange"
+                value="500000"
+              />
             </div>
+          </div>
         </div>
+
+        <div class="col-lg-9">
+          <div
+            class="search-header d-flex flex-column flex-md-row gap-3 align-items-md-center mb-4"
+          >
+            <div class="input-group">
+              <span class="search-icon"><i class="fas fa-search"></i></span
+              ><input
+                type="text"
+                class="form-control"
+                placeholder="Cari HydroKit, bibit, atau nutrisi..."
+                id="searchInput"
+              />
+            </div>
+            <div class="dropdown">
+              <button
+                class="btn btn-sort dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                id="sortButton"
+              >
+                Urutkan: Terbaru
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a
+                    class="dropdown-item sort-option"
+                    href="#"
+                    data-sort="terbaru"
+                    >Terbaru</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item sort-option"
+                    href="#"
+                    data-sort="harga-asc"
+                    >Harga: Terendah ke Tertinggi</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item sort-option"
+                    href="#"
+                    data-sort="harga-desc"
+                    >Harga: Tertinggi ke Terendah</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"
+            id="product-list"
+          ></div>
+        </div>
+      </div>
     </main>
 
     <div id="footer-placeholder"></div>
@@ -55,176 +165,503 @@
     <script src="../assets/js/public_script.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // ===================================================================
-            // DATA PRODUK (PUSAT DATA)
-            // ===================================================================
-            const allProducts = [
-                {
-                    id: 1,
-                    name: "HydroKit Mini Starter",
-                    category: "kit",
-                    price: 185000,
-                    image: "https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg",
-                    rating: 4.5,
-                    sold: "3.2k",
-                    badge: { text: "BEST SELLER", class: "badge-bestseller" }
-                },
-                {
-                    id: 2,
-                    name: "Caladium Red Star",
-                    category: "hias",
-                    price: 75000,
-                    image: "https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg",
-                    rating: 4.5,
-                    sold: "230",
-                    badge: { text: "PRODUK BARU", class: "badge-new" }
-                },
-                {
-                    id: 3,
-                    name: "Bibit Selada Romaine (Hydro)",
-                    category: "bibit",
-                    price: 25000,
-                    image: "https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg",
-                    rating: 5,
-                    sold: "8k+",
-                    badge: { text: "PILIHAN", class: "badge-limited" }
-                },
-                {
-                    id: 4,
-                    name: "Nutrisi AB Mix Premium",
-                    category: "nutrisi",
-                    price: 45000,
-                    originalPrice: 55000,
-                    image: "https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg",
-                    rating: 4,
-                    sold: "400+",
-                    badge: { text: "DISKON", class: "badge-sale" }
-                },
-                {
-                    id: 5,
-                    name: "Rockwool Cultilene",
-                    category: "media",
-                    price: 15000,
-                    image: "https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg",
-                    rating: 4.5,
-                    sold: "312",
-                    badge: null // Tidak ada badge
-                },
-                {
-                    id: 6,
-                    name: "Monstera Deliciosa",
-                    category: "hias",
-                    price: 125000,
-                    image: "https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg",
-                    rating: 5,
-                    sold: "185",
-                    badge: { text: "PRODUK BARU", class: "badge-new" }
-                }
-            ];
+      document.addEventListener("DOMContentLoaded", function () {
+        // ===================================================================
+        // DATA PRODUK (PUSAT DATA)
+        // ===================================================================
+        const allProducts = [
+          // --- KATEGORI: HIDROPONIK KIT ---
+          {
+            id: 1,
+            name: "HydroKit Mini Starter",
+            category: "kit",
+            price: 185000,
+            originalPrice: 225000,
+            image:
+              "https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg",
+            rating: 4.8,
+            sold: "3.2k",
+            date: "2024-08-10",
+            badge: { text: "DISKON", class: "badge-sale" },
+            description:
+              "Paket lengkap untuk pemula yang ingin mencoba hidroponik. Mudah dirakit dan tidak memakan tempat.",
+          },
+          {
+            id: 7,
+            name: "HydroTower Vertical Garden",
+            category: "kit",
+            price: 750000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/a2/28/76/a22876b6c59218275550a2f45130e8c8.jpg",
+            rating: 5,
+            sold: "890",
+            date: "2024-07-22",
+            badge: { text: "PRODUK BARU", class: "badge-new" },
+            description:
+              "Solusi berkebun di lahan terbatas. Sistem hidroponik vertikal yang efisien dan modern.",
+          },
+          {
+            id: 8,
+            name: "Dutch Bucket System (5 Pot)",
+            category: "kit",
+            price: 450000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/f7/a8/38/f7a8385a4982635334c26a0b9a68c34c.jpg",
+            rating: 4.5,
+            sold: "1.1k",
+            date: "2024-06-15",
+            badge: { text: "BEST SELLER", class: "badge-bestseller" },
+            description:
+              "Sistem hidroponik yang ideal untuk tanaman buah seperti tomat, paprika, dan mentimun.",
+          },
+          {
+            id: 15,
+            name: "Window Farm Kit",
+            category: "kit",
+            price: 250000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/b8/96/a8/b896a8a4f4e7102e1c942aba743b8118.jpg",
+            rating: 4.2,
+            sold: "450",
+            date: "2024-05-01",
+            badge: null,
+            description:
+              "Manfaatkan jendela rumahmu untuk menanam sayuran segar dengan kit hidroponik gantung yang praktis.",
+          },
 
-            const productListContainer = document.getElementById('product-list');
+          // --- KATEGORI: TANAMAN HIAS ---
+          {
+            id: 2,
+            name: "Caladium Red Star",
+            category: "hias",
+            price: 75000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg",
+            rating: 4.5,
+            sold: "230",
+            date: "2024-08-01",
+            badge: { text: "PRODUK BARU", class: "badge-new" },
+            description:
+              "Tanaman hias dengan warna merah menyala yang eksotis, cocok untuk mempercantik sudut ruangan Anda.",
+          },
+          {
+            id: 6,
+            name: "Monstera Deliciosa",
+            category: "hias",
+            price: 125000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg",
+            rating: 5,
+            sold: "185",
+            date: "2024-08-05",
+            badge: null,
+            description:
+              "Tanaman hias ikonik dengan daun terbelah yang unik. Memberikan kesan tropis dan modern pada interior.",
+          },
+          {
+            id: 9,
+            name: "Sansevieria Trifasciata",
+            category: "hias",
+            price: 60000,
+            originalPrice: 80000,
+            image:
+              "https://i.pinimg.com/564x/a4/0f/73/a40f73843f55a1a1f061217594191a92.jpg",
+            rating: 4.7,
+            sold: "950",
+            date: "2024-07-18",
+            badge: { text: "DISKON", class: "badge-sale" },
+            description:
+              "Dikenal sebagai 'Lidah Mertua', tanaman ini sangat kuat dan mampu membersihkan udara dalam ruangan.",
+          },
+          {
+            id: 10,
+            name: "Alocasia Black Velvet",
+            category: "hias",
+            price: 150000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/1200x/ed/a3/0d/eda30d19a03643d38792cbb6ac56db03.jpg",
+            rating: 4.9,
+            sold: "310",
+            date: "2024-08-12",
+            badge: { text: "STOK TERBATAS", class: "badge-limited" },
+            description:
+              "Tanaman premium dengan daun hitam beludru dan urat silver yang mewah. Menjadi pusat perhatian di koleksi tanaman hias Anda. Membutuhkan kelembapan yang cukup.",
+            specs: {
+              "Tinggi Tanaman": "15-25 cm",
+              "Ukuran Pot": "Diameter 12 cm",
+              "Media Tanam": "Aroid Mix (Cocochip, Perlite)",
+              "Kebutuhan Sinar": "Terang, tidak langsung",
+            },
+          },
 
-            // ===================================================================
-            // FUNGSI UNTUK MENAMPILKAN PRODUK (LOOP)
-            // ===================================================================
-            function renderProducts(productsToRender) {
-                productListContainer.innerHTML = ''; // Kosongkan dulu containernya
-                
-                if (productsToRender.length === 0) {
-                    productListContainer.innerHTML = '<p class="text-center col-12">Yah, produk yang kamu cari nggak ketemu nih :(</p>';
-                    return;
-                }
+          // --- KATEGORI: BIBIT & BENIH ---
+          {
+            id: 3,
+            name: "Bibit Selada Romaine (Hydro)",
+            category: "bibit",
+            price: 25000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg",
+            rating: 5,
+            sold: "8k+",
+            date: "2024-07-25",
+            badge: { text: "PILIHAN", class: "badge-limited" },
+            description:
+              "Bibit selada romaine unggulan yang cocok untuk sistem hidroponik. Cepat tumbuh dan renyah.",
+          },
+          {
+            id: 11,
+            name: "Benih Kangkung Bangkok",
+            category: "bibit",
+            price: 12000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/8e/31/35/8e31359c381c6674483e60181534346e.jpg",
+            rating: 4.8,
+            sold: "12k+",
+            date: "2024-03-10",
+            badge: { text: "BEST SELLER", class: "badge-bestseller" },
+            description:
+              "Benih kangkung varietas Bangkok, mudah tumbuh, dan bisa dipanen dalam waktu singkat.",
+          },
+          {
+            id: 12,
+            name: "Benih Tomat Cherry Super",
+            category: "bibit",
+            price: 30000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/4b/c9/2e/4bc92e850b5711b7e435a297746419a4.jpg",
+            rating: 4.6,
+            sold: "2.5k",
+            date: "2024-06-20",
+            badge: null,
+            description:
+              "Hasilkan tomat cherry yang manis dan melimpah langsung dari kebun hidroponik Anda.",
+          },
+          {
+            id: 18,
+            name: "Bibit Strawberry California",
+            category: "bibit",
+            price: 45000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/f1/40/f7/f140f7d549f7a7597148b51d8058b76c.jpg",
+            rating: 4.9,
+            sold: "5.2k",
+            date: "2024-08-08",
+            badge: { text: "PRODUK BARU", class: "badge-new" },
+            description:
+              "Bibit unggul strawberry California yang sudah beradaptasi untuk ditanam di iklim tropis.",
+          },
 
-                productsToRender.forEach(product => {
-                    // Membuat bintang rating
-                    let ratingStars = '';
-                    for (let i = 1; i <= 5; i++) {
-                        if (i <= product.rating) {
-                            ratingStars += '<i class="fas fa-star"></i>';
-                        } else if (i - 0.5 <= product.rating) {
-                            ratingStars += '<i class="fas fa-star-half-alt"></i>';
-                        } else {
-                            ratingStars += '<i class="far fa-star"></i>';
-                        }
-                    }
-                    const badgeHTML = product.badge ? `<div class="product-badge ${product.badge.class}">${product.badge.text}</div>` : '';
-                    
-                    const priceHTML = product.originalPrice 
-                        ? `<span class="price-original">Rp ${product.originalPrice.toLocaleString('id-ID')}</span> Rp ${product.price.toLocaleString('id-ID')}`
-                        : `Rp ${product.price.toLocaleString('id-ID')}`;
+          // --- KATEGORI: NUTRISI ---
+          {
+            id: 4,
+            name: "Nutrisi AB Mix Premium",
+            category: "nutrisi",
+            price: 45000,
+            originalPrice: 55000,
+            image:
+              "https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg",
+            rating: 4.7,
+            sold: "400+",
+            date: "2024-06-15",
+            badge: { text: "DISKON", class: "badge-sale" },
+            description:
+              "Nutrisi lengkap siap pakai untuk semua jenis tanaman hidroponik, mengandung unsur makro dan mikro esensial.",
+          },
+          {
+            id: 13,
+            name: "Pupuk Organik Cair (POC)",
+            category: "nutrisi",
+            price: 35000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/e7/a7/0a/e7a70a831e67d268a0a9557b646c1e33.jpg",
+            rating: 4.5,
+            sold: "1.8k",
+            date: "2024-04-25",
+            badge: null,
+            description:
+              "Pupuk organik cair yang kaya akan mikroorganisme baik untuk menyuburkan media tanam dan menyehatkan akar.",
+          },
+          {
+            id: 14,
+            name: "Root Booster Super",
+            category: "nutrisi",
+            price: 55000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/6c/67/03/6c670390a316fed930a4c95213b2e59e.jpg",
+            rating: 4.9,
+            sold: "2.2k",
+            date: "2024-07-30",
+            badge: { text: "BEST SELLER", class: "badge-bestseller" },
+            description:
+              "Formula khusus untuk merangsang pertumbuhan akar baru, membuat tanaman lebih kuat dan sehat.",
+          },
+          {
+            id: 20,
+            name: "Kalsium Nitrat (KNO3)",
+            category: "nutrisi",
+            price: 28000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/0a/d6/3d/0ad63d3e6015d97f22d1487f941f649e.jpg",
+            rating: 4.6,
+            sold: "980",
+            date: "2024-02-11",
+            badge: null,
+            description:
+              "Pupuk makro sekunder yang penting untuk mencegah kerontokan bunga dan buah, serta memperkuat dinding sel tanaman.",
+          },
 
-                    // Template HTML untuk satu kartu produk
-                    const productCardHTML = `
-                        <div class="col product-item" data-category="${product.category}" data-price="${product.price}" data-name="${product.name}">
-                            <div class="product-card-offer h-100">
-                                <div class="product-image-wrapper">
-                                    <a href="product_detail.html?id=${product.id}"><img src="${product.image}" alt="${product.name}"/></a>
-                                    ${badgeHTML}
-                                    <div class="product-actions">
-                                        <button class="action-btn" title="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
-                                        <button class="action-btn" title="Tambah ke Keranjang"><i class="fas fa-shopping-cart"></i></button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <p class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
-                                    <h3 class="product-title"><a href="product_detail.html?id=${product.id}">${product.name}</a></h3>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="product-rating">${ratingStars}</div>
-                                        <small class="product-sold ms-2">(${product.sold} terjual)</small>
-                                    </div>
-                                    <p class="product-price mt-auto">${priceHTML}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    productListContainer.innerHTML += productCardHTML;
-                });
+          // --- KATEGORI: MEDIA TANAM ---
+          {
+            id: 5,
+            name: "Rockwool Cultilene",
+            category: "media",
+            price: 15000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg",
+            rating: 4.9,
+            sold: "312",
+            date: "2024-05-20",
+            badge: { text: "BEST SELLER", class: "badge-bestseller" },
+            description:
+              "Media tanam rockwool impor berkualitas tinggi, mampu menyerap air dengan baik dan steril.",
+          },
+          {
+            id: 16,
+            name: "Hydroton Jerman",
+            category: "media",
+            price: 35000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/e3/3a/0d/e33a0d33e9b1a5390623a1a1f1035ac8.jpg",
+            rating: 4.8,
+            sold: "1.5k",
+            date: "2024-07-05",
+            badge: null,
+            description:
+              "Media tanam hidroponik dari tanah liat yang dibakar, bisa dipakai berulang kali dan memiliki aerasi yang sangat baik.",
+          },
+          {
+            id: 17,
+            name: "Cocopeat Blok Premium",
+            category: "media",
+            price: 22000,
+            originalPrice: 28000,
+            image:
+              "https://i.pinimg.com/564x/61/52/fa/6152fa2439c118a8022b79313271705e.jpg",
+            rating: 4.7,
+            sold: "3.5k",
+            date: "2024-06-01",
+            badge: { text: "DISKON", class: "badge-sale" },
+            description:
+              "Media tanam organik dari serabut kelapa yang sudah diproses dan dicuci, bebas dari zat tanin.",
+          },
+          {
+            id: 19,
+            name: "Sekam Bakar Fermentasi",
+            category: "media",
+            price: 18000,
+            originalPrice: null,
+            image:
+              "https://i.pinimg.com/564x/8d/e2/26/8de226211479d20c528f9d0c270d1cf5.jpg",
+            rating: 4.6,
+            sold: "2.8k",
+            date: "2024-01-30",
+            badge: null,
+            description:
+              "Media tanam porous yang sudah difermentasi, bagus untuk aerasi akar dan mencegah jamur.",
+          },
+        ];
+        const productListContainer = document.getElementById("product-list");
+        let currentSort = "terbaru";
+
+        // ===================================================================
+        // FUNGSI UNTUK MENAMPILKAN PRODUK (TIDAK BERUBAH)
+        // ===================================================================
+        function renderProducts(productsToRender) {
+          productListContainer.innerHTML = "";
+          if (productsToRender.length === 0) {
+            productListContainer.innerHTML =
+              '<p class="text-center col-12">Yah, produk yang kamu cari nggak ketemu nih :(</p>';
+            return;
+          }
+          productsToRender.forEach((product) => {
+            let ratingStars = "";
+            for (let i = 1; i <= 5; i++) {
+              if (i <= product.rating)
+                ratingStars += '<i class="fas fa-star"></i>';
+              else if (i - 0.5 <= product.rating)
+                ratingStars += '<i class="fas fa-star-half-alt"></i>';
+              else ratingStars += '<i class="far fa-star"></i>';
             }
+            const badgeHTML = product.badge
+              ? `<div class="product-badge ${product.badge.class}">${product.badge.text}</div>`
+              : "";
+            const priceHTML = product.originalPrice
+              ? `<span class="price-original">Rp ${product.originalPrice.toLocaleString(
+                  "id-ID"
+                )}</span> Rp ${product.price.toLocaleString("id-ID")}`
+              : `Rp ${product.price.toLocaleString("id-ID")}`;
 
+            const productCardHTML = `
+    <div class="col product-item">
+        <div class="product-card-offer h-100">
+            <div class="product-image-wrapper">
+                <a href="product_detail.html?id=${product.id}"><img src="${
+              product.image
+            }" alt="${product.name}"/></a>
+                ${badgeHTML}
+                <div class="product-actions">
+                    <button 
+                        class="action-btn" 
+                        title="Tambah ke Wishlist"
+                        data-product-id="${product.id}"
+                        data-product-name="${product.name}"
+                    ><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <p class="product-category">${
+                  product.category.charAt(0).toUpperCase() +
+                  product.category.slice(1)
+                }</p>
+                <h3 class="product-title"><a href="product_detail.html?id=${
+                  product.id
+                }">${product.name}</a></h3>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="product-rating">${ratingStars}</div>
+                    <small class="product-sold ms-2">(${
+                      product.sold
+                    } terjual)</small>
+                </div>
+                <div class="product-price-action mt-auto">
+                    <p class="product-price">${priceHTML}</p>
+                    <button 
+                        class="btn-add-cart-icon" 
+                        title="Tambah ke Keranjang"
+                        data-product-id="${product.id}"
+                        data-product-name="${product.name}"
+                        data-product-price="${product.price}"
+                        data-product-image="${product.image}"
+                    ><i class="fas fa-shopping-cart"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+            productListContainer.innerHTML += productCardHTML;
+          });
+        }
 
-            // ===================================================================
-            // FUNGSI UNTUK FILTER
-            // ===================================================================
-            const categoryFilters = document.querySelectorAll('.category-filter');
-            const priceRange = document.getElementById('hargaRange');
-            const priceLabel = document.getElementById('hargaLabel');
-            const searchInput = document.getElementById('searchInput');
+        // ===================================================================
+        // FUNGSI UTAMA UNTUK FILTER & SORTING (TIDAK BERUBAH)
+        // ===================================================================
+        const categoryFilters = document.querySelectorAll(".category-filter");
+        const priceRange = document.getElementById("hargaRange");
+        const priceLabel = document.getElementById("hargaLabel");
+        const searchInput = document.getElementById("searchInput");
+        const sortOptions = document.querySelectorAll(".sort-option");
+        const sortButton = document.getElementById("sortButton");
 
-            function applyFilters() {
-                const selectedCategory = document.querySelector('.category-filter:checked').value;
-                const maxPrice = parseInt(priceRange.value);
-                const searchTerm = searchInput.value.toLowerCase();
+        function applyFiltersAndSort() {
+          const selectedCategories = Array.from(
+            document.querySelectorAll(".category-filter:checked")
+          ).map((cb) => cb.value);
+          const maxPrice = parseInt(priceRange.value);
+          const searchTerm = searchInput.value.toLowerCase();
 
-                let filteredProducts = allProducts.filter(product => {
-                    const categoryMatch = selectedCategory === 'semua' || product.category === selectedCategory;
-                    const priceMatch = product.price <= maxPrice;
-                    const searchMatch = product.name.toLowerCase().includes(searchTerm);
-                    return categoryMatch && priceMatch && searchMatch;
-                });
+          let filteredProducts = allProducts.filter((product) => {
+            const categoryMatch =
+              selectedCategories.length === 0 ||
+              selectedCategories.includes(product.category);
+            const priceMatch = product.price <= maxPrice;
+            const searchMatch = product.name.toLowerCase().includes(searchTerm);
+            return categoryMatch && priceMatch && searchMatch;
+          });
 
-                renderProducts(filteredProducts);
-            }
+          if (currentSort === "harga-asc") {
+            filteredProducts.sort((a, b) => a.price - b.price);
+          } else if (currentSort === "harga-desc") {
+            filteredProducts.sort((a, b) => b.price - a.price);
+          } else {
+            filteredProducts.sort(
+              (a, b) => new Date(b.date) - new Date(a.date)
+            );
+          }
 
-            function updatePriceLabel() {
-                const value = parseInt(priceRange.value);
-                priceLabel.textContent = `Maks: Rp ${value.toLocaleString('id-ID')}`;
-            }
+          renderProducts(filteredProducts);
+        }
 
-            // Event listener untuk semua filter
-            categoryFilters.forEach(filter => filter.addEventListener('change', applyFilters));
-            priceRange.addEventListener('input', () => {
-                updatePriceLabel();
-                applyFilters();
-            });
-            searchInput.addEventListener('input', applyFilters);
+        function updatePriceLabel() {
+          const value = parseInt(priceRange.value);
+          priceLabel.textContent = `Maks: Rp ${value.toLocaleString("id-ID")}`;
+        }
 
-            // ===================================================================
-            // INISIALISASI
-            // ===================================================================
-            renderProducts(allProducts); // Tampilkan semua produk saat halaman pertama kali dimuat
-            updatePriceLabel(); // Update label harga awal
+        categoryFilters.forEach((filter) =>
+          filter.addEventListener("change", applyFiltersAndSort)
+        );
+        priceRange.addEventListener("input", () => {
+          updatePriceLabel();
+          applyFiltersAndSort();
         });
+        searchInput.addEventListener("input", applyFiltersAndSort);
+        sortOptions.forEach((option) => {
+          option.addEventListener("click", function (e) {
+            e.preventDefault();
+            currentSort = this.dataset.sort;
+            sortButton.textContent = `Urutkan: ${this.textContent}`;
+            applyFiltersAndSort();
+          });
+        });
+
+        // ===================================================================
+        // [INI BAGIAN BARUNYA] INISIALISASI & CEK PARAMETER URL
+        // ===================================================================
+        function initializePage() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const categoryFromURL = urlParams.get("category");
+
+          updatePriceLabel(); // Selalu update label harga
+
+          if (categoryFromURL) {
+            const categoriesToSelect = categoryFromURL.split(",");
+
+            // Hapus semua centang dulu biar bersih
+            document.querySelectorAll(".category-filter").forEach((cb) => {
+              cb.checked = false;
+            });
+
+            // Centang checkbox yang sesuai dari parameter URL
+            categoriesToSelect.forEach((categoryValue) => {
+              const checkboxToSelect = document.querySelector(
+                `.category-filter[value="${categoryValue.trim()}"]`
+              );
+              if (checkboxToSelect) {
+                checkboxToSelect.checked = true;
+              }
+            });
+          }
+
+          // Terapkan filter & sort berdasarkan kondisi awal (baik ada parameter atau tidak)
+          applyFiltersAndSort();
+        }
+
+        // Panggil fungsi inisialisasi untuk memulai semuanya
+        initializePage();
+      });
     </script>
-</body>
+  </body>
 </html>
