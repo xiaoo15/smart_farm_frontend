@@ -13,8 +13,69 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
+    <style>
+      .customer-profile {
+        display: flex;
+        align-items: center;
+      }
+      .customer-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 1rem;
+      }
+      .customer-name {
+        font-weight: 500;
+      }
+      .customer-email {
+        font-size: 0.85rem;
+        color: #6c757d;
+      }
+      .role-admin {
+        background-color: #b30e0e;
+        color: white;
+      }
+      .role-customer {
+        background-color: #235347;
+        color: white;
+      }
+      .delete-btn {
+        background-color: #6c757d14;
+        transition: background-color 0.2s ease-in-out;
+      }
+      .delete-btn i {
+        transition: color 0.2s ease-in-out;
+      }
+      .delete-btn:hover {
+        background-color: #6c757d14;
+      }
+      .delete-btn:hover i {
+        color: #dc3545;
+      }
+
+      /* === ANIMASI BARU DITAMBAHKAN DI SINI === */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .content-header, .dashboard-section, .customer-row {
+        opacity: 0; /* Mulai dari transparan */
+      }
+
+      .fade-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+    </style>
   </head>
   <body>
     <div class="admin-wrapper">
@@ -23,63 +84,321 @@
       <div class="main-content">
         <header class="content-header">
           <div>
-            <h2>Customer Accounts</h2>
-            <p>Manage all registered users.</p>
+            <h2>Manajemen Customer</h2>
+            <p>Kelola semua akun pengguna yang terdaftar.</p>
           </div>
+          <a href="#" class="btn btn-primary-custom">
+            <i class="fas fa-plus me-2"></i>Tambah Customer
+          </a>
         </header>
 
         <div class="dashboard-section">
           <div class="table-responsive">
-            <table class="table align-middle">
+            <table class="table table-hover align-middle">
               <thead>
                 <tr>
-                  <th>User ID</th>
-                  <th>Username</th>
+                  <th class="ps-4">Customer</th>
+                  <th>Tanggal Bergabung</th>
+                  <th class="text-center">Total Pesanan</th>
                   <th class="text-center">Role</th>
-                  <th class="text-center">Action</th>
+                  <th class="text-center">Aksi</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td data-label="User ID" class="fw-bold">1</td>
-                  <td data-label="Username">admin</td>
+              <tbody id="customerTableBody">
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=admin"
+                        alt="Admin"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Admin Utama</div>
+                        <div class="customer-email">admin@smartfarm.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">12 Jan 2024</td>
+                  <td data-label="Total Pesanan" class="text-center">N/A</td>
                   <td data-label="Role" class="text-center">
                     <span class="role-badge role-admin">Admin</span>
                   </td>
                   <td data-label="Action" class="text-center">
-                    <a
-                      href="edit_customer.html"
-                      class="btn btn-sm btn-outline-secondary"
-                      >Edit</a
-                    >
-                  </td>
+                    </td>
                 </tr>
-                <tr>
-                  <td data-label="User ID" class="fw-bold">2</td>
-                  <td data-label="Username">revan_putra</td>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=revan_putra"
+                        alt="Revan Putra"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Revan Putra</div>
+                        <div class="customer-email">
+                          revan.putra@example.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">25 Feb 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    125
+                  </td>
                   <td data-label="Role" class="text-center">
                     <span class="role-badge role-customer">Customer</span>
                   </td>
                   <td data-label="Action" class="text-center">
-                    <a
-                      href="edit_customer.html"
-                      class="btn btn-sm btn-outline-secondary"
-                      >Edit</a
-                    >
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
-                <tr>
-                  <td data-label="User ID" class="fw-bold">3</td>
-                  <td data-label="Username">citra_lestari</td>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=citra_lestari"
+                        alt="Citra Lestari"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Citra Lestari</div>
+                        <div class="customer-email">
+                          citra.lestari@example.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">18 Mar 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    98
+                  </td>
                   <td data-label="Role" class="text-center">
                     <span class="role-badge role-customer">Customer</span>
                   </td>
                   <td data-label="Action" class="text-center">
-                    <a
-                      href="edit_customer.html"
-                      class="btn btn-sm btn-outline-secondary"
-                      >Edit</a
-                    >
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=budi_santoso"
+                        alt="Budi Santoso"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Budi Santoso</div>
+                        <div class="customer-email">budi.s@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">05 Apr 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    45
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=andi_budi"
+                        alt="Andi Budi"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Andi Budi</div>
+                        <div class="customer-email">andi.b@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">11 Mei 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    76
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=siska_amelia"
+                        alt="Siska Amelia"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Siska Amelia</div>
+                        <div class="customer-email">siska.a@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">19 Mei 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    54
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=arsya_aji"
+                        alt="Arsya Aji"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Arsya Aji</div>
+                        <div class="customer-email">arsya.aji@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">28 Jun 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    51
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=bagas_perkasa"
+                        alt="Bagas Perkasa"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Bagas Perkasa</div>
+                        <div class="customer-email">bagas.p@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">02 Jul 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    33
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=dewi_anggraini"
+                        alt="Dewi Anggraini"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Dewi Anggraini</div>
+                        <div class="customer-email">dewi.a@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">15 Jul 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    88
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=dewi_lestari"
+                        alt="Dewi Lestari"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Dewi Lestari</div>
+                        <div class="customer-email">dewi.l@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">21 Agu 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    62
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="customer-row">
+                  <td data-label="Customer">
+                    <div class="customer-profile">
+                      <img
+                        src="https://i.pravatar.cc/150?u=rina_wijaya"
+                        alt="Rina Wijaya"
+                        class="customer-avatar"
+                      />
+                      <div>
+                        <div class="customer-name">Rina Wijaya</div>
+                        <div class="customer-email">rina.w@example.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Tanggal Bergabung">03 Sep 2024</td>
+                  <td data-label="Total Pesanan" class="text-center fw-bold">
+                    41
+                  </td>
+                  <td data-label="Role" class="text-center">
+                    <span class="role-badge role-customer">Customer</span>
+                  </td>
+                  <td data-label="Action" class="text-center">
+                    <button class="btn btn-icon btn-sm delete-btn">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -89,8 +408,82 @@
       </div>
     </div>
 
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Konfirmasi Hapus</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Apakah Anda yakin ingin menghapus customer
+              <strong id="customerNameToDelete"></strong>? Tindakan ini tidak
+              dapat dibatalkan.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Batal
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+              Ya, Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/admin_script.js"></script>
+    <script>
+      $(document).ready(function () {
+        const deleteModal = new bootstrap.Modal(
+          document.getElementById("deleteConfirmModal")
+        );
+        let rowToDelete = null;
+
+        $("#customerTableBody").on("click", ".delete-btn", function () {
+          rowToDelete = $(this).closest("tr");
+          const customerName = rowToDelete.find(".customer-name").text();
+          $("#customerNameToDelete").text(customerName);
+          deleteModal.show();
+        });
+
+        $("#confirmDeleteBtn").on("click", function () {
+          if (rowToDelete) {
+            rowToDelete.fadeOut(400, function () {
+              $(this).remove();
+            });
+            deleteModal.hide();
+            rowToDelete = null;
+          }
+        });
+
+        // --- SCRIPT BARU UNTUK ANIMASI HALAMAN ---
+        // Animasikan elemen utama terlebih dahulu
+        $('.content-header').addClass('fade-in');
+        
+        setTimeout(() => {
+          $('.dashboard-section').addClass('fade-in');
+        }, 150); // Jeda sebelum tabel muncul
+
+        // Animasikan setiap baris tabel secara berurutan
+        $('.customer-row').each(function(index) {
+          setTimeout(() => {
+            $(this).addClass('fade-in');
+          }, 300 + (100 * index)); // Jeda 300ms + 100ms untuk setiap baris
+        });
+      });
+    </script>
   </body>
 </html>

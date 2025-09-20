@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF--8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - My Products</title>
-    <!-- Bootstrap, FontAwesome, Google Fonts -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Custom global style (optional) -->
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
 
     <style>
@@ -202,10 +200,10 @@
       }
 
       .btn-primary-custom:hover {
-  background-color: #218838;
-  border-color: #1e7e34;
-  color: white;
-}
+        background-color: #297864;
+        border-color: #297864;
+        color: white;
+      }
 
       .product-name {
         font-weight: 500;
@@ -244,38 +242,12 @@
         font-style: italic;
       }
 
-      .toast-container {
-        z-index: 1050;
-      }
-
-      .toast {
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-lg);
-        border: none;
-      }
-
-      .toast-header {
-        background-color: var(--card-bg);
-        border-bottom: 1px solid #e2e8f0;
-        padding: 12px 16px;
-        border-top-left-radius: var(--border-radius);
-        border-top-right-radius: var(--border-radius);
-      }
-
-      .toast-body {
-        padding: 16px;
-        background-color: var(--card-bg);
-        border-bottom-left-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
-      }
-
       .action-buttons {
         display: flex;
         gap: 8px;
         justify-content: center;
       }
 
-      /* Category badges */
       .category-badge {
         display: inline-block;
         padding: 4px 8px;
@@ -299,7 +271,6 @@
         color: var(--warning);
       }
 
-      /* Price styling */
       .product-img {
         width: 56px;
         height: 56px;
@@ -419,6 +390,43 @@
           font-size: 0.8rem;
         }
       }
+
+      .delete-btn {
+        background-color: #6c757d14;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .delete-btn i {
+        transition: color 0.2s ease-in-out;
+      }
+
+      .delete-btn:hover {
+        background-color: #6c757d14;
+      }
+
+      .delete-btn:hover i {
+        color: #dc3545;
+      }
+      
+      /* === ANIMASI BARU DITAMBAHKAN DI SINI === */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .product-row, .dashboard-section, .content-header {
+        opacity: 0; /* Mulai dari transparan */
+      }
+
+      .fade-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
     </style>
   </head>
   <body>
@@ -428,7 +436,7 @@
       <div class="main-content">
         <header class="content-header">
           <div>
-            <h2>My Products</h2>
+            <h2>Master Products</h2>
             <p>Manage your smart farm products here.</p>
           </div>
         </header>
@@ -470,11 +478,10 @@
                 </tr>
               </thead>
               <tbody id="productTableBody">
-                <!-- Produk contoh, ganti dengan data dinamis jika perlu -->
-                <tr data-category="plant">
+                <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
                     <img
-                      src="https://i.pravatar.cc/150?img=1"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQpxICck1kyAHXchQT7oteq1cY-ODKGYTlQA&s"
                       alt="Caladium Red Star"
                       class="product-img"
                     />
@@ -484,25 +491,25 @@
                     <div class="product-name">Caladium Red Star</div>
                     <div class="category-badge category-plant">Plant</div>
                   </td>
-                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Satuan">120 Pcs</td>
                   <td data-label="Harga" class="product-price">Rp 75.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
                       <a
-                        href="update.html"
-                        class="btn btn-outline-secondary"
-                        ><i class="fas fa-edit"></i
+                        href="/admin/detailproduct/product_Caladium Red Star.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
                       ></a>
-                      <button class="btn btn-outline-danger">
-                        <i class="fas fa-trash"></i>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
-                <tr data-category="vegetables">
+                <tr data-category="vegetables" class="product-row">
                   <td data-label="Gambar">
                     <img
-                      src="https://i.pravatar.cc/150?img=2"
+                      src="https://wp.plantsnap.com/wp-content/uploads/2019/09/peace-lily-in-pot.jpg"
                       alt="Peace Lily"
                       class="product-img"
                     />
@@ -514,25 +521,25 @@
                       Vegetables
                     </div>
                   </td>
-                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Satuan">3 Pcs</td>
                   <td data-label="Harga" class="product-price">Rp 90.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
                       <a
-                        href="/pages/admin/update.html"
-                        class="btn btn-outline-secondary"
-                        ><i class="fas fa-edit"></i
+                        href="/admin/detailproduct/product_Peace Lily.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
                       ></a>
-                      <button class="btn btn-outline-danger">
-                        <i class="fas fa-trash"></i>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
-                <tr data-category="seed">
+                <tr data-category="seed" class="product-row">
                   <td data-label="Gambar">
                     <img
-                      src="https://i.pravatar.cc/150?img=3"
+                      src="https://bibitonline.com/wp-content/uploads/Tanaman-Aglaonema-Kochin.jpg"
                       alt="Bibit Aglaonema"
                       class="product-img"
                     />
@@ -542,25 +549,25 @@
                     <div class="product-name">Bibit Aglaonema</div>
                     <div class="category-badge category-seed">Seed</div>
                   </td>
-                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Satuan">0 Pcs</td>
                   <td data-label="Harga" class="product-price">Rp 120.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
                       <a
-                        href="/pages/admin/update.html"
-                        class="btn btn-outline-secondary"
-                        ><i class="fas fa-edit"></i
+                        href="/admin/detailproduct/product_Bibit Aglaonema.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
                       ></a>
-                      <button class="btn btn-outline-danger">
-                        <i class="fas fa-trash"></i>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
-                <tr data-category="plant">
+                <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
                     <img
-                      src="https://i.pravatar.cc/150?img=4"
+                      src="https://www.studioplant.com/media/catalog/product/cache/5f475ed5c56894ef7a51968da51e8dc7/m/o/monstera_-_4.jpg"
                       alt="Monstera Deliciosa"
                       class="product-img"
                     />
@@ -570,17 +577,17 @@
                     <div class="product-name">Monstera Deliciosa</div>
                     <div class="category-badge category-plant">Plant</div>
                   </td>
-                  <td data-label="Satuan">Pcs</td>
+                  <td data-label="Satuan">100 Pcs</td>
                   <td data-label="Harga" class="product-price">Rp 150.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
                       <a
-                        href="/pages/admin/update.html"
-                        class="btn btn-outline-secondary"
-                        ><i class="fas fa-edit"></i
+                        href="/admin/detailproduct/product_Monstera Deliciosa.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
                       ></a>
-                      <button class="btn btn-outline-danger">
-                        <i class="fas fa-trash"></i>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
                       </button>
                     </div>
                   </td>
@@ -598,120 +605,87 @@
         </div>
       </div>
     </div>
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-      <div
-        id="notificationToast"
-        class="toast"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div class="toast-header">
-          <i class="fas fa-check-circle text-success me-2"></i>
-          <strong class="me-auto">Sukses!</strong>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="toast-body">Aksi berhasil dilakukan.</div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        YAKIN mau hapus produk <strong id="productNameToDelete"></strong>? Aksi ini tidak bisa dibatalkan!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Ya, Hapus</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+    
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Sidebar loader & logic -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/admin_script.js"></script>
-    <script>
-  $(document).ready(function () {
-    // --- Inisialisasi Modal dan Toast ---
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
-    const notificationToast = new bootstrap.Toast(document.getElementById('notificationToast'));
-    let productRowToDelete = null;
-
-    // --- Fungsi Filter Produk (Tidak Berubah) ---
-    function filterProducts() {
-      var searchText = $("#searchInput").val().toLowerCase();
-      var category = $("#categoryFilter").val();
-      var found = 0;
-      $("#productTableBody tr").each(function () {
-        var productName = $(this).find(".product-name").text().toLowerCase();
-        var productCategory = $(this).data("category");
-        var searchMatch = productName.includes(searchText);
-        var categoryMatch = category === "all" || productCategory === category;
-        if (searchMatch && categoryMatch) {
-          $(this).show();
-          found++;
-        } else {
-          $(this).hide();
-        }
-      });
-      if (found === 0) {
-        $("#noResult").show();
-      } else {
-        $("#noResult").hide();
-      }
-    }
-    $("#searchInput").on("keyup", filterProducts);
-    $("#categoryFilter").on("change", filterProducts);
-
-    // --- LOGIKA BARU UNTUK TOMBOL HAPUS DENGAN MODAL ---
     
-    // 1. Saat tombol hapus di tabel diklik
-    $('#productTableBody').on('click', '.btn-outline-danger', function() {
-        // Simpan baris (tr) yang akan dihapus
-        productRowToDelete = $(this).closest('tr');
-        
-        // Ambil nama produk dari baris tersebut
-        const productName = productRowToDelete.find('.product-name').text();
-        
-        // Masukkan nama produk ke dalam modal
-        $('#productNameToDelete').text(productName);
-        
-        // Tampilkan modal
-        deleteModal.show();
-    });
-
-    // 2. Saat tombol "Ya, Hapus" di dalam modal diklik
-    $('#confirmDeleteBtn').on('click', function() {
-        if (productRowToDelete) {
-            // Sembunyikan baris produk dengan efek fade
-            productRowToDelete.fadeOut(500, function() {
-                $(this).remove(); // Hapus baris dari tabel
-                filterProducts(); // Perbarui filter jika diperlukan
-                
-                // Tampilkan notifikasi toast
-                $(".toast-body").text("Produk berhasil dihapus.");
-                notificationToast.show();
-            });
-            
-            // Sembunyikan modal
-            deleteModal.hide();
-            productRowToDelete = null; // Reset variabel
+    <script>
+      $(document).ready(function () {
+        // --- Fungsi Filter Produk (Tidak Berubah) ---
+        function filterProducts() {
+          var searchText = $("#searchInput").val().toLowerCase();
+          var category = $("#categoryFilter").val();
+          var found = 0;
+          $("#productTableBody tr").each(function () {
+            var productName = $(this).find(".product-name").text().toLowerCase();
+            var productCategory = $(this).data("category");
+            var searchMatch = productName.includes(searchText);
+            var categoryMatch = category === "all" || productCategory === category;
+            if (searchMatch && categoryMatch) {
+              $(this).show();
+              found++;
+            } else {
+              $(this).hide();
+            }
+          });
+          if (found === 0) {
+            $("#noResult").show();
+          } else {
+            $("#noResult").hide();
+          }
         }
-    });
+        $("#searchInput").on("keyup", filterProducts);
+        $("#categoryFilter").on("change", filterProducts);
 
-  });
-</script>
+        // --- Logika Tombol Hapus BARU dengan SweetAlert2 ---
+        $('#productTableBody').on('click', '.delete-btn', function() {
+            const productRowToDelete = $(this).closest('tr');
+            const productName = productRowToDelete.find('.product-name').text();
+
+            Swal.fire({
+                title: 'Anda yakin?',
+                html: `Yakin mau hapus produk <strong>${productName}</strong>?`, // Menampilkan nama produk
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    productRowToDelete.fadeOut(500, function() {
+                        $(this).remove();
+                        filterProducts(); // Update list jika ada "No Result"
+                    });
+
+                    Swal.fire({
+                        title: 'Dihapus!',
+                        text: `Produk ${productName} berhasil dihapus.`,
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'btn btn-primary-custom' // Class hijau Anda
+                        },
+                        buttonsStyling: false
+                    });
+                }
+            });
+        });
+
+        // --- Animasi Halaman Saat Dimuat (Tidak Berubah) ---
+        $('.content-header').addClass('fade-in');
+        
+        setTimeout(() => {
+          $('.dashboard-section').addClass('fade-in');
+        }, 150);
+
+        $('.product-row').each(function(index) {
+          setTimeout(() => {
+            $(this).addClass('fade-in');
+          }, 300 + (100 * index));
+        });
+      });
+    </script>
   </body>
 </html>
