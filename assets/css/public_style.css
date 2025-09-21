@@ -3752,3 +3752,63 @@ p.product-price {
     transform: scale(1.1); /* Efek zoom pas di-hover */
     filter: brightness(0.9); /* Sedikit gelap pas di-hover */
 }
+
+/* =================================================================== */
+/* CSS UNTUK SECTION BLOG */
+/* =================================================================== */
+
+.blog-card {
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color) !important;
+}
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow) !important;
+}
+.blog-card .card-title a {
+    color: var(--dark-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.blog-card .card-title a:hover {
+    color: var(--primary);
+}
+.blog-card .img-fluid {
+    object-fit: cover;
+}
+
+/* Sidebar */
+.blog-sidebar .widget {
+    margin-bottom: 2rem;
+}
+.blog-sidebar .widget-title {
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+.blog-sidebar ul {
+    padding-left: 0;
+}
+.blog-sidebar ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+.blog-sidebar ul li:last-child {
+    border-bottom: none;
+}
+.blog-sidebar ul li a {
+    text-decoration: none;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+.blog-sidebar ul li a:hover {
+    color: var(--primary);
+}
+
+/* Halaman Detail Blog */
+.blog-post-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+.social-share .btn {
+    margin: 0 0.5rem;
+}

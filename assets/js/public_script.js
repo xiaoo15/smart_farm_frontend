@@ -3,13 +3,12 @@
 /* =================================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  const preloader = document.getElementById('preloader');
+  const preloader = document.getElementById("preloader");
   if (preloader) {
-    window.addEventListener('load', function() {
-      preloader.classList.add('loaded');
+    window.addEventListener("load", function () {
+      preloader.classList.add("loaded");
       // Hapus elemen dari DOM setelah transisi selesai
-      preloader.addEventListener('transitionend', function() {
+      preloader.addEventListener("transitionend", function () {
         preloader.remove();
       });
     });
@@ -52,12 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // NAVBAR FUNCTIONALITY */
   // =================================================================== */
 
-  /* assets/js/public_script.js */
-
   function initializeNavbar() {
     // Definisi elemen-elemen penting
     const mobileMenuToggle = document.querySelector(".navbar-toggler");
     const mobileMenu = document.querySelector(".navbar-collapse");
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
 
     // ===================================================================
     // [1] LOGIKA BUKA/TUTUP MENU DARI TOMBOL HAMBURGER
@@ -71,9 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ===================================================================
-    // [2] [PERBAIKAN] LOGIKA MENUTUP MENU SAAT LINK DI DALAMNYA DI-KLIK
+    // [2] LOGIKA MENUTUP MENU SAAT LINK DI DALAMNYA DI-KLIK
     // ===================================================================
-    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
     navLinks.forEach(function (link) {
       link.addEventListener("click", function () {
         if (mobileMenu.classList.contains("show")) {
@@ -83,10 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ===================================================================
-    // [3] [BARU] LOGIKA MENUTUP MENU SAAT KLIK DI LUAR AREA NAVBAR
+    // [3] LOGIKA MENUTUP MENU SAAT KLIK DI LUAR AREA NAVBAR
     // ===================================================================
     document.addEventListener("click", function (event) {
-      // Cek apakah menu mobile ada, sedang terbuka, dan kliknya terjadi di LUAR area menu & LUAR tombol hamburger
       if (mobileMenu && mobileMenu.classList.contains("show")) {
         const isClickInsideNavbar = mobileMenu.contains(event.target);
         const isClickOnToggler = mobileMenuToggle.contains(event.target);
@@ -94,6 +90,27 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!isClickInsideNavbar && !isClickOnToggler) {
           mobileMenu.classList.remove("show");
         }
+      }
+    });
+
+    // ===================================================================
+    // [4] LOGIKA UNTUK MENANDAI LINK NAVBAR YANG AKTIF (YANG HILANG TADI)
+    // ===================================================================
+    const currentPage = window.location.pathname.split("/").pop(); // Mengambil nama file, misal: "products.html"
+
+    navLinks.forEach((link) => {
+      const linkPage = link.getAttribute("href").split("/").pop();
+
+      // Hapus dulu semua class active yang mungkin ada
+      link.classList.remove("active");
+
+      // Jika nama file di link sama dengan nama file halaman saat ini, tambahkan class active
+      // Pengecualian untuk halaman utama (index.html atau "")
+      if (
+        linkPage === currentPage ||
+        (currentPage === "" && linkPage === "index.html")
+      ) {
+        link.classList.add("active");
       }
     });
 
@@ -681,29 +698,47 @@ function addToCart(productId, productName, price, image, buttonElement) {
 }
 
 /* =================================================================== */
-/* PRODUCT CARD INTERACTIONS (ADD TO CART & WISHLIST) */
+/* PRODUCT CARD INTERACTIONS (ADD TO CART & WISHLIST) - VERSI UPGRADE */
 /* =================================================================== */
 
-// FUNGSI BARU UNTUK WISHLIST
-function addToWishlist(productId, productName, buttonElement) {
-    // Untuk sekarang, fungsinya cuma nampilin notif.
-    // Nanti bisa dikembangin buat nyimpen data wishlist di localStorage.
-    console.log(`Produk ${productName} (ID: ${productId}) ditambahkan ke wishlist.`);
-    
-    showNotification(`${productName} masuk ke wishlist!`, 'success');
+// FUNGSI BARU UNTUK TOGGLE WISHLIST (TAMBAH/HAPUS)
+// Buka file: assets/js/public_script.js
 
-    // Animasi tombol wishlist (opsional, tapi keren)
-    if (buttonElement) {
-        const icon = buttonElement.querySelector('i');
-        if (icon) {
-            icon.classList.remove('far'); // Ikon hati kosong
-            icon.classList.add('fas');   // Ikon hati penuh
-            buttonElement.style.color = '#dc3545'; // Warna jadi merah
-        }
+// GANTI FUNGSI LAMA DENGAN VERSI BARU INI
+function toggleWishlist(productId, productName, buttonElement) {
+  // Ambil data wishlist dari localStorage, atau buat array kosong jika belum ada
+  let wishlist = JSON.parse(localStorage.getItem("smartfarm_wishlist")) || [];
+  const icon = buttonElement.querySelector("i");
+
+  // Cek apakah produk SUDAH ada di wishlist
+  const productIndex = wishlist.indexOf(productId);
+
+  if (productIndex > -1) {
+    // --- LOGIKA HAPUS DARI WISHLIST ---
+    wishlist.splice(productIndex, 1); // Hapus ID produk dari array
+
+    if (icon) {
+      icon.classList.remove("fas"); // Hapus ikon hati penuh
+      icon.classList.add("far"); // Tambah ikon hati kosong
+      buttonElement.style.color = ""; // Kembalikan warna default
     }
-}
+    showNotification(`${productName} dihapus dari wishlist`, "success");
+  } else {
+    // --- LOGIKA TAMBAH KE WISHLIST ---
+    wishlist.push(productId); // Tambahkan ID produk ke array
 
-// FUNGSI LAMA UNTUK KERANJANG (tetap sama, karena notif sudah ada)
+    if (icon) {
+      icon.classList.remove("far"); // Hapus ikon hati kosong
+      icon.classList.add("fas"); // Tambah ikon hati penuh
+      buttonElement.style.color = "#dc3545"; // Warna jadi merah
+    }
+    showNotification(`${productName} masuk ke wishlist!`, "success");
+  }
+
+  // Simpan kembali array wishlist yang sudah diperbarui ke localStorage
+  localStorage.setItem("smartfarm_wishlist", JSON.stringify(wishlist));
+}
+// FUNGSI LAMA UNTUK KERANJANG (tetap sama)
 function addToCart(productId, productName, price, image, buttonElement) {
   try {
     let cart = JSON.parse(localStorage.getItem("smartfarm_cart") || "[]");
@@ -711,21 +746,27 @@ function addToCart(productId, productName, price, image, buttonElement) {
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      cart.push({ id: productId, name: productName, price: price, image: image, quantity: 1 });
+      cart.push({
+        id: productId,
+        name: productName,
+        price: price,
+        image: image,
+        quantity: 1,
+      });
     }
     localStorage.setItem("smartfarm_cart", JSON.stringify(cart));
     updateCartBadge();
-    showNotification(`${productName} ditambahkan ke keranjang!`, "success");
+    showNotification(`${productName} ditambahkan!`, "success");
 
     if (buttonElement) {
-        const originalIcon = buttonElement.innerHTML;
-        buttonElement.classList.add('added');
-        buttonElement.disabled = true;
-        setTimeout(() => {
-            buttonElement.classList.remove('added');
-            buttonElement.innerHTML = originalIcon;
-            buttonElement.disabled = false;
-        }, 1500);
+      const originalIcon = buttonElement.innerHTML;
+      buttonElement.classList.add("added");
+      buttonElement.disabled = true;
+      setTimeout(() => {
+        buttonElement.classList.remove("added");
+        buttonElement.innerHTML = originalIcon;
+        buttonElement.disabled = false;
+      }, 1500);
     }
   } catch (error) {
     console.error("Error adding to cart:", error);
@@ -733,36 +774,28 @@ function addToCart(productId, productName, price, image, buttonElement) {
   }
 }
 
-
 // EVENT LISTENER BARU YANG LEBIH PINTAR
-document.addEventListener('click', function(e) {
-    // Cek apakah yang diklik itu tombol keranjang
-    const cartButton = e.target.closest('.btn-add-cart-icon');
-    if (cartButton) {
-        e.preventDefault();
-        e.stopPropagation();
-        const productId = cartButton.dataset.productId;
-        const productName = cartButton.dataset.productName;
-        const productPrice = cartButton.dataset.productPrice;
-        const productImage = cartButton.dataset.productImage;
-
-        if (productId && productName) {
-            addToCart(productId, productName, productPrice, productImage, cartButton);
-        }
-        return; // Hentikan proses setelah aksi keranjang
+document.addEventListener("click", function (e) {
+  const cartButton = e.target.closest(".btn-add-cart-icon");
+  if (cartButton) {
+    e.preventDefault();
+    e.stopPropagation();
+    const { productId, productName, productPrice, productImage } =
+      cartButton.dataset;
+    if (productId && productName) {
+      addToCart(productId, productName, productPrice, productImage, cartButton);
     }
+    return;
+  }
 
-    // Cek apakah yang diklik itu tombol wishlist
-    const wishlistButton = e.target.closest('.action-btn');
-    if (wishlistButton && wishlistButton.querySelector('.fa-heart')) {
-        e.preventDefault();
-        e.stopPropagation();
-        const productId = wishlistButton.dataset.productId;
-        const productName = wishlistButton.dataset.productName;
-
-        if (productId && productName) {
-            addToWishlist(productId, productName, wishlistButton);
-        }
-        return; // Hentikan proses setelah aksi wishlist
+  const wishlistButton = e.target.closest(".action-btn");
+  if (wishlistButton && wishlistButton.querySelector(".fa-heart")) {
+    e.preventDefault();
+    e.stopPropagation();
+    const { productId, productName } = wishlistButton.dataset;
+    if (productId && productName) {
+      toggleWishlist(productId, productName, wishlistButton);
     }
+    return;
+  }
 });
