@@ -12,6 +12,19 @@
 </head>
 <body>
 <style>
+    /* --- STYLE BARU UNTUK BORDER --- */
+    .card-box {
+        border: 1px solid #235347;
+    }
+    hr {
+        border-top: 1px solid #235347;
+        opacity: 0.3;
+    }
+    .timeline::before {
+        background-color: #235347;
+    }
+    /* --- END STYLE BARU --- */
+
     @media (max-width: 991px) {
         .content-header.d-flex { flex-direction: column; align-items: flex-start !important; gap: 16px; }
         .content-header .btn { width: 100%; margin-bottom: 8px; }
@@ -27,6 +40,34 @@
         .card-box { padding: 12px !important; }
         .timeline-item { padding-left: 0.5rem; }
     }
+
+    /* --- ANIMASI FADE IN --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-content > * {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+/* --- Memberi jeda (delay) agar animasi muncul berurutan --- */
+.main-content > .content-header {
+    animation-delay: 0.1s;
+}
+.main-content > .row > .col-lg-8 {
+    animation-delay: 0.3s;
+}
+.main-content > .row > .col-lg-4 {
+    animation-delay: 0.5s;
+}
 </style>
 <div class="admin-wrapper">
     <div id="sidebar-container"></div>
@@ -37,19 +78,19 @@
                 <p>Order from Budi Santoso on 4 September 2025</p>
             </div>
             <div>
-                <a href="../orders.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Back to Orders</a>
+                <a href="../orders.html" class="btn btn-outline-danger"><i class="fas fa-arrow-left me-2"></i>Back to Orders</a>
                 <button class="btn btn-primary-custom"><i class="fas fa-print me-2"></i>Print Invoice</button>
             </div>
         </header>
         <div class="row g-4">
             <div class="col-lg-8">
                 <div class="card-box">
-                    <h5>Order Items (2)</h5>
+                    <h5>Order Items (1)</h5>
                     <table class="table align-middle">
                         <tbody>
                             <tr>
                                 <td><img src="http://i.pravatar.cc/400?img=48" width="50" class="rounded"></td>
-                                <td><strong>Peace Lily</strong> <br> <small class="text-muted">SKU: P008</small></td>
+                                <td><strong>Monstera Deliciosa</strong> <br> <small class="text-muted">SKU: P008</small></td>
                                 <td>Rp 120.000</td>
                                 <td>x 1</td>
                                 <td class="text-end fw-bold">Rp 120.000</td>

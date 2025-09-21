@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Detail Produk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/admin_style.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+        .main-content {
+            padding: 2rem;
+        }
+        .breadcrumb-item a {
+            text-decoration: none;
+            color: #39635b;
+        }
+        .breadcrumb-item a:hover {
+            text-decoration: none;
+            color: #3f8679;
+        }
+        .product-gallery .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+        }
+        .thumbnail-list {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .thumbnail-list img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+        .thumbnail-list img.active,
+        .thumbnail-list img:hover {
+            border-color: #39635b;
+        }
+        .product-details .product-title {
+            font-weight: 700;
+        }
+        .product-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #39635b; /* Warna hijau dari tema */
+        }
+        .info-section {
+            margin-top: 1.5rem;
+        }
+        .info-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .info-value {
+            font-weight: 500;
+        }
+
+        /* === ANIMASI BARU DITAMBAHKAN DI SINI === */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-welcome, .breadcrumb, .product-gallery, .product-details {
+            opacity: 0; /* Mulai dari transparan */
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar-container"></div>
+      <div id="overlay"></div>
+    <div class="main-content">
+        <div class="header-welcome">
+            <h2>Detail Product</h2>
+            <p>Click on any item in the list to view its full product details.</p>
+        </div>
+        <header class="mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../products.html">Master Product</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Caladium Red Star</li>
+                </ol>
+            </nav>
+            
+        </header>   
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm product-gallery">
+                    <div class="card-body">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQpxICck1kyAHXchQT7oteq1cY-ODKGYTlQA&s" alt="Produk Utama" class="main-image" id="mainProductImage">
+                        <div class="thumbnail-list" id="thumbnailGallery">
+                            <img src="https://tofgardens.in/wp-content/uploads/2024/08/white-vine-star.webp" alt="Thumbnail 1" class="active">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vn9ubv3BHMNSHQ3QgtpgnGKiVOepkKGRVYhOHxARQOMUV7jJzRnEY4rQatmP8yJn3Kg&usqp=CAU" alt="Thumbnail 2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUBl-QCHgsRvq1tjCWJVJS4hH1WkS-TgOA36Sc16Yo-eLLeh_m67WbCZ20d2WbVb9R8IY&usqp=CAU" alt="Thumbnail 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm product-details">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <h1 class="h3 product-title mb-0">Caladium Red Star</h1>
+                            <span class="badge bg-success-subtle text-success-emphasis rounded-pill ms-3">Aktif</span>
+                        </div>
+                        <p class="text-muted mb-3">SKU:P001</p>
+
+                        <p class="product-price mb-4">Rp 75.000</p>
+
+                        <div class="info-section">
+                            <div class="row">
+                                <div class="col-6 col-md-4">
+                                    <div class="info-label">Kategori</div>
+                                    <div class="info-value">Plant</div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="info-label">Stok Tersedia</div>
+                                    <div class="info-value">120 pcs</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="info-section">
+                            <h5 class="h6 mb-2">Deskripsi Produk</h5>
+                            <p class="text-muted">Caladium Red Star adalah salah satu tanaman hias tropis yang paling memukau, terkenal karena daunnya yang memiliki warna merah menyala dan corak yang dramatis. Tanaman ini menjadi primadona bagi para kolektor dan pecinta tanaman karena kemampuannya menghadirkan nuansa eksotis dan semarak ke dalam ruangan maupun taman.</p>
+                        </div>
+                        
+                        <hr class="my-4">
+
+                        <div class="info-section">
+                            
+                            <div class="d-flex gap-2">
+                                <a href="../updateproduct.html/update_CaladiumRedStar.html" class="btn btn-primary-custom"><i class="fas fa-edit me-2"></i>Edit Produk</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/admin_script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- LOGIKA GALERI GAMBAR ---
+            const mainImage = document.getElementById('mainProductImage');
+            const thumbnails = document.querySelectorAll('#thumbnailGallery img');
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    mainImage.src = this.src;
+                });
+            });
+
+            // --- SCRIPT BARU UNTUK ANIMASI HALAMAN ---
+            const header = document.querySelector('.header-welcome');
+            const breadcrumb = document.querySelector('.breadcrumb');
+            const gallery = document.querySelector('.product-gallery');
+            const details = document.querySelector('.product-details');
+            
+            if(header) header.classList.add('fade-in');
+
+            setTimeout(() => { if(breadcrumb) breadcrumb.classList.add('fade-in'); }, 100);
+            setTimeout(() => { if(gallery) gallery.classList.add('fade-in'); }, 200);
+            setTimeout(() => { if(details) details.classList.add('fade-in'); }, 300);
+        });
+    </script>
+
+</body>
+</html>

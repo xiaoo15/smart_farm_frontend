@@ -21,7 +21,7 @@
 
     <style>
       .dropdown-item p {
-        white-space: normal; /* Memastikan teks panjang di notifikasi bisa wrap */
+        white-space: normal;
       }
       .clickable-row {
         cursor: pointer;
@@ -30,8 +30,45 @@
         transition: background-color 0.2s ease-in-out;
         cursor: pointer;
       }
-      .top-customer-item:hover {
+      .top-customer-item:hover,
+      .clickable-row:hover {
         background-color: #f8f9fa;
+      }
+      .stat-card-modern {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+      .stat-card-modern:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+      }
+      .stat-card-link {
+        text-decoration: none;
+        color: inherit;
+      }
+      .stat-card-link:hover {
+        color: inherit;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .header-actions > .form-control,
+      .header-actions > .dropdown {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      .header-actions > .form-control {
+        animation-delay: 0.2s;
+      }
+      .header-actions > .dropdown {
+        animation-delay: 0.4s;
+        z-index: 10;
       }
     </style>
   </head>
@@ -50,7 +87,8 @@
             <input
               type="text"
               class="form-control me-2"
-              placeholder="Search..."
+              placeholder="Cari di dashboard..."
+              id="searchInput"
             />
             <div class="dropdown">
               <button
@@ -73,21 +111,19 @@
                 aria-labelledby="notificationDropdown"
                 style="min-width: 300px; max-height: 400px; overflow-y: auto"
               >
-                <li>
-                  <h6 class="dropdown-header">Notifications</h6>
-                </li>
+                <li><h6 class="dropdown-header">Notifications</h6></li>
                 <li>
                   <a
                     class="dropdown-item rounded d-flex align-items-start"
-                    href="#"
+                    href="order/order_detailBudiSantoso.html"
                   >
                     <i class="fas fa-shopping-cart text-success me-3 mt-1"></i>
                     <div>
-                      <strong>Pesanan Baru #876369</strong>
+                      <strong>Pesanan Baru #876371</strong>
                       <p class="mb-0 text-muted small">
-                        dari Arsya Aji telah diterima.
+                        dari Budi Santoso telah diterima.
                       </p>
-                      <small class="text-muted">5 menit yang lalu</small>
+                      <small class="text-muted">3 menit yang lalu</small>
                     </div>
                   </a>
                 </li>
@@ -95,13 +131,13 @@
                 <li>
                   <a
                     class="dropdown-item rounded d-flex align-items-start"
-                    href="#"
+                    href="detailproduct/product_Peace Lily.html"
                   >
                     <i class="fas fa-box-open text-warning me-3 mt-1"></i>
                     <div>
                       <strong>Stok Rendah</strong>
                       <p class="mb-0 text-muted small">
-                        Bibit Cabai Rawit Unggul tersisa 5 pcs.
+                        Peace Lily tersisa 3 pcs.
                       </p>
                       <small class="text-muted">1 jam yang lalu</small>
                     </div>
@@ -111,15 +147,17 @@
                 <li>
                   <a
                     class="dropdown-item rounded d-flex align-items-start"
-                    href="#"
+                    href="detailproduct/product_Bibit Aglaonema.html"
                   >
-                    <i class="fas fa-user-plus text-primary me-3 mt-1"></i>
+                    <i
+                      class="fas fa-triangle-exclamation text-danger me-3 mt-1"
+                    ></i>
                     <div>
                       <strong>Customer Baru</strong>
                       <p class="mb-0 text-muted small">
-                        Budi Santoso baru saja mendaftar.
+                        Bibit Aglaonema telah habis.segera restock.
                       </p>
-                      <small class="text-muted">Kemarin</small>
+                      <small class="text-muted">3 hari yang lalu</small>
                     </div>
                   </a>
                 </li>
@@ -127,9 +165,10 @@
                 <li>
                   <a
                     class="dropdown-item text-center text-primary small"
-                    href="#"
-                    >Lihat semua notifikasi</a
+                    href="notif.html"
                   >
+                    Lihat semua notifikasi
+                  </a>
                 </li>
               </ul>
             </div>
@@ -139,88 +178,105 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper primary-bg">
-                    <i class="fas fa-dollar-sign"></i>
+              <a
+                href="analytic.html#revenue-filter-group"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper primary-bg">
+                      <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <span class="badge badge-success-light"
+                      ><i class="fas fa-arrow-up"></i> 20%</span
+                    >
                   </div>
-                  <span class="badge badge-success-light">
-                    <i class="fas fa-arrow-up"></i> 20%
-                  </span>
+                  <p class="card-title-modern">Total Revenue</p>
+                  <h3 class="card-value-modern">$26,35,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Revenue</p>
-                <h3 class="card-value-modern">$26,35,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper info-bg">
-                    <i class="fas fa-file-invoice-dollar"></i>
+              <a
+                href="analytic.html#sales-filter-group"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper info-bg">
+                      <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <span class="badge badge-danger-light"
+                      ><i class="fas fa-arrow-down"></i> 1.8%</span
+                    >
                   </div>
-                  <span class="badge badge-danger-light">
-                    <i class="fas fa-arrow-down"></i> 1.8%
-                  </span>
+                  <p class="card-title-modern">Total Sales</p>
+                  <h3 class="card-value-modern">$56,35,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Sales</p>
-                <h3 class="card-value-modern">$56,35,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper warning-bg">
-                    <i class="fas fa-box-open"></i>
+              <a
+                href="analytic.html#dynamic-product-filter"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper warning-bg">
+                      <i class="fas fa-box-open"></i>
+                    </div>
+                    <span class="badge badge-warning-light"
+                      ><i class="fas fa-arrow-up"></i> 1.8%</span
+                    >
                   </div>
-                  <span class="badge badge-warning-light">
-                    <i class="fas fa-arrow-up"></i> 1.8%
-                  </span>
+                  <p class="card-title-modern">Total Products</p>
+                  <h3 class="card-value-modern">$4,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Products</p>
-                <h3 class="card-value-modern">$4,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper success-bg">
-                    <i class="fas fa-money-bill-wave"></i>
+              <a
+                href="analytic.html#expenses-filter-group"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper success-bg">
+                      <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <span class="badge badge-success-light"
+                      ><i class="fas fa-arrow-up"></i> 1.2%</span
+                    >
                   </div>
-                  <span class="badge badge-success-light">
-                    <i class="fas fa-arrow-up"></i> 1.2%
-                  </span>
+                  <p class="card-title-modern">Total Expenses</p>
+                  <h3 class="card-value-modern">$35,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Expenses</p>
-                <h3 class="card-value-modern">$35,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
         </div>
 
         <div class="row g-4 mt-2">
           <div class="col-lg-8">
-            <div class="card dashboard-card h-100">
+            <div id="sales-statistics-card" class="card dashboard-card h-100">
               <div class="card-body">
                 <div
                   class="d-flex justify-content-between align-items-center mb-3"
@@ -260,9 +316,8 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-4">
-            <div class="card dashboard-card h-100">
+            <div id="orders-statistics-card" class="card dashboard-card h-100">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Orders Statistics</h5>
                 <div
@@ -305,22 +360,24 @@
               </div>
             </div>
           </div>
-
           <div class="col-12">
-            <div class="card dashboard-card mt-4">
+            <div id="product-statistics-card" class="card dashboard-card mt-4">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Product Statistics</h5>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item product-stat-item">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
                     <div class="d-flex align-items-center">
                       <img
-                        src="https://i.pinimg.com/736x/80/5d/69/805d6987ade84a4bca8a8c6a5ec9092c.jpg"
+                        src="https://bibitonline.com/wp-content/uploads/Tanaman-Aglaonema-Kochin.jpg"
                         alt="Product"
                         class="rounded me-3"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="mb-0">Bibit Cabai Rawit Unggul</h6>
-                        <small class="text-muted">ID: #PROD-001</small>
+                        <h6 class="mb-0">Bibit Aglaonema</h6>
+                        <small class="text-muted">ID: #P003</small>
                       </div>
                     </div>
                     <div class="ms-auto text-end" style="width: 200px">
@@ -333,23 +390,23 @@
                           class="progress-bar bg-primary"
                           role="progressbar"
                           style="width: 85%"
-                          aria-valuenow="85"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
                         ></div>
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item product-stat-item">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
                     <div class="d-flex align-items-center">
                       <img
-                        src="https://i.pinimg.com/736x/7d/a7/b9/7da7b99ff39d5c65084802fc29de8f03.jpg"
+                        src="https://wp.plantsnap.com/wp-content/uploads/2019/09/peace-lily-in-pot.jpg"
                         alt="Product"
                         class="rounded me-3"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="mb-0">Pupuk Organik Cair</h6>
-                        <small class="text-muted">ID: #PROD-002</small>
+                        <h6 class="mb-0">Peace Lily</h6>
+                        <small class="text-muted">ID: #P002 </small>
                       </div>
                     </div>
                     <div class="ms-auto text-end" style="width: 200px">
@@ -362,23 +419,23 @@
                           class="progress-bar bg-info"
                           role="progressbar"
                           style="width: 70%"
-                          aria-valuenow="70"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
                         ></div>
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item product-stat-item">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
                     <div class="d-flex align-items-center">
                       <img
-                        src="https://i.pinimg.com/1200x/d7/65/92/d76592ddfd5d0e46d83a0f3ac188ce49.jpg"
+                        src="https://www.studioplant.com/media/catalog/product/cache/5f475ed5c56894ef7a51968da51e8dc7/m/o/monstera_-_4.jpg"
                         alt="Product"
                         class="rounded me-3"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="mb-0">Alat Siram Otomatis</h6>
-                        <small class="text-muted">ID: #PROD-003</small>
+                        <h6 class="mb-0">Monstera Deliciosa</h6>
+                        <small class="text-muted">ID: #P004</small>
                       </div>
                     </div>
                     <div class="ms-auto text-end" style="width: 200px">
@@ -391,9 +448,6 @@
                           class="progress-bar bg-warning"
                           role="progressbar"
                           style="width: 45%"
-                          aria-valuenow="45"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
                         ></div>
                       </div>
                     </div>
@@ -406,7 +460,7 @@
 
         <div class="row g-4 mt-1">
           <div class="col-lg-8">
-            <div class="card dashboard-card">
+            <div id="recent-orders-card" class="card dashboard-card">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Recent Orders</h5>
                 <div class="table-responsive">
@@ -492,9 +546,7 @@
                         <td>10</td>
                         <td class="fw-bold">Rp 30.000</td>
                         <td>
-                          <span class="badge status-badge-pending"
-                            >Pending</span
-                          >
+                          <span class="badge status-badge-pending">Pending</span>
                         </td>
                       </tr>
                     </tbody>
@@ -503,9 +555,8 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-4">
-            <div class="card dashboard-card">
+            <div id="top-customers-card" class="card dashboard-card">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Top Customers</h5>
                 <ul class="list-group list-group-flush">
@@ -684,226 +735,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/admin_script.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // --- FUNGSI SEARCH BAR ---
-        const searchInput = document.getElementById("searchInput");
-        if (searchInput) {
-          searchInput.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-              const query = searchInput.value.trim();
-              if (query) {
-                window.location.href = `search-results.html?q=${encodeURIComponent(
-                  query
-                )}`;
-              }
-            }
-          });
-        }
 
-        // --- JAVASCRIPT UNTUK MODAL CUSTOMER ---
-        const customerDetailModal = document.getElementById(
-          "customerDetailModal"
-        );
-        if (customerDetailModal) {
-          customerDetailModal.addEventListener(
-            "show.bs.modal",
-            function (event) {
-              // Tombol atau item <li> yang memicu modal
-              const triggerElement = event.relatedTarget;
-
-              // Ekstrak data dari atribut data-*
-              const name = triggerElement.getAttribute("data-name");
-              const username = triggerElement.getAttribute("data-username");
-              const orders = triggerElement.getAttribute("data-orders");
-              const spending = triggerElement.getAttribute("data-spending");
-              const profileLink =
-                triggerElement.getAttribute("data-profile-link");
-
-              // Dapatkan elemen-elemen di dalam modal
-              const modalName =
-                customerDetailModal.querySelector("#modalCustomerName");
-              const modalUsername = customerDetailModal.querySelector(
-                "#modalCustomerUsername"
-              );
-              const modalTotalOrders =
-                customerDetailModal.querySelector("#modalTotalOrders");
-              const modalTotalSpending = customerDetailModal.querySelector(
-                "#modalTotalSpending"
-              );
-              const modalProfileLink = customerDetailModal.querySelector(
-                "#modalCustomerProfileLink"
-              );
-
-              // Perbarui konten modal dengan data yang sesuai
-              modalName.textContent = name;
-              modalUsername.textContent = username;
-              modalTotalOrders.textContent = orders;
-              modalTotalSpending.textContent = spending;
-              modalProfileLink.href = profileLink;
-            }
-          );
-        }
-
-        // --- FUNGSI UNTUK MEMBUAT BARIS TABEL BISA DIKLIK ---
-        document.querySelectorAll(".clickable-row").forEach((row) => {
-          row.addEventListener("click", () => {
-            // Mengarahkan ke link yang ada di atribut data-href
-            window.location.href = row.dataset.href;
-          });
-        });
-
-        // --- GRAFIK (CHARTS) DENGAN DATA DINAMIS ---
-
-        // 1. Data untuk Sales Statistics
-        const salesData = {
-          week: {
-            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-            sales: [65, 59, 80, 81, 56, 55, 40],
-            revenue: [28, 48, 40, 19, 86, 27, 90],
-          },
-          month: {
-            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-            sales: [350, 410, 380, 500],
-            revenue: [180, 220, 190, 250],
-          },
-          year: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-            sales: [500, 450, 600, 700, 550, 650, 750],
-            revenue: [250, 220, 300, 350, 270, 320, 370],
-          },
-        };
-
-        // Data BARU untuk Orders Statistics
-        const ordersChartData = {
-          week: [1200, 345, 123],
-          month: [4800, 1200, 510],
-          year: [15000, 3500, 1800],
-        };
-
-        // 2. Inisialisasi variabel untuk kedua chart
-        let salesChart;
-        let ordersChart;
-
-        // 3. Fungsi untuk mengupdate KEDUA grafik
-        const updateCharts = (period) => {
-          // Update Sales Chart
-          if (salesChart) {
-            const salesPeriodData = salesData[period];
-            salesChart.data.labels = salesPeriodData.labels;
-            salesChart.data.datasets[0].data = salesPeriodData.sales;
-            salesChart.data.datasets[1].data = salesPeriodData.revenue;
-            salesChart.update();
-          }
-          // Update Orders Chart
-          if (ordersChart) {
-            ordersChart.data.datasets[0].data = ordersChartData[period];
-            ordersChart.update();
-          }
-        };
-
-        // Inisialisasi Chart Sales Statistics
-        const salesChartCanvasNew = document.getElementById("salesChartNew");
-        if (salesChartCanvasNew) {
-          const ctxSales = salesChartCanvasNew.getContext("2d");
-          salesChart = new Chart(ctxSales, {
-            type: "line",
-            data: {
-              labels: salesData.week.labels,
-              datasets: [
-                {
-                  label: "Sales",
-                  data: salesData.week.sales,
-                  fill: false,
-                  borderColor: "#235347",
-                  tension: 0.4,
-                  pointBackgroundColor: "#235347",
-                  pointRadius: 5,
-                },
-                {
-                  label: "Revenue",
-                  data: salesData.week.revenue,
-                  fill: false,
-                  borderColor: "#8EB69B",
-                  tension: 0.4,
-                  pointBackgroundColor: "#8EB69B",
-                  pointRadius: 5,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "top",
-                  align: "end",
-                  labels: {
-                    usePointStyle: true,
-                    boxWidth: 8,
-                    color: "#051F20",
-                  },
-                },
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: { color: "#163832" },
-                  grid: { color: "#DAF1DE" },
-                },
-                x: { ticks: { color: "#163832" } },
-              },
-            },
-          });
-        }
-
-        // Inisialisasi Chart Orders Statistics
-        const ordersChartCanvas = document.getElementById("ordersChart");
-        if (ordersChartCanvas) {
-          const ctxOrders = ordersChartCanvas.getContext("2d");
-          ordersChart = new Chart(ctxOrders, {
-            // Simpan instance ke variabel ordersChart
-            type: "doughnut",
-            data: {
-              labels: ["Completed", "Pending", "Canceled"],
-              datasets: [
-                {
-                  label: "Orders",
-                  data: ordersChartData.week, // Gunakan data awal dari objek baru
-                  backgroundColor: ["#235347", "#ffc107", "#dc3545"],
-                  borderColor: "#FFFFFF",
-                  borderWidth: 4,
-                  hoverOffset: 8,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              cutout: "75%",
-              plugins: { legend: { display: false } },
-            },
-          });
-        }
-
-        // 4. Event listener untuk dropdown (sekarang memanggil updateCharts)
-        const salesPeriodBtn = document.getElementById("salesPeriodBtn");
-        const salesPeriodOptions =
-          document.getElementById("salesPeriodOptions");
-
-        if (salesPeriodOptions && salesPeriodBtn) {
-          salesPeriodOptions.addEventListener("click", (event) => {
-            if (event.target.tagName === "A") {
-              event.preventDefault();
-              const period = event.target.dataset.period;
-              const periodText = event.target.textContent;
-
-              salesPeriodBtn.textContent = periodText;
-              updateCharts(period); // Panggil fungsi update gabungan
-            }
-          });
-        }
-      });
-    </script>
   </body>
 </html>
