@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alat Pertanian</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/public_style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <style>
+      .cart-badge {
+        font-size: 0.7rem;
+        padding: 0.3em 0.5em;
+      }
+      @media (max-width: 991.98px) {
+        .navbar .form-control {
+          width: 100%;
+          margin-bottom: 0.5rem;
+        }
+        .navbar .btn {
+          width: 100%;
+        }
+        .navbar .navbar-nav {
+          flex-direction: row;
+          justify-content: flex-end;
+          gap: 0.5rem;
+        }
+      }
+      @media (max-width: 575.98px) {
+        .navbar-brand {
+          font-size: 1.1rem;
+        }
+        .navbar .form-control {
+          font-size: 0.9rem;
+        }
+        .navbar .btn {
+          font-size: 0.9rem;
+        }
+        .cart-badge {
+          font-size: 0.6rem;
+        }
+      }
+    </style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+    <div class="main-container">
+        <h1 class="mb-4 fw-bold">PERALATAN PERTANIAN</h1>
+        
+       <div class="product-section bg-white rounded-3 p-3">
+    <div class="section-header">
+        <h4 class="section-title">ALAT UNTUK BERKEBUN</h4>
+        <a href="#" class="section-see-all">Lihat Semua <i class="fas fa-chevron-right"></i></a>
+    </div>
+    <div class="row g-3">
+        <script>
+            const alatPertanian = [
+                "Sekop Tangan Mini", "Cangkul Kecil", "Garpu Kebun",
+                "Semprotan Hama Manual", "Gunting Pangkas", "Sarung Tangan Berkebun",
+                "Pot Bunga", "Polybag", "Tali Pengikat Tanaman",
+                "Alat Ukur pH Tanah", "Termometer Tanah", "Sistem Irigasi Tetes",
+                "Mesin Rumput", "Gerobak Dorong", "Pacul",
+                "Cangkul Besar", "Traktor Mini", "Penyemprot Elektrik",
+                "Alat Tanam Benih", "Pembersih Gulma", "Jaring Pelindung",
+                "Lampu Tumbuh LED", "Sistem Hidroponik", "pH Meter Digital",
+                "EC Meter", "Pompa Air Submersible", "Keranjang Panen",
+                "Galah Petik Buah", "Alat Tanam Bawang", "Pemotong Rumput Gendong",
+                "Sekop Pasir", "Ember", "Gayung Siram",
+                "Pelindung Mata", "Masker Debu", "Sepatu Boot Karet",
+                "Gunting Stek Tanaman", "Gergaji Pangkas Dahan", "Pemotong Rumput Dorong",
+                "Tali Rafia", "Kawat Tanaman", "Pupuk Organik Padat",
+                "Pupuk Organik Cair", "Pestisida Nabati", "Herbisida",
+                "Zat Perangsang Akar", "Net Pot", "Media Tanam Cocopeat",
+                "Media Tanam Arang Sekam", "Media Tanam Rockwool", "Sistem NFT Hidroponik"
+            ];
+            for (let i = 0; i < 50; i++) {
+                const namaProduk = alatPertanian[i % alatPertanian.length];
+                const harga = (Math.random() * 250000 + 10000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                const terjual = Math.floor(Math.random() * 1000);
+
+                document.write(`
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="#" class="product-card-link">
+                            <div class="card h-100 product-card">
+                                <div class="img-container">
+                                    <img src="https://source.unsplash.com/random/300x200/?gardening-tools,farm-equipment,${i}" class="card-img-top" alt="${namaProduk}">
+                                </div>
+                                <div class="card-body">
+                                    <p class="product-title">${namaProduk}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="product-price mb-0">Rp${harga}</p>
+                                        <p class="product-sold mb-0">${terjual}+ terjual</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `);
+            }
+        </script>
+    </div>
+</div>
+    </div>
+    <div id="chat-placeholder"></div>
+  <script src="../../assets/js/public_app.js"></script>
+    <script>
+      async function loadHeader() {
+    try {
+      const response = await fetch("../../components/_navbar_public.html");
+      if (response.ok) {
+        const headerContent = await response.text();
+        document.getElementById("header-placeholder").innerHTML = headerContent;
+      } else {
+        console.error(
+          "Gagal memuat _navbar_public.html:",
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error saat memuat file:", error);
+    }
+  }
+
+  async function loadChatDropdown() {
+    try {
+      const response = await fetch("./chat.html");
+      if (response.ok) {
+        const chatContent = await response.text();
+        document.getElementById("chat-placeholder").innerHTML = chatContent;
+
+        // PANGGIL SKRIP CHAT DI SINI!
+        const chatScript = document.createElement("script");
+        chatScript.src = "../../assets/js/chat.js";
+        document.body.appendChild(chatScript);
+
+      } else {
+        console.error("Gagal memuat chat.html:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error saat memuat file:", error);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    loadHeader();
+    loadChatDropdown();
+  });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/chat.js"></script>
+    <script src="../../assets/js/public_app.js"></script>
+  </body>
+</html>
