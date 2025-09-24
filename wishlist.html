@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist Saya - SmartFarm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/public_style.css" />
+</head>
+<body>
+    <div id="preloader"><div class="spinner"></div></div>
+    <div id="header-placeholder"></div>
+
+    <main class="container my-5">
+        <div class="wishlist-header text-center mb-5">
+            <h1 class="wishlist-title">Produk Favorit Pilihanmu</h1>
+            <p class="wishlist-subtitle">Ini adalah daftar produk yang kamu suka. Segera checkout sebelum kehabisan!</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="wishlist-container">
+            </div>
+        
+        <div id="empty-wishlist-message" class="text-center p-5" style="display: none;">
+            <i class="far fa-heart fa-4x text-muted mb-3"></i>
+            <h3 class="text-muted">Wishlist-mu masih kosong</h3>
+            <p>Yuk, tambahkan produk favoritmu dengan menekan tombol hati!</p>
+            <a href="products.html" class="btn btn-smartfarm-primary mt-3">Mulai Belanja</a>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/public_script.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Copy "database" produk lengkap ke sini
+        const allProducts = [
+            { id: 1, name: "HydroKit Mini Starter", category: "kit", price: 185000, originalPrice: 225000, image: "https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg", rating: 4.8, sold: "3.2k", date: "2024-08-10", badge: { text: "DISKON", class: "badge-sale" }, description: "Paket lengkap untuk pemula yang ingin mencoba hidroponik...", specs: { "Jumlah Lubang": "8", "Ukuran Pipa": "2.5 inch" } },
+            { id: 2, name: "Caladium Red Star", category: "hias", price: 75000, originalPrice: null, image: "https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg", rating: 4.5, sold: "230", date: "2024-08-01", badge: { text: "PRODUK BARU", class: "badge-new" }, description: "Tanaman hias dengan warna merah menyala yang eksotis...", specs: { "Tinggi Tanaman": "20-30 cm", "Ukuran Pot": "Diameter 15 cm" } },
+            // ... PASTE SEMUA 20 PRODUK LENGKAP DARI KODE SEBELUMNYA DI SINI ...
+             { id: 19, name: "Sekam Bakar Fermentasi", category: "media", price: 18000, originalPrice: null, image: "https://i.pinimg.com/564x/8d/e2/26/8de226211479d20c528f9d0c270d1cf5.jpg", rating: 4.6, sold: "2.8k", date: "2024-01-30", badge: null, description: "Media tanam porous yang sudah difermentasi...", specs: { "Berat Bersih": "1 kg", "pH": "Netral (6.5 - 7.0)" } }
+        ];
+
+        const wishlistContainer = document.getElementById('wishlist-container');
+        const emptyMessage = document.getElementById('empty-wishlist-message');
+        
+        function renderWishlist() {
+            const wishlistIds = JSON.parse(localStorage.getItem('smartfarm_wishlist')) || [];
+            wishlistContainer.innerHTML = ''; // Kosongkan dulu
+
+            if (wishlistIds.length === 0) {
+                emptyMessage.style.display = 'block';
+                return;
+            }
+            
+            emptyMessage.style.display = 'none';
+
+            const wishlistedProducts = allProducts.filter(p => wishlistIds.includes(p.id.toString()));
+
+            wishlistedProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'col d-flex';
+                card.innerHTML = `
+                    <div class="wishlist-card">
+                        <div class="product-image-wrapper">
+                            <a href="product_detail.html?id=${product.id}"><img src="${product.image}" alt="${product.name}" loading="lazy"/></a>
+                            <div class="product-actions">
+                                <button class="action-btn remove-from-wishlist" title="Hapus dari Wishlist" data-product-id="${product.id}" data-product-name="${product.name}">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-category">${product.category}</p>
+                            <h3 class="product-title"><a href="product_detail.html?id=${product.id}">${product.name}</a></h3>
+                            <div class="product-price-action mt-auto">
+                                <p class="product-price">Rp ${product.price.toLocaleString('id-ID')}</p>
+                                <button class="btn-add-cart-icon" title="Tambah ke Keranjang"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                wishlistContainer.appendChild(card);
+            });
+        }
+        
+        // Event listener untuk tombol hapus di halaman wishlist
+        wishlistContainer.addEventListener('click', function(e) {
+            const removeBtn = e.target.closest('.remove-from-wishlist');
+            if (removeBtn) {
+                const productId = removeBtn.dataset.productId;
+                const productName = removeBtn.dataset.productName;
+                
+                let wishlist = JSON.parse(localStorage.getItem('smartfarm_wishlist')) || [];
+                const productIndex = wishlist.indexOf(productId);
+                
+                if (productIndex > -1) {
+                    wishlist.splice(productIndex, 1);
+                    localStorage.setItem('smartfarm_wishlist', JSON.stringify(wishlist));
+                    showNotification(`${productName} dihapus dari wishlist`, 'success');
+                    renderWishlist(); // Tampilkan ulang wishlist yang sudah update
+                }
+            }
+        });
+
+        // Tampilkan wishlist saat halaman dimuat
+        renderWishlist();
+    });
+    </script>
+</body>
+</html>
