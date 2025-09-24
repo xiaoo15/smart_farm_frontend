@@ -1,13 +1,98 @@
-<div class="navbar-actions">
-    <div class="dropdown">
-        <a href="#" class="nav-link-icon dropdown-toggle" role="button" data-bs-toggle="dropdown">
-            <i class="fas fa-user-circle"></i>
-            <span id="username-display">Revan</span> </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="profile.html">Profil Saya</a></li>
-            <li><a class="dropdown-item" href="orders.html">Pesanan</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
-        </ul>
+<header>
+  <div class="top-header">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span>Gratis Ongkir Min. Belanja Rp150rb!</span>
+      <div class="d-none d-md-flex align-items-center top-header-links">
+        <a href="help.html" class="me-3">Pusat Bantuan</a>
+
+        <div class="user-dropdown ms-3">
+          <a href="#" class="nav-link" id="user-greeting">
+            <i class="far fa-user-circle me-1"></i>
+            <span>Halo User!</span>
+            <i class="fas fa-chevron-down ms-1"></i>
+          </a>
+          <div class="dropdown-content">
+            <a href="profile.html"><i class="fas fa-user-edit"></i> Profil Saya</a>
+            <a href="settings.html"><i class="fas fa-cog"></i> Pengaturan</a>
+            <hr>
+            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+          </div>
+        </div>
+        </div>
     </div>
+  </div>
+
+  <nav class="main-header navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-leaf"></i> SmartFarm
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Tentang Kami</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Kontak</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <form class="search-form d-none d-lg-flex me-3">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Cari produk..."
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+          <div class="header-icons">
+            <a href="#" class="header-icon d-lg-none" id="mobile-search-icon">
+              <i class="fas fa-search"></i>
+            </a>
+            <a href="wishlist.html" class="header-icon">
+              <i class="far fa-heart"></i>
+            </a>
+            <a href="cart.html" class="header-icon">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-badge">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="search-overlay" id="search-overlay">
+  <button class="close-btn" id="close-search-btn">&times;</button>
+  <div class="search-overlay-content">
+    <form class="search-form-overlay">
+      <input
+        type="search"
+        placeholder="Cari bibit, tanaman, atau alat kebun..."
+        id="search-overlay-input"
+      />
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
 </div>
