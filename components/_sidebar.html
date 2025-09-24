@@ -19,39 +19,45 @@
     
     <ul class="sidebar-nav">
         <li class="sidebar-item" data-page="dashboard.html">
-        <a href="dashboard.html" class="sidebar-link">
+        <a href="/admin/dashboard.html" class="sidebar-link">
             <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
           </a>
         </li>
+        <li class="sidebar-item" data-page="analytic.html">
+        <a href="/admin/analytic.html" class="sidebar-link">
+            <i class="fas fa-chart-line"></i><span>Analytic</span>
+          </a>
+        </li>
     <li class="sidebar-item" data-page="products.html">
-        <a href="products.html" class="sidebar-link"
-            ><i class="fas fa-box"></i><span>Products</span></a
+        <a href="/admin/products.html" class="sidebar-link"
+            ><i class="fas fa-box"></i><span> Master Products</span></a
         >
         </li>
         <li class="sidebar-item" data-page="orders.html">
-        <a href="orders.html" class="sidebar-link"
-            ><i class="fas fa-shopping-cart"></i><span>Orders</span></a
+        <a href="/admin/orders.html" class="sidebar-link"
+            ><i class="fas fa-shopping-cart"></i><span>Master Orders</span></a
         >
         </li>
-        <li class="sidebar-item" data-page="chat.html">
-            <a href="chat.html" class="sidebar-link">
-                <i class="fas fa-comments"></i>
-                <span>Messages</span>
-                <span class="notification-badge ms-auto">3</span> </a>
+        <li class="sidebar-item" data-page="notif.html">
+            <a href="/admin/notif.html" class="sidebar-link">
+                <i class="fas fa-bell"></i>
+                <span>Notification</span>
+                <span class="notification-badge ms-auto">4</span> </a>
+        </li>
+        <li class="sidebar-item" data-page="customers.html">
+        <a href="/admin/customers.html" class="sidebar-link"
+            ><i class="fas fa-users"></i><span>Customers</span></a  
+        >
         </li>
         <li class="sidebar-item" data-page="store.html">
-      <a href="store.html" class="sidebar-link">
+      <a href="/admin/store.html" class="sidebar-link">
         <i class="fas fa-cog"></i><span>Settings</span>
       </a>
     </li>
-        <li class="sidebar-item" data-page="customers.html">
-        <a href="customers.html" class="sidebar-link"
-            ><i class="fas fa-users"></i><span>Customers</span></a
-        >
-        </li>
+        
     </ul>
     <div class="sidebar-footer">
-        <a href="#" class="logout-link"
+        <a href="../public/login.html" class="logout-link"
         ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
         >
     </div>
@@ -181,3 +187,4 @@
         initSidebar();
     });
     </script>
+    

@@ -4,25 +4,62 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Settings</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
+    <style>
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .settings-card {
+        border: 1px solid var(--bs-card-border-color); /* Memastikan kartu selalu punya border */
+        overflow: hidden; /* Mencegah konten 'bocor' dari sudut */
+      }
+      .settings-card .card-footer {
+        border-top: 1px solid var(--bs-card-border-color); /* Menambahkan garis pemisah atas footer */
+      }
+      .content-header, .settings-nav, .settings-card { opacity: 0; }
+      .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+      .tab-pane { transition: opacity 0.3s ease-in-out; }
+      .tab-pane:not(.show) { opacity: 0; }
+      #announcement-bar-container {
+        position: fixed; top: -50px; left: 0; width: 100%;
+        background-color: #235347; color: white; text-align: center;
+        padding: 8px 0; z-index: 1050; transition: top 0.4s ease-in-out;
+        font-weight: 500; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      .delete-btn {
+        background-color: #6c757d14;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .delete-btn i {
+        transition: color 0.2s ease-in-out;
+      }
+
+      .delete-btn:hover {
+        background-color: #6c757d14;
+      }
+
+      .delete-btn:hover i {
+        color: #dc3545;
+      }
+      #announcement-bar-container.show { top: 0; }
+      body.announcement-active .admin-wrapper { padding-top: 40px; }
+    </style>
   </head>
   <body>
+    <div id="announcement-bar-container">
+      <span id="announcement-bar-text"></span>
+    </div>
+
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
-
       <div class="main-content">
         <header class="content-header">
           <div>
@@ -30,162 +67,70 @@
             <p>Kelola semua pengaturan toko dan akun Anda di sini.</p>
           </div>
         </header>
-
         <div class="settings-page-container">
-          <ul
-            class="nav nav-pills settings-nav mb-4"
-            id="settings-tab"
-            role="tablist"
-          >
+          <ul class="nav nav-pills settings-nav mb-4" id="settings-tab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button
-                class="nav-link active"
-                id="umum-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#umum-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="umum-tab-pane"
-                aria-selected="true"
-              >
+              <button class="nav-link active" id="umum-tab" data-bs-toggle="tab" data-bs-target="#umum-tab-pane" type="button">
                 <i class="fas fa-store me-2"></i>Pengaturan Umum
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="akun-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#akun-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="akun-tab-pane"
-                aria-selected="false"
-              >
+              <button class="nav-link" id="akun-tab" data-bs-toggle="tab" data-bs-target="#akun-tab-pane" type="button">
                 <i class="fas fa-user-cog me-2"></i>Akun Admin
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="tampilan-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#tampilan-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="tampilan-tab-pane"
-                aria-selected="false"
-              >
+              <button class="nav-link" id="tampilan-tab" data-bs-toggle="tab" data-bs-target="#tampilan-tab-pane" type="button">
                 <i class="fas fa-palette me-2"></i>Tampilan & Konten
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="lanjutan-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#lanjutan-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="lanjutan-tab-pane"
-                aria-selected="false"
-              >
+              <button class="nav-link" id="lanjutan-tab" data-bs-toggle="tab" data-bs-target="#lanjutan-tab-pane" type="button">
                 <i class="fas fa-cogs me-2"></i>Pengaturan Lanjutan
               </button>
             </li>
           </ul>
-
           <div class="tab-content" id="settings-tab-content">
-            <div
-              class="tab-pane fade show active"
-              id="umum-tab-pane"
-              role="tabpanel"
-              aria-labelledby="umum-tab"
-              tabindex="0"
-            >
+            <div class="tab-pane fade show active" id="umum-tab-pane" role="tabpanel" aria-labelledby="umum-tab" tabindex="0">
               <div class="card settings-card">
-                <div class="card-header">
-                  <h5 class="card-title-custom mb-0">Profil Toko</h5>
-                </div>
-                <div class="card-body">
-                  <form>
+                <form onsubmit="return false;">
+                  <div class="card-header">
+                    <h5 class="card-title-custom mb-0">Profil Toko</h5>
+                  </div>
+                  <div class="card-body">
                     <div class="row">
                       <div class="col-lg-8">
                         <div class="mb-3">
-                          <label for="namaToko" class="form-label"
-                            >Nama Toko</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="namaToko"
-                            value="SmartFarm"
-                          />
+                          <label for="namaToko" class="form-label">Nama Toko</label>
+                          <input type="text" class="form-control" id="namaToko" value="SmartFarm"/>
                         </div>
                         <div class="mb-3">
-                          <label for="sloganToko" class="form-label"
-                            >Slogan/Tagline</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="sloganToko"
-                            value="Solusi Kebun Pintar di Rumah Anda"
-                          />
+                          <label for="sloganToko" class="form-label">Slogan/Tagline</label>
+                          <input type="text" class="form-control" id="sloganToko" value="Solusi Kebun Pintar di Rumah Anda"/>
                         </div>
                         <div class="mb-4">
-                          <label for="deskripsiToko" class="form-label"
-                            >Deskripsi Singkat Toko</label
-                          >
-                          <textarea
-                            class="form-control"
-                            id="deskripsiToko"
-                            rows="4"
-                          >
-SmartFarm menyediakan semua kebutuhan hidroponik dan urban farming dengan kualitas terbaik untuk membantu Anda memulai kebun pintar di rumah.</textarea
-                          >
+                          <label for="deskripsiToko" class="form-label">Deskripsi Singkat Toko</label>
+                          <textarea class="form-control" id="deskripsiToko" rows="4">SmartFarm menyediakan semua kebutuhan hidroponik dan urban farming dengan kualitas terbaik untuk membantu Anda memulai kebun pintar di rumah.</textarea>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
                           <label class="form-label">Logo Toko</label>
-                          <div class="logo-upload-wrapper">
-                            <img
-                              src="https://i.pravatar.cc/150?img=10"
-                              alt="Logo Preview"
-                              id="logoPreview"
-                              class="logo-preview"
-                            />
-                            <input type="file" id="logoUpload" class="d-none" />
-                            <button
-                              type="button"
-                              class="btn btn-sm btn-light"
-                              onclick="document.getElementById('logoUpload').click();"
-                            >
-                              <i class="fas fa-camera me-1"></i> Ganti Logo
+                          <div class="logo-upload-wrapper d-flex align-items-center">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrxOXV-1FnzP39-VEYnny3znIRPE3LCmSlHPe1mzEK3SdZUQZP7yYjqNgeTJ77qyvlHjM&usqp=CAU" alt="Logo Preview" id="logoPreview" class="logo-preview"/>
+                            <input type="file" id="logoUpload" class="d-none" accept="image/*"/>
+                            <button type="button" class="btn btn-sm btn-light ms-3" onclick="document.getElementById('logoUpload').click();">
+                              <i class="fas fa-camera me-1"></i> Ganti
                             </button>
                           </div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Favicon</label>
-                          <div class="logo-upload-wrapper">
-                            <img
-                              src="https://i.pravatar.cc/150?img=11"
-                              alt="Favicon Preview"
-                              id="faviconPreview"
-                              class="logo-preview is-favicon"
-                            />
-                            <input
-                              type="file"
-                              id="faviconUpload"
-                              class="d-none"
-                            />
-                            <button
-                              type="button"
-                              class="btn btn-sm btn-light"
-                              onclick="document.getElementById('faviconUpload').click();"
-                            >
-                              <i class="fas fa-camera me-1"></i> Ganti Favicon
+                          <div class="logo-upload-wrapper d-flex align-items-center">
+                            <img src="https://i.pravatar.cc/150?img=31" alt="Favicon Preview" id="faviconPreview" class="logo-preview is-favicon"/>
+                            <input type="file" id="faviconUpload" class="d-none" accept="image/x-icon, image/png, image/svg+xml"/>
+                            <button type="button" class="btn btn-sm btn-light ms-3" onclick="document.getElementById('faviconUpload').click();">
+                              <i class="fas fa-camera me-1"></i> Ganti
                             </button>
                           </div>
                         </div>
@@ -195,334 +140,256 @@ SmartFarm menyediakan semua kebutuhan hidroponik dan urban farming dengan kualit
                     <h6 class="mb-3">Informasi Kontak & Media Sosial</h6>
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label for="alamatToko" class="form-label"
-                          >Alamat Toko</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="alamatToko"
-                          placeholder="Masukkan alamat lengkap"
-                        />
+                        <label for="alamatToko" class="form-label">Alamat Toko</label>
+                        <input type="text" class="form-control" id="alamatToko" placeholder="Masukkan alamat lengkap"/>
                       </div>
                       <div class="col-md-6 mb-3">
-                        <label for="emailToko" class="form-label"
-                          >Email Publik</label
-                        >
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="emailToko"
-                          placeholder="contoh@smartfarm.com"
-                        />
+                        <label for="emailToko" class="form-label">Email Publik</label>
+                        <input type="email" class="form-control" id="emailToko" placeholder="contoh@smartfarm.com"/>
                       </div>
                       <div class="col-md-6 mb-3">
-                        <label for="teleponToko" class="form-label"
-                          >Telepon / WhatsApp</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="teleponToko"
-                          placeholder="0812xxxxxxxx"
-                        />
+                        <label for="teleponToko" class="form-label">Telepon / WhatsApp</label>
+                        <input type="text" class="form-control" id="teleponToko" placeholder="0812xxxxxxxx"/>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label class="form-label">Instagram</label>
                         <div class="input-group">
-                          <span class="input-group-text"
-                            ><i class="fab fa-instagram"></i
-                          ></span>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="username_smartfarm"
-                          />
+                          <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                          <input type="text" class="form-control" placeholder="username_smartfarm"/>
                         </div>
                       </div>
                       <div class="col-md-6 mb-3">
                         <label class="form-label">Facebook</label>
                         <div class="input-group">
-                          <span class="input-group-text"
-                            ><i class="fab fa-facebook"></i
-                          ></span>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="SmartFarmIndonesia"
-                          />
+                          <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                          <input type="text" class="form-control" placeholder="SmartFarmIndonesia"/>
                         </div>
                       </div>
                     </div>
-                  </form>
-                </div>
-                <div class="card-footer text-end">
-                  <button type="button" class="btn btn-secondary-custom">
-                    Batal
-                  </button>
-                  <button type="submit" class="btn btn-primary-custom">
-                    Simpan Perubahan
-                  </button>
-                </div>
+                  </div>
+                  <div class="card-footer text-end">
+                    <button type="button" class="btn btn-primary-custom" id="save-general-btn">Simpan Perubahan</button>
+                  </div>
+                </form>
               </div>
             </div>
 
-            <div
-              class="tab-pane fade"
-              id="akun-tab-pane"
-              role="tabpanel"
-              aria-labelledby="akun-tab"
-              tabindex="0"
-            >
-              <div
-                class="tab-pane fade"
-                id="akun-tab-pane"
-                role="tabpanel"
-                aria-labelledby="akun-tab"
-                tabindex="0"
-              >
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="card settings-card">
+            <div class="tab-pane fade" id="akun-tab-pane" role="tabpanel" aria-labelledby="akun-tab" tabindex="0">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="card settings-card">
+                    <form onsubmit="return false;">
                       <div class="card-header">
                         <h5 class="card-title-custom mb-0">Ubah Profil</h5>
                       </div>
                       <div class="card-body">
-                        <form>
-                          <div class="text-center mb-4">
-                            <img
-                              src="https://i.pravatar.cc/150?img=1"
-                              alt="Foto Profil"
-                              class="rounded-circle"
-                              width="100"
-                              height="100"
-                            />
-                            <button
-                              type="button"
-                              class="btn btn-sm btn-light mt-2"
-                            >
-                              Ganti Foto
-                            </button>
-                          </div>
-                          <div class="mb-3">
-                            <label for="adminName" class="form-label"
-                              >Nama Lengkap</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="adminName"
-                              value="Revan"
-                            />
-                          </div>
-                          <div class="mb-3">
-                            <label for="adminEmail" class="form-label"
-                              >Alamat Email</label
-                            >
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="adminEmail"
-                              value="revan@gmail.com"
-                              readonly
-                            />
-                            <div class="form-text">
-                              Email tidak dapat diubah.
-                            </div>
-                          </div>
-                        </form>
+                        <div class="text-center mb-4">
+                          <img 
+                            src="https://i.pravatar.cc/150?img=31" 
+                            alt="Foto Profil" 
+                            class="rounded-circle" 
+                            width="100" 
+                            height="100"
+                            id="profilePhotoPreview" />
+                          <input type="file" id="profilePhotoUpload" class="d-none" accept="image/*"> <button 
+                            type="button" 
+                            class="btn btn-sm btn-light mt-3"
+                            onclick="document.getElementById('profilePhotoUpload').click();" >
+                            Ganti Foto
+                          </button>
+                        </div>
+                        <div class="mb-3">
+                          <label for="adminName" class="form-label">Nama Lengkap</label>
+                          <input type="text" class="form-control" id="adminName" value="Revan"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="adminEmail" class="form-label">Alamat Email</label>
+                          <input type="email" class="form-control" id="adminEmail" value="revan@gmail.com"/>
+                          <div class="form-text">Pastikan Anda memiliki akses ke email ini.</div>
+                        </div>
                       </div>
                       <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary-custom">
-                          Simpan Profil
-                        </button>
+                        <button type="button" class="btn btn-primary-custom" id="save-profile-btn">Simpan Profil</button>
                       </div>
-                    </div>
+                    </form>
                   </div>
-
-                  <div class="col-lg-6">
-                    <div class="card settings-card">
+                </div>
+                <div class="col-lg-6">
+                  <div class="card settings-card">
+                    <form onsubmit="return false;">
                       <div class="card-header">
-                        <h5 class="card-title-custom mb-0">
-                          Keamanan & Password
-                        </h5>
+                        <h5 class="card-title-custom mb-0">Keamanan & Password</h5>
                       </div>
                       <div class="card-body">
-                        <form>
-                          <div class="mb-3">
-                            <label for="currentPassword" class="form-label"
-                              >Password Saat Ini</label
-                            >
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="currentPassword"
-                              placeholder="Masukkan password lama Anda"
-                            />
+                        <div class="mb-3">
+                          <label for="currentPassword" class="form-label">Password Saat Ini</label>
+                          <div class="input-group">
+                            <input type="password" class="form-control" id="currentPassword" placeholder="Masukkan password lama Anda"/>
+                            <button class="btn btn-primary-custom" type="button" id="toggleCurrentPassword"><i class="fas fa-eye"></i></button>
                           </div>
-                          <div class="mb-3">
-                            <label for="newPassword" class="form-label"
-                              >Password Baru</label
-                            >
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="newPassword"
-                              placeholder="Masukkan password baru"
-                            />
+                        </div>
+                        <div class="mb-3">
+                          <label for="newPassword" class="form-label">Password Baru</label>
+                          <div class="input-group">
+                            <input type="password" class="form-control" id="newPassword" placeholder="Masukkan password baru"/>
+                            <button class="btn btn-primary-custom" type="button" id="toggleNewPassword"><i class="fas fa-eye"></i></button>
                           </div>
-                          <div class="mb-3">
-                            <label for="confirmPassword" class="form-label"
-                              >Konfirmasi Password Baru</label
-                            >
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="confirmPassword"
-                              placeholder="Ketik ulang password baru"
-                            />
+                        </div>
+                        <div class="mb-3">
+                          <label for="confirmPassword" class="form-label">Konfirmasi Password Baru</label>
+                          <div class="input-group">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Ketik ulang password baru"/>
+                            <button class="btn btn-primary-custom" type="button" id="toggleConfirmPassword"><i class="fas fa-eye"></i></button>
                           </div>
-                        </form>
+                        </div>
                       </div>
                       <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary-custom">
-                          Ubah Password
-                        </button>
+                        <button type="button" class="btn btn-primary-custom" id="change-password-btn">Ubah Password</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-pane fade" id="tampilan-tab-pane" role="tabpanel" aria-labelledby="tampilan-tab" tabindex="0">
+              <div class="card settings-card">
+                <form onsubmit="return false;">
+                  <div class="card-header">
+                    <h5 class="card-title-custom mb-0">Konten Halaman Depan</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="announcementBar"/>
+                        <label class="form-check-label" for="announcementBar">Tampilkan Baris Pengumuman</label>
+                      </div>
+                      <div class="form-text ps-1">Aktifkan untuk menampilkan teks pengumuman di bagian atas situs.</div>
+                    </div>
+                    <div class="mb-4">
+                      <label for="announcementText" class="form-label">Teks Pengumuman</label>
+                      <input type="text" class="form-control" id="announcementText" value="Gratis ongkir untuk pembelian di atas Rp 200.000!"/>
+                    </div>
+                    <div class="mb-4">
+                      <label for="featuredCategory" class="form-label">Kategori Unggulan di Beranda</label>
+                      <select class="form-select" id="featuredCategory">
+                        <option selected>-- Pilih Kategori --</option>
+                        <option value="1">Paket Hidroponik Pemula</option>
+                        <option value="2">Nutrisi & Vitamin Tanaman</option>
+                        <option value="3">Benih & Bibit Unggul</option>
+                        <option value="4">Media Tanam</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="productsPerPage" class="form-label">Jumlah Produk per Halaman</label>
+                      <input type="number" class="form-control" id="productsPerPage" value="12" style="max-width: 150px;">
+                    </div>
+                    <hr class="my-4">
+                    <h6 class="mb-3">Banner Promosi</h6>
+                    <div class="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+                      <div>
+                        <img src="https://palominobag.com/cdn/shop/products/VC100K_800x.jpg?v=1647922663" alt="Banner 1" width="60" class="me-3 rounded">
+                        <span>Promo Awal Bulan - Diskon 15%</span>
+                      </div>
+                      <div>
+                        <a href="banner/edit_banner_discount.html" class="btn btn-icon btn-sm me-1"><i class="fas fa-pencil-alt"></i></a>
+                        <button type="button" class="btn btn-icon btn-sm delete-btn btn-hapus-banner"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="tampilan-tab-pane"
-              role="tabpanel"
-              aria-labelledby="tampilan-tab"
-              tabindex="0"
-            >
-              ...
-            </div>
-            <div
-              class="tab-pane fade"
-              id="lanjutan-tab-pane"
-              role="tabpanel"
-              aria-labelledby="lanjutan-tab"
-              tabindex="0"
-            >
-              ...
-            </div>
-          </div>
-          <div
-            class="tab-pane fade"
-            id="akun-tab-pane"
-            role="tabpanel"
-            aria-labelledby="akun-tab"
-            tabindex="0"
-          >
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="card settings-card">
-                  <div class="card-header">
-                    <h5 class="card-title-custom mb-0">Ubah Profil</h5>
-                  </div>
-                  <div class="card-body">
-                    <form>
-                      <div class="text-center mb-4">
-                        <img
-                          src="https://i.pravatar.cc/150?img=1"
-                          alt="Foto Profil"
-                          class="rounded-circle"
-                          width="100"
-                          height="100"
-                        />
-                        <button type="button" class="btn btn-sm btn-light mt-2">
-                          Ganti Foto
-                        </button>
+                    <div class="d-flex align-items-center justify-content-between p-2 border rounded mb-3">
+                      <div>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXia2vQ6aTFBjpN3j3Q94NaH9rhnKJZPVaUw&s" alt="Banner 2" width="60" class="me-3 rounded">
+                        <span>Paket Lengkap Hidroponik Cuma 100rb!</span>
                       </div>
-                      <div class="mb-3">
-                        <label for="adminName" class="form-label"
-                          >Nama Lengkap</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="adminName"
-                          value="Revan"
-                        />
+                      <div>
+                        <a href="banner/edit_banner_set.html" class="btn btn-icon btn-sm me-1"><i class="fas fa-pencil-alt"></i></a>
+                        <button type="button" class="btn btn-icon btn-sm delete-btn btn-hapus-banner"><i class="fas fa-trash-alt"></i></button>
                       </div>
-                      <div class="mb-3">
-                        <label for="adminEmail" class="form-label"
-                          >Alamat Email</label
-                        >
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="adminEmail"
-                          value="revan@gmail.com"
-                          readonly
-                        />
-                        <div class="form-text">Email tidak dapat diubah.</div>
-                      </div>
-                    </form>
+                    </div>
+                    <a href="add_banner.html" class="btn btn-primary-custom mt-2">
+                      <i class="fas fa-plus me-2"></i>Tambah Banner Baru
+                    </a>
                   </div>
                   <div class="card-footer text-end">
-                    <button type="submit" class="btn btn-primary-custom">
-                      Simpan Profil
-                    </button>
+                    <button type="button" class="btn btn-primary-custom" id="save-display-btn">Simpan Perubahan Tampilan</button>
                   </div>
-                </div>
+                </form>
               </div>
+            </div>
 
-              <div class="col-lg-6">
-                <div class="card settings-card">
-                  <div class="card-header">
-                    <h5 class="card-title-custom mb-0">Keamanan & Password</h5>
+            <div class="tab-pane fade" id="lanjutan-tab-pane" role="tabpanel" aria-labelledby="lanjutan-tab" tabindex="0">
+              <div class="card settings-card">
+                <div class="card-header">
+                  <h5 class="card-title-custom mb-0">Integrasi & API</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text text-muted mb-4">Hubungkan toko Anda dengan layanan pihak ketiga.</p>
+                  <form onsubmit="return false;">
+                    <div class="mb-4">
+                      <label class="form-label">Google Analytics</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fab fa-google"></i></span>
+                        <input type="text" class="form-control" placeholder="UA-XXXXXXXXX-X">
+                      </div>
+                      <div class="form-text">Masukkan Tracking ID untuk memonitor trafik situs.</div>
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label">Facebook Pixel</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fab fa-facebook"></i></span>
+                        <input type="text" class="form-control" placeholder="1234567890123456">
+                      </div>
+                      <div class="form-text">Masukkan Pixel ID untuk melacak konversi.</div>
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label">API Key RajaOngkir</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-shipping-fast"></i></span>
+                        <input type="password" class="form-control" id="rajaongkirKey" value="a1b2c3d4e5f6g7h8i9j0">
+                        <button class="btn btn-primary-custom" type="button" id="toggleRajaongkirKey"><i class="fas fa-eye"></i></button>
+                      </div>
+                      <div class="form-text">API Key untuk integrasi biaya pengiriman otomatis.</div>
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label">Gateway Pembayaran</label>
+                      <div class="input-group">
+                        <select class="form-select" style="max-width: 150px;">
+                          <option>Midtrans</option>
+                          <option selected>Xendit</option>
+                          <option>DOKU</option>
+                        </select>
+                        <input type="password" class="form-control" id="paymentApiKey" value="xnd_prod_abcdefghijkl">
+                        <button class="btn btn-primary-custom" type="button" id="togglePaymentApiKey"><i class="fas fa-eye"></i></button>
+                      </div>
+                      <div class="form-text">Pilih gateway dan masukkan API Key yang sesuai.</div>
+                    </div>
+                  </form>
+                  <hr class="my-4">
+                  <h6 class="mb-3">Mode Perawatan & Keamanan</h6>
+                  <div class="mb-4">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="maintenanceMode"/>
+                      <label class="form-check-label" for="maintenanceMode">Aktifkan Mode Perawatan</label>
+                    </div>
+                    <div class="form-text ps-1">Situs akan menampilkan halaman khusus dan tidak dapat diakses pelanggan.</div>
                   </div>
-                  <div class="card-body">
-                    <form>
-                      <div class="mb-3">
-                        <label for="currentPassword" class="form-label"
-                          >Password Saat Ini</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="currentPassword"
-                          placeholder="Masukkan password lama Anda"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label for="newPassword" class="form-label"
-                          >Password Baru</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="newPassword"
-                          placeholder="Masukkan password baru"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label for="confirmPassword" class="form-label"
-                          >Konfirmasi Password Baru</label
-                        >
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="confirmPassword"
-                          placeholder="Ketik ulang password baru"
-                        />
-                      </div>
-                    </form>
+                  <div class="mb-4">
+                    <label for="maintenanceMessage" class="form-label">Pesan Halaman Perawatan</label>
+                    <textarea class="form-control" id="maintenanceMessage" rows="3">Kami sedang melakukan pembaruan untuk meningkatkan pengalaman Anda. SmartFarm akan segera kembali!</textarea>
                   </div>
-                  <div class="card-footer text-end">
-                    <button type="submit" class="btn btn-primary-custom">
-                      Ubah Password
+                  <div class="d-flex flex-wrap gap-2">
+                    <button type="button" class="btn btn-warning" id="clear-cache-btn">
+                      <i class="fas fa-broom me-2"></i>Hapus Cache Situs
                     </button>
+                    <a href="../public/login.html" class="btn btn-outline-danger">
+                      <i class="fas fa-sign-out-alt me-2"></i>Logout Semua Sesi
+                    </a>
                   </div>
+                </div>
+                <div class="card-footer text-end">
+                  <button type="button" class="btn btn-primary-custom" id="save-advanced-btn">Simpan Pengaturan Lanjutan</button>
                 </div>
               </div>
             </div>
@@ -533,5 +400,172 @@ SmartFarm menyediakan semua kebutuhan hidroponik dan urban farming dengan kualit
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/admin_script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const header = document.querySelector('.content-header');
+          const nav = document.querySelector('.settings-nav');
+          if (header) header.classList.add('fade-in');
+          if (nav) { setTimeout(() => { nav.classList.add('fade-in'); }, 150); }
+          const allTabs = document.querySelectorAll('.settings-nav .nav-link');
+          const firstActiveCard = document.querySelector('.tab-pane.active .settings-card');
+          if (firstActiveCard) { setTimeout(() => { firstActiveCard.classList.add('fade-in'); }, 300); }
+          allTabs.forEach(tab => {
+              tab.addEventListener('shown.bs.tab', event => {
+                  const newTabPane = document.querySelector(event.target.getAttribute('data-bs-target'));
+                  const cardsInNewTab = newTabPane.querySelectorAll('.settings-card');
+                  cardsInNewTab.forEach((card, index) => {
+                      card.style.animationDelay = `${index * 100}ms`;
+                      card.classList.add('fade-in');
+                  });
+              });
+              tab.addEventListener('hide.bs.tab', event => {
+                  const oldTabPane = document.querySelector(event.target.getAttribute('data-bs-target'));
+                  if (oldTabPane) {
+                      const cardsInOldTab = oldTabPane.querySelectorAll('.settings-card');
+                      cardsInOldTab.forEach(card => card.classList.remove('fade-in'));
+                  }
+              });
+          });
+          
+          function setupImagePreview(inputId, previewId) {
+              const inputElement = document.getElementById(inputId);
+              const previewElement = document.getElementById(previewId);
+              if (inputElement && previewElement) {
+                  inputElement.addEventListener('change', function(event) {
+                      if (event.target.files[0]) {
+                          const reader = new FileReader();
+                          reader.onload = (e) => { previewElement.src = e.target.result; }
+                          reader.readAsDataURL(event.target.files[0]);
+                      }
+                  });
+              }
+          }
+          setupImagePreview('logoUpload', 'logoPreview');
+          setupImagePreview('faviconUpload', 'faviconPreview');
+          setupImagePreview('profilePhotoUpload', 'profilePhotoPreview'); // FUNGSI BARU DITAMBAHKAN
+
+          function setupPasswordToggle(toggleId, inputId) {
+              const toggleButton = document.getElementById(toggleId);
+              const inputField = document.getElementById(inputId);
+              if (toggleButton && inputField) {
+                  toggleButton.addEventListener('click', function() {
+                      const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+                      inputField.setAttribute('type', type);
+                      this.querySelector('i').classList.toggle('fa-eye');
+                      this.querySelector('i').classList.toggle('fa-eye-slash');
+                  });
+              }
+          }
+          setupPasswordToggle('toggleCurrentPassword', 'currentPassword');
+          setupPasswordToggle('toggleNewPassword', 'newPassword');
+          setupPasswordToggle('toggleConfirmPassword', 'confirmPassword');
+          setupPasswordToggle('toggleRajaongkirKey', 'rajaongkirKey');
+          setupPasswordToggle('togglePaymentApiKey', 'paymentApiKey');
+          
+          document.querySelectorAll('.btn-hapus-banner').forEach(tombol => {
+              tombol.addEventListener('click', function (event) {
+                  event.preventDefault();
+                  const bannerElement = this.closest('.d-flex.align-items-center');
+                  Swal.fire({
+                      title: 'Anda yakin?', text: "Banner yang dihapus tidak dapat dikembalikan!", icon: 'warning',
+                      showCancelButton: true, confirmButtonColor: '#d33', cancelButtonColor: '#6c757d',
+                      confirmButtonText: 'Ya, hapus!', cancelButtonText: 'Batal'
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          bannerElement.remove();
+                          Swal.fire({
+                              title: 'Dihapus!', text: 'Banner promosi telah dihapus.', icon: 'success',
+                              customClass: { confirmButton: 'btn btn-primary-custom' }, buttonsStyling: false
+                          });
+                      }
+                  });
+              });
+          });
+
+          const announcementSwitch = document.getElementById('announcementBar');
+          const announcementBar = document.getElementById('announcement-bar-container');
+          const announcementBarText = document.getElementById('announcement-bar-text');
+          const announcementTextInput = document.getElementById('announcementText');
+          function updateAnnouncementBar() {
+            if (!announcementSwitch || !announcementBar || !announcementBarText || !announcementTextInput) return;
+            if (announcementSwitch.checked) {
+              announcementBarText.textContent = announcementTextInput.value;
+              announcementBar.classList.add('show');
+              document.body.classList.add('announcement-active');
+            } else {
+              announcementBar.classList.remove('show');
+              document.body.classList.remove('announcement-active');
+            }
+            announcementTextInput.disabled = !announcementSwitch.checked;
+          }
+          if (announcementSwitch) {
+            updateAnnouncementBar();
+            announcementSwitch.addEventListener('change', updateAnnouncementBar);
+            announcementTextInput.addEventListener('input', updateAnnouncementBar);
+          }
+
+          const clearCacheBtn = document.getElementById('clear-cache-btn');
+          if (clearCacheBtn) {
+            clearCacheBtn.addEventListener('click', function() {
+              Swal.fire({
+                title: 'Hapus Cache?', text: "Tindakan ini akan membersihkan cache situs.", icon: 'warning',
+                showCancelButton: true, confirmButtonColor: '#ffc107', cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus Cache', cancelButtonText: 'Batal'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  const loadingAlert = Swal.fire({
+                    title: 'Menghapus...', text: 'Harap tunggu sebentar.',
+                    allowOutsideClick: false, didOpen: () => { Swal.showLoading(); }
+                  });
+                  setTimeout(() => {
+                    loadingAlert.close();
+                    Swal.fire({
+                      title: 'Berhasil!', text: 'Cache situs telah berhasil dihapus.', icon: 'success',
+                      customClass: { confirmButton: 'btn btn-primary-custom' }, buttonsStyling: false
+                    });
+                  }, 1500);
+                }
+              });
+            });
+          }
+
+          const maintenanceSwitch = document.getElementById('maintenanceMode');
+          const maintenanceMessage = document.getElementById('maintenanceMessage');
+          function toggleMaintenanceMessage() {
+              if(!maintenanceSwitch || !maintenanceMessage) return;
+              maintenanceMessage.disabled = !maintenanceSwitch.checked;
+          }
+          if(maintenanceSwitch) {
+              toggleMaintenanceMessage();
+              maintenanceSwitch.addEventListener('change', function() {
+                  toggleMaintenanceMessage();
+                  if (this.checked) {
+                      Swal.fire({
+                          title: 'Mode Perawatan Diaktifkan',
+                          text: 'Situs Anda sekarang tidak dapat diakses oleh pelanggan.',
+                          icon: 'info',
+                          customClass: { confirmButton: 'btn btn-primary-custom' },
+                          buttonsStyling: false
+                      });
+                  }
+              });
+          }
+
+          function showSaveConfirmation(event) {
+            event.preventDefault();
+            Swal.fire({
+              title: 'Tersimpan!', text: 'Pengaturan Anda telah berhasil disimpan.', icon: 'success',
+              timer: 2000, showConfirmButton: false, toast: true, position: 'top-end'
+            });
+          }
+          document.getElementById('save-general-btn')?.addEventListener('click', showSaveConfirmation);
+          document.getElementById('save-profile-btn')?.addEventListener('click', showSaveConfirmation);
+          document.getElementById('change-password-btn')?.addEventListener('click', showSaveConfirmation);
+          document.getElementById('save-display-btn')?.addEventListener('click', showSaveConfirmation);
+          document.getElementById('save-advanced-btn')?.addEventListener('click', showSaveConfirmation);
+      });
+    </script>
   </body>
 </html>
