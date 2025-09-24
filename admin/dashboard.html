@@ -18,9 +18,61 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
+
+    <style>
+      .dropdown-item p {
+        white-space: normal;
+      }
+      .clickable-row {
+        cursor: pointer;
+      }
+      .top-customer-item {
+        transition: background-color 0.2s ease-in-out;
+        cursor: pointer;
+      }
+      .top-customer-item:hover,
+      .clickable-row:hover {
+        background-color: #f8f9fa;
+      }
+      .stat-card-modern {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+      .stat-card-modern:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+      }
+      .stat-card-link {
+        text-decoration: none;
+        color: inherit;
+      }
+      .stat-card-link:hover {
+        color: inherit;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .header-actions > .form-control,
+      .header-actions > .dropdown {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      .header-actions > .form-control {
+        animation-delay: 0.2s;
+      }
+      .header-actions > .dropdown {
+        animation-delay: 0.4s;
+        z-index: 10;
+      }
+    </style>
   </head>
   <body>
-    
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
@@ -35,97 +87,196 @@
             <input
               type="text"
               class="form-control me-2"
-              placeholder="Search..."
+              placeholder="Cari di dashboard..."
+              id="searchInput"
             />
-            <button class="btn btn-light"><i class="fas fa-bell"></i></button>
+            <div class="dropdown">
+              <button
+                class="btn btn-light position-relative"
+                type="button"
+                id="notificationDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fas fa-bell"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                >
+                  3
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end p-2"
+                aria-labelledby="notificationDropdown"
+                style="min-width: 300px; max-height: 400px; overflow-y: auto"
+              >
+                <li><h6 class="dropdown-header">Notifications</h6></li>
+                <li>
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="order/order_detailBudiSantoso.html"
+                  >
+                    <i class="fas fa-shopping-cart text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Pesanan Baru #876371</strong>
+                      <p class="mb-0 text-muted small">
+                        dari Budi Santoso telah diterima.
+                      </p>
+                      <small class="text-muted">3 menit yang lalu</small>
+                    </div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="detailproduct/product_Peace Lily.html"
+                  >
+                    <i class="fas fa-box-open text-warning me-3 mt-1"></i>
+                    <div>
+                      <strong>Stok Rendah</strong>
+                      <p class="mb-0 text-muted small">
+                        Peace Lily tersisa 3 pcs.
+                      </p>
+                      <small class="text-muted">1 jam yang lalu</small>
+                    </div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="detailproduct/product_Bibit Aglaonema.html"
+                  >
+                    <i
+                      class="fas fa-triangle-exclamation text-danger me-3 mt-1"
+                    ></i>
+                    <div>
+                      <strong>Customer Baru</strong>
+                      <p class="mb-0 text-muted small">
+                        Bibit Aglaonema telah habis.segera restock.
+                      </p>
+                      <small class="text-muted">3 hari yang lalu</small>
+                    </div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item text-center text-primary small"
+                    href="notif.html"
+                  >
+                    Lihat semua notifikasi
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </header>
 
         <div class="row">
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper primary-bg">
-                    <i class="fas fa-dollar-sign"></i>
+              <a
+                href="analytic.html#revenue-filter-group"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper primary-bg">
+                      <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <span class="badge badge-success-light"
+                      ><i class="fas fa-arrow-up"></i> 20%</span
+                    >
                   </div>
-                  <span class="badge badge-success-light">
-                    <i class="fas fa-arrow-up"></i> 20%
-                  </span>
+                  <p class="card-title-modern">Total Revenue</p>
+                  <h3 class="card-value-modern">$26,35,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Revenue</p>
-                <h3 class="card-value-modern">$26,35,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper info-bg">
-                    <i class="fas fa-file-invoice-dollar"></i>
+              <a
+                href="analytic.html#sales-filter-group"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper info-bg">
+                      <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <span class="badge badge-danger-light"
+                      ><i class="fas fa-arrow-down"></i> 1.8%</span
+                    >
                   </div>
-                  <span class="badge badge-danger-light">
-                    <i class="fas fa-arrow-down"></i> 1.8%
-                  </span>
+                  <p class="card-title-modern">Total Sales</p>
+                  <h3 class="card-value-modern">$56,35,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Sales</p>
-                <h3 class="card-value-modern">$56,35,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper warning-bg">
-                    <i class="fas fa-box-open"></i>
+              <a
+                href="analytic.html#dynamic-product-filter"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper warning-bg">
+                      <i class="fas fa-box-open"></i>
+                    </div>
+                    <span class="badge badge-warning-light"
+                      ><i class="fas fa-arrow-up"></i> 1.8%</span
+                    >
                   </div>
-                  <span class="badge badge-warning-light">
-                    <i class="fas fa-arrow-up"></i> 1.8%
-                  </span>
+                  <p class="card-title-modern">Total Products</p>
+                  <h3 class="card-value-modern">$4,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Products</p>
-                <h3 class="card-value-modern">$4,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card stat-card-modern">
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-start mb-3"
-                >
-                  <div class="icon-wrapper success-bg">
-                    <i class="fas fa-money-bill-wave"></i>
+              <a
+                href="analytic.html#expenses-filter-group"
+                class="stat-card-link"
+              >
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper success-bg">
+                      <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <span class="badge badge-success-light"
+                      ><i class="fas fa-arrow-up"></i> 1.2%</span
+                    >
                   </div>
-                  <span class="badge badge-success-light">
-                    <i class="fas fa-arrow-up"></i> 1.2%
-                  </span>
+                  <p class="card-title-modern">Total Expenses</p>
+                  <h3 class="card-value-modern">$35,262</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-                <p class="card-title-modern">Total Expenses</p>
-                <h3 class="card-value-modern">$35,262</h3>
-                <p class="card-text-modern text-muted">in last week</p>
-              </div>
+              </a>
             </div>
           </div>
         </div>
 
         <div class="row g-4 mt-2">
           <div class="col-lg-8">
-            <div class="card dashboard-card h-100">
+            <div id="sales-statistics-card" class="card dashboard-card h-100">
               <div class="card-body">
                 <div
                   class="d-flex justify-content-between align-items-center mb-3"
@@ -135,13 +286,27 @@
                     <button
                       class="btn btn-outline-secondary btn-sm dropdown-toggle"
                       type="button"
+                      id="salesPeriodBtn"
                       data-bs-toggle="dropdown"
                     >
                       This Week
                     </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <ul class="dropdown-menu" id="salesPeriodOptions">
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="week"
+                          >This Week</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="month"
+                          >This Month</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="year"
+                          >This Year</a
+                        >
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -151,9 +316,8 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-4">
-            <div class="card dashboard-card h-100">
+            <div id="orders-statistics-card" class="card dashboard-card h-100">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Orders Statistics</h5>
                 <div
@@ -196,22 +360,24 @@
               </div>
             </div>
           </div>
-
           <div class="col-12">
-            <div class="card dashboard-card mt-4">
+            <div id="product-statistics-card" class="card dashboard-card mt-4">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Product Statistics</h5>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item product-stat-item">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
                     <div class="d-flex align-items-center">
                       <img
-                        src="https://i.pinimg.com/736x/80/5d/69/805d6987ade84a4bca8a8c6a5ec9092c.jpg"
+                        src="https://bibitonline.com/wp-content/uploads/Tanaman-Aglaonema-Kochin.jpg"
                         alt="Product"
                         class="rounded me-3"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="mb-0">Bibit Cabai Rawit Unggul</h6>
-                        <small class="text-muted">ID: #PROD-001</small>
+                        <h6 class="mb-0">Bibit Aglaonema</h6>
+                        <small class="text-muted">ID: #P003</small>
                       </div>
                     </div>
                     <div class="ms-auto text-end" style="width: 200px">
@@ -224,23 +390,23 @@
                           class="progress-bar bg-primary"
                           role="progressbar"
                           style="width: 85%"
-                          aria-valuenow="85"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
                         ></div>
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item product-stat-item">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
                     <div class="d-flex align-items-center">
                       <img
-                        src="https://i.pinimg.com/736x/7d/a7/b9/7da7b99ff39d5c65084802fc29de8f03.jpg"
+                        src="https://wp.plantsnap.com/wp-content/uploads/2019/09/peace-lily-in-pot.jpg"
                         alt="Product"
                         class="rounded me-3"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="mb-0">Pupuk Organik Cair</h6>
-                        <small class="text-muted">ID: #PROD-002</small>
+                        <h6 class="mb-0">Peace Lily</h6>
+                        <small class="text-muted">ID: #P002 </small>
                       </div>
                     </div>
                     <div class="ms-auto text-end" style="width: 200px">
@@ -253,23 +419,23 @@
                           class="progress-bar bg-info"
                           role="progressbar"
                           style="width: 70%"
-                          aria-valuenow="70"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
                         ></div>
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item product-stat-item">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
                     <div class="d-flex align-items-center">
                       <img
-                        src="https://i.pinimg.com/1200x/d7/65/92/d76592ddfd5d0e46d83a0f3ac188ce49.jpg"
+                        src="https://www.studioplant.com/media/catalog/product/cache/5f475ed5c56894ef7a51968da51e8dc7/m/o/monstera_-_4.jpg"
                         alt="Product"
                         class="rounded me-3"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="mb-0">Alat Siram Otomatis</h6>
-                        <small class="text-muted">ID: #PROD-003</small>
+                        <h6 class="mb-0">Monstera Deliciosa</h6>
+                        <small class="text-muted">ID: #P004</small>
                       </div>
                     </div>
                     <div class="ms-auto text-end" style="width: 200px">
@@ -282,9 +448,6 @@
                           class="progress-bar bg-warning"
                           role="progressbar"
                           style="width: 45%"
-                          aria-valuenow="45"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
                         ></div>
                       </div>
                     </div>
@@ -297,7 +460,7 @@
 
         <div class="row g-4 mt-1">
           <div class="col-lg-8">
-            <div class="card dashboard-card">
+            <div id="recent-orders-card" class="card dashboard-card">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Recent Orders</h5>
                 <div class="table-responsive">
@@ -313,7 +476,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailRevanPutra.html"
+                      >
                         <td class="fw-bold">#876364</td>
                         <td>Revan Putra</td>
                         <td>Bibit Cabai</td>
@@ -325,7 +491,10 @@
                           >
                         </td>
                       </tr>
-                      <tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailCitraLestari.html"
+                      >
                         <td class="fw-bold">#876365</td>
                         <td>Citra Lestari</td>
                         <td>Pupuk Organik</td>
@@ -337,7 +506,10 @@
                           >
                         </td>
                       </tr>
-                      <tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailAndiBudi.html"
+                      >
                         <td class="fw-bold">#876366</td>
                         <td>Andi Budi</td>
                         <td>Alat Siram</td>
@@ -349,7 +521,10 @@
                           >
                         </td>
                       </tr>
-                      <tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailSiskaAmelia.html"
+                      >
                         <td class="fw-bold">#876367</td>
                         <td>Siska Amelia</td>
                         <td>Polybag (x50)</td>
@@ -361,16 +536,17 @@
                           >
                         </td>
                       </tr>
-                      <tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailArsyaAji.html"
+                      >
                         <td class="fw-bold">#876368</td>
                         <td>Arsya Aji</td>
                         <td>Benih Selada</td>
                         <td>10</td>
                         <td class="fw-bold">Rp 30.000</td>
                         <td>
-                          <span class="badge status-badge-pending"
-                            >Pending</span
-                          >
+                          <span class="badge status-badge-pending">Pending</span>
                         </td>
                       </tr>
                     </tbody>
@@ -379,70 +555,129 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-4">
-            <div class="card dashboard-card">
+            <div id="top-customers-card" class="card dashboard-card">
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Top Customers</h5>
-                <ul class="list-unstyled">
-                  <li class="top-customer-item">
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Revan Putra"
+                    data-username="@revanputra"
+                    data-orders="125"
+                    data-spending="Rp 15.750.000"
+                    data-profile-link="customer_detail_revan.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/150?img=1"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Revan Putra</h6>
                       <small class="text-muted">@revanputra</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">125</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
-                  <li class="top-customer-item">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Citra Lestari"
+                    data-username="@citra"
+                    data-orders="98"
+                    data-spending="Rp 12.120.000"
+                    data-profile-link="customer_detail_citra.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/150?img=37"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Citra Lestari</h6>
                       <small class="text-muted">@citra</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">98</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
-                  <li class="top-customer-item">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Andi Budi"
+                    data-username="@andib"
+                    data-orders="76"
+                    data-spending="Rp 9.850.000"
+                    data-profile-link="customer_detail_andi.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/400?img=33"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Andi Budi</h6>
                       <small class="text-muted">@andib</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">76</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
-                  <li class="top-customer-item">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Siska Amelia"
+                    data-username="@siska_a"
+                    data-orders="54"
+                    data-spending="Rp 7.200.000"
+                    data-profile-link="customer_detail_siska.html"
+                  >
                     <img
-                      src="https://via.placeholder.com/40"
+                      src="https://i.pravatar.cc/400?img=49"
                       alt="Customer"
                       class="rounded-circle"
                     />
-                    <div class="customer-info">
+                    <div class="customer-info ms-3">
                       <h6 class="mb-0">Siska Amelia</h6>
                       <small class="text-muted">@siska_a</small>
                     </div>
-                    <div class="customer-orders ms-auto">
-                      <i class="fas fa-shopping-cart text-muted me-2"></i>
+                    <div class="customer-orders ms-auto text-end">
                       <span class="fw-bold">54</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Arsya Aji"
+                    data-username="@arsya_aji"
+                    data-orders="51"
+                    data-spending="Rp 7.050.000"
+                    data-profile-link="customer_detail_arsya.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/150?img=52"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Arsya Aji</h6>
+                      <small class="text-muted">@arsya_aji</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">51</span>
+                      <small class="text-muted d-block">orders</small>
                     </div>
                   </li>
                 </ul>
@@ -452,109 +687,54 @@
         </div>
       </div>
     </div>
+    <div
+      class="modal fade"
+      id="customerDetailModal"
+      tabindex="-1"
+      aria-labelledby="customerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="customerModalLabel">
+              Ringkasan Customer
+            </h5>
+          </div>
+          <div class="modal-body p-4">
+            <h4 id="modalCustomerName" class="mb-1"></h4>
+            <p id="modalCustomerUsername" class="text-muted mb-4"></p>
+
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Total Pesanan</small>
+                <p id="modalTotalOrders" class="fs-4 fw-bold text-prymary"></p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Total Belanja</small>
+                <p
+                  id="modalTotalSpending"
+                  class="fs-4 fw-bold text-success"
+                ></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary-custom"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/admin_script.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Chart.js untuk Sales Statistics (WARNA BARU)
-        const salesChartCanvasNew = document.getElementById("salesChartNew");
-        if (salesChartCanvasNew) {
-          const ctxSales = salesChartCanvasNew.getContext("2d");
-          new Chart(ctxSales, {
-            type: "line",
-            data: {
-              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-              datasets: [
-                {
-                  label: "Sales",
-                  data: [65, 59, 80, 81, 56, 55, 40],
-                  fill: false,
-                  borderColor: "#235347", // GANTI ke warna Hijau Tua (Primary)
-                  tension: 0.4,
-                  pointBackgroundColor: "#235347", // GANTI ke warna Hijau Tua (Primary)
-                  pointRadius: 5,
-                },
-                {
-                  label: "Revenue",
-                  data: [28, 48, 40, 19, 86, 27, 90],
-                  fill: false,
-                  borderColor: "#8EB69B", // GANTI ke warna Hijau Abu-abu (Border Color)
-                  tension: 0.4,
-                  pointBackgroundColor: "#8EB69B", // GANTI ke warna Hijau Abu-abu
-                  pointRadius: 5,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "top",
-                  align: "end",
-                  labels: {
-                    usePointStyle: true,
-                    boxWidth: 8,
-                    color: "#051F20" // GANTI warna teks legenda
-                  },
-                },
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: {
-                    color: "#163832" // GANTI warna teks di sumbu Y
-                  },
-                  grid: {
-                    color: '#DAF1DE' // GANTI warna garis grid
-                  }
-                },
-                x: {
-                   ticks: {
-                    color: "#163832" // GANTI warna teks di sumbu X
-                  }
-                }
-              },
-            },
-          });
-        }
 
-        // Chart.js untuk Orders Statistics (WARNA BARU)
-        const ordersChartCanvas = document.getElementById("ordersChart");
-        if (ordersChartCanvas) {
-          const ctxOrders = ordersChartCanvas.getContext("2d");
-          new Chart(ctxOrders, {
-            type: "doughnut",
-            data: {
-              labels: ["Completed", "Pending", "Canceled"],
-              datasets: [
-                {
-                  label: "Orders",
-                  data: [1200, 345, 123],
-                  backgroundColor: [
-                    "#235347", // GANTI Completed ke Hijau Tua (Primary)
-                    "#ffc107", // Biarkan Pending tetap Kuning (universal)
-                    "#dc3545", // Biarkan Canceled tetap Merah (universal)
-                  ],
-                  borderColor: "#FFFFFF", // Ganti ke warna kartu (putih)
-                  borderWidth: 4,
-                  hoverOffset: 8,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              cutout: "75%",
-              plugins: {
-                legend: {
-                  display: false,
-                },
-              },
-            },
-          });
-        }
-      });
-    </script>
   </body>
 </html>
