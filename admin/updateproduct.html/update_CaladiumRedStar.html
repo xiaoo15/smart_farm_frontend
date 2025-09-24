@@ -13,147 +13,174 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../assets/css/admin_style.css" />
   </head>
   <body>
-  <div class="admin-wrapper">
-    <div id="sidebar-container"></div>
-    <div id="overlay"></div>
-    <div class="main-content">
-      <header class="content-header">
-        <div>
-          <h2>Update Product</h2>
-          <p>Change the product details below.</p>
-        </div>
-      </header>
-
-      <div class="dashboard-section">
-        <form>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="productCode" class="form-label">Kode</label>
-              <input
-                type="text"
-                class="form-control"
-                id="productCode"
-                value="P001"
-                readonly
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="productName" class="form-label">Nama</label>
-              <input
-                type="text"
-                class="form-control"
-                id="productName"
-                value="Caladium Red Star"
-              />
-            </div>
+    <div class="admin-wrapper">
+      <div id="sidebar-container"></div>
+      <div id="overlay"></div>
+      <div class="main-content">
+        <header class="content-header">
+          <div>
+            <h2>Update Product</h2>
+            <p>Change the product details below.</p>
           </div>
+        </header>
 
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="productUnit" class="form-label">Satuan</label>
-              <input
-                type="text"
-                class="form-control"
-                id="productUnit"
-                value="120 Pcs"
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="productPrice" class="form-label">Harga</label>
-              <div class="input-group">
-                <span class="input-group-text">Rp</span>
+        <div class="dashboard-section">
+          <form onsubmit="return false;">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="productCode" class="form-label">Kode</label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control"
-                  id="productPrice"
-                  value="75000"
+                  id="productCode"
+                  value="P001"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="productName" class="form-label">Nama</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  value="Caladium Red Star"
                 />
               </div>
             </div>
-          </div>
 
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="productCategory" class="form-label">Kategori</label>
-              <select class="form-select" id="productCategory">
-                <option value="plant" selected>Tanaman</option>
-                <option value="seed">Seed</option>
-                <option value="tools">Tools</option>
-                <option value="vegetables">Vegetables</option>
-                <option value="more">More</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label d-block">Status</label>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="productStatus" id="statusAktif" value="aktif" checked>
-                <label class="form-check-label" for="statusAktif">Aktif</label>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="productStock" class="form-label">Jumlah Stok</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="productStock"
+                  placeholder="Masukkan jumlah stok"
+                  value="120"
+                />
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="productStatus" id="statusNonaktif" value="nonaktif">
-                <label class="form-check-label" for="statusNonaktif">Nonaktif</label>
+              <div class="col-md-6">
+                <label for="productUnitValue" class="form-label">Satuan</label>
+                <div class="input-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="productUnitValue"
+                    placeholder="Contoh: 1"
+                    aria-label="Nilai satuan"
+                    value="1"
+                  />
+                  <select class="form-select" id="productUnitType" style="max-width: 120px;">
+                    <option value="Pcs" selected>Pcs</option>
+                    <option value="Ikat">Ikat</option>
+                    <option value="Gram">Gram</option>
+                    <option value="Ml">Ml</option>
+                    <option value="Kg">Kg</option>
+                  </select>
+                </div>
+                <div class="form-text">Contoh: 1 Pcs, 100 Gram, 500 Ml</div>
               </div>
             </div>
-          </div>
-          
-          <div class="mb-3">
-             <label for="productDescription" class="form-label">Deskripsi</label>
-             <textarea class="form-control" id="productDescription" rows="4" placeholder="Masukkan deskripsi lengkap produk di sini...">Caladium Red Star adalah salah satu tanaman hias tropis yang paling memukau, terkenal karena daunnya yang memiliki warna merah menyala dan corak yang dramatis.</textarea>
-          </div>
-
-          <div class="mb-4">
-            <label for="productImage" class="form-label">Gambar</label>
-            <input class="form-control" type="file" id="productImage" />
-            <div class="form-text">
-              Pilih gambar baru untuk mengganti gambar lama.
+            <div class="row mb-3">
+              <div class="col-md-6">
+                  <label for="productPrice" class="form-label">Harga per Satuan</label>
+                  <div class="input-group">
+                    <span class="input-group-text">Rp</span>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="productPrice"
+                      value="75000"
+                    />
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <label for="productCategory" class="form-label">Kategori</label>
+                <select class="form-select" id="productCategory">
+                  <option value="Tanaman" selected>Tanaman</option>
+                  <option value="Bibit">Bibit</option>
+                  <option value="Pupuk">Pupuk</option>
+                  <option value="Alat">Alat</option>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div class="d-flex justify-content-between">
-            <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-primary-custom">
-                <i class="fas fa-sync-alt me-2"></i>Update
-              </button>
-              <a href="products.html" class="btn btn-secondary-custom">
-                Cancel
-              </a>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                  <label class="form-label d-block">Status</label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="productStatus" id="statusAktif" value="aktif" checked>
+                    <label class="form-check-label" for="statusAktif">Aktif</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="productStatus" id="statusNonaktif" value="nonaktif">
+                    <label class="form-check-label" for="statusNonaktif">Nonaktif</label>
+                  </div>
+              </div>
             </div>
-          </div>
-        </form>
+            
+            <div class="mb-3">
+               <label for="productDescription" class="form-label">Deskripsi</label>
+               <textarea class="form-control" id="productDescription" rows="4" placeholder="Masukkan deskripsi lengkap produk di sini...">Caladium Red Star adalah salah satu tanaman hias tropis yang paling memukau, terkenal karena daunnya yang memiliki warna merah menyala dan corak yang dramatis.</textarea>
+            </div>
+
+            <div class="mb-4">
+              <label for="productImage" class="form-label">Gambar</label>
+              <input class="form-control" type="file" id="productImage" />
+              <div class="form-text">
+                Pilih gambar baru untuk mengganti gambar lama.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary-custom" id="update-product-btn">
+                  <i class="fas fa-sync-alt me-2"></i>Update
+                </button>
+                <a href="../products.html" class="btn btn-secondary-custom">
+                  Cancel
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../assets/js/admin_script.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Event listener untuk tombol Update
+        $("#update-product-btn").on("click", function (event) {
+          // Mencegah form untuk submit dan reload halaman
+          event.preventDefault();
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/js/admin_script.js"></script>
-  <script>
-    $(document).ready(function () {
-      // Script untuk modal hapus (tidak berubah)
-      $(".btn-danger-custom").on("click", function () {
-        var productName = $("#productName").val();
-        $("#productNameToDelete").text(productName);
-        var myModal = new bootstrap.Modal(
-          document.getElementById("deleteConfirmModal")
-        );
-        myModal.show();
+          // Tampilkan notifikasi toast
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Produk berhasil diupdate',
+            showConfirmButton: false,
+            timer: 2000, // Hilang setelah 2 detik
+            timerProgressBar: true
+          });
+
+          // Tunggu 2 detik, lalu kembali ke halaman daftar produk
+          setTimeout(function() {
+            window.location.href = '../products.html';
+          }, 2000);
+        });
       });
-
-      $("#confirmDeleteBtn").on("click", function () {
-        sessionStorage.setItem("toastMessage", "Produk berhasil dihapus!");
-        var myModalEl = document.getElementById("deleteConfirmModal");
-        var modal = bootstrap.Modal.getInstance(myModalEl);
-        modal.hide();
-        window.location.href = "my_product.html";
-      });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

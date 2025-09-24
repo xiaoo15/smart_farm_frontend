@@ -536,3 +536,77 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- MULAI APLIKASI ---
   initializeApp();
 });
+
+// --- [MULAI] KODE FINAL ANTI-FRUSTRASI (GAYA SUBSCRIBE COUNT) ---
+
+/**
+ * Menganimasikan angka dari nilai awal ke nilai akhir dengan cepat.
+ * @param {HTMLElement} element - Elemen h3 yang menampilkan angka.
+ * @param {number} start - Angka awal.
+ * @param {number} end - Angka tujuan.
+ * @param {number} duration - Durasi animasi dalam milidetik.
+ */
+function animateCounter(element, start, end, duration) {
+    let startTime = null;
+
+    const step = (currentTime) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        
+        const prefix = element.getAttribute('data-prefix') || '';
+        element.textContent = prefix + currentValue.toLocaleString('en-US');
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            element.textContent = prefix + end.toLocaleString('en-US');
+            element.setAttribute('data-current-value', end);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// --- INISIALISASI DAN EKSEKUSI ---
+
+// 1. Inisialisasi semua counter saat halaman pertama kali dimuat
+document.querySelectorAll('.card-value-modern').forEach(element => {
+    const finalValue = parseInt(element.getAttribute('data-value'));
+    const text = element.textContent || '';
+    
+    // Simpan prefix (misal: '$') jika ada
+    if (text.startsWith('$')) {
+        element.setAttribute('data-prefix', '$');
+    }
+    
+    element.setAttribute('data-current-value', '0');
+    // Animasi awal dari 0 ke nilai target
+    animateCounter(element, 0, finalValue, 1500);
+});
+
+
+// 2. Atur interval untuk update berkala
+setInterval(() => {
+    document.querySelectorAll('.card-value-modern').forEach(element => {
+        const indicatorElement = element.closest('.card-body').querySelector('.badge');
+        let currentValue = parseInt(element.getAttribute('data-current-value'));
+
+        const percentageChange = (Math.random() * 10 - 5) / 100;
+        const isPositive = percentageChange >= 0;
+        const newValue = Math.round(currentValue * (1 + percentageChange));
+
+        // Update angka dengan animasi hitung cepat (durasinya singkat: 0.8 detik)
+        animateCounter(element, currentValue, newValue, 800);
+
+        // Update badge persentase
+        if (indicatorElement) {
+            const icon = isPositive ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>';
+            indicatorElement.innerHTML = `${icon} ${Math.abs(percentageChange * 100).toFixed(1)}%`;
+            indicatorElement.classList.remove("badge-success-light", "badge-danger-light");
+            indicatorElement.classList.add(isPositive ? "badge-success-light" : "badge-danger-light");
+        }
+    });
+}, 5000); // Update setiap 5 detik
+
+// --- [SELESAI] KODE FINAL ANTI-FRUSTRASI (GAYA SUBSCRIBE COUNT) ---
+

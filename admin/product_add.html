@@ -55,39 +55,61 @@
 
             <div class="row mb-3">
               <div class="col-md-6">
-                <label for="productUnit" class="form-label">Satuan</label>
+                <label for="productStock" class="form-label">Jumlah Stok</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
-                  id="productUnit"
-                  placeholder="Contoh: Pcs, Kg, Ikat"
+                  id="productStock"
+                  placeholder="Masukkan jumlah stok awal"
                 />
               </div>
               <div class="col-md-6">
-                <label for="productPrice" class="form-label">Harga</label>
+                <label for="productUnitValue" class="form-label">Satuan</label>
                 <div class="input-group">
-                  <span class="input-group-text">Rp</span>
                   <input
                     type="number"
                     class="form-control"
-                    id="productPrice"
-                    placeholder="Contoh: 50000"
+                    id="productUnitValue"
+                    placeholder="Contoh: 100"
+                    aria-label="Nilai satuan"
                   />
+                  <select class="form-select" id="productUnitType" style="max-width: 120px;">
+                    <option value="Pcs">Pcs</option>
+                    <option value="Ikat">Ikat</option>
+                    <option value="Gram">Gram</option>
+                    <option value="Ml">Ml</option>
+                    <option value="Kg">Kg</option>
+                  </select>
                 </div>
+                <div class="form-text">Contoh: 1 Pcs, 100 Gram, 500 Ml</div>
               </div>
             </div>
-            
             <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="productCategory" class="form-label">Kategori</label>
-                <select class="form-select" id="productCategory">
-                  <option selected>Pilih Kategori...</option>
-                  <option value="Tanaman">Tanaman</option>
-                  <option value="Bibit">Bibit</option>
-                  <option value="Pupuk">Pupuk</option>
-                  <option value="Alat">Alat</option>
-                </select>
-              </div>
+                <div class="col-md-6">
+                    <label for="productPrice" class="form-label">Harga per Satuan</label>
+                    <div class="input-group">
+                      <span class="input-group-text">Rp</span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="productPrice"
+                        placeholder="Contoh: 50000"
+                      />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="productCategory" class="form-label">Kategori</label>
+                    <select class="form-select" id="productCategory">
+                      <option selected>Pilih Kategori...</option>
+                      <option value="Tanaman">Tanaman</option>
+                      <option value="Bibit">Bibit</option>
+                      <option value="Pupuk">Pupuk</option>
+                      <option value="Alat">Alat</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
               <div class="col-md-6">
                 <label class="form-label">Status</label>
                 <div>

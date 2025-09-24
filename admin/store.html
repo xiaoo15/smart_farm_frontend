@@ -13,14 +13,6 @@
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
       }
-
-      .settings-card {
-        border: 1px solid var(--bs-card-border-color); /* Memastikan kartu selalu punya border */
-        overflow: hidden; /* Mencegah konten 'bocor' dari sudut */
-      }
-      .settings-card .card-footer {
-        border-top: 1px solid var(--bs-card-border-color); /* Menambahkan garis pemisah atas footer */
-      }
       .content-header, .settings-nav, .settings-card { opacity: 0; }
       .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
       .tab-pane { transition: opacity 0.3s ease-in-out; }
@@ -31,25 +23,15 @@
         padding: 8px 0; z-index: 1050; transition: top 0.4s ease-in-out;
         font-weight: 500; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       }
-
-      .delete-btn {
-        background-color: #6c757d14;
-        transition: background-color 0.2s ease-in-out;
-      }
-
-      .delete-btn i {
-        transition: color 0.2s ease-in-out;
-      }
-
-      .delete-btn:hover {
-        background-color: #6c757d14;
-      }
-
-      .delete-btn:hover i {
-        color: #dc3545;
-      }
       #announcement-bar-container.show { top: 0; }
       body.announcement-active .admin-wrapper { padding-top: 40px; }
+      .settings-card {
+        border: 1px solid var(--bs-card-border-color);
+        overflow: hidden;
+      }
+      .settings-card .card-footer {
+        border-top: 1px solid var(--bs-card-border-color);
+      }
     </style>
   </head>
   <body>
@@ -141,15 +123,15 @@
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="alamatToko" class="form-label">Alamat Toko</label>
-                        <input type="text" class="form-control" id="alamatToko" placeholder="Masukkan alamat lengkap"/>
+                        <input type="text" class="form-control" id="alamatToko" placeholder="Masukkan alamat lengkap" value="Jl. Kebun Raya No. 123, Sidoarjo"/>
                       </div>
                       <div class="col-md-6 mb-3">
                         <label for="emailToko" class="form-label">Email Publik</label>
-                        <input type="email" class="form-control" id="emailToko" placeholder="contoh@smartfarm.com"/>
+                        <input type="email" class="form-control" id="emailToko" placeholder="contoh@smartfarm.com" value="kontak@smartfarm.com"/>
                       </div>
                       <div class="col-md-6 mb-3">
                         <label for="teleponToko" class="form-label">Telepon / WhatsApp</label>
-                        <input type="text" class="form-control" id="teleponToko" placeholder="0812xxxxxxxx"/>
+                        <input type="text" class="form-control" id="teleponToko" placeholder="0812xxxxxxxx" value="081234567890"/>
                       </div>
                     </div>
                     <div class="row">
@@ -157,14 +139,14 @@
                         <label class="form-label">Instagram</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="fab fa-instagram"></i></span>
-                          <input type="text" class="form-control" placeholder="username_smartfarm"/>
+                          <input type="text" class="form-control" placeholder="username_smartfarm" value="smartfarm_indonesia"/>
                         </div>
                       </div>
                       <div class="col-md-6 mb-3">
                         <label class="form-label">Facebook</label>
                         <div class="input-group">
                           <span class="input-group-text"><i class="fab fa-facebook"></i></span>
-                          <input type="text" class="form-control" placeholder="SmartFarmIndonesia"/>
+                          <input type="text" class="form-control" placeholder="SmartFarmIndonesia" value="SmartFarm ID"/>
                         </div>
                       </div>
                     </div>
@@ -192,11 +174,14 @@
                             class="rounded-circle" 
                             width="100" 
                             height="100"
-                            id="profilePhotoPreview" />
-                          <input type="file" id="profilePhotoUpload" class="d-none" accept="image/*"> <button 
+                            id="profilePhotoPreview"
+                          />
+                          <input type="file" id="profilePhotoUpload" class="d-none" accept="image/*">
+                          <button 
                             type="button" 
                             class="btn btn-sm btn-light mt-3"
-                            onclick="document.getElementById('profilePhotoUpload').click();" >
+                            onclick="document.getElementById('profilePhotoUpload').click();"
+                          >
                             Ganti Foto
                           </button>
                         </div>
@@ -227,21 +212,21 @@
                           <label for="currentPassword" class="form-label">Password Saat Ini</label>
                           <div class="input-group">
                             <input type="password" class="form-control" id="currentPassword" placeholder="Masukkan password lama Anda"/>
-                            <button class="btn btn-primary-custom" type="button" id="toggleCurrentPassword"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleCurrentPassword"><i class="fas fa-eye"></i></button>
                           </div>
                         </div>
                         <div class="mb-3">
                           <label for="newPassword" class="form-label">Password Baru</label>
                           <div class="input-group">
                             <input type="password" class="form-control" id="newPassword" placeholder="Masukkan password baru"/>
-                            <button class="btn btn-primary-custom" type="button" id="toggleNewPassword"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword"><i class="fas fa-eye"></i></button>
                           </div>
                         </div>
                         <div class="mb-3">
                           <label for="confirmPassword" class="form-label">Konfirmasi Password Baru</label>
                           <div class="input-group">
                             <input type="password" class="form-control" id="confirmPassword" placeholder="Ketik ulang password baru"/>
-                            <button class="btn btn-primary-custom" type="button" id="toggleConfirmPassword"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword"><i class="fas fa-eye"></i></button>
                           </div>
                         </div>
                       </div>
@@ -294,7 +279,7 @@
                         <span>Promo Awal Bulan - Diskon 15%</span>
                       </div>
                       <div>
-                        <a href="banner/edit_banner_discount.html" class="btn btn-icon btn-sm me-1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="edit_banner.html?id=1" class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-pencil-alt"></i></a>
                         <button type="button" class="btn btn-icon btn-sm delete-btn btn-hapus-banner"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </div>
@@ -304,7 +289,7 @@
                         <span>Paket Lengkap Hidroponik Cuma 100rb!</span>
                       </div>
                       <div>
-                        <a href="banner/edit_banner_set.html" class="btn btn-icon btn-sm me-1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="edit_banner.html?id=2" class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-pencil-alt"></i></a>
                         <button type="button" class="btn btn-icon btn-sm delete-btn btn-hapus-banner"><i class="fas fa-trash-alt"></i></button>
                       </div>
                     </div>
@@ -321,12 +306,12 @@
 
             <div class="tab-pane fade" id="lanjutan-tab-pane" role="tabpanel" aria-labelledby="lanjutan-tab" tabindex="0">
               <div class="card settings-card">
-                <div class="card-header">
-                  <h5 class="card-title-custom mb-0">Integrasi & API</h5>
-                </div>
-                <div class="card-body">
-                  <p class="card-text text-muted mb-4">Hubungkan toko Anda dengan layanan pihak ketiga.</p>
-                  <form onsubmit="return false;">
+                <form onsubmit="return false;">
+                  <div class="card-header">
+                    <h5 class="card-title-custom mb-0">Integrasi & API</h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text text-muted mb-4">Hubungkan toko Anda dengan layanan pihak ketiga.</p>
                     <div class="mb-4">
                       <label class="form-label">Google Analytics</label>
                       <div class="input-group">
@@ -348,7 +333,7 @@
                       <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-shipping-fast"></i></span>
                         <input type="password" class="form-control" id="rajaongkirKey" value="a1b2c3d4e5f6g7h8i9j0">
-                        <button class="btn btn-primary-custom" type="button" id="toggleRajaongkirKey"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-outline-secondary" type="button" id="toggleRajaongkirKey"><i class="fas fa-eye"></i></button>
                       </div>
                       <div class="form-text">API Key untuk integrasi biaya pengiriman otomatis.</div>
                     </div>
@@ -361,36 +346,36 @@
                           <option>DOKU</option>
                         </select>
                         <input type="password" class="form-control" id="paymentApiKey" value="xnd_prod_abcdefghijkl">
-                        <button class="btn btn-primary-custom" type="button" id="togglePaymentApiKey"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePaymentApiKey"><i class="fas fa-eye"></i></button>
                       </div>
                       <div class="form-text">Pilih gateway dan masukkan API Key yang sesuai.</div>
                     </div>
-                  </form>
-                  <hr class="my-4">
-                  <h6 class="mb-3">Mode Perawatan & Keamanan</h6>
-                  <div class="mb-4">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="maintenanceMode"/>
-                      <label class="form-check-label" for="maintenanceMode">Aktifkan Mode Perawatan</label>
+                    <hr class="my-4">
+                    <h6 class="mb-3">Mode Perawatan & Keamanan</h6>
+                    <div class="mb-4">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="maintenanceMode"/>
+                        <label class="form-check-label" for="maintenanceMode">Aktifkan Mode Perawatan</label>
+                      </div>
+                      <div class="form-text ps-1">Situs akan menampilkan halaman khusus dan tidak dapat diakses pelanggan.</div>
                     </div>
-                    <div class="form-text ps-1">Situs akan menampilkan halaman khusus dan tidak dapat diakses pelanggan.</div>
+                    <div class="mb-4">
+                      <label for="maintenanceMessage" class="form-label">Pesan Halaman Perawatan</label>
+                      <textarea class="form-control" id="maintenanceMessage" rows="3">Kami sedang melakukan pembaruan untuk meningkatkan pengalaman Anda. SmartFarm akan segera kembali!</textarea>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-warning" id="clear-cache-btn">
+                        <i class="fas fa-broom me-2"></i>Hapus Cache Situs
+                      </button>
+                      <a href="../public/login.html" class="btn btn-outline-danger">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout Semua Sesi
+                      </a>
+                    </div>
                   </div>
-                  <div class="mb-4">
-                    <label for="maintenanceMessage" class="form-label">Pesan Halaman Perawatan</label>
-                    <textarea class="form-control" id="maintenanceMessage" rows="3">Kami sedang melakukan pembaruan untuk meningkatkan pengalaman Anda. SmartFarm akan segera kembali!</textarea>
+                  <div class="card-footer text-end">
+                    <button type="button" class="btn btn-primary-custom" id="save-advanced-btn">Simpan Pengaturan Lanjutan</button>
                   </div>
-                  <div class="d-flex flex-wrap gap-2">
-                    <button type="button" class="btn btn-warning" id="clear-cache-btn">
-                      <i class="fas fa-broom me-2"></i>Hapus Cache Situs
-                    </button>
-                    <a href="../public/login.html" class="btn btn-outline-danger">
-                      <i class="fas fa-sign-out-alt me-2"></i>Logout Semua Sesi
-                    </a>
-                  </div>
-                </div>
-                <div class="card-footer text-end">
-                  <button type="button" class="btn btn-primary-custom" id="save-advanced-btn">Simpan Pengaturan Lanjutan</button>
-                </div>
+                </form>
               </div>
             </div>
           </div>
@@ -404,86 +389,84 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-          const header = document.querySelector('.content-header');
-          const nav = document.querySelector('.settings-nav');
-          if (header) header.classList.add('fade-in');
-          if (nav) { setTimeout(() => { nav.classList.add('fade-in'); }, 150); }
-          const allTabs = document.querySelectorAll('.settings-nav .nav-link');
-          const firstActiveCard = document.querySelector('.tab-pane.active .settings-card');
-          if (firstActiveCard) { setTimeout(() => { firstActiveCard.classList.add('fade-in'); }, 300); }
-          allTabs.forEach(tab => {
-              tab.addEventListener('shown.bs.tab', event => {
-                  const newTabPane = document.querySelector(event.target.getAttribute('data-bs-target'));
-                  const cardsInNewTab = newTabPane.querySelectorAll('.settings-card');
-                  cardsInNewTab.forEach((card, index) => {
-                      card.style.animationDelay = `${index * 100}ms`;
-                      card.classList.add('fade-in');
-                  });
-              });
-              tab.addEventListener('hide.bs.tab', event => {
-                  const oldTabPane = document.querySelector(event.target.getAttribute('data-bs-target'));
-                  if (oldTabPane) {
-                      const cardsInOldTab = oldTabPane.querySelectorAll('.settings-card');
-                      cardsInOldTab.forEach(card => card.classList.remove('fade-in'));
-                  }
-              });
-          });
-          
-          function setupImagePreview(inputId, previewId) {
-              const inputElement = document.getElementById(inputId);
-              const previewElement = document.getElementById(previewId);
-              if (inputElement && previewElement) {
-                  inputElement.addEventListener('change', function(event) {
-                      if (event.target.files[0]) {
-                          const reader = new FileReader();
-                          reader.onload = (e) => { previewElement.src = e.target.result; }
-                          reader.readAsDataURL(event.target.files[0]);
-                      }
-                  });
-              }
-          }
-          setupImagePreview('logoUpload', 'logoPreview');
-          setupImagePreview('faviconUpload', 'faviconPreview');
-          setupImagePreview('profilePhotoUpload', 'profilePhotoPreview'); // FUNGSI BARU DITAMBAHKAN
-
-          function setupPasswordToggle(toggleId, inputId) {
-              const toggleButton = document.getElementById(toggleId);
-              const inputField = document.getElementById(inputId);
-              if (toggleButton && inputField) {
-                  toggleButton.addEventListener('click', function() {
-                      const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
-                      inputField.setAttribute('type', type);
-                      this.querySelector('i').classList.toggle('fa-eye');
-                      this.querySelector('i').classList.toggle('fa-eye-slash');
-                  });
-              }
-          }
-          setupPasswordToggle('toggleCurrentPassword', 'currentPassword');
-          setupPasswordToggle('toggleNewPassword', 'newPassword');
-          setupPasswordToggle('toggleConfirmPassword', 'confirmPassword');
-          setupPasswordToggle('toggleRajaongkirKey', 'rajaongkirKey');
-          setupPasswordToggle('togglePaymentApiKey', 'paymentApiKey');
-          
-          document.querySelectorAll('.btn-hapus-banner').forEach(tombol => {
-              tombol.addEventListener('click', function (event) {
-                  event.preventDefault();
-                  const bannerElement = this.closest('.d-flex.align-items-center');
-                  Swal.fire({
-                      title: 'Anda yakin?', text: "Banner yang dihapus tidak dapat dikembalikan!", icon: 'warning',
-                      showCancelButton: true, confirmButtonColor: '#d33', cancelButtonColor: '#6c757d',
-                      confirmButtonText: 'Ya, hapus!', cancelButtonText: 'Batal'
-                  }).then((result) => {
-                      if (result.isConfirmed) {
-                          bannerElement.remove();
-                          Swal.fire({
-                              title: 'Dihapus!', text: 'Banner promosi telah dihapus.', icon: 'success',
-                              customClass: { confirmButton: 'btn btn-primary-custom' }, buttonsStyling: false
-                          });
-                      }
-                  });
-              });
-          });
-
+          (function setupBaseFunctionality() {
+            const header = document.querySelector('.content-header');
+            const nav = document.querySelector('.settings-nav');
+            if (header) header.classList.add('fade-in');
+            if (nav) { setTimeout(() => { nav.classList.add('fade-in'); }, 150); }
+            const allTabs = document.querySelectorAll('.settings-nav .nav-link');
+            const firstActiveCard = document.querySelector('.tab-pane.active .settings-card');
+            if (firstActiveCard) { setTimeout(() => { firstActiveCard.classList.add('fade-in'); }, 300); }
+            allTabs.forEach(tab => {
+                tab.addEventListener('shown.bs.tab', event => {
+                    const newTabPane = document.querySelector(event.target.getAttribute('data-bs-target'));
+                    const cardsInNewTab = newTabPane.querySelectorAll('.settings-card');
+                    cardsInNewTab.forEach((card, index) => {
+                        card.style.animationDelay = `${index * 100}ms`;
+                        card.classList.add('fade-in');
+                    });
+                });
+                tab.addEventListener('hide.bs.tab', event => {
+                    const oldTabPane = document.querySelector(event.target.getAttribute('data-bs-target'));
+                    if (oldTabPane) {
+                        const cardsInOldTab = oldTabPane.querySelectorAll('.settings-card');
+                        cardsInOldTab.forEach(card => card.classList.remove('fade-in'));
+                    }
+                });
+            });
+            function setupImagePreview(inputId, previewId) {
+                const inputElement = document.getElementById(inputId);
+                const previewElement = document.getElementById(previewId);
+                if (inputElement && previewElement) {
+                    inputElement.addEventListener('change', function(event) {
+                        if (event.target.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => { previewElement.src = e.target.result; }
+                            reader.readAsDataURL(event.target.files[0]);
+                        }
+                    });
+                }
+            }
+            setupImagePreview('logoUpload', 'logoPreview');
+            setupImagePreview('faviconUpload', 'faviconPreview');
+            setupImagePreview('profilePhotoUpload', 'profilePhotoPreview');
+            function setupPasswordToggle(toggleId, inputId) {
+                const toggleButton = document.getElementById(toggleId);
+                const inputField = document.getElementById(inputId);
+                if (toggleButton && inputField) {
+                    toggleButton.addEventListener('click', function() {
+                        const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+                        inputField.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('fa-eye');
+                        this.querySelector('i').classList.toggle('fa-eye-slash');
+                    });
+                }
+            }
+            setupPasswordToggle('toggleCurrentPassword', 'currentPassword');
+            setupPasswordToggle('toggleNewPassword', 'newPassword');
+            setupPasswordToggle('toggleConfirmPassword', 'confirmPassword');
+            setupPasswordToggle('toggleRajaongkirKey', 'rajaongkirKey');
+            setupPasswordToggle('togglePaymentApiKey', 'paymentApiKey');
+            document.querySelectorAll('.btn-hapus-banner').forEach(tombol => {
+                tombol.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const bannerElement = this.closest('.d-flex.align-items-center');
+                    Swal.fire({
+                        title: 'Anda yakin?', text: "Banner yang dihapus tidak dapat dikembalikan!", icon: 'warning',
+                        showCancelButton: true, confirmButtonColor: '#d33', cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Ya, hapus!', cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            bannerElement.remove();
+                            Swal.fire({
+                                title: 'Dihapus!', text: 'Banner promosi telah dihapus.', icon: 'success',
+                                customClass: { confirmButton: 'btn btn-primary-custom' }, buttonsStyling: false
+                            });
+                        }
+                    });
+                });
+            });
+          })();
           const announcementSwitch = document.getElementById('announcementBar');
           const announcementBar = document.getElementById('announcement-bar-container');
           const announcementBarText = document.getElementById('announcement-bar-text');
@@ -505,7 +488,6 @@
             announcementSwitch.addEventListener('change', updateAnnouncementBar);
             announcementTextInput.addEventListener('input', updateAnnouncementBar);
           }
-
           const clearCacheBtn = document.getElementById('clear-cache-btn');
           if (clearCacheBtn) {
             clearCacheBtn.addEventListener('click', function() {
@@ -530,7 +512,6 @@
               });
             });
           }
-
           const maintenanceSwitch = document.getElementById('maintenanceMode');
           const maintenanceMessage = document.getElementById('maintenanceMessage');
           function toggleMaintenanceMessage() {
@@ -552,7 +533,6 @@
                   }
               });
           }
-
           function showSaveConfirmation(event) {
             event.preventDefault();
             Swal.fire({
