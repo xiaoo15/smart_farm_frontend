@@ -2,6 +2,8 @@
 /* SMARTFARM ADMIN CONSOLIDATED STYLE - ALL ADMIN PAGES */
 /* =================================================================== */
 
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
 :root {
   /* PALET WARNA BARU KAMU */
   --primary: #235347; /* Hijau Tua untuk tombol, link aktif, dan highlight */
@@ -41,7 +43,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   background-color: var(--background);
   color: var(--text-primary);
   display: flex;
