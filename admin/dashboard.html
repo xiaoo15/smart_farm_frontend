@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Dashboard</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/admin_style.css" />
+
+    <style>
+      .dropdown-item p {
+        white-space: normal;
+      }
+      .clickable-row {
+        cursor: pointer;
+      }
+      .top-customer-item {
+        transition: background-color 0.2s ease-in-out;
+        cursor: pointer;
+      }
+      .top-customer-item:hover,
+      .clickable-row:hover {
+        background-color: #f8f9fa;
+      }
+      .stat-card-modern {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+      .stat-card-modern:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+      }
+      .stat-card-link {
+        text-decoration: none;
+        color: inherit;
+      }
+      .stat-card-link:hover {
+        color: inherit;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .header-actions > .form-control,
+      .header-actions > .dropdown {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      .header-actions > .form-control {
+        animation-delay: 0.2s;
+      }
+      .header-actions > .dropdown {
+        animation-delay: 0.4s;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-wrapper">
+      <div id="sidebar-container"></div>
+      <div id="overlay"></div>
+
+      <div class="main-content">
+        <header class="content-header">
+          <div class="header-welcome">
+            <h2>Dashboard</h2>
+            <p>Here's what's happening with your store today.</p>
+          </div>
+          <div class="header-actions d-flex align-items-center">
+            <input
+              type="text"
+              class="form-control me-2"
+              placeholder="Cari di dashboard..."
+              id="searchInput"
+            />
+            <div class="dropdown">
+              <button
+                class="btn btn-light position-relative"
+                type="button"
+                id="notificationDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fas fa-bell"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                >
+                  3
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end p-2"
+                aria-labelledby="notificationDropdown"
+                style="min-width: 300px; max-height: 400px; overflow-y: auto"
+              >
+                <li><h6 class="dropdown-header">Notifications</h6></li>
+                <li>
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="order/order_detailBudiSantoso.html"
+                  >
+                    <i class="fas fa-shopping-cart text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Pesanan Baru #876371</strong>
+                      <p class="mb-0 text-muted small">
+                        dari Budi Santoso telah diterima.
+                      </p>
+                      <small class="text-muted">3 menit yang lalu</small>
+                    </div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="detailproduct/product_Peace Lily.html"
+                  >
+                    <i class="fas fa-box-open text-warning me-3 mt-1"></i>
+                    <div>
+                      <strong>Stok Rendah</strong>
+                      <p class="mb-0 text-muted small">
+                        Peace Lily tersisa 3 pcs.
+                      </p>
+                      <small class="text-muted">1 jam yang lalu</small>
+                    </div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item rounded d-flex align-items-start"
+                    href="detailproduct/product_Bibit Aglaonema.html"
+                  >
+                    <i
+                      class="fas fa-triangle-exclamation text-danger me-3 mt-1"
+                    ></i>
+                    <div>
+                      <strong>Customer Baru</strong>
+                      <p class="mb-0 text-muted small">
+                        Bibit Aglaonema telah habis.segera restock.
+                      </p>
+                      <small class="text-muted">3 hari yang lalu</small>
+                    </div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item text-center text-primary small"
+                    href="notif.html"
+                  >
+                    Lihat semua notifikasi
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <div class="row">
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card stat-card-modern">
+            <a href="analytic.html#revenue-filter-group" class="stat-card-link">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="icon-wrapper primary-bg">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <span class="badge badge-success-light"><i class="fas fa-arrow-up"></i> 20%</span>
+                    </div>
+                    <p class="card-title-modern">Total Revenue</p>
+                    <h3 class="card-value-modern" data-value="2635262">$0</h3>
+                    <p class="card-text-modern text-muted">in last week</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card stat-card-modern">
+            <a href="analytic.html#sales-filter-group" class="stat-card-link">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="icon-wrapper info-bg">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <span class="badge badge-danger-light"><i class="fas fa-arrow-down"></i> 1.8%</span>
+                    </div>
+                    <p class="card-title-modern">Total Sales</p>
+                    <h3 class="card-value-modern" data-value="5635262">$0</h3>
+                    <p class="card-text-modern text-muted">in last week</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card stat-card-modern">
+            <a href="analytic.html#dynamic-product-filter" class="stat-card-link">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="icon-wrapper warning-bg">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <span class="badge badge-warning-light"><i class="fas fa-arrow-up"></i> 1.8%</span>
+                    </div>
+                    <p class="card-title-modern">Total Products</p>
+                    <h3 class="card-value-modern" data-value="4262">0</h3>
+                    <p class="card-text-modern text-muted">in last week</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card stat-card-modern">
+            <a href="analytic.html#expenses-filter-group" class="stat-card-link">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="icon-wrapper success-bg">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <span class="badge badge-success-light"><i class="fas fa-arrow-up"></i> 1.2%</span>
+                    </div>
+                    <p class="card-title-modern">Total Expenses</p>
+                    <h3 class="card-value-modern" data-value="35262">$0</h3>
+                    <p class="card-text-modern text-muted">in last week</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-lg-8">
+            <div id="sales-statistics-card" class="card dashboard-card h-100">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="card-title-custom">Sales Statistics</h5>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                      type="button"
+                      id="salesPeriodBtn"
+                      data-bs-toggle="dropdown"
+                    >
+                      This Week
+                    </button>
+                    <ul class="dropdown-menu" id="salesPeriodOptions">
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="week"
+                          >This Week</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="month"
+                          >This Month</a
+                        >
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-period="year"
+                          >This Year</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="chart-container" style="height: 300px">
+                  <canvas id="salesChartNew"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div id="orders-statistics-card" class="card dashboard-card h-100">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Orders Statistics</h5>
+                <div
+                  class="chart-container-doughnut mx-auto"
+                  style="height: 200px; max-width: 200px"
+                >
+                  <canvas id="ordersChart"></canvas>
+                </div>
+                <div class="mt-4">
+                  <ul class="list-unstyled">
+                    <li
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <span
+                        ><span class="legend-dot bg-success"></span>
+                        Completed</span
+                      >
+                      <strong>1.2k</strong>
+                    </li>
+                    <li
+                      class="d-flex justify-content-between align-items-center mb-2"
+                    >
+                      <span
+                        ><span class="legend-dot bg-warning"></span>
+                        Pending</span
+                      >
+                      <strong>345</strong>
+                    </li>
+                    <li
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <span
+                        ><span class="legend-dot bg-danger"></span>
+                        Canceled</span
+                      >
+                      <strong>123</strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div id="product-statistics-card" class="card dashboard-card mt-4">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Product Statistics</h5>
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://bibitonline.com/wp-content/uploads/Tanaman-Aglaonema-Kochin.jpg"
+                        alt="Product"
+                        class="rounded me-3"
+                      />
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Bibit Aglaonema</h6>
+                        <small class="text-muted">ID: #P003</small>
+                      </div>
+                    </div>
+                    <div class="ms-auto text-end" style="width: 200px">
+                      <div class="d-flex justify-content-between">
+                        <small>Sales</small>
+                        <small class="fw-bold">1,250</small>
+                      </div>
+                      <div class="progress" style="height: 6px">
+                        <div
+                          class="progress-bar bg-primary"
+                          role="progressbar"
+                          style="width: 85%"
+                        ></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://wp.plantsnap.com/wp-content/uploads/2019/09/peace-lily-in-pot.jpg"
+                        alt="Product"
+                        class="rounded me-3"
+                      />
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Peace Lily</h6>
+                        <small class="text-muted">ID: #P002 </small>
+                      </div>
+                    </div>
+                    <div class="ms-auto text-end" style="width: 200px">
+                      <div class="d-flex justify-content-between">
+                        <small>Sales</small>
+                        <small class="fw-bold">980</small>
+                      </div>
+                      <div class="progress" style="height: 6px">
+                        <div
+                          class="progress-bar bg-info"
+                          role="progressbar"
+                          style="width: 70%"
+                        ></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item product-stat-item clickable-row"
+                    data-href="analytic.html#product-bestsellers"
+                  >
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://www.studioplant.com/media/catalog/product/cache/5f475ed5c56894ef7a51968da51e8dc7/m/o/monstera_-_4.jpg"
+                        alt="Product"
+                        class="rounded me-3"
+                      />
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Monstera Deliciosa</h6>
+                        <small class="text-muted">ID: #P004</small>
+                      </div>
+                    </div>
+                    <div class="ms-auto text-end" style="width: 200px">
+                      <div class="d-flex justify-content-between">
+                        <small>Sales</small>
+                        <small class="fw-bold">450</small>
+                      </div>
+                      <div class="progress" style="height: 6px">
+                        <div
+                          class="progress-bar bg-warning"
+                          role="progressbar"
+                          style="width: 45%"
+                        ></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+          <div class="col-lg-8">
+            <div id="recent-orders-card" class="card dashboard-card">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Recent Orders</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailRevanPutra.html"
+                      >
+                        <td class="fw-bold">#876364</td>
+                        <td>Revan Putra</td>
+                        <td>Bibit Cabai</td>
+                        <td>2</td>
+                        <td class="fw-bold">Rp 50.000</td>
+                        <td>
+                          <span class="badge status-badge-completed"
+                            >Completed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailCitraLestari.html"
+                      >
+                        <td class="fw-bold">#876365</td>
+                        <td>Citra Lestari</td>
+                        <td>Pupuk Organik</td>
+                        <td>1</td>
+                        <td class="fw-bold">Rp 75.000</td>
+                        <td>
+                          <span class="badge status-badge-pending"
+                            >Pending</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailAndiBudi.html"
+                      >
+                        <td class="fw-bold">#876366</td>
+                        <td>Andi Budi</td>
+                        <td>Alat Siram</td>
+                        <td>1</td>
+                        <td class="fw-bold">Rp 120.000</td>
+                        <td>
+                          <span class="badge status-badge-canceled"
+                            >Canceled</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailSiskaAmelia.html"
+                      >
+                        <td class="fw-bold">#876367</td>
+                        <td>Siska Amelia</td>
+                        <td>Polybag (x50)</td>
+                        <td>5</td>
+                        <td class="fw-bold">Rp 25.000</td>
+                        <td>
+                          <span class="badge status-badge-completed"
+                            >Completed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr
+                        class="clickable-row"
+                        data-href="order/order_detailArsyaAji.html"
+                      >
+                        <td class="fw-bold">#876368</td>
+                        <td>Arsya Aji</td>
+                        <td>Benih Selada</td>
+                        <td>10</td>
+                        <td class="fw-bold">Rp 30.000</td>
+                        <td>
+                          <span class="badge status-badge-pending">Pending</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div id="top-customers-card" class="card dashboard-card">
+              <div class="card-body">
+                <h5 class="card-title-custom mb-3">Top Customers</h5>
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Revan Putra"
+                    data-username="@revanputra"
+                    data-orders="125"
+                    data-spending="Rp 15.750.000"
+                    data-profile-link="customer_detail_revan.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/150?img=1"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Revan Putra</h6>
+                      <small class="text-muted">@revanputra</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">125</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Citra Lestari"
+                    data-username="@citra"
+                    data-orders="98"
+                    data-spending="Rp 12.120.000"
+                    data-profile-link="customer_detail_citra.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/150?img=37"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Citra Lestari</h6>
+                      <small class="text-muted">@citra</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">98</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Andi Budi"
+                    data-username="@andib"
+                    data-orders="76"
+                    data-spending="Rp 9.850.000"
+                    data-profile-link="customer_detail_andi.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/400?img=33"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Andi Budi</h6>
+                      <small class="text-muted">@andib</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">76</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Siska Amelia"
+                    data-username="@siska_a"
+                    data-orders="54"
+                    data-spending="Rp 7.200.000"
+                    data-profile-link="customer_detail_siska.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/400?img=49"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Siska Amelia</h6>
+                      <small class="text-muted">@siska_a</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">54</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item top-customer-item p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#customerDetailModal"
+                    data-name="Arsya Aji"
+                    data-username="@arsya_aji"
+                    data-orders="51"
+                    data-spending="Rp 7.050.000"
+                    data-profile-link="customer_detail_arsya.html"
+                  >
+                    <img
+                      src="https://i.pravatar.cc/150?img=52"
+                      alt="Customer"
+                      class="rounded-circle"
+                    />
+                    <div class="customer-info ms-3">
+                      <h6 class="mb-0">Arsya Aji</h6>
+                      <small class="text-muted">@arsya_aji</small>
+                    </div>
+                    <div class="customer-orders ms-auto text-end">
+                      <span class="fw-bold">51</span>
+                      <small class="text-muted d-block">orders</small>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="customerDetailModal"
+      tabindex="-1"
+      aria-labelledby="customerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="customerModalLabel">
+              Ringkasan Customer
+            </h5>
+          </div>
+          <div class="modal-body p-4">
+            <h4 id="modalCustomerName" class="mb-1"></h4>
+            <p id="modalCustomerUsername" class="text-muted mb-4"></p>
+
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Total Pesanan</small>
+                <p id="modalTotalOrders" class="fs-4 fw-bold text-prymary"></p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Total Belanja</small>
+                <p
+                  id="modalTotalSpending"
+                  class="fs-4 fw-bold text-success"
+                ></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary-custom"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/admin_script.js"></script>
+
+  </body>
+</html>

@@ -1,31 +1,77 @@
 /* =================================================================== */
 /* SMARTFARM ADMIN CONSOLIDATED SCRIPT - ALL ADMIN PAGES */
+/* (Versi Final dengan Fitur Dashboard Lengkap) */
 /* =================================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebarContainer = document.getElementById("sidebar-container");
+document.addEventListener("DOMContentLoaded", () => {
+  // --- FUNGSI GLOBAL ---
 
-  // Pastikan elemen sidebar container ada sebelum melanjutkan
-  if (!sidebarContainer) {
-    console.error("Sidebar container tidak ditemukan.");
-    return;
-  }
+  /**
+   * Memuat komponen HTML dari file eksternal ke dalam elemen container.
+   * @param {string} url - Path ke file komponen HTML.
+   * @param {string} containerId - ID elemen container tujuan.
+   * @returns {Promise<void>}
+   */
+  const loadComponent = async (url, containerId) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Gagal memuat ${url}: ${response.statusText}`);
+      }
+      const data = await response.text();
+      const container = document.getElementById(containerId);
+      if (container) {
+        container.innerHTML = data;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  // Muat sidebar dari _sidebar.html
-  fetch("../components/_sidebar.html")
-    .then((response) =>
-      response.ok ? response.text() : Promise.reject("Sidebar not found")
-    )
-    .then((data) => {
-      sidebarContainer.innerHTML = data;
-      // Tunggu sebentar untuk memastikan DOM sudah terupdate
-      setTimeout(() => {
-        initializeSidebar();
-      }, 100);
-    })
-    .catch((error) => console.error("Error loading sidebar:", error));
+  /**
+   * Menampilkan notifikasi sementara di pojok kanan atas.
+   * @param {string} message - Pesan yang akan ditampilkan.
+   * @param {string} [type='success'] - Tipe notifikasi ('success' atau 'error').
+   */
+  window.showNotification = (message, type = "success") => {
+    const notification = document.createElement("div");
+    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notification.style.cssText =
+      "top: 20px; right: 20px; z-index: 9999; min-width: 300px;";
+    notification.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    document.body.appendChild(notification);
 
-  // Fungsi untuk inisialisasi sidebar setelah dimuat
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 5000);
+  };
+
+  // --- INISIALISASI KOMPONEN UTAMA (Sidebar & Footer) ---
+
+  const initializeApp = async () => {
+    // Muat komponen sidebar dan footer secara bersamaan
+    await Promise.all([
+      loadComponent("/components/_sidebar.html", "sidebar-container"),
+      loadComponent("/components/_footer_admin.html", "footer-container"),
+    ]);
+
+    // Setelah komponen dimuat, jalankan fungsi inisialisasi lainnya
+    initializeSidebar();
+    initializeAdminChat();
+    initializeDashboardFeatures(); // <--- FUNGSI INI AKAN KITA ISI LENGKAP
+    initializeGeneralAdminFeatures();
+  };
+
+  // --- FUNGSI INISIALISASI SPESIFIK ---
+
+  /**
+   * Mengatur semua event listener dan logika untuk sidebar.
+   */
   function initializeSidebar() {
     const sidebar = document.getElementById("sidebar");
     const hamburgerBtn = document.querySelector(".hamburger-btn");
@@ -33,364 +79,534 @@ document.addEventListener("DOMContentLoaded", function () {
     const mainContent = document.querySelector(".main-content");
 
     if (!sidebar || !hamburgerBtn || !overlay) {
-      console.error("Elemen sidebar tidak ditemukan setelah dimuat.");
       return;
     }
 
-    // Fungsi untuk toggle sidebar
-    function toggleSidebar(e) {
+    const toggleSidebar = (e) => {
       if (e) e.stopPropagation();
-      
       const isMobile = window.innerWidth < 993;
-      
       if (isMobile) {
         sidebar.classList.toggle("open");
-        sidebar.classList.toggle("active"); // Untuk kompatibilitas
         overlay.classList.toggle("active");
-        document.body.style.overflow = sidebar.classList.contains("open") ? "hidden" : "";
+        document.body.style.overflow = sidebar.classList.contains("open")
+          ? "hidden"
+          : "";
       } else {
         sidebar.classList.toggle("collapsed");
-        if (mainContent) {
-          mainContent.classList.toggle("expanded");
-        }
+        mainContent?.classList.toggle("expanded");
       }
-    }
+    };
 
-    // Fungsi untuk menutup sidebar
-    function closeSidebar() {
-      sidebar.classList.remove("open", "active");
+    const closeSidebar = () => {
+      sidebar.classList.remove("open");
       overlay.classList.remove("active");
       document.body.style.overflow = "";
-    }
+    };
 
-    // Fungsi untuk inisialisasi state sidebar
-    function initSidebarState() {
-      const isMobile = window.innerWidth < 993;
-      
-      if (isMobile) {
+    const initSidebarState = () => {
+      if (window.innerWidth < 993) {
         sidebar.classList.remove("collapsed");
-        closeSidebar();
       } else {
-        sidebar.classList.remove("open", "active");
-        overlay.classList.remove("active");
-        document.body.style.overflow = "";
+        closeSidebar();
       }
-    }
+    };
 
-    // Event listeners
+    const highlightActiveMenu = () => {
+      const currentPage =
+        window.location.pathname.split("/").pop() || "dashboard.html";
+      document
+        .querySelectorAll(".sidebar-nav .sidebar-item")
+        .forEach((item) => {
+          const link = item.querySelector(".sidebar-link");
+          if (link) {
+            link.classList.remove("active");
+            if (item.getAttribute("data-page") === currentPage) {
+              link.classList.add("active");
+            }
+          }
+        });
+    };
+
     hamburgerBtn.addEventListener("click", toggleSidebar);
     overlay.addEventListener("click", closeSidebar);
-
-    // Tutup sidebar saat mengklik link (mobile)
-    const sidebarLinks = document.querySelectorAll(".sidebar-link, .logout-link");
-    sidebarLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        if (window.innerWidth < 993) {
-          closeSidebar();
-        }
+    document.querySelectorAll(".sidebar-link, .logout-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 993) closeSidebar();
       });
     });
-
-    // Tutup sidebar dengan tombol Escape
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && (sidebar.classList.contains("open") || sidebar.classList.contains("active"))) {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sidebar.classList.contains("open")) {
         closeSidebar();
       }
     });
 
-    // Handle resize
     window.addEventListener("resize", initSidebarState);
-
-    // Set active menu
     highlightActiveMenu();
-    
-    // Initialize state
     initSidebarState();
   }
 
-  // Fungsi untuk menandai menu yang aktif
-  function highlightActiveMenu() {
-    const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
-    const menuItems = document.querySelectorAll(".sidebar-nav .sidebar-item");
-    
-    menuItems.forEach((item) => {
-      const link = item.querySelector(".sidebar-link");
-      if (link) {
-        link.classList.remove("active");
-        if (item.getAttribute("data-page") === currentPage) {
-          link.classList.add("active");
-        }
-      }
-    });
-  }
+  /**
+   * Mengatur fungsionalitas chat admin.
+   */
+  function initializeAdminChat() {
+    // (Fungsi ini tetap sama seperti sebelumnya, tidak perlu diubah)
+    const chatButton = document.querySelector(".chat-button");
+    const chatBox = document.querySelector(".chat-box");
+    if (!chatButton || !chatBox) return;
 
-  // =================================================================== */
-  // ADMIN CHAT FUNCTIONALITY */
-  // =================================================================== */
-  
-  // Initialize admin chat if elements exist
-  const adminChatButton = document.querySelector('.chat-button');
-  const adminChatBox = document.querySelector('.chat-box');
-  const adminChatClose = document.querySelector('.chat-close');
-  const adminChatInput = document.querySelector('.chat-input');
-  const adminChatSend = document.querySelector('.chat-send');
-  const adminChatMessages = document.querySelector('.chat-messages');
-  const adminNotification = document.querySelector('.notification');
+    const chatClose = chatBox.querySelector(".chat-close");
+    const chatInput = chatBox.querySelector(".chat-input");
+    const chatSend = chatBox.querySelector(".chat-send");
+    const chatMessages = chatBox.querySelector(".chat-messages");
+    const notification = document.querySelector(".notification");
 
-  if (adminChatButton && adminChatBox) {
-    // Toggle chat box
-    adminChatButton.addEventListener('click', function() {
-      adminChatBox.classList.toggle('active');
-      if (adminNotification) {
-        adminNotification.style.display = 'none';
+    const addMessage = (text, sender) => {
+      const msgEl = document.createElement("div");
+      msgEl.classList.add("message", `${sender}-message`);
+      msgEl.textContent = text;
+      chatMessages.appendChild(msgEl);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+
+    const getAIResponse = (message) => {
+      const msg = message.toLowerCase();
+      const responses = {
+        halo: "Halo! Selamat datang di SmartFarm Admin Panel. Ada yang bisa saya bantu?",
+        dashboard:
+          "Dashboard menampilkan ringkasan penjualan, pesanan, dan statistik penting lainnya.",
+        produk:
+          "Kelola produk Anda di halaman Products. Anda bisa menambah, mengedit, atau menghapus produk.",
+        pesanan:
+          "Kelola pesanan pelanggan di halaman Orders. Anda bisa melihat detail dan mengupdate status pesanan.",
+        pelanggan:
+          "Kelola data pelanggan di halaman Customers. Anda bisa melihat dan mengedit informasi pelanggan.",
+        laporan:
+          "Laporan penjualan dan transaksi tersedia di halaman Transaksi.",
+        "terima kasih": "Sama-sama! Senang bisa membantu.",
+      };
+      for (const key in responses) {
+        if (msg.includes(key)) return responses[key];
       }
-    });
-    
-    // Close chat box
-    if (adminChatClose) {
-      adminChatClose.addEventListener('click', function() {
-        adminChatBox.classList.remove('active');
-      });
-    }
-    
-    // Send message function
-    function sendAdminMessage() {
-      const message = adminChatInput.value.trim();
-      if (message === '') return;
-      
-      // Add user message
-      addAdminMessage(message, 'user');
-      adminChatInput.value = '';
-      
-      // Simulate AI response after a short delay
+      return "Maaf, saya belum mengerti. Coba cek dokumentasi admin panel.";
+    };
+
+    const sendMessage = () => {
+      const message = chatInput.value.trim();
+      if (message === "") return;
+
+      addMessage(message, "user");
+      chatInput.value = "";
+
       setTimeout(() => {
-        const response = getAdminAIResponse(message);
-        addAdminMessage(response, 'ai');
+        addMessage(getAIResponse(message), "ai");
       }, 1000);
-    }
-    
-    // Send message on button click
-    if (adminChatSend) {
-      adminChatSend.addEventListener('click', sendAdminMessage);
-    }
-    
-    // Send message on Enter key
-    if (adminChatInput) {
-      adminChatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          sendAdminMessage();
-        }
-      });
-    }
-    
-    // Add message to chat
-    function addAdminMessage(text, sender) {
-      const messageElement = document.createElement('div');
-      messageElement.classList.add('message');
-      messageElement.classList.add(sender + '-message');
-      messageElement.textContent = text;
-      
-      if (adminChatMessages) {
-        adminChatMessages.appendChild(messageElement);
-        adminChatMessages.scrollTop = adminChatMessages.scrollHeight;
-      }
-    }
-    
-    // Simple AI response logic for admin
-    function getAdminAIResponse(message) {
-      const lowerMsg = message.toLowerCase();
-      
-      if (lowerMsg.includes('halo') || lowerMsg.includes('hai') || lowerMsg.includes('hi')) {
-        return 'Halo! Selamat datang di SmartFarm Admin Panel. Ada yang bisa saya bantu?';
-      } else if (lowerMsg.includes('dashboard') || lowerMsg.includes('statistik')) {
-        return 'Dashboard menampilkan ringkasan penjualan, pesanan, dan statistik penting lainnya.';
-      } else if (lowerMsg.includes('produk') || lowerMsg.includes('product')) {
-        return 'Kelola produk Anda di halaman Products. Anda bisa menambah, mengedit, atau menghapus produk.';
-      } else if (lowerMsg.includes('pesanan') || lowerMsg.includes('order')) {
-        return 'Kelola pesanan pelanggan di halaman Orders. Anda bisa melihat detail dan mengupdate status pesanan.';
-      } else if (lowerMsg.includes('pelanggan') || lowerMsg.includes('customer')) {
-        return 'Kelola data pelanggan di halaman Customers. Anda bisa melihat dan mengedit informasi pelanggan.';
-      } else if (lowerMsg.includes('laporan') || lowerMsg.includes('report')) {
-        return 'Laporan penjualan dan transaksi tersedia di halaman Transaksi.';
-      } else if (lowerMsg.includes('terima kasih') || lowerMsg.includes('makasih') || lowerMsg.includes('thanks')) {
-        return 'Sama-sama! Senang bisa membantu. Jika ada pertanyaan lain, jangan ragu untuk bertanya.';
-      } else {
-        return 'Maaf, saya belum mengerti pertanyaan Anda. Bisa diulangi dengan kata lain? Atau cek dokumentasi admin panel.';
-      }
-    }
-    
-    // Simulate initial notification
-    if (adminNotification) {
+    };
+
+    chatButton.addEventListener("click", () => {
+      chatBox.classList.toggle("active");
+      if (notification) notification.style.display = "none";
+    });
+
+    chatClose?.addEventListener("click", () =>
+      chatBox.classList.remove("active")
+    );
+    chatSend?.addEventListener("click", sendMessage);
+    chatInput?.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    if (notification) {
       setTimeout(() => {
-        adminNotification.style.display = 'flex';
+        notification.style.display = "flex";
       }, 3000);
     }
   }
 
-  // =================================================================== */
-  // ADMIN DASHBOARD ANIMATIONS */
-  // =================================================================== */
-  
-  // Animate stat cards on load
-  const statCards = document.querySelectorAll('.stat-card');
-  if (statCards.length > 0) {
-    statCards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('animate-fade-in-up');
-      }, index * 100);
-    });
-  }
+  /**
+   * Fitur yang HANYA berjalan di halaman Dashboard.
+   * KODE DARI KAMU DIMASUKKAN DI SINI!
+   */
+  function initializeDashboardFeatures() {
+    // Cek apakah ini halaman dashboard
+    const searchInput = document.getElementById("searchInput");
+    if (!searchInput) {
+      return; // Jika tidak ada searchInput, anggap bukan halaman dashboard, lalu stop.
+    }
 
-  // =================================================================== */
-  // FORM VALIDATION AND SUBMISSION */
-  // =================================================================== */
-  
-  // Handle form submissions
-  const forms = document.querySelectorAll('form');
-  forms.forEach(form => {
-    form.addEventListener('submit', function(e) {
-      // Add loading state to submit button
-      const submitBtn = form.querySelector('button[type="submit"]');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        
-        // Re-enable after 3 seconds (adjust as needed)
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = submitBtn.getAttribute('data-original-text') || 'Submit';
-        }, 3000);
-      }
-    });
-  });
+    // --- [MULAI] KODE DASHBOARD ---
 
-  // =================================================================== */
-  // TABLE INTERACTIONS */
-  // =================================================================== */
-  
-  // Handle table row selections
-  const selectAllCheckbox = document.querySelector('input[type="checkbox"][data-select-all]');
-  const rowCheckboxes = document.querySelectorAll('input[type="checkbox"][data-row-select]');
-  
-  if (selectAllCheckbox && rowCheckboxes.length > 0) {
-    selectAllCheckbox.addEventListener('change', function() {
-      rowCheckboxes.forEach(checkbox => {
-        checkbox.checked = this.checked;
-      });
+    // Animate stat cards on load
+    document.querySelectorAll(".stat-card").forEach((card, index) => {
+      setTimeout(() => card.classList.add("animate-fade-in-up"), index * 100);
     });
-    
-    rowCheckboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        const checkedCount = document.querySelectorAll('input[type="checkbox"][data-row-select]:checked').length;
-        selectAllCheckbox.checked = checkedCount === rowCheckboxes.length;
-        selectAllCheckbox.indeterminate = checkedCount > 0 && checkedCount < rowCheckboxes.length;
-      });
-    });
-  }
 
-  // =================================================================== */
-  // MODAL HANDLING */
-  // =================================================================== */
-  
-  // Handle modal confirmations
-  const deleteButtons = document.querySelectorAll('[data-delete-confirm]');
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      const itemName = this.getAttribute('data-delete-confirm');
-      if (confirm(`Apakah Anda yakin ingin menghapus ${itemName}?`)) {
-        // Proceed with deletion
-        const form = this.closest('form');
-        if (form) {
-          form.submit();
+    // --- FUNGSI SEARCH INTERAKTIF ---
+    const searchableSections = {
+      "sales statistics": "sales-statistics-card",
+      sales: "sales-statistics-card",
+      sale: "sales-statistics-card",
+      "statistik sales": "sales-statistics-card",
+      "statistik penjualan": "sales-statistics-card",
+      "orders statistics": "orders-statistics-card",
+      "statistik order": "orders-statistics-card",
+      "statistik pesanan": "orders-statistics-card",
+      "product statistics": "product-statistics-card",
+      product: "product-statistics-card",
+      products: "product-statistics-card",
+      "statistik produk": "product-statistics-card",
+      "recent orders": "recent-orders-card",
+      order: "recent-orders-card",
+      orders: "recent-orders-card",
+      pesanan: "recent-orders-card",
+      "recent order": "recent-orders-card",
+      "top customers": "top-customers-card",
+      customer: "top-customers-card",
+      customers: "top-customers-card",
+      pelanggan: "top-customers-card",
+      "top customer": "top-customers-card",
+    };
+
+    searchInput.addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const query = searchInput.value.trim().toLowerCase();
+        const targetId = searchableSections[query]; // Perbaikan: Logika ini lebih sederhana
+
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+            targetElement.style.transition = "box-shadow 0.3s ease-in-out";
+            targetElement.style.boxShadow = "0 0 0 3px rgba(42, 157, 143, 0.5)";
+            setTimeout(() => {
+              targetElement.style.boxShadow = "";
+            }, 2000);
+          }
+        } else {
+          alert(`Bagian "${searchInput.value}" tidak ditemukan di dashboard.`);
         }
       }
     });
-  });
 
-  // =================================================================== */
-  // SEARCH AND FILTER FUNCTIONALITY */
-  // =================================================================== */
-  
-  // Handle search inputs
-  const searchInputs = document.querySelectorAll('input[data-search]');
-  searchInputs.forEach(input => {
-    input.addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const targetTable = document.querySelector(this.getAttribute('data-search'));
-      
-      if (targetTable) {
-        const rows = targetTable.querySelectorAll('tbody tr');
-        rows.forEach(row => {
-          const text = row.textContent.toLowerCase();
-          row.style.display = text.includes(searchTerm) ? '' : 'none';
-        });
-      }
+    // --- JAVASCRIPT UNTUK MODAL CUSTOMER ---
+    const customerDetailModal = document.getElementById("customerDetailModal");
+    if (customerDetailModal) {
+      customerDetailModal.addEventListener("show.bs.modal", function (event) {
+        const triggerElement = event.relatedTarget;
+        const name = triggerElement.getAttribute("data-name");
+        const username = triggerElement.getAttribute("data-username");
+        const orders = triggerElement.getAttribute("data-orders");
+        const spending = triggerElement.getAttribute("data-spending");
+
+        customerDetailModal.querySelector("#modalCustomerName").textContent =
+          name;
+        customerDetailModal.querySelector(
+          "#modalCustomerUsername"
+        ).textContent = username;
+        customerDetailModal.querySelector("#modalTotalOrders").textContent =
+          orders;
+        customerDetailModal.querySelector("#modalTotalSpending").textContent =
+          spending;
+      });
+    }
+
+    // --- FUNGSI BARIS TABEL BISA DIKLIK ---
+    document.querySelectorAll(".clickable-row").forEach((row) => {
+      row.addEventListener("click", () => {
+        window.location.href = row.dataset.href;
+      });
     });
-  });
 
-  // =================================================================== */
-  // NOTIFICATION SYSTEM */
-  // =================================================================== */
-  
-  // Show success/error messages
-  function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
-    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
-    notification.innerHTML = `
-      ${message}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-      if (notification.parentNode) {
-        notification.remove();
+    // --- GRAFIK (CHARTS) DENGAN DATA DINAMIS ---
+    const salesData = {
+      week: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        sales: [65, 59, 80, 81, 56, 55, 40],
+        revenue: [28, 48, 40, 19, 86, 27, 90],
+      },
+      month: {
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        sales: [350, 410, 380, 500],
+        revenue: [180, 220, 190, 250],
+      },
+      year: {
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "ags",
+          "sep",
+          "oct",
+          "nov",
+          "des",
+        ],
+        sales: [500, 450, 600, 700, 550, 650, 750, 700, 800, 850, 900, 850],
+        revenue: [250, 220, 300, 350, 270, 320, 370, 380, 400, 420, 460, 480],
+      },
+    };
+    const ordersChartData = {
+      week: [1200, 345, 123],
+      month: [4800, 1200, 510],
+      year: [15000, 3500, 1800],
+    };
+
+    let salesChart;
+    let ordersChart;
+
+    const updateCharts = (period) => {
+      if (salesChart) {
+        const salesPeriodData = salesData[period];
+        salesChart.data.labels = salesPeriodData.labels;
+        salesChart.data.datasets[0].data = salesPeriodData.sales;
+        salesChart.data.datasets[1].data = salesPeriodData.revenue;
+        salesChart.update();
       }
-    }, 5000);
+      if (ordersChart) {
+        ordersChart.data.datasets[0].data = ordersChartData[period];
+        ordersChart.update();
+      }
+    };
+
+    const salesChartCanvasNew = document.getElementById("salesChartNew");
+    if (salesChartCanvasNew) {
+      const ctxSales = salesChartCanvasNew.getContext("2d");
+      salesChart = new Chart(ctxSales, {
+        type: "line",
+        data: {
+          labels: salesData.week.labels,
+          datasets: [
+            {
+              label: "Sales",
+              data: salesData.week.sales,
+              fill: false,
+              borderColor: "#235347",
+              tension: 0.4,
+              pointBackgroundColor: "#235347",
+              pointRadius: 5,
+            },
+            {
+              label: "Revenue",
+              data: salesData.week.revenue,
+              fill: false,
+              borderColor: "#8EB69B",
+              tension: 0.4,
+              pointBackgroundColor: "#8EB69B",
+              pointRadius: 5,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "top",
+              align: "end",
+              labels: { usePointStyle: true, boxWidth: 8, color: "#051F20" },
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#163832" },
+              grid: { color: "#DAF1DE" },
+            },
+            x: { ticks: { color: "#163832" } },
+          },
+        },
+      });
+    }
+
+    const ordersChartCanvas = document.getElementById("ordersChart");
+    if (ordersChartCanvas) {
+      const ctxOrders = ordersChartCanvas.getContext("2d");
+      ordersChart = new Chart(ctxOrders, {
+        type: "doughnut",
+        data: {
+          labels: ["Completed", "Pending", "Canceled"],
+          datasets: [
+            {
+              label: "Orders",
+              data: ordersChartData.week,
+              backgroundColor: ["#235347", "#ffc107", "#dc3545"],
+              borderColor: "#FFFFFF",
+              borderWidth: 4,
+              hoverOffset: 8,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "75%",
+          plugins: { legend: { display: false } },
+        },
+      });
+    }
+
+    const salesPeriodBtn = document.getElementById("salesPeriodBtn");
+    const salesPeriodOptions = document.getElementById("salesPeriodOptions");
+    if (salesPeriodOptions && salesPeriodBtn) {
+      salesPeriodOptions.addEventListener("click", (event) => {
+        if (event.target.tagName === "A") {
+          event.preventDefault();
+          const period = event.target.dataset.period;
+          salesPeriodBtn.textContent = event.target.textContent;
+          updateCharts(period);
+        }
+      });
+    }
+
+    // --- [SELESAI] KODE DASHBOARD ---
   }
 
-  // Make notification function globally available
-  window.showNotification = showNotification;
-});
+  /**
+   * Fitur umum untuk semua halaman admin (form, tabel, modal, dll).
+   */
+  function initializeGeneralAdminFeatures() {
+    // (Fungsi ini tetap sama seperti sebelumnya, tidak perlu diubah)
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", function () {
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Processing...';
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML =
+              submitBtn.getAttribute("data-original-text") || "Submit";
+          }, 3000);
+        }
+      });
+    });
 
-// Chart.js untuk Dashboard
-document.addEventListener("DOMContentLoaded", () => {
-    // Cek jika kita berada di halaman dashboard
-    if (document.getElementById("salesChart")) {
-        const salesChartCanvas = document.getElementById("salesChart");
-        const ctx = salesChartCanvas.getContext("2d");
-
-        let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, "rgba(67, 97, 238, 0.3)"); // Warna biru primer
-        gradient.addColorStop(1, "rgba(67, 97, 238, 0)");
-
-        new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-                datasets: [{
-                    label: "Sales",
-                    data: [120, 190, 300, 500, 200, 350, 450],
-                    borderColor: "#4361ee", // Warna biru primer
-                    backgroundColor: gradient,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: "#fff",
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { grid: { color: "#e0e6ed" } },
-                    x: { grid: { display: false } }
-                }
-            },
+    const selectAllCheckbox = document.querySelector("input[data-select-all]");
+    const rowCheckboxes = document.querySelectorAll("input[data-row-select]");
+    if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener("change", function () {
+        rowCheckboxes.forEach((cb) => {
+          cb.checked = this.checked;
         });
+      });
+      rowCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          const checkedCount = document.querySelectorAll(
+            "input[data-row-select]:checked"
+          ).length;
+          selectAllCheckbox.checked = checkedCount === rowCheckboxes.length;
+          selectAllCheckbox.indeterminate =
+            checkedCount > 0 && checkedCount < rowCheckboxes.length;
+        });
+      });
     }
+
+    document.querySelectorAll("[data-delete-confirm]").forEach((button) => {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+        const itemName = this.getAttribute("data-delete-confirm");
+        if (confirm(`Apakah Anda yakin ingin menghapus ${itemName}?`)) {
+          this.closest("form")?.submit();
+        }
+      });
+    });
+
+    document.querySelectorAll("input[data-search]").forEach((input) => {
+      input.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        const targetTable = document.querySelector(
+          this.getAttribute("data-search")
+        );
+        targetTable?.querySelectorAll("tbody tr").forEach((row) => {
+          row.style.display = row.textContent.toLowerCase().includes(searchTerm)
+            ? ""
+            : "none";
+        });
+      });
+    });
+  }
+
+  // --- MULAI APLIKASI ---
+  initializeApp();
 });
+
+// --- [MULAI] KODE FINAL ANTI-FRUSTRASI (GAYA SUBSCRIBE COUNT) ---
+
+/**
+ * Menganimasikan angka dari nilai awal ke nilai akhir dengan cepat.
+ * @param {HTMLElement} element - Elemen h3 yang menampilkan angka.
+ * @param {number} start - Angka awal.
+ * @param {number} end - Angka tujuan.
+ * @param {number} duration - Durasi animasi dalam milidetik.
+ */
+function animateCounter(element, start, end, duration) {
+    let startTime = null;
+
+    const step = (currentTime) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        
+        const prefix = element.getAttribute('data-prefix') || '';
+        element.textContent = prefix + currentValue.toLocaleString('en-US');
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            element.textContent = prefix + end.toLocaleString('en-US');
+            element.setAttribute('data-current-value', end);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// --- INISIALISASI DAN EKSEKUSI ---
+
+// 1. Inisialisasi semua counter saat halaman pertama kali dimuat
+document.querySelectorAll('.card-value-modern').forEach(element => {
+    const finalValue = parseInt(element.getAttribute('data-value'));
+    const text = element.textContent || '';
+    
+    // Simpan prefix (misal: '$') jika ada
+    if (text.startsWith('$')) {
+        element.setAttribute('data-prefix', '$');
+    }
+    
+    element.setAttribute('data-current-value', '0');
+    // Animasi awal dari 0 ke nilai target
+    animateCounter(element, 0, finalValue, 1500);
+});
+
+
+// 2. Atur interval untuk update berkala
+setInterval(() => {
+    document.querySelectorAll('.card-value-modern').forEach(element => {
+        const indicatorElement = element.closest('.card-body').querySelector('.badge');
+        let currentValue = parseInt(element.getAttribute('data-current-value'));
+
+        const percentageChange = (Math.random() * 10 - 5) / 100;
+        const isPositive = percentageChange >= 0;
+        const newValue = Math.round(currentValue * (1 + percentageChange));
+
+        // Update angka dengan animasi hitung cepat (durasinya singkat: 0.8 detik)
+        animateCounter(element, currentValue, newValue, 800);
+
+        // Update badge persentase
+        if (indicatorElement) {
+            const icon = isPositive ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>';
+            indicatorElement.innerHTML = `${icon} ${Math.abs(percentageChange * 100).toFixed(1)}%`;
+            indicatorElement.classList.remove("badge-success-light", "badge-danger-light");
+            indicatorElement.classList.add(isPositive ? "badge-success-light" : "badge-danger-light");
+        }
+    });
+}, 5000); // Update setiap 5 detik
+
+// --- [SELESAI] KODE FINAL ANTI-FRUSTRASI (GAYA SUBSCRIBE COUNT) ---
+
