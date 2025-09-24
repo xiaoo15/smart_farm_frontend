@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pesanan Saya - SmartFarm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/public_style.css" />
+</head>
+<body>
+    <div id="preloader"><div class="spinner"></div></div>
+
+    <div id="header-placeholder"></div>
+
+    <main class="account-page">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="account-sidebar">
+                        <h5 class="sidebar-title">Menu Akun</h5>
+                        <div class="list-group">
+                            <a href="profile.html" class="list-group-item list-group-item-action">
+                                <i class="fas fa-user-edit"></i> Profil Saya
+                            </a>
+                            <a href="orders.html" class="list-group-item list-group-item-action active">
+                                <i class="fas fa-box"></i> Pesanan Saya
+                            </a>
+                            <a href="settings.html" class="list-group-item list-group-item-action">
+                                <i class="fas fa-cog"></i> Pengaturan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="account-content">
+                        <h3>Pesanan Saya</h3>
+                        <p class="text-muted">Lihat riwayat pesanan dan lacak status pengiriman Anda di sini.</p>
+                        <hr>
+
+                        <div class="order-list">
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <div>
+                                        <strong>Order ID:</strong> #SF20250921-001 <br>
+                                        <small class="text-muted">Tanggal: 21 September 2025</small>
+                                    </div>
+                                    <span class="order-status status-completed">Selesai</span>
+                                </div>
+                                <div class="order-body">
+                                    <p class="mb-1">Total Belanja: <strong>Rp 185.000</strong></p>
+                                    <p class="mb-0 text-muted small">1x HydroKit Mini Starter, 1x Bibit Selada</p>
+                                </div>
+                                <div class="order-footer">
+                                    <button class="btn btn-warning btn-sm review-btn" data-bs-toggle="modal" data-bs-target="#reviewModal" data-order-id="#SF20250921-001">
+                                        <i class="fas fa-star"></i> Beri Ulasan
+                                    </button>
+                                    <a href="#" class="btn-smartfarm-secondary btn-sm">Lihat Detail</a>
+                                </div>
+                            </div>
+                            
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <div>
+                                        <strong>Order ID:</strong> #SF20250915-007 <br>
+                                        <small class="text-muted">Tanggal: 15 September 2025</small>
+                                    </div>
+                                    <span class="order-status status-shipped">Dikirim</span>
+                                </div>
+                                <div class="order-body">
+                                    <p class="mb-1">Total Belanja: <strong>Rp 75.000</strong></p>
+                                    <p class="mb-0 text-muted small">1x Alat Siram Otomatis</p>
+                                </div>
+                                <div class="order-footer">
+                                    <a href="lacak.html" class="btn-smartfarm-secondary btn-sm">Lacak Pengiriman</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Beri Ulasan untuk Pesanan <span id="review-order-id"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bagaimana penilaianmu terhadap produk dan layanan kami?</p>
+                    <div class="rating-stars mb-3">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="rating-value" name="rating" value="0">
+                    
+                    <div class="form-group">
+                        <label for="review-comment" class="form-label">Komentar Anda (Opsional)</label>
+                        <textarea class="form-control" id="review-comment" rows="4" placeholder="Ceritakan pengalamanmu..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn-smartfarm-primary" id="submit-review-btn">Kirim Ulasan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/public_script.js"></script>
+</body>
+</html>
