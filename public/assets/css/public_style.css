@@ -2,6 +2,9 @@
 /* SMARTFARM PUBLIC CONSOLIDATED STYLE - ALL PUBLIC PAGES */
 /* =================================================================== */
 
+/* Import Swiper JS CSS */
+@import url("https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css");
+
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 :root {
@@ -4151,4 +4154,256 @@ body {
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   color: var(--dark-text);
+}
+
+/* =================================================================== */
+/* SEARCH RECOMMENDATIONS STYLING
+/* =================================================================== */
+
+.search-container {
+  position: relative;
+}
+
+.search-result-item .item-info .item-category {
+  font-size: 0.8rem;
+  color: #777;
+  text-transform: capitalize; /* Biar kategori lebih rapi */
+}
+
+/* [KODE BARU] Style untuk deskripsi produk */
+.search-result-item .item-info .item-description {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 2px;
+  /* Batasi teks jadi 1 baris dan beri elipsis (...) jika terlalu panjang */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-results-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f5f5f5;
+}
+
+.search-result-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.search-result-item .item-info .item-name {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.search-result-item .item-info .item-category {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* =================================================================== */
+/* PRODUCT SLIDER & SKELETON LOADER
+/* =================================================================== */
+.product-swiper {
+  padding-bottom: 40px; /* Ruang untuk navigasi */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Skeleton Loading Effect */
+.product-card-offer.skeleton {
+  background: #f0f0f0;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.product-card-offer.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* =================================================================== */
+/* HALAMAN DETAIL PRODUK (UPGRADE) */
+/* =================================================================== */
+.product-detail-page .breadcrumb-item a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+}
+.product-detail-page .breadcrumb-item.active {
+  color: #6c757d;
+}
+
+/* Galeri Gambar */
+.product-gallery .main-image-container {
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  background-color: var(--white);
+}
+.thumbnail-images {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.thumbnail-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+.thumbnail-images img:hover,
+.thumbnail-images img.active {
+  border-color: var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Produk */
+.product-details-info .product-title {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--primary-darkest);
+  margin-bottom: 0.5rem;
+}
+.product-price-detail {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.product-price-detail .price-original {
+  font-size: 1.2rem;
+  text-decoration: line-through;
+  color: #999;
+}
+.product-short-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Tombol Aksi */
+.quantity-selector {
+  display: flex;
+  border-radius: 50px; /* Bikin pinggirannya rounded */
+  overflow: hidden; /* Biar efek roundednya keliatan */
+  border: 1px solid #dee2e6;
+}
+.quantity-selector input {
+  width: 60px;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  border: none;
+}
+.quantity-selector input:focus {
+  box-shadow: none;
+}
+.quantity-selector button {
+  border-radius: 0;
+  background-color: #f8f9fa;
+  border: none;
+  font-weight: 600;
+}
+.quantity-selector button:hover {
+  background-color: #e9ecef;
+}
+
+#add-to-wishlist-detail i.fas {
+  /* Style untuk wishlist aktif */
+  font-weight: 900;
+  color: #dc3545;
+}
+
+/* Info Meta */
+.product-meta {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+.product-meta span {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+.product-meta a {
+  color: var(--primary);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+/* Tab Info */
+.product-info-tabs .nav-link {
+  color: #555;
+  font-weight: 600;
+  border-radius: 0;
+  padding: 1rem 1.5rem;
+}
+.product-info-tabs .nav-link.active {
+  color: var(--primary);
+  border-color: #dee2e6 #dee2e6 var(--primary);
+  border-bottom-width: 3px;
+  background-color: #f8f9fa;
 }
