@@ -1,384 +1,340 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Orders</title>
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <title>Admin - Master Orders</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
-
     <style>
-      /* --- STYLE UNTUK ANIMASI FADE IN --- */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .content-header,.order-summary-cards .col,.recent-orders-section{opacity:0;animation:fadeInUp .6s ease-out forwards}
+        .content-header{animation-delay:.1s}.order-summary-cards .col:nth-child(1){animation-delay:.2s}.order-summary-cards .col:nth-child(2){animation-delay:.3s}.order-summary-cards .col:nth-child(3){animation-delay:.4s}.order-summary-cards .col:nth-child(4){animation-delay:.5s}.order-summary-cards .col:nth-child(5){animation-delay:.6s}.recent-orders-section{animation-delay:.7s}
+        .status-badge-completed{background-color:#198754;color:#fff}.status-badge-pending{background-color:#ffc107;color:#000}.status-badge-canceled{background-color:#dc3545;color:#fff}.status-badge-delivery{background-color:#6610f2;color:#fff}
+        .bg-indigo-light{background-color:#e0cffc}.bg-indigo-dark{background-color:#6610f2}
+        .delete-btn{background-color:#6c757d14;transition:background-color .2s ease-in-out}.delete-btn i{transition:color .2s ease-in-out}.delete-btn:hover{background-color:#6c757d14}.delete-btn:hover i{color:#dc3545}
+        /* Style untuk nomor halaman aktif */
+        .btn-group > .btn-outline-success.active {
+            color: #fff;
+            background-color: #198754;
+            border-color: #198754;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Terapkan animasi ke elemen utama */
-      .content-header,
-      .order-summary-cards .col,
-      .recent-orders-section {
-        opacity: 0; /* Mulai dari transparan */
-        animation: fadeInUp 0.6s ease-out forwards;
-      }
-
-      /* Atur jeda (delay) agar animasi muncul berurutan */
-      .content-header { animation-delay: 0.1s; }
-      .order-summary-cards .col:nth-child(1) { animation-delay: 0.2s; }
-      .order-summary-cards .col:nth-child(2) { animation-delay: 0.3s; }
-      .order-summary-cards .col:nth-child(3) { animation-delay: 0.4s; }
-      .order-summary-cards .col:nth-child(4) { animation-delay: 0.5s; }
-      .order-summary-cards .col:nth-child(5) { animation-delay: 0.6s; }
-      .recent-orders-section { animation-delay: 0.7s; }
-      /* --- AKHIR STYLE ANIMASI --- */
-
-      /* CSS untuk badge status */
-      .status-badge-completed { background-color: #198754; color: #fff; }
-      .status-badge-pending { background-color: #ffc107; color: #000; }
-      .status-badge-canceled { background-color: #dc3545; color: #fff; }
-      .status-badge-delivery { background-color: #6610f2; color: #fff; }
-
-      /* Penambahan CSS untuk warna kartu summary baru */
-      .bg-indigo-light { background-color: #e0cffc; }
-      .bg-indigo-dark { background-color: #6610f2; }
-      /* --- STYLE BARU UNTUK HOVER TOMBOL HAPUS --- */
-      .delete-btn {
-        background-color: #6c757d14;
-        transition: background-color 0.2s ease-in-out;
-      }
-
-      .delete-btn i {
-        transition: color 0.2s ease-in-out;
-      }
-
-      .delete-btn:hover {
-        background-color: #6c757d14;
-      }
-
-      .delete-btn:hover i {
-        color: #dc3545;
-      }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="admin-wrapper">
-      <div id="sidebar-container"></div>
-      <div id="overlay"></div>
+        <div id="sidebar-container"></div>
+        <div id="overlay"></div>
+        <div class="main-content" id="mainContent">
+            <header class="content-header">
+                <div class="header-welcome"><h2 class="mb-0">Master Orders</h2><p class="text-muted">Welcome back, Revan! Here's your order list.</p></div>
+            </header>
+            <section class="order-summary-cards mb-4">
+                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+                    <div class="col"><div class="summary-card-order bg-primary-light h-100"><div class="icon-wrapper-order bg-primary-dark"><i class="fas fa-box"></i></div><div class="info-wrapper-order"><p class="text-nowrap">Total Orders</p><h4 id="total-orders-count">0</h4></div></div></div>
+                    <div class="col"><div class="summary-card-order bg-success-light h-100"><div class="icon-wrapper-order bg-success-dark"><i class="fas fa-check-circle"></i></div><div class="info-wrapper-order"><p class="text-nowrap">Completed</p><h4 id="completed-orders-count">0</h4></div></div></div>
+                    <div class="col"><div class="summary-card-order bg-warning-light h-100"><div class="icon-wrapper-order bg-warning-dark"><i class="fas fa-hourglass-half"></i></div><div class="info-wrapper-order"><p class="text-nowrap">Pending</p><h4 id="pending-orders-count">0</h4></div></div></div>
+                    <div class="col"><div class="summary-card-order bg-indigo-light h-100"><div class="icon-wrapper-order bg-indigo-dark"><i class="fas fa-truck"></i></div><div class="info-wrapper-order"><p class="text-nowrap">Delivery</p><h4 id="delivery-orders-count">0</h4></div></div></div>
+                    <div class="col"><div class="summary-card-order bg-danger-light h-100"><div class="icon-wrapper-order bg-danger-dark"><i class="fas fa-times-circle"></i></div><div class="info-wrapper-order"><p class="text-nowrap">Canceled</p><h4 id="canceled-orders-count">0</h4></div></div></div>
+                </div>
+            </section>
+            <section class="recent-orders-section">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                            <h5 class="card-title-custom mb-0">Recent Orders</h5>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
 
-      <div class="main-content" id="mainContent">
-        <header class="content-header">
-          <div class="header-welcome">
-            <h2 class="mb-0">Master Orders</h2>
-            <p class="text-muted">
-              Welcome back, Revan! Here's your order list.
-            </p>
-          </div>
-        </header>
-
-        <section class="order-summary-cards mb-4">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
-            <div class="col">
-              <div class="summary-card-order bg-primary-light h-100 d-flex align-items-center justify-content-center">
-                <div class="icon-wrapper-order bg-primary-dark">
-                  <i class="fas fa-box"></i>
+                                <div class="input-group"><span class="input-group-text"><i class="fas fa-search"></i></span><input type="text" class="form-control" placeholder="Cari ID, Nama, atau Tanggal..." id="searchInput" /></div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary-custom dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-filter me-2"></i><span id="filter-btn-text">Filter</span></button>
+                                    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                        <li><a class="dropdown-item" href="#" data-filter-status="all">Semua Pesanan</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#" data-filter-status="Pending"><span class="d-inline-block rounded-circle me-2" style="width:8px;height:8px;background-color:#ffc107"></span> Pending</a></li>
+                                        <li><a class="dropdown-item" href="#" data-filter-status="Completed"><span class="d-inline-block rounded-circle me-2" style="width:8px;height:8px;background-color:#198754"></span> Completed</a></li>
+                                        <li><a class="dropdown-item" href="#" data-filter-status="Canceled"><span class="d-inline-block rounded-circle me-2" style="width:8px;height:8px;background-color:#dc3545"></span> Canceled</a></li>
+                                        <li><a class="dropdown-item" href="#" data-filter-status="delivery"><span class="d-inline-block rounded-circle me-2" style="width:8px;height:8px;background-color:#6610f2"></span> Delivery</a></li>
+                                    </ul>
+                                    <button class="btn btn-primary-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Show <span class="limit-text">All</span>
+                                    </button>
+                                    <ul class="dropdown-menu limit-dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" data-limit="5">5</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="10">10</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="15">15</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="20">20</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="25">25</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="30">30</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="all">Show All</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle orders-table-new">
+                                <thead>
+                                    <tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Action</th></tr>
+                                </thead>
+                                <tbody id="ordersTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="text-muted">Show:</span>
+                                 <div class="dropdown">
+                                    <button class="btn btn-primary-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="limit-text">All</span>
+                                    </button>
+                                    <ul class="dropdown-menu limit-dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" data-limit="5">5</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="10">10</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="15">15</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="20">20</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="25">25</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="30">30</a></li>
+                                        <li><a class="dropdown-item" href="#" data-limit="all">Show All</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <span id="pagination-info" class="text-muted"></span>
+                            <nav id="pagination-nav">
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group me-2" role="group">
+                                        <button type="button" class="btn btn-primary-custom" id="prev-page">Previous</button>
+                                    </div>
+                                    <div class="btn-group me-2" role="group" id="pagination-numbers">
+                                        </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-primary-custom" id="next-page">Next</button>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-wrapper-order">
-                  <p class="text-nowrap">Total Orders</p>
-                  <h4 id="total-orders-count">0</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="summary-card-order bg-success-light h-100 d-flex align-items-center justify-content-center">
-                <div class="icon-wrapper-order bg-success-dark">
-                  <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="info-wrapper-order">
-                  <p class="text-nowrap">Completed</p>
-                  <h4 id="completed-orders-count">0</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="summary-card-order bg-warning-light h-100 d-flex align-items-center justify-content-center">
-                <div class="icon-wrapper-order bg-warning-dark">
-                  <i class="fas fa-hourglass-half"></i>
-                </div>
-                <div class="info-wrapper-order">
-                  <p class="text-nowrap">Pending</p>
-                  <h4 id="pending-orders-count">0</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="summary-card-order bg-indigo-light h-100 d-flex align-items-center justify-content-center">
-                <div class="icon-wrapper-order bg-indigo-dark">
-                  <i class="fas fa-truck"></i>
-                </div>
-                <div class="info-wrapper-order">
-                  <p class="text-nowrap">Delivery</p>
-                  <h4 id="delivery-orders-count">0</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="summary-card-order bg-danger-light h-100 d-flex align-items-center justify-content-center">
-                <div class="icon-wrapper-order bg-danger-dark">
-                  <i class="fas fa-times-circle"></i>
-                </div>
-                <div class="info-wrapper-order">
-                  <p class="text-nowrap">Canceled</p>
-                  <h4 id="canceled-orders-count">0</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="recent-orders-section">
-          <div class="card dashboard-card">
-            <div class="card-body">
-              <div
-                class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2"
-              >
-                <h5 class="card-title-custom mb-0">Recent Orders</h5>
-                <div class="d-flex flex-wrap gap-2">
-                  <div class="input-group">
-                    <span class="input-group-text">
-                      <i class="fas fa-search"></i>
-                    </span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Search orders..."
-                      id="searchInput"
-                    />
-                  </div>
-
-                  <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="fas fa-filter me-2"></i>
-                      <span id="filter-btn-text">Filter</span>
-                    </button>
-
-                    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                      <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="all">Semua Pesanan</a>
-                      </li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="pending">
-                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #ffc107;"></span>
-                          Pending
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="completed">
-                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #198754;"></span>
-                          Completed
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="canceled">
-                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #dc3545;"></span>
-                          Canceled
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-filter-status="delivery">
-                          <span class="d-inline-block rounded-circle me-2" style="width: 8px; height: 8px; background-color: #6610f2;"></span>
-                          Delivery
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="table-responsive">
-                <table class="table align-middle orders-table-new">
-                  <thead>
-                    <tr>
-                      <th>Order ID</th>
-                      <th>Customer</th>
-                      <th>Date</th>
-                      <th>Total</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="ordersTableBody"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+            </section>
+            <footer class="footer mt-auto py-3 footer-animated"><div class="container-fluid"><div class="row"><div class="col-12 text-center"><script>document.write(new Date().getFullYear())</script> © Smart Farm. <span class="d-none d-sm-inline-block">- Design & Develop by Smart Farm.</span></div></div></div></footer>
+        </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/admin_script.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Data Awal Pesanan
-        let ordersData = [
-          { id: "#876364", customer: "Revan Putra", date: "07 Sep, 2025", total: "Rp 160.000", status: "Completed", href: "order/order_detailRevanPutra.html", edit_href: "confirm_orders/confirm_RevanArya.html" },
-          { id: "#876365", customer: "Citra Lestari", date: "07 Sep, 2025", total: "Rp 135.000", status: "Pending", href: "order/order_detailCitraLestari.html", edit_href: "confirm_orders/confirm_CitraLestari.html" },
-          { id: "#876366", customer: "Andi Budi", date: "06 Sep, 2025", total: "Rp 120.000", status: "Canceled", href: "order/order_detailAndiBudi.html", edit_href: "confirm_orders/confirm_AndiBudi.html" },
-          { id: "#876367", customer: "Dewi Lestari", date: "05 Sep, 2025", total: "Rp 90.000", status: "delivery", href: "order/order_detailDewiLestari.html", edit_href: "confirm_orders/confirm_DewiLestari.html" },
-          { id: "#876368", customer: "Siska Amelia", date: "05 Sep, 2025", total: "Rp 25.000", status: "Completed", href: "order/order_detailSiskaAmelia.html", edit_href: "confirm_orders/confirm_SiskaAmelia.html" },
-          { id: "#876369", customer: "Arsya Aji", date: "05 Sep, 2025", total: "Rp 35.000", status: "Pending", href: "order/order_detailArsyaAji.html", edit_href: "confirm_orders/confirm_ArsyaAji.html" },
-          { id: "#876370", customer: "Dewi Anggraini", date: "04 Sep, 2025", total: "Rp 150.000", status: "Completed", href: "order/order_detailDewiAnggraini.html", edit_href: "confirm_orders/confirm_DewiAnggraini.html" },
-          { id: "#876371", customer: "Budi Santoso", date: "03 Sep, 2025", total: "Rp 150.000", status: "delivery", href: "order/order_detailBudiSantoso.html", edit_href: "confirm_orders/confirm_BudiSantoso.html" },
-          { id: "#876372", customer: "Bagas Perkasa", date: "03 Sep, 2025", total: "Rp 120.000", status: "Canceled", href: "order/order_detailBagasPerkasa.html", edit_href: "confirm_orders/confirm_BagasPerkasa.html" },
-          { id: "#876373", customer: "Rina Wijaya", date: "02 Sep, 2025", total: "Rp 150.000", status: "Completed", href: "order/order_detailRinaWijaya.html", edit_href: "confirm_orders/confirm_RinaWijaya.html" }
-        ];
+    document.addEventListener("DOMContentLoaded", function () {
+    let ordersData = [
+        { id: "#876364", customer: "Revan Putra", date: "07 Sep, 2025", total: "Rp 160.000", status: "Completed" },
+        { id: "#876365", customer: "Citra Lestari", date: "07 Sep, 2025", total: "Rp 135.000", status: "Pending" },
+        { id: "#876366", customer: "Andi Budi", date: "06 Sep, 2025", total: "Rp 120.000", status: "Canceled" },
+        { id: "#876367", customer: "Dewi Lestari", date: "05 Sep, 2025", total: "Rp 90.000", status: "delivery" },
+        { id: "#876368", customer: "Siska Amelia", date: "05 Sep, 2025", total: "Rp 25.000", status: "Completed" },
+        { id: "#876369", customer: "Arsya Aji", date: "05 Sep, 2025", total: "Rp 35.000", status: "Pending" },
+        { id: "#876370", customer: "Dewi Anggraini", date: "04 Sep, 2025", total: "Rp 150.000", status: "Completed" },
+        { id: "#876371", customer: "Budi Santoso", date: "03 Sep, 2025", total: "Rp 150.000", status: "delivery" },
+        { id: "#876372", customer: "Bagas Perkasa", date: "03 Sep, 2025", total: "Rp 120.000", status: "Canceled" },
+        { id: "#876373", customer: "Rina Wijaya", date: "02 Sep, 2025", total: "Rp 150.000", status: "Completed" },
+        { id: "#876374", customer: "Fitriani", date: "01 Sep, 2025", total: "Rp 75.000", status: "Pending" },
+        { id: "#876375", customer: "Eko Prasetyo", date: "01 Sep, 2025", total: "Rp 180.000", status: "Completed" },
+        { id: "#876376", customer: "Nurul Hidayah", date: "31 Aug, 2025", total: "Rp 55.000", status: "delivery" },
+        { id: "#876377", customer: "Agus Santoso", date: "31 Aug, 2025", total: "Rp 210.000", status: "Canceled" },
+        { id: "#876378", customer: "Sri Wahyuni", date: "30 Aug, 2025", total: "Rp 95.000", status: "Completed" },
+        { id: "#876379", customer: "Adi Nugroho", date: "29 Aug, 2025", total: "Rp 115.000", status: "Pending" },
+        { id: "#876380", customer: "Indah Permata", date: "29 Aug, 2025", total: "Rp 40.000", status: "delivery" },
+        { id: "#876381", customer: "Joko Susilo", date: "28 Aug, 2025", total: "Rp 300.000", status: "Completed" },
+        { id: "#876382", customer: "Lina Marlina", date: "27 Aug, 2025", total: "Rp 85.000", status: "Canceled" },
+        { id: "#876383", customer: "Yoga Pratama", date: "27 Aug, 2025", total: "Rp 125.000", status: "Pending" },
+        { id: "#876384", customer: "Putri Ayu", date: "26 Aug, 2025", total: "Rp 60.000", status: "Completed" },
+        { id: "#876385", customer: "Rian Hidayat", date: "25 Aug, 2025", total: "Rp 170.000", status: "delivery" },
+        { id: "#876386", customer: "Dian Novita", date: "25 Aug, 2025", total: "Rp 190.000", status: "Completed" },
+        { id: "#876387", customer: "Ahmad Fauzi", date: "24 Aug, 2025", total: "Rp 220.000", status: "Pending" },
+        { id: "#876388", customer: "Siti Aminah", date: "23 Aug, 2025", total: "Rp 50.000", status: "Canceled" },
+        { id: "#876389", customer: "Fajar Nugraha", date: "22 Aug, 2025", total: "Rp 145.000", status: "delivery" },
+        { id: "#876390", customer: "Mega Lestari", date: "21 Aug, 2025", total: "Rp 105.000", status: "Completed" },
+        { id: "#876391", customer: "Rizki Maulana", date: "20 Aug, 2025", total: "Rp 80.000", status: "Pending" },
+        { id: "#876392", customer: "Annisa Fitri", date: "19 Aug, 2025", total: "Rp 250.000", status: "Completed" },
+        { id: "#876393", customer: "Hendro Wibowo", date: "18 Aug, 2025", total: "Rp 110.000", status: "delivery" }
+    ];
 
-        const tableBody = document.getElementById('ordersTableBody');
-        const filterBtnText = document.getElementById('filter-btn-text');
-        const searchInput = document.getElementById('searchInput');
-        let currentFilterStatus = 'all';
+    const tableBody = document.getElementById('ordersTableBody');
+    const filterBtnText = document.getElementById('filter-btn-text');
+    const searchInput = document.getElementById('searchInput');
+    const paginationNumbers = document.getElementById('pagination-numbers');
+    const prevPageBtn = document.getElementById('prev-page');
+    const nextPageBtn = document.getElementById('next-page');
+    const paginationInfo = document.getElementById('pagination-info');
+    
+    let currentFilterStatus = 'all';
+    let currentPage = 1;
+    let rowsPerPage = 10;
+    let showLimit = 'all'; 
+    let filteredOrders = []; // <-- Biarkan variabel ini untuk menyimpan hasil akhir
 
-        const updateSummaryCards = () => {
-          document.getElementById('total-orders-count').textContent = ordersData.length;
-          document.getElementById('completed-orders-count').textContent = ordersData.filter(o => o.status.toLowerCase() === 'completed').length;
-          document.getElementById('pending-orders-count').textContent = ordersData.filter(o => o.status.toLowerCase() === 'pending').length;
-          document.getElementById('canceled-orders-count').textContent = ordersData.filter(o => o.status.toLowerCase() === 'canceled').length;
-          document.getElementById('delivery-orders-count').textContent = ordersData.filter(o => o.status.toLowerCase() === 'delivery').length;
-        };
+    const updateSummaryCards = () => {
+        document.getElementById('total-orders-count').textContent = ordersData.length;
+        document.getElementById('completed-orders-count').textContent = ordersData.filter(o => o.status === 'Completed').length;
+        document.getElementById('pending-orders-count').textContent = ordersData.filter(o => o.status === 'Pending').length;
+        document.getElementById('canceled-orders-count').textContent = ordersData.filter(o => o.status === 'Canceled').length;
+        document.getElementById('delivery-orders-count').textContent = ordersData.filter(o => o.status === 'delivery').length;
+    };
 
-        const getStatusBadge = (status) => {
-          const statusClass = `status-badge-${status.toLowerCase()}`;
-          return `<span class="badge rounded-pill ${statusClass}">${status}</span>`;
-        };
+    const getStatusBadge = (status) => `<span class="badge rounded-pill status-badge-${status.toLowerCase()}">${status}</span>`;
 
-        const renderTable = (data) => {
-          tableBody.innerHTML = '';
-          if (data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Tidak ada pesanan yang ditemukan.</td></tr>';
+    const renderTableAndPagination = () => {
+    tableBody.innerHTML = '';
+
+    // <-- DITAMBAHKAN: Cek apakah ada data yang cocok
+    if (filteredOrders.length === 0) {
+        // Jika tidak ada, tampilkan pesan di dalam tabel
+        const emptyRow = `<tr><td colspan="6" class="text-center text-muted py-4">List order tidak ditemukan.</td></tr>`;
+        tableBody.innerHTML = emptyRow;
+        // Sembunyikan info paginasi dan tombol
+        paginationInfo.textContent = 'Showing 0 to 0 of 0 entries';
+        document.getElementById('pagination-nav').style.display = 'none';
+        return; // Hentikan fungsi di sini
+    }
+
+    // Kode lama tetap berjalan jika data ditemukan
+    const totalPages = Math.ceil(filteredOrders.length / rowsPerPage);
+    
+    const start = (currentPage - 1) * rowsPerPage;
+    const paginatedData = filteredOrders.slice(start, start + rowsPerPage);
+
+    paginatedData.forEach(order => {
+        const params = new URLSearchParams({ orderId: order.id, customerName: order.customer, orderDate: order.date, orderTotal: order.total, status: order.status });
+        const detailLink = `order_detail.html?${params.toString()}`;
+        const updateLink = `confirm_order.html?${params.toString()}`;
+        const updateButton = `<a href="${updateLink}" class="btn btn-icon btn-sm" title="Update Order"><i class="fas fa-check"></i></a>`;
+        const row = `<tr><td class="fw-bold">${order.id}</td><td>${order.customer}</td><td>${order.date}</td><td class="fw-bold">${order.total}</td><td>${getStatusBadge(order.status)}</td><td><a href="${detailLink}" class="btn btn-icon btn-sm" title="Lihat Detail"><i class="fas fa-eye"></i></a> ${updateButton} <a href="#" class="btn btn-icon btn-sm delete-btn" data-order-id="${order.id}" data-order-customer="${order.customer}" title="Hapus Pesanan"><i class="fas fa-trash-alt"></i></a></td></tr>`;
+        tableBody.innerHTML += row;
+    });
+
+    const end = Math.min(start + rowsPerPage, filteredOrders.length);
+    paginationInfo.textContent = `Showing ${paginatedData.length > 0 ? start + 1 : 0} to ${end} of ${filteredOrders.length} entries`;
+    renderPaginationControls(totalPages);
+};
+    
+    const renderPaginationControls = (totalPages) => {
+        paginationNumbers.innerHTML = '';
+        
+        if (totalPages <= 1) {
+            document.getElementById('pagination-nav').style.display = 'none';
             return;
-          }
-          data.forEach(order => {
-            const row = `
-              <tr>
-                <td class="fw-bold">${order.id}</td>
-                <td>${order.customer}</td>
-                <td>${order.date}</td>
-                <td class="fw-bold">${order.total}</td>
-                <td>${getStatusBadge(order.status)}</td>
-                <td>
-                  <a href="${order.href}" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                  <a href="${order.edit_href}" class="btn btn-icon btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                  <a href="#" class="btn btn-icon btn-sm delete-btn" 
-                     data-order-id="${order.id}" 
-                     data-order-customer="${order.customer}">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </td>
-              </tr>
-            `;
-            tableBody.innerHTML += row;
-          });
-        };
-        
-        const applyFiltersAndSearch = () => {
-          const searchText = searchInput.value.toLowerCase();
-          const filteredByStatus = currentFilterStatus === 'all'
-            ? ordersData
-            : ordersData.filter(order => order.status.toLowerCase() === currentFilterStatus.toLowerCase());
-          const finalFilteredData = filteredByStatus.filter(order => 
-            order.id.toLowerCase().includes(searchText) ||
-            order.customer.toLowerCase().includes(searchText)
-          );
-          renderTable(finalFilteredData);
-        };
-        
-        // --- LOGIKA FUNGSI HAPUS BARU DENGAN SWEETALERT2 ---
+        }
+        document.getElementById('pagination-nav').style.display = 'flex';
 
-        const deleteOrder = (orderId) => {
-          const orderIndex = ordersData.findIndex(order => order.id === orderId);
-          if (orderIndex > -1) {
-            ordersData.splice(orderIndex, 1);
-            updateSummaryCards();
-            applyFiltersAndSearch();
-          }
-        };
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = `btn btn-outline-success ${i === currentPage ? 'active' : ''}`;
+            button.textContent = i;
+            button.dataset.page = i;
+            paginationNumbers.appendChild(button);
+        }
 
-        tableBody.addEventListener('click', function (event) {
-          const deleteButton = event.target.closest('.delete-btn');
-          if (deleteButton) {
+        prevPageBtn.disabled = currentPage === 1;
+        nextPageBtn.disabled = currentPage === totalPages;
+    };
+
+    const applyFiltersAndSearch = () => {
+        const searchText = searchInput.value.toLowerCase();
+        
+        // 1. Filter data berdasarkan status
+        let dataToProcess = (currentFilterStatus === 'all') 
+            ? ordersData 
+            : ordersData.filter(order => order.status === currentFilterStatus);
+        
+        // <-- DIUBAH: Batasi (limit) data SEBELUM dicari
+        const limitedData = (showLimit === 'all') ? dataToProcess : dataToProcess.slice(0, showLimit);
+
+        // 2. Lakukan pencarian HANYA pada data yang sudah dibatasi
+        filteredOrders = limitedData.filter(order => 
+            order.id.toLowerCase().includes(searchText) || 
+            order.customer.toLowerCase().includes(searchText) ||
+            order.date.toLowerCase().includes(searchText)
+        );
+
+        currentPage = 1;
+        renderTableAndPagination();
+    };
+    
+    const deleteOrder = (orderId) => {
+        ordersData = ordersData.filter(order => order.id !== orderId);
+        updateSummaryCards();
+        applyFiltersAndSearch();
+    };
+
+    const checkUpdatedOrder = () => {
+        const updatedOrderId = localStorage.getItem('adminUpdatedOrderId');
+        const updatedOrderStatus = localStorage.getItem('adminUpdatedOrderStatus');
+        if (updatedOrderId && updatedOrderStatus) {
+            const orderToUpdate = ordersData.find(order => order.id === updatedOrderId);
+            if (orderToUpdate) { orderToUpdate.status = updatedOrderStatus; }
+            localStorage.removeItem('adminUpdatedOrderId');
+            localStorage.removeItem('adminUpdatedOrderStatus');
+        }
+    };
+
+    // --- Event Listeners ---
+    tableBody.addEventListener('click', (event) => {
+        const deleteButton = event.target.closest('.delete-btn');
+        if (deleteButton) {
             event.preventDefault();
             const orderId = deleteButton.dataset.orderId;
             const customerName = deleteButton.dataset.orderCustomer;
-            
             Swal.fire({
-                title: 'Anda yakin?',
-                html: `Yakin mau hapus pesanan dari <strong>${customerName}</strong> (ID: ${orderId})?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal'
+                title: 'Anda yakin?', html: `Yakin mau hapus pesanan dari <strong>${customerName}</strong> (ID: ${orderId})?`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', cancelButtonColor: '#6c757d', confirmButtonText: 'Ya, Hapus', cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     deleteOrder(orderId);
-                    
-                    Swal.fire({
-                        title: 'Dihapus!',
-                        text: `Pesanan dari ${customerName} berhasil dihapus.`,
-                        icon: 'success',
-                        customClass: {
-                            confirmButton: 'btn btn-primary-custom'
-                        },
-                        buttonsStyling: false
-                    });
+                    Swal.fire('Dihapus!', `Pesanan dari ${customerName} berhasil dihapus.`, 'success');
                 }
             });
-          }
+        }
+    });
+    
+    document.querySelectorAll('.dropdown-item[data-filter-status]').forEach(item => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+            currentFilterStatus = event.currentTarget.getAttribute('data-filter-status');
+            filterBtnText.textContent = event.currentTarget.textContent.trim();
+            applyFiltersAndSearch();
         });
-        
-        // --- AKHIR LOGIKA FUNGSI HAPUS ---
+    });
 
-        updateSummaryCards();
-        applyFiltersAndSearch();
-
-        document.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', (event) => {
-                const newStatus = event.target.closest('.dropdown-item').getAttribute('data-filter-status');
-                currentFilterStatus = newStatus;
-                if (newStatus === 'all') {
-                    filterBtnText.textContent = 'Semua Pesanan';
-                } else {
-                    filterBtnText.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
-                }
-                applyFiltersAndSearch();
-            });
+    document.querySelectorAll('.limit-dropdown-menu .dropdown-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const limit = e.target.dataset.limit;
+            showLimit = (limit === 'all') ? 'all' : parseInt(limit, 10);
+            document.querySelectorAll('.limit-text').forEach(span => span.textContent = e.target.textContent);
+            currentPage = 1;
+            // <-- DIUBAH: Panggil applyFiltersAndSearch agar logika limit dan search diterapkan ulang
+            applyFiltersAndSearch();
         });
+    });
 
-        searchInput.addEventListener('input', applyFiltersAndSearch);
-      });
+    paginationNumbers.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            currentPage = parseInt(e.target.dataset.page, 10);
+            renderTableAndPagination();
+        }
+    });
+
+    prevPageBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTableAndPagination(); } });
+    nextPageBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(filteredOrders.length / rowsPerPage);
+        if (currentPage < totalPages) { currentPage++; renderTableAndPagination(); }
+    });
+
+    searchInput.addEventListener('input', applyFiltersAndSearch);
+    
+    // --- Initial Load ---
+    checkUpdatedOrder(); 
+    updateSummaryCards();
+    applyFiltersAndSearch();
+});
     </script>
-  </body>
-</html> 
+</body>
+</html>

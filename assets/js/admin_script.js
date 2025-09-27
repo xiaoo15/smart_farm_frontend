@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muat komponen sidebar dan footer secara bersamaan
     await Promise.all([
       loadComponent("/components/_sidebar.html", "sidebar-container"),
-      loadComponent("/components/_footer_admin.html", "footer-container"),
+      loadComponent("../components/_footer_admin.html", "footer-container"),
     ]);
 
     // Setelah komponen dimuat, jalankan fungsi inisialisasi lainnya
@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeAdminChat();
     initializeDashboardFeatures(); // <--- FUNGSI INI AKAN KITA ISI LENGKAP
     initializeGeneralAdminFeatures();
+    initializeProductDetailModal();
+    initializeOrderDetailModal();
+    initializeProductEdit();
   };
 
   // --- FUNGSI INISIALISASI SPESIFIK ---
@@ -532,6 +535,179 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+   /**
+   * [BARU] Menangani tampilan detail produk dalam modal di halaman products.html
+   */
+  function initializeProductDetailModal() {
+    const productTableBody = document.getElementById('productTableBody');
+    // Hanya jalankan skrip ini jika kita berada di halaman produk
+    if (!productTableBody) {
+        return;
+    }
+
+    // Buat dan sisipkan elemen modal ke dalam body jika belum ada
+    if (!document.getElementById('productDetailModal')) {
+        const modalHTML = `
+            <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productDetailModalLabel">Detail Produk</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="productDetailModalBody">
+                            </div>
+                    </div>
+                </div>
+            </div>`;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+    
+    // Inisialisasi modal Bootstrap
+    const productDetailModal = new bootstrap.Modal(document.getElementById('productDetailModal'));
+
+    // Tambahkan event listener ke seluruh body tabel
+    productTableBody.addEventListener('click', function(event) {
+        // Cari tombol "view" (ikon mata) yang paling dekat dengan elemen yang diklik
+        const viewButton = event.target.closest('a[href*="detailproduct"]');
+        
+        if (viewButton) {
+            event.preventDefault(); // Mencegah link berpindah halaman
+
+            const productRow = viewButton.closest('tr');
+
+            // Ambil semua data dari baris tabel yang diklik
+            const imgSrc = productRow.querySelector('.product-img').src;
+            const productCode = productRow.querySelector('[data-label="Kode"]').textContent.trim();
+            const productName = productRow.querySelector('.product-name').textContent.trim();
+            const category = productRow.querySelector('.category-badge').textContent.trim();
+            // Perbaiki selector untuk mengambil jumlah stok
+            const stockElement = productRow.querySelector('[data-label="jumblah"]') || productRow.querySelector('[data-label="Jumlah"]');
+            const stock = stockElement ? stockElement.textContent.trim() : 'N/A';
+            const price = productRow.querySelector('.product-price').textContent.trim();
+            const editUrl = viewButton.getAttribute('href').replace('detailproduct', 'updateproduct.html/update').replace('.html','');
+
+
+            // Buat konten HTML untuk ditampilkan di dalam modal
+            const modalBodyContent = `
+                <div class="container-fluid">
+                    <div class="row g-4">
+                        <div class="col-md-5 text-center">
+                            <img src="${imgSrc}" alt="${productName}" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-7">
+                            <h2 class="mb-1">${productName}</h2>
+                            <p class="text-muted small">KODE: ${productCode}</p>
+                            
+                            <span class="badge category-${category.toLowerCase()} mb-3" style="font-size: 0.9rem;">${category}</span>
+
+                            <h3 class="product-price text-success fw-bold my-3">${price}</h3>
+                            
+                            <div class="info-section">
+                                <div class="info-label">Stok Tersedia</div>
+                                <div class="info-value fs-5">${stock}</div>
+                            </div>
+                            
+                            <hr class="my-4">
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Masukkan konten ke dalam modal dan tampilkan
+            document.getElementById('productDetailModalBody').innerHTML = modalBodyContent;
+            document.getElementById('productDetailModalLabel').textContent = `Detail: ${productName}`;
+            productDetailModal.show();
+        }
+    });
+  }
+
+
+  function initializeOrderDetailModal() {
+    const ordersTableBody = document.getElementById('ordersTableBody');
+    if (!ordersTableBody) {
+      return;
+    }
+
+    if (!document.getElementById('orderDetailModal')) {
+      const modalHTML = `
+        <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderDetailModalLabel">Detail Pesanan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="orderDetailModalBody">
+                        </div>
+                </div>
+            </div>
+        </div>`;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    const orderDetailModal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
+
+    ordersTableBody.addEventListener('click', function(event) {
+      const viewButton = event.target.closest('a[data-action="view-order-detail"]');
+
+      if (viewButton) {
+        event.preventDefault();
+        const orderRow = viewButton.closest('tr');
+        const orderDetails = JSON.parse(orderRow.dataset.orderDetails);
+
+        const getStatusBadge = (status) => {
+          const statusClass = `status-badge-${status.toLowerCase()}`;
+          return `<span class="badge rounded-pill ${statusClass}">${status}</span>`;
+        };
+
+        const modalBodyContent = `
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Customer</h4>
+                <p>${orderDetails.customer}</p>
+              </div>
+              <div class="col-md-6">
+                <h4>Order ID</h4>
+                <p>${orderDetails.id}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Tanggal</h4>
+                <p>${orderDetails.date}</p>
+              </div>
+              <div class="col-md-6">
+                <h4>Total</h4>
+                <p class="fw-bold">${orderDetails.total}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Status</h4>
+                <p>${getStatusBadge(orderDetails.status)}</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('orderDetailModalBody').innerHTML = modalBodyContent;
+        document.getElementById('orderDetailModalLabel').textContent = `Detail Pesanan: ${orderDetails.id}`;
+        orderDetailModal.show();
+      }
+    });
+  }
+
+  /**
+   * [KOSONG] Logika edit produk sekarang ditangani langsung di products.html
+   * untuk memastikan tidak ada konflik timing.
+   */
+  function initializeProductEdit() {
+      // Biarkan fungsi ini kosong.
+  }
+
+  
 
   // --- MULAI APLIKASI ---
   initializeApp();

@@ -20,6 +20,15 @@
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
 
     <style>
+      .content-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding-top: 1.5rem;
+        padding-bottom: 10px;
+        background-color: #ffffff;
+        padding-bottom: 10px;
+      }
       .dropdown-item p {
         white-space: normal;
       }
@@ -58,17 +67,42 @@
           transform: translateY(0);
         }
       }
-      .header-actions > .form-control,
+      .header-actions > .search-wrapper,
       .header-actions > .dropdown {
         opacity: 0;
         animation: fadeInUp 0.5s ease-out forwards;
       }
-      .header-actions > .form-control {
+      .header-actions > .search-wrapper {
         animation-delay: 0.2s;
       }
       .header-actions > .dropdown {
         animation-delay: 0.4s;
         z-index: 10;
+      }
+
+      /* === [BARU] CSS untuk Tampilan Mobile === */
+      @media (max-width: 767.98px) {
+        .content-header {
+          padding-top: 1.5rem;
+        padding-bottom: 10px;;
+        }
+        .header-actions {
+          width: 100%;
+          margin-top: 1rem; /* Memberi jarak dari sub-judul */
+        }
+        .header-actions .search-wrapper {
+          flex-grow: 1; /* Membuat kolom search memanjang */
+        }
+        .header-actions .dropdown {
+          margin-left: 0.5rem; /* Memberi jarak antara search dan dropdown */
+        }
+        
+      }
+      /* === Selesai CSS Tampilan Mobile === */
+       .dashboard-card .table th,
+      .dashboard-card .table td {
+        text-align: left;
+        vertical-align: middle; /* Memastikan konten selaras di tengah secara vertikal */
       }
     </style>
   </head>
@@ -78,18 +112,20 @@
       <div id="overlay"></div>
 
       <div class="main-content">
-        <header class="content-header">
+        <header class="content-header d-flex flex-wrap justify-content-between align-items-center">
           <div class="header-welcome">
             <h2>Dashboard</h2>
             <p>Here's what's happening with your store today.</p>
           </div>
-          <div class="header-actions d-flex align-items-center">
-            <input
-              type="text"
-              class="form-control me-2"
-              placeholder="Cari di dashboard..."
-              id="searchInput"
-            />
+          <div class="header-actions d-flex align-items-center gap-2">
+            <div class="search-wrapper">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Cari di dashboard..."
+                id="searchInput"
+              />
+            </div>
             <div class="dropdown">
               <button
                 class="btn btn-light position-relative"
@@ -436,7 +472,7 @@
               <div class="card-body">
                 <h5 class="card-title-custom mb-3">Recent Orders</h5>
                 <div class="table-responsive">
-                  <table class="table table-hover align-middle">
+                  <table class="table table-hover align-middle ">
                     <thead class="table-light">
                       <tr>
                         <th scope="col">Order ID</th>
@@ -655,7 +691,18 @@
                 </ul>
               </div>
             </div>
+            
           </div>
+          <footer class="footer footer-animated">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <script>document.write(new Date().getFullYear())</script> © Smart Farm. 
+                <span class="d-none d-sm-inline-block">- Design & Develop by Smart Farm.</span>
+            </div>
+        </div>
+    </div>
+</footer>
         </div>
       </div>
     </div>
@@ -703,10 +750,10 @@
         </div>
       </div>
     </div>
-
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/admin_script.js"></script>
-
   </body>
 </html>

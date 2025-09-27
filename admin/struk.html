@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Struk Pesanan - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../assets/css/admin_style.css" />
+    <style>
+        /* --- STYLE ANIMASI FADE IN --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Terapkan animasi ke elemen struk dan tombol */
+        #struk-wrapper {
+            /* Mulai dari transparan agar tidak "deg" */
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        /* --- AKHIR STYLE ANIMASI --- */
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #struk-section, #struk-section * {
+                visibility: visible;
+            }
+            #struk-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <div id="sidebar-container" class="no-print"></div>
+        <div id="overlay" class="no-print"></div>
+        <div class="main-content" id="mainContent">
+            <div class="container my-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6" id="struk-wrapper">
+                        <div class="d-flex justify-content-between align-items-center mb-3 no-print">
+                             <a href="orders.html" class="btn btn-outline-danger"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Pesanan</a>
+                             <button onclick="window.print()" class="btn btn-primary-custom"><i class="fas fa-print me-2"></i>Cetak Struk</button>
+                        </div>
+                        <div id="struk-section">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <div class="text-center mb-4">
+                                        <h4>Struk Pesanan</h4>
+                                        <p class="text-muted">Smart Farm</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Order ID:</span>
+                                        <span id="order-id" class="fw-bold"></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Tanggal:</span>
+                                        <span id="order-date"></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span>Customer:</span>
+                                        <span id="customer-name"></span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Produk</span>
+                                        <span>Total</span>
+                                    </div>
+                                    <hr>
+                                    <div id="product-list">
+                                        </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Subtotal</span>
+                                        <span id="subtotal"></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Pengiriman</span>
+                                        <span>Rp 0</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between h5 fw-bold">
+                                        <span>TOTAL</span>
+                                        <span id="grand-total"></span>
+                                    </div>
+                                    <hr>
+                                    <p class="text-center text-muted small mt-4">Terima kasih telah berbelanja!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/admin_script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('orderId');
+            const customerName = urlParams.get('customerName');
+            const orderDate = urlParams.get('orderDate');
+            const orderTotal = urlParams.get('orderTotal');
+
+            if (!orderId) {
+                document.body.innerHTML = '<div class="alert alert-danger">Data pesanan tidak ditemukan.</div>';
+                return;
+            }
+
+            // Mengisi data ke elemen struk
+            document.getElementById('order-id').textContent = orderId;
+            document.getElementById('order-date').textContent = orderDate;
+            document.getElementById('customer-name').textContent = customerName;
+            document.getElementById('subtotal').textContent = orderTotal;
+            document.getElementById('grand-total').textContent = orderTotal;
+
+            // Mengisi detail produk (contoh)
+            document.getElementById('product-list').innerHTML = `
+                <div class="d-flex justify-content-between">
+                    <span>Item Pesanan (Contoh) x1</span>
+                    <span>${orderTotal}</span>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
