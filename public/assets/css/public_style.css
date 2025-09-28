@@ -224,6 +224,15 @@ body {
   .header-icons {
     margin-left: auto; /* Pindahin ikon ke paling kanan di mobile */
   }
+  .navbar-nav .nav-link::after {
+    left: 16px; /* Atur posisi dari kiri, sesuaikan dengan padding */
+    transform: translateX(0); /* Hapus transform yang membuatnya ke tengah */
+  }
+
+  .navbar-nav .nav-link:hover::after,
+  .navbar-nav .nav-link.active::after {
+    width: 25px; /* Pastikan lebarnya tetap sama */
+  }
 }
 /* =================================================================== */
 /* MAIN CONTENT */
@@ -2322,6 +2331,183 @@ p.product-price {
   font-size: 1.2rem;
 }
 
+.search-results-container-overlay {
+  background-color: white;
+  border-radius: 12px;
+  margin-top: 15px; /* Kasih jarak dari kotak pencarian */
+  max-height: 50vh; /* Maksimal tingginya 50% dari layar biar nggak kepanjangan */
+  overflow-y: auto; /* Bisa di-scroll kalau hasilnya banyak */
+  opacity: 0; /* Awalnya sembunyi */
+  transform: translateY(-10px); /* Awalnya agak ke atas dikit */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Animasi muncul */
+  display: none; /* Kita pakai display none biar nggak makan tempat pas kosong */
+}
+
+/* Tampilkan container HANYA jika ada isinya */
+.search-results-container-overlay:not(:empty) {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Styling untuk setiap item hasil pencarian */
+.search-results-container-overlay .search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--dark-text);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.search-results-container-overlay .search-result-item:last-child {
+  border-bottom: none; /* Hapus garis di item terakhir */
+}
+
+.search-results-container-overlay .search-result-item:hover {
+  background-color: #f8f9fa; /* Warna latar pas di-hover */
+  color: var(--primary);
+}
+
+.search-results-container-overlay .search-result-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+  flex-shrink: 0; /* Biar gambar nggak gepeng */
+}
+
+.search-results-container-overlay .item-info .item-name {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* Kategori & Deskripsi dikecilin biar nggak terlalu rame */
+.search-results-container-overlay .item-info .item-category,
+.search-results-container-overlay .item-info .item-description {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-bottom: 0;
+  line-height: 1.3;
+  
+  /* [TRIK KEREN] Potong teks yang panjang dengan elipsis (...) */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px; /* Sesuaikan lebarnya jika perlu */
+}
+.search-result-item .item-category {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background-color: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: 6px;
+  align-self: flex-start; /* Biar ukurannya pas dengan teks */
+}
+
+.search-result-item .item-info {
+  /* Beri ruang agar info tidak terlalu mepet ke harga */
+  margin-right: 15px;
+}
+
+.search-result-item .item-price {
+  font-weight: 600;
+  color: var(--primary); /* Warna hijau khas SmartFarm */
+  font-size: 0.8rem;
+  white-space: nowrap; /* Mencegah harga turun baris di layar sempit */
+}
+
+/* =================================================================== */
+/* [FINAL] DESAIN SEARCH RESULTS (DESKTOP & MOBILE) */
+/* =================================================================== */
+
+/* Container utama untuk hasil pencarian */
+.search-results-container,
+.search-results-container-overlay {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  z-index: 1001;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 8px; /* Jarak dari search bar */
+}
+
+/* Khusus untuk desktop, posisinya absolut di bawah search bar */
+.search-container {
+  position: relative;
+}
+.search-results-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+/* Tampilkan container HANYA jika ada isinya */
+.search-results-container:empty,
+.search-results-container-overlay:empty {
+  display: none;
+}
+
+/* Styling untuk setiap item hasil pencarian */
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--dark-text);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.search-result-item img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.search-result-item .item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result-item .item-name {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+/* Styling untuk Kategori biar jadi Tag kecil yang keren */
+.search-result-item .item-category {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background-color: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: 6px;
+  align-self: flex-start; /* Biar ukuran tag pas dengan teks */
+  text-transform: capitalize; /* Huruf depannya jadi kapital */
+}
+
 /* =================================================================== */
 /* CART PAGE STYLES */
 /* =================================================================== */
@@ -2927,7 +3113,7 @@ p.product-price {
 }
 
 /* =================================================================== */
-/* WISHLIST PAGE STYLES (UPGRADE GAMBAR BESAR) */
+/* [UPGRADE] WISHLIST PAGE STYLES */
 /* =================================================================== */
 
 .wishlist-header .wishlist-title {
@@ -2978,7 +3164,7 @@ p.product-price {
   transform: scale(1.05);
 }
 
-/* Info produk di bawahnya tetap menggunakan style yang sama, jadi tidak perlu diubah */
+/* Info produk di bawahnya tetap menggunakan style yang sama */
 .wishlist-card .product-info {
   padding: 1.25rem;
   display: flex;
@@ -2987,11 +3173,16 @@ p.product-price {
 }
 
 /* Tombol hapus disesuaikan */
-.wishlist-card .product-actions .action-btn i.fa-times {
-  color: #dc3545; /* Warna merah untuk hapus */
-  font-size: 1.2rem;
+.wishlist-card .product-actions .action-btn.remove-from-wishlist {
+  background-color: rgba(220, 53, 69, 0.8); /* Warna merah transparan */
+  color: white;
+  backdrop-filter: blur(2px);
 }
 
+.wishlist-card .product-actions .action-btn.remove-from-wishlist:hover {
+    background-color: #dc3545; /* Merah solid pas hover */
+    transform: scale(1.1);
+}
 /* =============================================== */
 /* STYLE UNTUK HALAMAN CONTACT US */
 /* =============================================== */
@@ -4226,6 +4417,12 @@ body {
   font-size: 0.8rem;
   color: #777;
 }
+
+.search-result-item {
+  font-size: 0.8rem;
+  color: #777;
+}
+
 
 /* =================================================================== */
 /* PRODUCT SLIDER & SKELETON LOADER

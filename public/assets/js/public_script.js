@@ -1,48 +1,82 @@
 /* =================================================================== */
-/* SMARTFARM PUBLIC SCRIPT V3.0 - FINAL & CLEANED VERSION */
+/* SMARTFARM PUBLIC SCRIPT V3.1 - FINAL & ORGANIZED VERSION */
 /* =================================================================== */
 
-/**
- * Listener utama yang akan berjalan setelah seluruh struktur HTML halaman dimuat.
- */
 document.addEventListener("DOMContentLoaded", function () {
-  // Aturan utama: Cek apakah ini halaman login.
-  if (document.body.classList.contains("login-body")) {
-    // Jika ya, langsung hajar preloader & jalankan skrip login.
-    forceRemovePreloader();
-    initializeLoginPage();
-  } else {
-    // Untuk SEMUA halaman lain, jalankan alur inisialisasi yang aman.
-    initializeApp();
-  }
+  // Selalu muat header & footer terlebih dahulu
+  Promise.all([loadHeader(), loadFooter()])
+    .then(() => {
+      // Setelah komponen dasar dimuat, jalankan logika spesifik halaman
+      if (document.body.classList.contains("login-body")) {
+        initializeLoginPage();
+      } else {
+        initializeApp();
+      }
+      // Preloader dihilangkan setelah semua siap
+      forceRemovePreloader();
+    })
+    .catch((error) => {
+      console.error("Gagal memuat komponen halaman:", error);
+      forceRemovePreloader(); // Tetap hilangkan preloader jika ada error
+    });
 });
 
 /**
  * [FUNGSI UTAMA] Menginisialisasi seluruh halaman (selain login).
- * Menunggu semua komponen (header, footer) selesai dimuat
- * baru menghilangkan preloader.
  */
 function initializeApp() {
-  Promise.all([loadHeader(), loadFooter()])
-    .then(() => {
-      // SUKSES! Header & Footer SIAP!
-      forceRemovePreloader();
-      // Jalankan semua skrip lain yang butuh elemen dari header/footer.
-      initializeNavbar();
-      initializePageSpecificLogic(); // <== SEMUA LOGIKA HALAMAN ADA DI SINI
-      initializeChatFunctionality();
-    })
-    .catch((error) => {
-      // GAGAL!
-      console.error("Gagal memuat komponen halaman:", error);
-      forceRemovePreloader();
-      const placeholder = document.getElementById("header-placeholder");
-      if (placeholder)
-        placeholder.innerHTML =
-          "<h3 class='text-center text-danger my-5'>Waduh, gagal memuat halaman. Coba refresh lagi.</h3>";
-    });
+  initializeNavbarAndSearch(); // <- CUKUP SATU FUNGSI INI UNTUK SEMUA URUSAN NAVBAR
+  initializePageSpecificLogic();
+  initializeChatFunctionality();
+  initializeActiveNavlink();
 }
 
+/**
+ * [FUNGSI BARU] Tempat semua event listener untuk navbar.
+ * Fungsi ini HARUS dipanggil SETELAH header selesai dimuat.
+ */
+function initializeNavbarEventListeners() {
+  const mobileMenuToggle = document.querySelector(".navbar-toggler");
+  const navbarCollapse = document.getElementById("navbarNav");
+  const mobileSearchIcon = document.getElementById("mobile-search-icon");
+  const searchOverlay = document.getElementById("search-overlay");
+  const closeSearchBtn = document.getElementById("close-search-btn");
+
+  // Logika untuk menampilkan/menyembunyikan Menu Hamburger
+  // Bootstrap 5 sudah menangani ini dengan atribut data-bs-toggle, jadi ini hanya untuk debugging
+  if (mobileMenuToggle && navbarCollapse) {
+    mobileMenuToggle.addEventListener("click", function () {
+      console.log("Tombol hamburger diklik!");
+    });
+  }
+
+  // Logika untuk menampilkan Search Overlay saat ikon search mobile diklik
+  if (mobileSearchIcon && searchOverlay) {
+    mobileSearchIcon.addEventListener("click", function (event) {
+      event.preventDefault();
+      searchOverlay.classList.add("active");
+      console.log("Ikon search mobile diklik, overlay muncul.");
+    });
+  }
+
+  // Logika untuk menutup Search Overlay
+  if (closeSearchBtn && searchOverlay) {
+    closeSearchBtn.addEventListener("click", function () {
+      searchOverlay.classList.remove("active");
+      console.log("Tombol close search diklik, overlay hilang.");
+    });
+  }
+
+  // (Opsional tapi keren) Tutup juga overlay kalau klik di luar area form
+  if (searchOverlay) {
+    searchOverlay.addEventListener("click", function (event) {
+      if (event.target === searchOverlay) {
+        searchOverlay.classList.remove("active");
+        console.log("Klik di luar area, overlay hilang.");
+      }
+    });
+  }
+}
 /**
  * ===================================================================
  * FUNGSI-FUNGSI PEMUAT KOMPONEN (Header, Footer, Preloader)
@@ -65,7 +99,7 @@ function loadHeader() {
     .then((data) => {
       headerPlaceholder.innerHTML = data;
     });
-}
+} 
 
 function loadFooter() {
   const footerPlaceholder = document.getElementById("footer-placeholder");
@@ -88,6 +122,154 @@ function forceRemovePreloader() {
       preloader.remove();
     }, 500);
   }
+}
+
+function initializeNavbarAndSearch() {
+  // --- Logika Menampilkan Menu User atau Tombol Login ---
+  const userSectionContainer = document.getElementById("user-section-container");
+  if (userSectionContainer) {
+    if (isAuthenticated()) {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const firstName = currentUser ? currentUser.name.split(" ")[0] : "User";
+
+      userSectionContainer.innerHTML = `
+        <div class="user-dropdown">
+          <a href="#" class="nav-link">
+            <i class="far fa-user-circle me-1"></i>
+            <span>Halo, ${firstName}!</span>
+            <i class="fas fa-chevron-down ms-1"></i>
+          </a>
+          <div class="dropdown-content">
+            <a href="profile.html"><i class="fas fa-user-edit"></i> Profil Saya</a>
+            <a href="orders.html"><i class="fas fa-box"></i> Pesananku</a>
+            <hr>
+            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+          </div>
+        </div>
+      `;
+
+      const logoutBtn = document.getElementById("logout-btn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("currentUser");
+          showNotification("Kamu berhasil keluar.", "info");
+          setTimeout(() => (window.location.href = "login.html"), 1500);
+        });
+      }
+    }
+    // Jika tidak login, biarkan tombol default "Daftar / Masuk" dari HTML
+  }
+
+  // --- Logika untuk Search Overlay (di HP) ---
+  const mobileSearchIcon = document.getElementById("mobile-search-icon");
+  const searchOverlay = document.getElementById("search-overlay");
+  const closeSearchBtn = document.getElementById("close-search-btn");
+
+  if (mobileSearchIcon && searchOverlay) {
+    mobileSearchIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchOverlay.classList.add("active");
+    });
+  }
+  if (closeSearchBtn) {
+    closeSearchBtn.addEventListener("click", () =>
+      searchOverlay.classList.remove("active")
+    );
+  }
+
+  // --- INISIALISASI SEMUA FUNGSI PENCARIAN ---
+  const desktopSearchInput = document.querySelector(
+    ".search-form .form-control"
+  );
+  const desktopResultsContainer = document.querySelector(
+    ".search-results-container"
+  );
+  const overlaySearchInput = document.getElementById("search-overlay-input");
+  const overlayResultsContainer = document.querySelector(
+    ".search-results-container-overlay"
+  );
+
+  if (desktopSearchInput && desktopResultsContainer) {
+    initializeSearch(desktopSearchInput, desktopResultsContainer);
+  }
+  if (overlaySearchInput && overlayResultsContainer) {
+    initializeSearch(overlaySearchInput, overlayResultsContainer);
+  }
+
+  updateCartBadge();
+}
+/**
+ * Menginisialisasi logika pencarian untuk sebuah input field.
+ */
+function initializeSearch(inputElement, resultsContainer) {
+    const productsData = getSampleProducts();
+
+    inputElement.addEventListener("input", function () {
+        const query = this.value.toLowerCase().trim();
+        if (query.length < 2) {
+            resultsContainer.innerHTML = "";
+            resultsContainer.style.display = 'none'; // Sembunyikan jika query pendek
+            return;
+        }
+        const filteredProducts = productsData.filter(p =>
+            p.name.toLowerCase().includes(query) ||
+            p.category.toLowerCase().includes(query)
+        );
+        displaySearchResults(filteredProducts, resultsContainer);
+        resultsContainer.style.display = 'block'; // Tampilkan jika ada hasil
+    });
+
+    document.addEventListener("click", function (e) {
+        if (
+            !e.target.closest(".search-container") &&
+            !e.target.closest(".search-overlay-content")
+        ) {
+            if (resultsContainer) {
+                resultsContainer.innerHTML = "";
+                resultsContainer.style.display = 'none';
+            }
+        }
+    });
+}
+
+/**
+ * Menampilkan hasil pencarian di kontainer yang ditentukan.
+ */
+function displaySearchResults(products, container) {
+  if (products.length === 0) {
+    container.innerHTML =
+      '<div class="p-3 text-center text-muted">Produk tidak ditemukan.</div>';
+    return;
+  }
+
+  const resultsHTML = products
+    .slice(0, 5)
+    .map(
+      (product) => `
+      <a href="product_detail.html?id=${product.id}" class="search-result-item">
+          <img src="${product.image}" alt="${product.name}">
+          <div class="item-info">
+              <p class="item-name mb-0">${product.name}</p>
+              <p class="item-category mb-0 text-capitalize">${product.category}</p>
+          </div>
+      </a>
+  `
+    )
+    .join("");
+  container.innerHTML = resultsHTML;
+}
+
+function initializeActiveNavlink() {
+  let currentPage = window.location.pathname.split("/").pop() || "index.html";
+  const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  navLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+    }
+  });
 }
 
 /**
@@ -125,27 +307,36 @@ function initializeNavbar() {
         }, 1500);
       });
     }
-  }
+  } // --- Logika Menu Mobile ---
 
-  // --- Logika Menu Mobile ---
-  const mobileMenuToggle = document.querySelector(".navbar-toggler");
-  const mobileMenu = document.querySelector(".navbar-collapse");
-  if (mobileMenuToggle && mobileMenu) {
-    mobileMenuToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      mobileMenu.classList.toggle("show");
-    });
-    document.addEventListener("click", (e) => {
-      if (
-        mobileMenu.classList.contains("show") &&
-        !e.target.closest(".navbar")
-      ) {
-        mobileMenu.classList.remove("show");
+  // Logika untuk menampilkan hasil pencarian di Search Overlay
+  const searchOverlayInput = document.getElementById("search-overlay-input");
+  const searchOverlayResultsContainer = document.querySelector(".search-results-container-overlay");
+  const allProducts = getSampleProducts(); // Ambil data produk dari fungsi yang sudah ada
+
+  if (searchOverlayInput && searchOverlayResultsContainer) {
+    searchOverlayInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+
+      if (query.length < 2) {
+        searchOverlayResultsContainer.innerHTML = "";
+        return;
       }
+
+      // Filter produk berdasarkan nama atau kategori
+      const filteredProducts = allProducts.filter(
+        (product) =>
+          product.name.toLowerCase().includes(query) ||
+          product.category.toLowerCase().includes(query)
+      );
+      
+      // Tampilkan hasilnya menggunakan fungsi yang sudah ada! Keren kan?
+      displaySearchResults(filteredProducts, searchOverlayResultsContainer);
     });
   }
 
-  // --- [FIX] LOGIKA REKOMENDASI PENCARIAN ---
+   // --- [FIX] LOGIKA REKOMENDASI PENCARIAN ---
+
   const sampleProducts = [
     {
       id: 1,
@@ -345,21 +536,20 @@ function initializeNavbar() {
     const resultsHTML = products
       .map(
         (product) => `
-          <a href="${product.url}" class="search-result-item">
-              <img src="${product.img}" alt="${product.name}">
-              <div class="item-info">
-                  <p class="item-name mb-0">${product.name}</p>
-                  <p class="item-category mb-0">${product.category}</p>
-                  <p class="item-description mb-0">${product.description}</p>
-              </div>
-          </a>
-      `
+          <a href="${product.url}" class="search-result-item">
+              <img src="${product.img}" alt="${product.name}">
+              <div class="item-info">
+                  <p class="item-name mb-0">${product.name}</p>
+                  <p class="item-category mb-0">${product.category}</p>
+                  <p class="item-description mb-0">${product.description}</p>
+              </div>
+          </a>
+      `
       )
       .join("");
     container.innerHTML = resultsHTML;
-  }
+  } // --- Sisa Logika Navbar ---
 
-  // --- Sisa Logika Navbar ---
   updateCartBadge();
 }
 
@@ -370,9 +560,8 @@ function initializeLoginPage() {
   const getUsers = () =>
     JSON.parse(localStorage.getItem("smartfarm_users")) || [];
   const saveUsers = (users) =>
-    localStorage.setItem("smartfarm_users", JSON.stringify(users));
+    localStorage.setItem("smartfarm_users", JSON.stringify(users)); // Form Login
 
-  // Form Login
   const loginForm = document.getElementById("login-form");
   if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
@@ -392,9 +581,8 @@ function initializeLoginPage() {
         errorDiv.textContent = "Email atau password salah!";
       }
     });
-  }
+  } // [KODE BARU] Logika untuk Form Lupa Password
 
-  // [KODE BARU] Logika untuk Form Lupa Password
   const forgotForm = document.getElementById("forgot-password-form");
   if (forgotForm) {
     forgotForm.addEventListener("submit", function (e) {
@@ -410,10 +598,8 @@ function initializeLoginPage() {
         // Simulasi berhasil
         errorDiv.textContent = "";
         successDiv.textContent =
-          "Link reset password telah dikirim ke email Anda!";
+          "Link reset password telah dikirim ke email Anda!"; // PENTING: Ini hanya untuk demo, karena kita tidak bisa kirim email sungguhan. // Kita tampilkan password user via alert. Di aplikasi nyata, ini SANGAT TIDAK AMAN.
 
-        // PENTING: Ini hanya untuk demo, karena kita tidak bisa kirim email sungguhan.
-        // Kita tampilkan password user via alert. Di aplikasi nyata, ini SANGAT TIDAK AMAN.
         setTimeout(() => {
           alert(
             `(Hanya untuk Demo) Password Anda adalah: ${foundUser.password}\n\nDi aplikasi sungguhan, Anda akan menerima email.`
@@ -425,9 +611,8 @@ function initializeLoginPage() {
         errorDiv.textContent = "Email tidak ditemukan di database kami.";
       }
     });
-  }
+  } // Form Registrasi
 
-  // Form Registrasi
   const registerForm = document.getElementById("register-form");
   if (registerForm) {
     registerForm.addEventListener("submit", (e) => {
@@ -593,9 +778,8 @@ document.addEventListener("click", function (e) {
       cartButton.dataset;
     addToCart(productId, productName, productPrice, productImage, cartButton);
     return;
-  }
+  } // Cek apakah yang diklik adalah tombol 'wishlist'
 
-  // Cek apakah yang diklik adalah tombol 'wishlist'
   const wishlistButton = e.target.closest(".action-btn");
   if (wishlistButton && wishlistButton.querySelector(".fa-heart")) {
     e.preventDefault();
@@ -627,9 +811,7 @@ function initializeChatFunctionality() {
         chatBox.classList.remove("active")
       );
     }
-  }
-  // Catatan: Logika pengiriman pesan (sendMessage, fetch API) tetap sama seperti kodemu sebelumnya.
-  // Pastikan backend API di server.js sudah berjalan.
+  } // Catatan: Logika pengiriman pesan (sendMessage, fetch API) tetap sama seperti kodemu sebelumnya. // Pastikan backend API di server.js sudah berjalan.
 }
 
 /**
@@ -642,9 +824,8 @@ function initializeChatFunctionality() {
  * Menjalankan skrip yang hanya dibutuhkan di halaman tertentu.
  */
 function initializePageSpecificLogic() {
-  const pagePath = window.location.pathname;
+  const pagePath = window.location.pathname; // --- Keamanan untuk Halaman Akun ---
 
-  // --- Keamanan untuk Halaman Akun ---
   const isAccountPage =
     pagePath.endsWith("profile.html") ||
     pagePath.endsWith("settings.html") ||
@@ -652,9 +833,8 @@ function initializePageSpecificLogic() {
   if (isAccountPage && !isAuthenticated()) {
     window.location.href = "login.html";
     return; // Hentikan fungsi jika user belum login di halaman akun.
-  }
+  } // --- Logika untuk Halaman Profil ---
 
-  // --- Logika untuk Halaman Profil ---
   if (pagePath.endsWith("profile.html")) {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser) {
@@ -679,17 +859,15 @@ function initializePageSpecificLogic() {
     const stars = document.querySelectorAll(".rating-stars i");
     const ratingValue = document.getElementById("rating-value");
     const submitReviewBtn = document.getElementById("submit-review-btn");
-    let currentRating = 0;
+    let currentRating = 0; // Saat tombol "Beri Ulasan" di-klik
 
-    // Saat tombol "Beri Ulasan" di-klik
     reviewButtons.forEach((button) => {
       button.addEventListener("click", function () {
         const orderId = this.dataset.orderId;
         reviewOrderId.textContent = orderId;
       });
-    });
+    }); // Logika untuk hover dan klik bintang
 
-    // Logika untuk hover dan klik bintang
     stars.forEach((star) => {
       star.addEventListener("mouseover", function () {
         const rating = parseInt(this.dataset.rating);
@@ -708,16 +886,14 @@ function initializePageSpecificLogic() {
         currentRating = parseInt(this.dataset.rating);
         ratingValue.value = currentRating;
       });
-    });
+    }); // Saat tombol "Kirim Ulasan" di dalam modal di-klik
 
-    // Saat tombol "Kirim Ulasan" di dalam modal di-klik
     if (submitReviewBtn) {
       submitReviewBtn.addEventListener("click", function () {
         if (currentRating === 0) {
           showNotification("Pilih bintang rating dulu ya!", "warning");
           return;
-        }
-        // Di sini nanti bisa ditambahkan logika untuk mengirim data ke server
+        } // Di sini nanti bisa ditambahkan logika untuk mengirim data ke server
         console.log(
           `Rating: ${currentRating}, Komentar: ${
             document.getElementById("review-comment").value
@@ -725,9 +901,8 @@ function initializePageSpecificLogic() {
         );
 
         showNotification("Terima kasih atas ulasanmu!", "success");
-        reviewModal.hide();
+        reviewModal.hide(); // (Opsional) Ganti tombol setelah memberi ulasan
 
-        // (Opsional) Ganti tombol setelah memberi ulasan
         const reviewedButton = document.querySelector(
           `.review-btn[data-order-id="${reviewOrderId.textContent}"]`
         );
@@ -739,9 +914,8 @@ function initializePageSpecificLogic() {
         }
       });
     }
-  }
+  } // --- Logika untuk Halaman Pengaturan ---
 
-  // --- Logika untuk Halaman Pengaturan ---
   if (pagePath.endsWith("settings.html")) {
     const changePasswordForm = document.getElementById("change-password-form");
     if (changePasswordForm) {
@@ -751,9 +925,8 @@ function initializePageSpecificLogic() {
         this.reset();
       });
     }
-  }
+  } // --- Logika untuk Halaman Lacak Pesanan (YANG BARU) ---
 
-  // --- Logika untuk Halaman Lacak Pesanan (YANG BARU) ---
   if (pagePath.endsWith("lacak.html")) {
     const trackingForm = document.getElementById("tracking-form");
     const formSection = document.getElementById("tracking-form-section");
@@ -844,11 +1017,11 @@ function initializePageSpecificLogic() {
       specsTableBody.innerHTML = Object.entries(product.specs)
         .map(
           ([key, value]) => `
-            <tr>
-                <td><strong>${key}</strong></td>
-                <td>${value}</td>
-            </tr>
-        `
+            <tr>
+                <td><strong>${key}</strong></td>
+                <td>${value}</td>
+            </tr>
+        `
         )
         .join("");
     }
@@ -876,9 +1049,8 @@ function initializePageSpecificLogic() {
     wishlistBtn.addEventListener("click", () => {
       toggleWishlist(product.id, product.name, wishlistBtn);
     });
-  }
+  } // --- Logika untuk Halaman Keranjang (cart.html) ---
 
-  // --- Logika untuk Halaman Keranjang (cart.html) ---
   if (pagePath.endsWith("cart.html")) {
     const checkoutBtn = document.getElementById("checkout-btn");
     if (checkoutBtn) {
@@ -899,9 +1071,8 @@ function initializePageSpecificLogic() {
         localStorage.setItem("cartTotalForCheckout", total);
       });
     }
-  }
+  } // --- Logika untuk Halaman Pembayaran (pembayaran.html) ---
 
-  // --- Logika untuk Halaman Pembayaran (pembayaran.html) ---
   if (pagePath.endsWith("pembayaran.html")) {
     const summaryContainer = document.getElementById("summary-items");
     const totalPayment = document.getElementById("total-payment");
@@ -920,296 +1091,435 @@ function initializePageSpecificLogic() {
   }
 }
 
-
 /**
  * [SUMBER DATA UTAMA] Menyediakan data semua produk secara terpusat.
  */
 function getSampleProducts() {
-    return [
-      // --- KATEGORI: HIDROPONIK KIT ---
-      {
-        id: 1,
-        name: "HydroKit Mini Starter",
-        category: "kit",
-        price: 185000,
-        originalPrice: 225000,
-        image: "https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg",
-        rating: 4.8,
-        sold: "3.2k",
-        date: "2024-08-10",
-        badge: { text: "DISKON", class: "badge-sale" },
-        description: "Paket lengkap untuk pemula yang ingin mencoba hidroponik. Mudah dirakit dan tidak memakan tempat, cocok untuk menanam sayuran daun di balkon atau halaman rumah. Semua yang Anda butuhkan untuk memulai panen pertama Anda ada di sini.",
-        specs: { "Jumlah Lubang": "8", "Ukuran Pipa": "2.5 inch", "Kapasitas Air": "15 Liter", "Isi Paket": "Pipa, Pompa, Netpot, Rockwool, 2 Jenis Benih, Nutrisi AB Mix 250ml" },
+  return [
+    // --- KATEGORI: HIDROPONIK KIT ---
+    {
+      id: 1,
+      name: "HydroKit Mini Starter",
+      category: "kit",
+      price: 185000,
+      originalPrice: 225000,
+      image:
+        "https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg",
+      rating: 4.8,
+      sold: "3.2k",
+      date: "2024-08-10",
+      badge: { text: "DISKON", class: "badge-sale" },
+      description:
+        "Paket lengkap untuk pemula yang ingin mencoba hidroponik. Mudah dirakit dan tidak memakan tempat, cocok untuk menanam sayuran daun di balkon atau halaman rumah. Semua yang Anda butuhkan untuk memulai panen pertama Anda ada di sini.",
+      specs: {
+        "Jumlah Lubang": "8",
+        "Ukuran Pipa": "2.5 inch",
+        "Kapasitas Air": "15 Liter",
+        "Isi Paket":
+          "Pipa, Pompa, Netpot, Rockwool, 2 Jenis Benih, Nutrisi AB Mix 250ml",
       },
-      {
-        id: 7,
-        name: "HydroTower Vertical Garden",
-        category: "kit",
-        price: 750000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/a2/28/76/a22876b6c59218275550a2f45130e8c8.jpg",
-        rating: 5,
-        sold: "890",
-        date: "2024-07-22",
-        badge: { text: "PRODUK BARU", class: "badge-new" },
-        description: "Solusi berkebun di lahan terbatas. Sistem hidroponik vertikal yang efisien dan modern, mampu menampung hingga 20 tanaman. Desain elegan yang juga berfungsi sebagai dekorasi.",
-        specs: { "Jumlah Lubang": "20", Sistem: "NFT (Nutrient Film Technique)", Tinggi: "1.5 Meter", "Isi Paket": "Tower, Pompa, Netpot, Rockwool, Nutrisi AB Mix 500ml, Timer" },
+    },
+    {
+      id: 7,
+      name: "HydroTower Vertical Garden",
+      category: "kit",
+      price: 750000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/a2/28/76/a22876b6c59218275550a2f45130e8c8.jpg",
+      rating: 5,
+      sold: "890",
+      date: "2024-07-22",
+      badge: { text: "PRODUK BARU", class: "badge-new" },
+      description:
+        "Solusi berkebun di lahan terbatas. Sistem hidroponik vertikal yang efisien dan modern, mampu menampung hingga 20 tanaman. Desain elegan yang juga berfungsi sebagai dekorasi.",
+      specs: {
+        "Jumlah Lubang": "20",
+        Sistem: "NFT (Nutrient Film Technique)",
+        Tinggi: "1.5 Meter",
+        "Isi Paket":
+          "Tower, Pompa, Netpot, Rockwool, Nutrisi AB Mix 500ml, Timer",
       },
-      {
-        id: 8,
-        name: "Dutch Bucket System (5 Pot)",
-        category: "kit",
-        price: 450000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/f7/a8/38/f7a8385a4982635334c26a0b9a68c34c.jpg",
-        rating: 4.5,
-        sold: "1.1k",
-        date: "2024-06-15",
-        badge: { text: "BEST SELLER", class: "badge-bestseller" },
-        description: "Sistem hidroponik yang ideal untuk tanaman buah seperti tomat, paprika, dan mentimun. Setiap pot memiliki sistem irigasi tetes individu untuk nutrisi yang optimal.",
-        specs: { "Jumlah Pot": "5", "Kapasitas Pot": "10 Liter", "Media Tanam": "Perlite & Vermiculite (termasuk)", "Isi Paket": "5 Bucket, Pipa Sirkulasi, Pompa, Selang, Nutrisi Buah 500ml" },
+    },
+    {
+      id: 8,
+      name: "Dutch Bucket System (5 Pot)",
+      category: "kit",
+      price: 450000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/f7/a8/38/f7a8385a4982635334c26a0b9a68c34c.jpg",
+      rating: 4.5,
+      sold: "1.1k",
+      date: "2024-06-15",
+      badge: { text: "BEST SELLER", class: "badge-bestseller" },
+      description:
+        "Sistem hidroponik yang ideal untuk tanaman buah seperti tomat, paprika, dan mentimun. Setiap pot memiliki sistem irigasi tetes individu untuk nutrisi yang optimal.",
+      specs: {
+        "Jumlah Pot": "5",
+        "Kapasitas Pot": "10 Liter",
+        "Media Tanam": "Perlite & Vermiculite (termasuk)",
+        "Isi Paket":
+          "5 Bucket, Pipa Sirkulasi, Pompa, Selang, Nutrisi Buah 500ml",
       },
-      {
-        id: 15,
-        name: "Window Farm Kit",
-        category: "kit",
-        price: 250000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/b8/96/a8/b896a8a4f4e7102e1c942aba743b8118.jpg",
-        rating: 4.2,
-        sold: "450",
-        date: "2024-05-01",
-        badge: null,
-        description: "Manfaatkan jendela rumahmu untuk menanam sayuran segar atau herbal dengan kit hidroponik gantung yang praktis ini. Menggunakan botol daur ulang sebagai wadah tanam.",
-        specs: { "Jumlah Lubang": "4", Sistem: "Wick System (Sumbu)", "Cocok Untuk": "Herbal (Basil, Mint), Selada", "Isi Paket": "Rangka Gantung, Pompa Mini, Sumbu, Netpot, Rockwool, Benih Herbal" },
+    },
+    {
+      id: 15,
+      name: "Window Farm Kit",
+      category: "kit",
+      price: 250000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/b8/96/a8/b896a8a4f4e7102e1c942aba743b8118.jpg",
+      rating: 4.2,
+      sold: "450",
+      date: "2024-05-01",
+      badge: null,
+      description:
+        "Manfaatkan jendela rumahmu untuk menanam sayuran segar atau herbal dengan kit hidroponik gantung yang praktis ini. Menggunakan botol daur ulang sebagai wadah tanam.",
+      specs: {
+        "Jumlah Lubang": "4",
+        Sistem: "Wick System (Sumbu)",
+        "Cocok Untuk": "Herbal (Basil, Mint), Selada",
+        "Isi Paket":
+          "Rangka Gantung, Pompa Mini, Sumbu, Netpot, Rockwool, Benih Herbal",
       },
-      // --- KATEGORI: TANAMAN HIAS ---
-      {
-        id: 2,
-        name: "Caladium Red Star",
-        category: "hias",
-        price: 75000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg",
-        rating: 4.5,
-        sold: "230",
-        date: "2024-08-01",
-        badge: { text: "PRODUK BARU", class: "badge-new" },
-        description: "Tanaman hias dengan warna merah menyala yang eksotis. Daunnya yang berbentuk hati memberikan sentuhan tropis yang mewah di sudut ruangan Anda. Perawatan mudah dan tidak memerlukan banyak sinar matahari langsung.",
-        specs: { "Tinggi Tanaman": "20-30 cm", "Ukuran Pot": "Diameter 15 cm", "Media Tanam": "Sekam Bakar, Cocopeat", "Kebutuhan Sinar": "Rendah - Sedang" },
+    }, // --- KATEGORI: TANAMAN HIAS ---
+    {
+      id: 2,
+      name: "Caladium Red Star",
+      category: "hias",
+      price: 75000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/736x/21/e7/ed/21e7edbf1feac9ae291fdf783f383c5a.jpg",
+      rating: 4.5,
+      sold: "230",
+      date: "2024-08-01",
+      badge: { text: "PRODUK BARU", class: "badge-new" },
+      description:
+        "Tanaman hias dengan warna merah menyala yang eksotis. Daunnya yang berbentuk hati memberikan sentuhan tropis yang mewah di sudut ruangan Anda. Perawatan mudah dan tidak memerlukan banyak sinar matahari langsung.",
+      specs: {
+        "Tinggi Tanaman": "20-30 cm",
+        "Ukuran Pot": "Diameter 15 cm",
+        "Media Tanam": "Sekam Bakar, Cocopeat",
+        "Kebutuhan Sinar": "Rendah - Sedang",
       },
-      {
-        id: 6,
-        name: "Monstera Deliciosa",
-        category: "hias",
-        price: 125000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg",
-        rating: 5,
-        sold: "185",
-        date: "2024-08-05",
-        badge: null,
-        description: "Tanaman hias ikonik dengan daun terbelah yang unik. Memberikan kesan tropis dan modern pada interior. Semakin dewasa, belahan daunnya akan semakin banyak dan indah.",
-        specs: { "Tinggi Tanaman": "30-40 cm", "Ukuran Pot": "Diameter 18 cm", "Media Tanam": "Tanah Subur, Humus", "Kebutuhan Sinar": "Sedang, tidak langsung" },
+    },
+    {
+      id: 6,
+      name: "Monstera Deliciosa",
+      category: "hias",
+      price: 125000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/1200x/38/cf/fa/38cffaaf2227820ea7d719381d85eaa7.jpg",
+      rating: 5,
+      sold: "185",
+      date: "2024-08-05",
+      badge: null,
+      description:
+        "Tanaman hias ikonik dengan daun terbelah yang unik. Memberikan kesan tropis dan modern pada interior. Semakin dewasa, belahan daunnya akan semakin banyak dan indah.",
+      specs: {
+        "Tinggi Tanaman": "30-40 cm",
+        "Ukuran Pot": "Diameter 18 cm",
+        "Media Tanam": "Tanah Subur, Humus",
+        "Kebutuhan Sinar": "Sedang, tidak langsung",
       },
-      {
-        id: 9,
-        name: "Sansevieria Trifasciata",
-        category: "hias",
-        price: 60000,
-        originalPrice: 80000,
-        image: "https://i.pinimg.com/564x/a4/0f/73/a40f73843f55a1a1f061217594191a92.jpg",
-        rating: 4.7,
-        sold: "950",
-        date: "2024-07-18",
-        badge: { text: "DISKON", class: "badge-sale" },
-        description: "Dikenal sebagai 'Lidah Mertua', tanaman ini sangat kuat dan mampu membersihkan udara dalam ruangan dari polutan. Sangat cocok untuk pemula karena perawatannya sangat minim.",
-        specs: { "Tinggi Tanaman": "25-35 cm", "Ukuran Pot": "Diameter 15 cm", "Media Tanam": "Sekulen & Kaktus Mix", "Kebutuhan Sinar": "Sangat Toleran (Rendah - Terang)" },
+    },
+    {
+      id: 9,
+      name: "Sansevieria Trifasciata",
+      category: "hias",
+      price: 60000,
+      originalPrice: 80000,
+      image:
+        "https://i.pinimg.com/564x/a4/0f/73/a40f73843f55a1a1f061217594191a92.jpg",
+      rating: 4.7,
+      sold: "950",
+      date: "2024-07-18",
+      badge: { text: "DISKON", class: "badge-sale" },
+      description:
+        "Dikenal sebagai 'Lidah Mertua', tanaman ini sangat kuat dan mampu membersihkan udara dalam ruangan dari polutan. Sangat cocok untuk pemula karena perawatannya sangat minim.",
+      specs: {
+        "Tinggi Tanaman": "25-35 cm",
+        "Ukuran Pot": "Diameter 15 cm",
+        "Media Tanam": "Sekulen & Kaktus Mix",
+        "Kebutuhan Sinar": "Sangat Toleran (Rendah - Terang)",
       },
-      {
-        id: 10,
-        name: "Alocasia Black Velvet",
-        category: "hias",
-        price: 150000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/5a/0f/58/5a0f5803886cd3a42c67677bc2e2a733.jpg",
-        rating: 4.9,
-        sold: "310",
-        date: "2024-08-12",
-        badge: { text: "STOK TERBATAS", class: "badge-limited" },
-        description: "Tanaman premium dengan daun hitam beludru dan urat silver yang mewah. Menjadi pusat perhatian di koleksi tanaman hias Anda. Membutuhkan kelembapan yang cukup.",
-        specs: { "Tinggi Tanaman": "15-25 cm", "Ukuran Pot": "Diameter 12 cm", "Media Tanam": "Aroid Mix (Cocochip, Perlite)", "Kebutuhan Sinar": "Terang, tidak langsung" },
+    },
+    {
+      id: 10,
+      name: "Alocasia Black Velvet",
+      category: "hias",
+      price: 150000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/5a/0f/58/5a0f5803886cd3a42c67677bc2e2a733.jpg",
+      rating: 4.9,
+      sold: "310",
+      date: "2024-08-12",
+      badge: { text: "STOK TERBATAS", class: "badge-limited" },
+      description:
+        "Tanaman premium dengan daun hitam beludru dan urat silver yang mewah. Menjadi pusat perhatian di koleksi tanaman hias Anda. Membutuhkan kelembapan yang cukup.",
+      specs: {
+        "Tinggi Tanaman": "15-25 cm",
+        "Ukuran Pot": "Diameter 12 cm",
+        "Media Tanam": "Aroid Mix (Cocochip, Perlite)",
+        "Kebutuhan Sinar": "Terang, tidak langsung",
       },
-      // --- KATEGORI: BIBIT & BENIH ---
-      {
-        id: 3,
-        name: "Bibit Selada Romaine (Hydro)",
-        category: "bibit",
-        price: 25000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg",
-        rating: 5,
-        sold: "8k+",
-        date: "2024-07-25",
-        badge: { text: "PILIHAN", class: "badge-limited" },
-        description: "Bibit selada romaine unggulan yang sudah diadaptasi khusus untuk sistem hidroponik. Memiliki tingkat germinasi tinggi, cepat tumbuh, dan tekstur daun yang renyah. Panen dalam 30-40 hari setelah semai.",
-        specs: { "Isi per Paket": "± 200 biji", Germinasi: "85% - 95%", "Rekomendasi pH": "5.5 - 6.5", "Rekomendasi PPM": "560 - 840" },
+    }, // --- KATEGORI: BIBIT & BENIH ---
+    {
+      id: 3,
+      name: "Bibit Selada Romaine (Hydro)",
+      category: "bibit",
+      price: 25000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg",
+      rating: 5,
+      sold: "8k+",
+      date: "2024-07-25",
+      badge: { text: "PILIHAN", class: "badge-limited" },
+      description:
+        "Bibit selada romaine unggulan yang sudah diadaptasi khusus untuk sistem hidroponik. Memiliki tingkat germinasi tinggi, cepat tumbuh, dan tekstur daun yang renyah. Panen dalam 30-40 hari setelah semai.",
+      specs: {
+        "Isi per Paket": "± 200 biji",
+        Germinasi: "85% - 95%",
+        "Rekomendasi pH": "5.5 - 6.5",
+        "Rekomendasi PPM": "560 - 840",
       },
-      {
-        id: 11,
-        name: "Benih Kangkung Bangkok",
-        category: "bibit",
-        price: 12000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/8e/31/35/8e31359c381c6674483e60181534346e.jpg",
-        rating: 4.8,
-        sold: "12k+",
-        date: "2024-03-10",
-        badge: { text: "BEST SELLER", class: "badge-bestseller" },
-        description: "Benih kangkung varietas Bangkok, mudah tumbuh, dan bisa dipanen dalam waktu singkat (20-30 hari). Cocok untuk ditanam di sistem hidroponik maupun konvensional.",
-        specs: { "Isi per Paket": "± 500 biji", Germinasi: "> 90%", "Rekomendasi pH": "5.5 - 7.0", "Rekomendasi PPM": "700 - 1400" },
+    },
+    {
+      id: 11,
+      name: "Benih Kangkung Bangkok",
+      category: "bibit",
+      price: 12000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/8e/31/35/8e31359c381c6674483e60181534346e.jpg",
+      rating: 4.8,
+      sold: "12k+",
+      date: "2024-03-10",
+      badge: { text: "BEST SELLER", class: "badge-bestseller" },
+      description:
+        "Benih kangkung varietas Bangkok, mudah tumbuh, dan bisa dipanen dalam waktu singkat (20-30 hari). Cocok untuk ditanam di sistem hidroponik maupun konvensional.",
+      specs: {
+        "Isi per Paket": "± 500 biji",
+        Germinasi: "> 90%",
+        "Rekomendasi pH": "5.5 - 7.0",
+        "Rekomendasi PPM": "700 - 1400",
       },
-      {
-        id: 12,
-        name: "Benih Tomat Cherry Super",
-        category: "bibit",
-        price: 30000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/4b/c9/2e/4bc92e850b5711b7e435a297746419a4.jpg",
-        rating: 4.6,
-        sold: "2.5k",
-        date: "2024-06-20",
-        badge: null,
-        description: "Hasilkan tomat cherry yang manis dan melimpah langsung dari kebun hidroponik Anda. Tahan terhadap penyakit dan cuaca panas.",
-        specs: { "Isi per Paket": "± 30 biji", Germinasi: "80% - 90%", "Potensi Hasil": "3-5 kg per tanaman", "Masa Panen": "~90 hari setelah tanam" },
+    },
+    {
+      id: 12,
+      name: "Benih Tomat Cherry Super",
+      category: "bibit",
+      price: 30000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/4b/c9/2e/4bc92e850b5711b7e435a297746419a4.jpg",
+      rating: 4.6,
+      sold: "2.5k",
+      date: "2024-06-20",
+      badge: null,
+      description:
+        "Hasilkan tomat cherry yang manis dan melimpah langsung dari kebun hidroponik Anda. Tahan terhadap penyakit dan cuaca panas.",
+      specs: {
+        "Isi per Paket": "± 30 biji",
+        Germinasi: "80% - 90%",
+        "Potensi Hasil": "3-5 kg per tanaman",
+        "Masa Panen": "~90 hari setelah tanam",
       },
-      {
-        id: 18,
-        name: "Bibit Strawberry California",
-        category: "bibit",
-        price: 45000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/f1/40/f7/f140f7d549f7a7597148b51d8058b76c.jpg",
-        rating: 4.9,
-        sold: "5.2k",
-        date: "2024-08-08",
-        badge: { text: "PRODUK BARU", class: "badge-new" },
-        description: "Bibit unggul strawberry California yang sudah beradaptasi untuk ditanam di iklim tropis. Menghasilkan buah yang besar dan manis. Dikirim dalam bentuk bibit hidup siap tanam.",
-        specs: { Tipe: "Bibit hidup (runner)", Jumlah: "1 bibit", "Rekomendasi Sistem": "NFT, Rak Tetes", "Rekomendasi PPM": "840 - 1260" },
+    },
+    {
+      id: 18,
+      name: "Bibit Strawberry California",
+      category: "bibit",
+      price: 45000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/f1/40/f7/f140f7d549f7a7597148b51d8058b76c.jpg",
+      rating: 4.9,
+      sold: "5.2k",
+      date: "2024-08-08",
+      badge: { text: "PRODUK BARU", class: "badge-new" },
+      description:
+        "Bibit unggul strawberry California yang sudah beradaptasi untuk ditanam di iklim tropis. Menghasilkan buah yang besar dan manis. Dikirim dalam bentuk bibit hidup siap tanam.",
+      specs: {
+        Tipe: "Bibit hidup (runner)",
+        Jumlah: "1 bibit",
+        "Rekomendasi Sistem": "NFT, Rak Tetes",
+        "Rekomendasi PPM": "840 - 1260",
       },
-      // --- KATEGORI: NUTRISI ---
-      {
-        id: 4,
-        name: "Nutrisi AB Mix Premium",
-        category: "nutrisi",
-        price: 45000,
-        originalPrice: 55000,
-        image: "https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg",
-        rating: 4.7,
-        sold: "400+",
-        date: "2024-06-15",
-        badge: { text: "DISKON", class: "badge-sale" },
-        description: "Nutrisi lengkap siap pakai untuk semua jenis tanaman hidroponik, mengandung unsur makro dan mikro esensial yang 100% larut dalam air. Cukup campurkan pekatan A dan B dengan air sesuai takaran.",
-        specs: { Bentuk: "Pekatan Cair", Ukuran: "2 x 250ml", "Target PPM": "1000-1400 PPM", Kandungan: "Unsur Makro & Mikro Lengkap" },
+    }, // --- KATEGORI: NUTRISI ---
+    {
+      id: 4,
+      name: "Nutrisi AB Mix Premium",
+      category: "nutrisi",
+      price: 45000,
+      originalPrice: 55000,
+      image:
+        "https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg",
+      rating: 4.7,
+      sold: "400+",
+      date: "2024-06-15",
+      badge: { text: "DISKON", class: "badge-sale" },
+      description:
+        "Nutrisi lengkap siap pakai untuk semua jenis tanaman hidroponik, mengandung unsur makro dan mikro esensial yang 100% larut dalam air. Cukup campurkan pekatan A dan B dengan air sesuai takaran.",
+      specs: {
+        Bentuk: "Pekatan Cair",
+        Ukuran: "2 x 250ml",
+        "Target PPM": "1000-1400 PPM",
+        Kandungan: "Unsur Makro & Mikro Lengkap",
       },
-      {
-        id: 13,
-        name: "Pupuk Organik Cair (POC)",
-        category: "nutrisi",
-        price: 35000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/e7/a7/0a/e7a70a831e67d268a0a9557b646c1e33.jpg",
-        rating: 4.5,
-        sold: "1.8k",
-        date: "2024-04-25",
-        badge: null,
-        description: "Pupuk organik cair yang kaya akan mikroorganisme baik untuk menyuburkan media tanam dan menyehatkan akar. Cocok untuk tanaman konvensional dan sebagai suplemen pada hidroponik.",
-        specs: { Bentuk: "Cair", Ukuran: "500ml", Aplikasi: "Siram ke media tanam / Semprot ke daun", Frekuensi: "1-2 minggu sekali" },
+    },
+    {
+      id: 13,
+      name: "Pupuk Organik Cair (POC)",
+      category: "nutrisi",
+      price: 35000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/e7/a7/0a/e7a70a831e67d268a0a9557b646c1e33.jpg",
+      rating: 4.5,
+      sold: "1.8k",
+      date: "2024-04-25",
+      badge: null,
+      description:
+        "Pupuk organik cair yang kaya akan mikroorganisme baik untuk menyuburkan media tanam dan menyehatkan akar. Cocok untuk tanaman konvensional dan sebagai suplemen pada hidroponik.",
+      specs: {
+        Bentuk: "Cair",
+        Ukuran: "500ml",
+        Aplikasi: "Siram ke media tanam / Semprot ke daun",
+        Frekuensi: "1-2 minggu sekali",
       },
-      {
-        id: 14,
-        name: "Root Booster Super",
-        category: "nutrisi",
-        price: 55000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/6c/67/03/6c670390a316fed930a4c95213b2e59e.jpg",
-        rating: 4.9,
-        sold: "2.2k",
-        date: "2024-07-30",
-        badge: { text: "BEST SELLER", class: "badge-bestseller" },
-        description: "Formula khusus untuk merangsang pertumbuhan akar baru, membuat tanaman lebih kuat dan sehat. Sangat baik digunakan pada saat pindah tanam atau untuk perbanyakan stek.",
-        specs: { Bentuk: "Cair", Ukuran: "100ml", "Kandungan Utama": "Hormon Auksin, Vitamin B1", Dosis: "2ml per liter air" },
+    },
+    {
+      id: 14,
+      name: "Root Booster Super",
+      category: "nutrisi",
+      price: 55000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/6c/67/03/6c670390a316fed930a4c95213b2e59e.jpg",
+      rating: 4.9,
+      sold: "2.2k",
+      date: "2024-07-30",
+      badge: { text: "BEST SELLER", class: "badge-bestseller" },
+      description:
+        "Formula khusus untuk merangsang pertumbuhan akar baru, membuat tanaman lebih kuat dan sehat. Sangat baik digunakan pada saat pindah tanam atau untuk perbanyakan stek.",
+      specs: {
+        Bentuk: "Cair",
+        Ukuran: "100ml",
+        "Kandungan Utama": "Hormon Auksin, Vitamin B1",
+        Dosis: "2ml per liter air",
       },
-      {
-        id: 20,
-        name: "Kalsium Nitrat (KNO3)",
-        category: "nutrisi",
-        price: 28000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/0a/d6/3d/0ad63d3e6015d97f22d1487f941f649e.jpg",
-        rating: 4.6,
-        sold: "980",
-        date: "2024-02-11",
-        badge: null,
-        description: "Pupuk makro sekunder yang penting untuk mencegah kerontokan bunga dan buah, serta memperkuat dinding sel tanaman. Wajib dimiliki untuk budidaya tanaman buah.",
-        specs: { Bentuk: "Kristal", "Berat Bersih": "500 gram", Kelarutan: "100% larut air", Penggunaan: "Komponen tambahan nutrisi AB Mix" },
+    },
+    {
+      id: 20,
+      name: "Kalsium Nitrat (KNO3)",
+      category: "nutrisi",
+      price: 28000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/0a/d6/3d/0ad63d3e6015d97f22d1487f941f649e.jpg",
+      rating: 4.6,
+      sold: "980",
+      date: "2024-02-11",
+      badge: null,
+      description:
+        "Pupuk makro sekunder yang penting untuk mencegah kerontokan bunga dan buah, serta memperkuat dinding sel tanaman. Wajib dimiliki untuk budidaya tanaman buah.",
+      specs: {
+        Bentuk: "Kristal",
+        "Berat Bersih": "500 gram",
+        Kelarutan: "100% larut air",
+        Penggunaan: "Komponen tambahan nutrisi AB Mix",
       },
-      // --- KATEGORI: MEDIA TANAM ---
-      {
-        id: 5,
-        name: "Rockwool Cultilene",
-        category: "media",
-        price: 15000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg",
-        rating: 4.9,
-        sold: "312",
-        date: "2024-05-20",
-        badge: { text: "BEST SELLER", class: "badge-bestseller" },
-        description: "Media tanam rockwool impor berkualitas tinggi, mampu menyerap air dengan baik dan steril. Sangat ideal untuk tahap persemaian benih hidroponik.",
-        specs: { Ukuran: "1 slab (100cm x 15cm x 7.5cm)", Kepadatan: "45 kg/m³", "Arah Serat": "Horizontal", Kelebihan: "Steril, retensi air tinggi" },
+    }, // --- KATEGORI: MEDIA TANAM ---
+    {
+      id: 5,
+      name: "Rockwool Cultilene",
+      category: "media",
+      price: 15000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg",
+      rating: 4.9,
+      sold: "312",
+      date: "2024-05-20",
+      badge: { text: "BEST SELLER", class: "badge-bestseller" },
+      description:
+        "Media tanam rockwool impor berkualitas tinggi, mampu menyerap air dengan baik dan steril. Sangat ideal untuk tahap persemaian benih hidroponik.",
+      specs: {
+        Ukuran: "1 slab (100cm x 15cm x 7.5cm)",
+        Kepadatan: "45 kg/m³",
+        "Arah Serat": "Horizontal",
+        Kelebihan: "Steril, retensi air tinggi",
       },
-      {
-        id: 16,
-        name: "Hydroton Jerman",
-        category: "media",
-        price: 35000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/e3/3a/0d/e33a0d33e9b1a5390623a1a1f1035ac8.jpg",
-        rating: 4.8,
-        sold: "1.5k",
-        date: "2024-07-05",
-        badge: null,
-        description: "Media tanam hidroponik dari tanah liat yang dibakar, bisa dipakai berulang kali dan memiliki aerasi yang sangat baik untuk akar. Ukuran seragam dan tidak mudah hancur.",
-        specs: { "Berat Bersih": "1 Liter", Ukuran: "8-16 mm", Bahan: "Tanah Liat Pilihan", Kelebihan: "Dapat digunakan kembali, pH netral" },
+    },
+    {
+      id: 16,
+      name: "Hydroton Jerman",
+      category: "media",
+      price: 35000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/e3/3a/0d/e33a0d33e9b1a5390623a1a1f1035ac8.jpg",
+      rating: 4.8,
+      sold: "1.5k",
+      date: "2024-07-05",
+      badge: null,
+      description:
+        "Media tanam hidroponik dari tanah liat yang dibakar, bisa dipakai berulang kali dan memiliki aerasi yang sangat baik untuk akar. Ukuran seragam dan tidak mudah hancur.",
+      specs: {
+        "Berat Bersih": "1 Liter",
+        Ukuran: "8-16 mm",
+        Bahan: "Tanah Liat Pilihan",
+        Kelebihan: "Dapat digunakan kembali, pH netral",
       },
-      {
-        id: 17,
-        name: "Cocopeat Blok Premium",
-        category: "media",
-        price: 22000,
-        originalPrice: 28000,
-        image: "https://i.pinimg.com/564x/61/52/fa/6152fa2439c118a8022b79313271705e.jpg",
-        rating: 4.7,
-        sold: "3.5k",
-        date: "2024-06-01",
-        badge: { text: "DISKON", class: "badge-sale" },
-        description: "Media tanam organik dari serabut kelapa yang sudah diproses dan dicuci, bebas dari zat tanin. Cukup direndam air, blok akan mengembang hingga 5-7 kali lipat.",
-        specs: { "Berat Kering": "± 500 gram", "Volume Setelah Mengembang": "5-7 Liter", EC: "< 0.5 mS/cm", Kelebihan: "Daya simpan air tinggi" },
+    },
+    {
+      id: 17,
+      name: "Cocopeat Blok Premium",
+      category: "media",
+      price: 22000,
+      originalPrice: 28000,
+      image:
+        "https://i.pinimg.com/564x/61/52/fa/6152fa2439c118a8022b79313271705e.jpg",
+      rating: 4.7,
+      sold: "3.5k",
+      date: "2024-06-01",
+      badge: { text: "DISKON", class: "badge-sale" },
+      description:
+        "Media tanam organik dari serabut kelapa yang sudah diproses dan dicuci, bebas dari zat tanin. Cukup direndam air, blok akan mengembang hingga 5-7 kali lipat.",
+      specs: {
+        "Berat Kering": "± 500 gram",
+        "Volume Setelah Mengembang": "5-7 Liter",
+        EC: "< 0.5 mS/cm",
+        Kelebihan: "Daya simpan air tinggi",
       },
-      {
-        id: 19,
-        name: "Sekam Bakar Fermentasi",
-        category: "media",
-        price: 18000,
-        originalPrice: null,
-        image: "https://i.pinimg.com/564x/8d/e2/26/8de226211479d20c528f9d0c270d1cf5.jpg",
-        rating: 4.6,
-        sold: "2.8k",
-        date: "2024-01-30",
-        badge: null,
-        description: "Media tanam porous yang sudah difermentasi, bagus untuk aerasi akar dan mencegah jamur. Sangat cocok sebagai campuran media tanam konvensional maupun untuk lapisan dasar pot hidroponik.",
-        specs: { "Berat Bersih": "1 kg", "Kadar Air": "< 15%", pH: "Netral (6.5 - 7.0)", Bahan: "Sekam padi pilihan" },
+    },
+    {
+      id: 19,
+      name: "Sekam Bakar Fermentasi",
+      category: "media",
+      price: 18000,
+      originalPrice: null,
+      image:
+        "https://i.pinimg.com/564x/8d/e2/26/8de226211479d20c528f9d0c270d1cf5.jpg",
+      rating: 4.6,
+      sold: "2.8k",
+      date: "2024-01-30",
+      badge: null,
+      description:
+        "Media tanam porous yang sudah difermentasi, bagus untuk aerasi akar dan mencegah jamur. Sangat cocok sebagai campuran media tanam konvensional maupun untuk lapisan dasar pot hidroponik.",
+      specs: {
+        "Berat Bersih": "1 kg",
+        "Kadar Air": "< 15%",
+        pH: "Netral (6.5 - 7.0)",
+        Bahan: "Sekam padi pilihan",
       },
-    ];
+    },
+  ];
 }
