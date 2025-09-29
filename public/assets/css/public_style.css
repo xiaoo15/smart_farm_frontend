@@ -226,7 +226,7 @@ body {
     display: block !important; /* Paksa banner untuk selalu tampil */
     text-align: center; /* Teks promo jadi di tengah */
     position: fixed;
-    top: 75px; /* Jarak dari atas seukuran tinggi navbar. Sesuaikan jika perlu. */
+    top: 70px; /* Jarak dari atas seukuran tinggi navbar. Sesuaikan jika perlu. */
     left: 0;
     width: 100%;
     z-index: 999; /* Pastikan z-index lebih rendah dari navbar utama */
