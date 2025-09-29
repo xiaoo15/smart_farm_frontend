@@ -28,11 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  /**
-   * Menampilkan notifikasi sementara di pojok kanan atas.
-   * @param {string} message - Pesan yang akan ditampilkan.
-   * @param {string} [type='success'] - Tipe notifikasi ('success' atau 'error').
-   */
+  window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if(preloader) {
+        preloader.classList.add('loaded');
+    }
+});
+ 
   window.showNotification = (message, type = "success") => {
     const notification = document.createElement("div");
     notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
@@ -237,12 +239,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- [MULAI] KODE DASHBOARD ---
+const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1
+    };
 
-    // Animate stat cards on load
-    document.querySelectorAll(".stat-card").forEach((card, index) => {
-      setTimeout(() => card.classList.add("animate-fade-in-up"), index * 100);
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Terapkan ke semua kartu yang mau dianimasikan
+    document.querySelectorAll('.stat-card-modern, .dashboard-card').forEach(card => {
+        observer.observe(card);
     });
-
     // --- FUNGSI SEARCH INTERAKTIF ---
     const searchableSections = {
       "sales statistics": "sales-statistics-card",

@@ -15,70 +15,105 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
-    <style>
-      .customer-profile {
+<style>
+    /* Menggunakan variabel dari admin_style.css biar konsisten */
+    .dashboard-section {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+    }
+
+    .customer-profile {
         display: flex;
         align-items: center;
-      }
-      .customer-avatar {
+        gap: 1rem;
+    }
+    
+    .customer-avatar {
         width: 45px;
         height: 45px;
         border-radius: 50%;
         object-fit: cover;
-        margin-right: 1rem;
-      }
-      .customer-name {
-        font-weight: 500;
-      }
-      .customer-email {
-        font-size: 0.85rem;
-        color: #6c757d;
-      }
-      .role-admin {
-        background-color: #b30e0e;
-        color: white;
-      }
-      .role-customer {
-        background-color: #235347;
-        color: white;
-      }
-      .delete-btn {
-        background-color: #6c757d14;
-        transition: background-color 0.2s ease-in-out;
-      }
-      .delete-btn i {
-        transition: color 0.2s ease-in-out;
-      }
-      .delete-btn:hover {
-        background-color: #6c757d14;
-      }
-      .delete-btn:hover i {
-        color: #dc3545;
-      }
+        border: 2px solid var(--border-color);
+    }
 
-      /* === ANIMASI BARU DITAMBAHKAN DI SINI === */
-      @keyframes fadeInUp {
+    .customer-name {
+        font-weight: 600; /* Ditebelin dikit biar menonjol */
+        color: var(--text-primary);
+    }
+
+    .customer-email {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    /* --- Desain Badge yang Baru --- */
+    .role-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.4em 0.9em;
+        border-radius: 50px; /* Bikin jadi pill/kapsul */
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .role-admin {
+        background-color: var(--danger-light); /* Warna dari halaman order */
+        color: var(--danger-dark);
+        border: 1px solid var(--danger-dark);
+    }
+    
+    .role-customer {
+        background-color: var(--success-light); /* Warna dari halaman order */
+        color: var(--success-dark);
+        border: 1px solid var(--success-dark);
+    }
+
+    /* --- Desain Tombol Hapus yang Baru --- */
+    .delete-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        color: var(--text-secondary);
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .delete-btn:hover {
+        background-color: var(--danger);
+        color: white;
+        border-color: var(--danger);
+        transform: scale(1.1) rotate(10deg); /* Efek goyang dikit */
+    }
+    
+    /* --- Animasi Fade-in (Ini biarin aja, udah bagus) --- */
+    @keyframes fadeInUp {
         from {
-          opacity: 0;
-          transform: translateY(20px);
+            opacity: 0;
+            transform: translateY(20px);
         }
         to {
-          opacity: 1;
-          transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
         }
-      }
+    }
 
-      .content-header, .dashboard-section, .customer-row {
+    .content-header, .dashboard-section, .customer-row {
         opacity: 0; /* Mulai dari transparan */
-      }
+    }
 
-      .fade-in {
+    .fade-in {
         animation: fadeInUp 0.6s ease-out forwards;
-      }
-
-    </style>
+    }
+</style>
   </head>
   <body>
+    <div id="preloader">
+    <div class="spinner"></div>
+</div>
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
 

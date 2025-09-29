@@ -12,13 +12,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-   <link
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
 
-    <style> 
+    <style>
       .admin-wrapper {
         display: flex;
         min-height: 100vh;
@@ -372,7 +372,9 @@
           transform: translateY(0);
         }
       }
-      .product-row, .dashboard-section, .content-header {
+      .product-row,
+      .dashboard-section,
+      .content-header {
         opacity: 0; /* Mulai dari transparan */
       }
       .fade-in {
@@ -381,6 +383,9 @@
     </style>
   </head>
   <body>
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
@@ -453,7 +458,11 @@
                         class="btn btn-icon btn-sm"
                         ><i class="fas fa-eye"></i
                       ></a>
-                      <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
                       <button class="btn btn-icon btn-sm delete-btn">
                         <i class="fas fa-trash-alt"></i>
                       </button>
@@ -485,7 +494,11 @@
                         class="btn btn-icon btn-sm"
                         ><i class="fas fa-eye"></i
                       ></a>
-                      <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
                       <button class="btn btn-icon btn-sm delete-btn">
                         <i class="fas fa-trash-alt"></i>
                       </button>
@@ -515,7 +528,11 @@
                         class="btn btn-icon btn-sm"
                         ><i class="fas fa-eye"></i
                       ></a>
-                      <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
                       <button class="btn btn-icon btn-sm delete-btn">
                         <i class="fas fa-trash-alt"></i>
                       </button>
@@ -545,96 +562,168 @@
                         class="btn btn-icon btn-sm"
                         ><i class="fas fa-eye"></i
                       ></a>
-                      <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
                       <button class="btn btn-icon btn-sm delete-btn">
                         <i class="fas fa-trash-alt"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
-                 <tr data-category="vegetables" class="product-row">
+                <tr data-category="vegetables" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg" alt="HydroKit Mini Starter" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/3f/bd/42/3fbd42c0b1283820276dbf7661e32ee1.jpg"
+                      alt="HydroKit Mini Starter"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P005</td>
                   <td data-label="Nama Produk">
                     <div class="product-name">HydroKit Mini Starter</div>
-                    <div class="category-badge category-vegetables">Vegetables</div>
+                    <div class="category-badge category-vegetables">
+                      Vegetables
+                    </div>
                   </td>
                   <td data-label="Jumlah">50 Pcs</td>
                   <td data-label="Satuan">1</td>
                   <td data-label="Harga" class="product-price">Rp 185.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_HydroKit Mini Starter.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_HydroKit Mini Starter.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="vegetables" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://image.made-in-china.com/318f0j00ItwUmAoEnHki/hydro-tower-mp4.webp" alt="HydroTower Vertical Garden" class="product-img">
+                    <img
+                      src="https://image.made-in-china.com/318f0j00ItwUmAoEnHki/hydro-tower-mp4.webp"
+                      alt="HydroTower Vertical Garden"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P006</td>
                   <td data-label="Nama Produk">
                     <div class="product-name">HydroTower Vertical Garden</div>
-                    <div class="category-badge category-vegetables">Vegetables</div>
+                    <div class="category-badge category-vegetables">
+                      Vegetables
+                    </div>
                   </td>
                   <td data-label="Jumlah">25 Pcs</td>
                   <td data-label="Satuan">1</td>
                   <td data-label="Harga" class="product-price">Rp 750.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_HydroTower Vertical Garden.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_HydroTower Vertical Garden.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="vegetables" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/d5/3a/77/d53a7742f48e45ed66b890a5e79a8e74.jpg" alt="Dutch Bucket System (5 Pot)" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/d5/3a/77/d53a7742f48e45ed66b890a5e79a8e74.jpg"
+                      alt="Dutch Bucket System (5 Pot)"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P007</td>
                   <td data-label="Nama Produk">
                     <div class="product-name">Dutch Bucket System (5 Pot)</div>
-                    <div class="category-badge category-vegetables">Vegetables</div>
+                    <div class="category-badge category-vegetables">
+                      Vegetables
+                    </div>
                   </td>
                   <td data-label="Jumlah">30 Pcs</td>
                   <td data-label="Satuan">1</td>
                   <td data-label="Harga" class="product-price">Rp 450.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Dutch Bucket System (5 Pot).html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Dutch Bucket System (5 Pot).html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="vegetables" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/62/01/a3/6201a3ff90d61d7db5659f92bede2f75.jpg" alt="Window Farm Kit" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/62/01/a3/6201a3ff90d61d7db5659f92bede2f75.jpg"
+                      alt="Window Farm Kit"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P008</td>
                   <td data-label="Nama Produk">
                     <div class="product-name">Window Farm Kit</div>
-                    <div class="category-badge category-vegetables">Vegetables</div>
+                    <div class="category-badge category-vegetables">
+                      Vegetables
+                    </div>
                   </td>
                   <td data-label="Jumlah">40 Pcs</td>
                   <td data-label="Satuan">1</td>
                   <td data-label="Harga" class="product-price">Rp 250.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Window Farm Kit.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Window Farm Kit.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/a1/c9/2b/a1c92bd7dc40fdf544efa989849b9cfb.jpg" alt="Sansevieria Trifasciata" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/a1/c9/2b/a1c92bd7dc40fdf544efa989849b9cfb.jpg"
+                      alt="Sansevieria Trifasciata"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P009</td>
                   <td data-label="Nama Produk">
@@ -646,15 +735,29 @@
                   <td data-label="Harga" class="product-price">Rp 60.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Sansevieria Trifasciata.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Sansevieria Trifasciata.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/ca/29/f4/ca29f44fd8e19ee12b87bdb7803cdc39.jpg" alt="Alocasia Black Velvet" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/ca/29/f4/ca29f44fd8e19ee12b87bdb7803cdc39.jpg"
+                      alt="Alocasia Black Velvet"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P010</td>
                   <td data-label="Nama Produk">
@@ -666,15 +769,29 @@
                   <td data-label="Harga" class="product-price">Rp 150.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Alocasia Black Velvet.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Alocasia Black Velvet.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="seed" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg" alt="Bibit Selada Romaine (Hydro)" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/74/e7/8c/74e78cb0708839f8dbfe4ceded346702.jpg"
+                      alt="Bibit Selada Romaine (Hydro)"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P011</td>
                   <td data-label="Nama Produk">
@@ -686,15 +803,29 @@
                   <td data-label="Harga" class="product-price">Rp 25.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Bibit Selada Romaine (Hydro).html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Bibit Selada Romaine (Hydro).html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="seed" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/a3/88/be/a388bea9abc16ac0277917949f295a72.jpg" alt="Benih Kangkung Bangkok" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/a3/88/be/a388bea9abc16ac0277917949f295a72.jpg"
+                      alt="Benih Kangkung Bangkok"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P012</td>
                   <td data-label="Nama Produk">
@@ -706,15 +837,29 @@
                   <td data-label="Harga" class="product-price">Rp 12.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Benih Kangkung Bangkok.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Benih Kangkung Bangkok.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="seed" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/0c/cc/58/0ccc583baa2eb7979735c2574bb653ed.jpg" alt="Benih Tomat Cherry Super" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/0c/cc/58/0ccc583baa2eb7979735c2574bb653ed.jpg"
+                      alt="Benih Tomat Cherry Super"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P013</td>
                   <td data-label="Nama Produk">
@@ -726,15 +871,29 @@
                   <td data-label="Harga" class="product-price">Rp 30.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Benih Tomat Cherry Super.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Benih Tomat Cherry Super.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="seed" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://down-id.img.susercontent.com/file/8f4a387cbbb4e5af5f04b513801ee06d@resize_w900_nl.webp" alt="Bibit Strawberry California" class="product-img">
+                    <img
+                      src="https://down-id.img.susercontent.com/file/8f4a387cbbb4e5af5f04b513801ee06d@resize_w900_nl.webp"
+                      alt="Bibit Strawberry California"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P014</td>
                   <td data-label="Nama Produk">
@@ -746,15 +905,29 @@
                   <td data-label="Harga" class="product-price">Rp 45.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Bibit Strawberry California.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Bibit Strawberry California.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg" alt="Nutrisi AB Mix Premium" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg"
+                      alt="Nutrisi AB Mix Premium"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P015</td>
                   <td data-label="Nama Produk">
@@ -766,15 +939,29 @@
                   <td data-label="Harga" class="product-price">Rp 45.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Nutrisi AB Mix Premium.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Nutrisi AB Mix Premium.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/20/7b/10/207b108b49d9d8410f18a2a30e29f102.jpg" alt="Pupuk Organik Cair (POC)" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/20/7b/10/207b108b49d9d8410f18a2a30e29f102.jpg"
+                      alt="Pupuk Organik Cair (POC)"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P016</td>
                   <td data-label="Nama Produk">
@@ -786,15 +973,29 @@
                   <td data-label="Harga" class="product-price">Rp 35.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Pupuk Organik Cair (POC).html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Pupuk Organik Cair (POC).html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/58/cd/c3/58cdc3c5f5aabb37836ae1eba2e19ed0.jpg" alt="Root Booster Super" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/58/cd/c3/58cdc3c5f5aabb37836ae1eba2e19ed0.jpg"
+                      alt="Root Booster Super"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P017</td>
                   <td data-label="Nama Produk">
@@ -806,15 +1007,29 @@
                   <td data-label="Harga" class="product-price">Rp 55.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Root Booster Super.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Root Booster Super.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://images.tokopedia.net/img/cache/700/product-1/2020/7/15/6477595/6477595_2292d5e9-8f04-4697-a2c9-2e202a78087a_747_747.jpg" alt="Kalsium Nitrat (KNO3)" class="product-img">
+                    <img
+                      src="https://images.tokopedia.net/img/cache/700/product-1/2020/7/15/6477595/6477595_2292d5e9-8f04-4697-a2c9-2e202a78087a_747_747.jpg"
+                      alt="Kalsium Nitrat (KNO3)"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P018</td>
                   <td data-label="Nama Produk">
@@ -826,15 +1041,29 @@
                   <td data-label="Harga" class="product-price">Rp 28.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Kalsium Nitrat (KNO3).html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Kalsium Nitrat (KNO3).html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg" alt="Rockwool Cultilene" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/93/d1/64/93d164ef5fe8afb9c5ded04b26eafb57.jpg"
+                      alt="Rockwool Cultilene"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P019</td>
                   <td data-label="Nama Produk">
@@ -846,15 +1075,29 @@
                   <td data-label="Harga" class="product-price">Rp 15.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Rockwool Cultilene.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Rockwool Cultilene.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/1200x/5a/55/83/5a5583d434516eae605ba27783c91621.jpg" alt="Hydroton Jerman" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/1200x/5a/55/83/5a5583d434516eae605ba27783c91621.jpg"
+                      alt="Hydroton Jerman"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P020</td>
                   <td data-label="Nama Produk">
@@ -866,15 +1109,29 @@
                   <td data-label="Harga" class="product-price">Rp 35.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Hydroton Jerman.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Hydroton Jerman.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/2a/c6/5e/2ac65e07e88337e92cf7761941e444bd.jpg" alt="Cocopeat Blok Premium" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/2a/c6/5e/2ac65e07e88337e92cf7761941e444bd.jpg"
+                      alt="Cocopeat Blok Premium"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P021</td>
                   <td data-label="Nama Produk">
@@ -886,15 +1143,29 @@
                   <td data-label="Harga" class="product-price">Rp 22.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Cocopeat Blok Premium.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Cocopeat Blok Premium.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
                 <tr data-category="plant" class="product-row">
                   <td data-label="Gambar">
-                    <img src="https://i.pinimg.com/736x/11/64/98/11649824eb0aa47fb4f5987b388f194c.jpg" alt="Sekam Bakar Fermentasi" class="product-img">
+                    <img
+                      src="https://i.pinimg.com/736x/11/64/98/11649824eb0aa47fb4f5987b388f194c.jpg"
+                      alt="Sekam Bakar Fermentasi"
+                      class="product-img"
+                    />
                   </td>
                   <td data-label="Kode">P022</td>
                   <td data-label="Nama Produk">
@@ -906,9 +1177,19 @@
                   <td data-label="Harga" class="product-price">Rp 18.000</td>
                   <td data-label="Action" class="text-center">
                     <div class="action-buttons">
-                      <a href="/admin/detailproduct/product_Sekam Bakar Fermentasi.html" class="btn btn-icon btn-sm"><i class="fas fa-eye"></i></a>
-                       <a href="update_product.html" class="btn btn-icon btn-sm btn-edit"><i class="fas fa-pencil-alt"></i></a>
-                      <button class="btn btn-icon btn-sm delete-btn"><i class="fas fa-trash-alt"></i></button>
+                      <a
+                        href="/admin/detailproduct/product_Sekam Bakar Fermentasi.html"
+                        class="btn btn-icon btn-sm"
+                        ><i class="fas fa-eye"></i
+                      ></a>
+                      <a
+                        href="update_product.html"
+                        class="btn btn-icon btn-sm btn-edit"
+                        ><i class="fas fa-pencil-alt"></i
+                      ></a>
+                      <button class="btn btn-icon btn-sm delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -924,66 +1205,77 @@
           </div>
         </div>
         <footer class="footer footer-animated">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center">
-                <script>document.write(new Date().getFullYear())</script> © Smart Farm. 
-                <span class="d-none d-sm-inline-block">- Design & Develop by Smart Farm.</span>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12 text-center">
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                © Smart Farm.
+                <span class="d-none d-sm-inline-block"
+                  >- Design & Develop by Smart Farm.</span
+                >
+              </div>
             </div>
-        </div>
-    </div>
-</footer>
+          </div>
+        </footer>
       </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/admin_script.js"></script>
-    
+
     <script>
       $(document).ready(function () {
         // --- LOGIKA EDIT PRODUK ---
-        $('#productTableBody').on('click', '.btn-edit', function(event) {
-            event.preventDefault();
-            console.log("Tombol edit dari products.html diklik!");
+        $("#productTableBody").on("click", ".btn-edit", function (event) {
+          event.preventDefault();
+          console.log("Tombol edit dari products.html diklik!");
 
-            const productRow = $(this).closest('tr');
-            const stockText = (productRow.find('[data-label="jumblah"]').text() || productRow.find('[data-label="Jumlah"]').text()).trim();
+          const productRow = $(this).closest("tr");
+          const stockText = (
+            productRow.find('[data-label="jumblah"]').text() ||
+            productRow.find('[data-label="Jumlah"]').text()
+          ).trim();
 
-            const stockParts = stockText.split(' ');
-            const stockQuantity = parseInt(stockParts[0], 10) || 0;
-            const unitType = stockParts.length > 1 ? stockParts[1] : 'Pcs';
+          const stockParts = stockText.split(" ");
+          const stockQuantity = parseInt(stockParts[0], 10) || 0;
+          const unitType = stockParts.length > 1 ? stockParts[1] : "Pcs";
 
-            const categoryMap = {
-                plant: 'Tanaman',
-                seed: 'Bibit',
-                vegetables: 'Tanaman'
-            };
+          const categoryMap = {
+            plant: "Tanaman",
+            seed: "Bibit",
+            vegetables: "Tanaman",
+          };
 
-            const rawCategory = productRow.data('category');
-            const mappedCategory = categoryMap[rawCategory] || 'Tanaman';
+          const rawCategory = productRow.data("category");
+          const mappedCategory = categoryMap[rawCategory] || "Tanaman";
 
-            const productData = {
-                code: productRow.find('[data-label="Kode"]').text().trim(),
-                name: productRow.find('.product-name').text().trim(),
-                stock: stockQuantity,
-                unitValue: productRow.find('[data-label="Satuan"]').text().trim(),
-                unitType: unitType,
-                price: productRow.find('.product-price').text().replace(/[^0-9]/g, ''),
-                category: mappedCategory,
-                imgSrc: productRow.find('.product-img').attr('src'),
-                description: "Deskripsi placeholder.",
-                status: stockQuantity > 0 ? "Aktif" : "Nonaktif"
-            };
-            
-            try {
-              localStorage.setItem('productToEdit', JSON.stringify(productData));
-              window.location.href = $(this).attr('href');
-            } catch (e) {
-              console.error("GAGAL menyimpan data:", e);
-              alert("Gagal menyimpan data produk!");
-            }
+          const productData = {
+            code: productRow.find('[data-label="Kode"]').text().trim(),
+            name: productRow.find(".product-name").text().trim(),
+            stock: stockQuantity,
+            unitValue: productRow.find('[data-label="Satuan"]').text().trim(),
+            unitType: unitType,
+            price: productRow
+              .find(".product-price")
+              .text()
+              .replace(/[^0-9]/g, ""),
+            category: mappedCategory,
+            imgSrc: productRow.find(".product-img").attr("src"),
+            description: "Deskripsi placeholder.",
+            status: stockQuantity > 0 ? "Aktif" : "Nonaktif",
+          };
+
+          try {
+            localStorage.setItem("productToEdit", JSON.stringify(productData));
+            window.location.href = $(this).attr("href");
+          } catch (e) {
+            console.error("GAGAL menyimpan data:", e);
+            alert("Gagal menyimpan data produk!");
+          }
         });
 
         // --- Fungsi Filter Produk ---
@@ -992,10 +1284,14 @@
           var category = $("#categoryFilter").val();
           var found = 0;
           $("#productTableBody tr").each(function () {
-            var productName = $(this).find(".product-name").text().toLowerCase();
+            var productName = $(this)
+              .find(".product-name")
+              .text()
+              .toLowerCase();
             var productCategory = $(this).data("category");
             var searchMatch = productName.includes(searchText);
-            var categoryMatch = category === "all" || productCategory === category;
+            var categoryMatch =
+              category === "all" || productCategory === category;
             if (searchMatch && categoryMatch) {
               $(this).show();
               found++;
@@ -1013,40 +1309,40 @@
         $("#categoryFilter").on("change", filterProducts);
 
         // --- Logika Tombol Hapus ---
-        $('#productTableBody').on('click', '.delete-btn', function() {
-          const productRowToDelete = $(this).closest('tr');
-          const productName = productRowToDelete.find('.product-name').text();
+        $("#productTableBody").on("click", ".delete-btn", function () {
+          const productRowToDelete = $(this).closest("tr");
+          const productName = productRowToDelete.find(".product-name").text();
 
           Swal.fire({
-            title: 'Anda yakin?',
+            title: "Anda yakin?",
             html: `Yakin mau hapus produk <strong>${productName}</strong>?`,
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Hapus',
-            cancelButtonText: 'Batal'
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Ya, Hapus",
+            cancelButtonText: "Batal",
           }).then((result) => {
             if (result.isConfirmed) {
-              productRowToDelete.fadeOut(500, function() {
+              productRowToDelete.fadeOut(500, function () {
                 $(this).remove();
                 filterProducts();
               });
               Swal.fire({
-                title: 'Dihapus!',
+                title: "Dihapus!",
                 text: `Produk ${productName} berhasil dihapus.`,
-                icon: 'success'
+                icon: "success",
               });
             }
           });
         });
 
         // --- Animasi Halaman Saat Dimuat ---
-        $('.content-header, .dashboard-section').addClass('fade-in');
-        $('.product-row').each(function(index) {
+        $(".content-header, .dashboard-section").addClass("fade-in");
+        $(".product-row").each(function (index) {
           setTimeout(() => {
-            $(this).addClass('fade-in');
-          }, 150 + (50 * index));
+            $(this).addClass("fade-in");
+          }, 150 + 50 * index);
         });
       });
     </script>
