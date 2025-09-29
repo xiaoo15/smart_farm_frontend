@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="assets/css/public_style.css" />
 
     <style>
-
       /* Header */
       #header-placeholder {
         background-color: white;
@@ -28,20 +27,6 @@
         position: sticky;
         top: 0;
         z-index: 100;
-      }
-
-      .navbar-brand img {
-        height: 35px;
-      }
-
-      .navbar-nav .nav-link {
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        color: var(--dark);
-      }
-
-      .navbar-nav .nav-link.active {
-        color: var(--primary);
       }
 
       /* Main Content */
@@ -286,7 +271,6 @@
         box-shadow: var(--shadow);
       }
 
-
       /* Animation */
       @keyframes fadeInUp {
         from {
@@ -464,41 +448,7 @@
     <div id="preloader">
       <div class="spinner"></div>
     </div>
-
-    <!-- Header Placeholder -->
-    <div id="header-placeholder">
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img
-              src="https://via.placeholder.com/150x50?text=SmartFarm"
-              alt="SmartFarm Logo"
-            />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link" href="#">Beranda</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Tentang</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Produk</a></li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Hubungi Kami</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-
+    <div id="header-placeholder"></div>
     <main class="main-content">
       <div class="container page-header animate-fadeInUp">
         <h1>Punya Pertanyaan?</h1>

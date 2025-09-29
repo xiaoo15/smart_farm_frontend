@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/public_style.css" />
 </head>
 <body>
+    <div id="preloader"><div class="spinner"></div></div>
     <div id="header-placeholder"></div>
 
     <main>
@@ -31,12 +32,12 @@
              <div class="row justify-content-center g-4 mt-3">
                  <div class="col-lg-4 col-md-6">
                      <div class="voucher-card">
-                         <div class="voucher-icon"><i class="fas fa-leaf"></i></div>
+                         <div class="voucher-icon"><i class="fas fa-percentage"></i></div>
                          <div class="voucher-details">
-                             <h5 class="voucher-title">Diskon Bibit 15%</h5>
-                             <p class="voucher-code">KODE: <span id="code1">BIBITSERU</span></p>
+                             <h5 class="voucher-title">Diskon Ekstra 10%</h5>
+                             <p class="voucher-code">KODE: <span id="code1">SMARTFARM10</span></p>
                          </div>
-                         <button class="btn-claim-voucher" onclick="copyVoucher('code1')">SALIN</button>
+                         <button class="btn-claim-voucher" onclick="copyVoucher('code1', this)">SALIN</button>
                      </div>
                  </div>
                  <div class="col-lg-4 col-md-6">
@@ -46,9 +47,19 @@
                              <h5 class="voucher-title">Gratis Ongkir</h5>
                              <p class="voucher-code">KODE: <span id="code2">KIRIMGRATIS</span></p>
                          </div>
-                         <button class="btn-claim-voucher" onclick="copyVoucher('code2')">SALIN</button>
+                         <button class="btn-claim-voucher" onclick="copyVoucher('code2', this)">SALIN</button>
                      </div>
                  </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="voucher-card">
+                        <div class="voucher-icon"><i class="fas fa-tag"></i></div>
+                        <div class="voucher-details">
+                            <h5 class="voucher-title">Potongan Rp 25.000</h5>
+                            <p class="voucher-code">KODE: <span id="code3">PANENRAYA</span></p>
+                        </div>
+                        <button class="btn-claim-voucher" onclick="copyVoucher('code3', this)">SALIN</button>
+                    </div>
+                </div>
              </div>
         </section>
 
@@ -56,25 +67,12 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="section-title mb-0">Produk Paling Laris Diskon</h2>
             </div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-                <div class="col d-flex">
-                    <div class="product-card-offer h-100">
-                        <div class="product-image-wrapper">
-                            <a href="product_detail.html"><img src="https://i.pinimg.com/736x/d5/0d/ad/d50dadbceb8948b3afcba70f927facdf.jpg" alt="Nutrisi AB Mix" loading="lazy"/></a>
-                            <div class="product-badge badge-sale">DISKON 20%</div>
-                            <div class="product-actions"><button class="action-btn" title="Tambah ke Wishlist"><i class="far fa-heart"></i></button></div>
-                        </div>
-                        <div class="product-info">
-                            <p class="product-category">Nutrisi Tanaman</p>
-                            <h3 class="product-title"><a href="product_detail.html">Nutrisi AB Mix Premium</a></h3>
-                            <div class="product-price-action mt-auto">
-                                <p class="product-price"><span class="price-original">Rp 55.000</span> Rp 45.000</p>
-                                <button class="btn-add-cart-icon" title="Tambah ke Keranjang"><i class="fas fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="promo-product-list">
+                <div class="col"><div class="product-card-offer skeleton" style="height: 400px;"></div></div>
+                <div class="col"><div class="product-card-offer skeleton" style="height: 400px;"></div></div>
+                <div class="col"><div class="product-card-offer skeleton" style="height: 400px;"></div></div>
+                <div class="col"><div class="product-card-offer skeleton" style="height: 400px;"></div></div>
+            </div>
         </div>
     </main>
 
@@ -83,30 +81,111 @@
     <script src="assets/js/public_script.js"></script>
     
     <script>
-        // Set tanggal akhir promo (Tahun, Bulan-1, Hari, Jam, Menit, Detik)
+        // --- SCRIPT LAMA UNTUK COUNTDOWN & COPY VOUCHER ---
         const countdownDate = new Date("Sep 30, 2025 23:59:59").getTime();
-
         const countdownFunction = setInterval(function() {
             const now = new Date().getTime();
             const distance = countdownDate - now;
 
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown-timer").innerHTML = "<h4 class='text-white bg-danger p-2 rounded'>PROMO SUDAH BERAKHIR</h4>";
+                return;
+            }
+            
             document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                document.getElementById("countdown-timer").innerHTML = "<h4>PROMO SUDAH BERAKHIR</h4>";
-            }
         }, 1000);
         
-        function copyVoucher(elementId) {
+        function copyVoucher(elementId, button) {
             const codeElement = document.getElementById(elementId);
             navigator.clipboard.writeText(codeElement.innerText).then(() => {
-                alert(`Kode "${codeElement.innerText}" berhasil disalin!`);
+                // Gunakan fungsi notifikasi global yg sudah ada
+                if(typeof showNotification === 'function') {
+                    showNotification(`Kode "${codeElement.innerText}" berhasil disalin!`, 'success');
+                } else {
+                    alert(`Kode "${codeElement.innerText}" berhasil disalin!`);
+                }
+
+                // Animasi tombol
+                button.textContent = 'DISALIN!';
+                button.disabled = true;
+                setTimeout(() => {
+                    button.textContent = 'SALIN';
+                    button.disabled = false;
+                }, 2000);
             });
         }
+
+        // --- [SCRIPT BARU] UNTUK MENAMPILKAN PRODUK DISKON SECARA DINAMIS ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pastikan fungsi getSampleProducts() ada
+            if (typeof getSampleProducts !== 'function') {
+                console.error("Fungsi getSampleProducts() tidak ditemukan!");
+                return;
+            }
+
+            const allProducts = getSampleProducts();
+            
+            // 1. Filter produk yang punya harga original (artinya lagi diskon)
+            const discountedProducts = allProducts.filter(p => p.originalPrice && p.originalPrice > 0);
+            
+            const container = document.getElementById('promo-product-list');
+            container.innerHTML = ''; // Kosongkan skeleton loader
+
+            if (discountedProducts.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">Yah, belum ada produk diskon saat ini. Cek lagi nanti ya!</p>';
+                return;
+            }
+
+            // 2. Buat HTML untuk setiap produk diskon
+            discountedProducts.forEach(product => {
+                const productHTML = `
+                    <div class="col d-flex">
+                        <div class="product-card-offer h-100">
+                            <div class="product-image-wrapper">
+                                <a href="product_detail.html?id=${product.id}">
+                                    <img src="${product.image}" alt="${product.name}" loading="lazy"/>
+                                </a>
+                                <div class="product-badge ${product.badge.class}">${product.badge.text}</div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Tambah ke Wishlist" data-product-id="${product.id}" data-product-name="${product.name}">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <p class="product-category">${product.category}</p>
+                                <h3 class="product-title"><a href="product_detail.html?id=${product.id}">${product.name}</a></h3>
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <div class="product-rating">
+                                      <i class="fas fa-star"></i> ${product.rating}
+                                    </div>
+                                    <small class="product-sold text-muted">${product.sold} terjual</small>
+                                </div>
+                                <div class="product-price-action mt-auto">
+                                    <p class="product-price">
+                                        <span class="price-original">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
+                                        Rp ${product.price.toLocaleString('id-ID')}
+                                    </p>
+                                    <button class="btn-add-cart-icon" title="Tambah ke Keranjang" 
+                                        data-product-id="${product.id}" 
+                                        data-product-name="${product.name}" 
+                                        data-product-price="${product.price}" 
+                                        data-product-image="${product.image}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += productHTML;
+            });
+        });
+
     </script>
 </body>
 </html>
