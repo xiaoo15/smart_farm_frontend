@@ -31,10 +31,33 @@ function initializeApp() {
   initializeActiveNavlink();
 }
 
-/**
- * [FUNGSI BARU] Tempat semua event listener untuk navbar.
- * Fungsi ini HARUS dipanggil SETELAH header selesai dimuat.
- */
+function loadComponent(componentPath, placeholderId) {
+  const placeholder = document.getElementById(placeholderId);
+  if (!placeholder) {
+    // Jika placeholder tidak ditemukan, langsung selesaikan promise-nya.
+    console.warn(`Placeholder dengan ID "${placeholderId}" tidak ditemukan.`);
+    return Promise.resolve();
+  }
+
+  // Ambil konten dari file HTML
+  return fetch(componentPath)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Gagal memuat komponen: ${componentPath}`);
+      }
+      return response.text();
+    })
+    .then(html => {
+      // Masukkan konten HTML ke dalam placeholder
+      placeholder.innerHTML = html;
+    })
+    .catch(error => {
+      console.error(`Error saat memuat ${componentPath}:`, error);
+      // Jika gagal, mungkin tampilkan pesan error di placeholder
+      placeholder.innerHTML = `<p class="text-danger text-center">Gagal memuat komponen.</p>`;
+    });
+}
+
 function initializeNavbarEventListeners() {
   const mobileMenuToggle = document.querySelector(".navbar-toggler");
   const navbarCollapse = document.getElementById("navbarNav");
@@ -124,42 +147,36 @@ function forceRemovePreloader() {
   }
 }
 
+/**
+ * [FINAL-FIX] Menginisialisasi semua fungsi navbar, search, dan user.
+ */
 function initializeNavbarAndSearch() {
-  // --- Logika Menampilkan Menu User atau Tombol Login ---
-  const userSectionContainer = document.getElementById("user-section-container");
-  if (userSectionContainer) {
-    if (isAuthenticated()) {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      const firstName = currentUser ? currentUser.name.split(" ")[0] : "User";
-
-      userSectionContainer.innerHTML = `
-        <div class="user-dropdown">
-          <a href="#" class="nav-link">
-            <i class="far fa-user-circle me-1"></i>
-            <span>Halo, ${firstName}!</span>
-            <i class="fas fa-chevron-down ms-1"></i>
-          </a>
-          <div class="dropdown-content">
-            <a href="profile.html"><i class="fas fa-user-edit"></i> Profil Saya</a>
-            <a href="orders.html"><i class="fas fa-box"></i> Pesananku</a>
-            <hr>
-            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Keluar</a>
-          </div>
-        </div>
-      `;
-
-      const logoutBtn = document.getElementById("logout-btn");
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          localStorage.removeItem("isLoggedIn");
-          localStorage.removeItem("currentUser");
-          showNotification("Kamu berhasil keluar.", "info");
-          setTimeout(() => (window.location.href = "login.html"), 1500);
-        });
-      }
+  // --- Logika User Login & Logout ---
+  if (isAuthenticated()) {
+    // Kalau user sudah login, kita langsung cari tombol logout & sapaan nama.
+    const logoutBtn = document.getElementById("logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("currentUser");
+        showNotification("Kamu berhasil keluar.", "success");
+        setTimeout(() => (window.location.href = "index.html"), 1500);
+      });
     }
-    // Jika tidak login, biarkan tombol default "Daftar / Masuk" dari HTML
+
+    // INI DIA KUNCI BIAR NAMANYA MUNCUL
+    try {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        const userGreetingSpan = document.querySelector("#user-greeting span");
+        
+        if (userGreetingSpan && currentUser && currentUser.name) {
+            const firstName = currentUser.name.split(" ")[0]; // Ambil nama depan
+            userGreetingSpan.textContent = `Halo, ${firstName}!`; // Ganti tulisannya!
+        }
+    } catch(e) {
+        console.error("Gagal memuat data user:", e);
+    }
   }
 
   // --- Logika untuk Search Overlay (di HP) ---
@@ -245,7 +262,7 @@ function displaySearchResults(products, container) {
   }
 
   const resultsHTML = products
-    .slice(0, 5)
+    .slice(0, 5) // Tetap batasi 5 hasil biar nggak kepanjangan
     .map(
       (product) => `
       <a href="product_detail.html?id=${product.id}" class="search-result-item">
@@ -253,11 +270,15 @@ function displaySearchResults(products, container) {
           <div class="item-info">
               <p class="item-name mb-0">${product.name}</p>
               <p class="item-category mb-0 text-capitalize">${product.category}</p>
+              
+              <p class="item-price mb-0">Rp ${product.price.toLocaleString('id-ID')}</p> 
+              
           </div>
       </a>
-  `
+    `
     )
     .join("");
+
   container.innerHTML = resultsHTML;
 }
 
