@@ -17,16 +17,490 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/public_style.css" />
+
+    <style>
+
+      /* Header */
+      #header-placeholder {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .navbar-brand img {
+        height: 35px;
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        color: var(--dark);
+      }
+
+      .navbar-nav .nav-link.active {
+        color: var(--primary);
+      }
+
+      /* Main Content */
+      .main-content {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+      }
+
+      /* Page Header */
+      .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 1.5rem 1rem;
+        background: linear-gradient(135deg, var(--primary-light) 0%, #fff 100%);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+      }
+
+      .page-header .subtitle {
+        font-size: 1rem;
+        color: var(--gray);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Contact Content */
+      .contact-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      /* Contact Grid */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      /* Contact Info */
+      .contact-info {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        height: fit-content;
+        order: 2;
+      }
+
+      .contact-info h3 {
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .contact-info h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background-color: var(--secondary);
+        border-radius: 2px;
+      }
+
+      .contact-info > p {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .info-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .info-list li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.25rem;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+      }
+
+      .info-list li:hover {
+        background-color: var(--primary-light);
+        transform: translateY(-3px);
+      }
+
+      .info-list li i {
+        background-color: var(--primary-light);
+        color: var(--primary);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+      }
+
+      .info-list li div {
+        flex: 1;
+      }
+
+      .info-list li strong {
+        display: block;
+        margin-bottom: 0.3rem;
+        color: var(--dark);
+        font-size: 0.95rem;
+      }
+
+      .info-list li a,
+      .info-list li div {
+        font-size: 0.9rem;
+      }
+
+      .info-list li a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: var(--transition);
+        word-break: break-all;
+      }
+
+      .info-list li a:hover {
+        color: var(--secondary);
+      }
+
+      /* Contact Form */
+      .contact-form {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        order: 1;
+      }
+
+      .contact-form h3 {
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .contact-form h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background-color: var(--secondary);
+        border-radius: 2px;
+      }
+
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--dark);
+        font-size: 0.95rem;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(44, 113, 96, 0.1);
+      }
+
+      .btn-smartfarm-primary {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .btn-smartfarm-primary:hover {
+        background-color: #235347;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(44, 113, 96, 0.2);
+      }
+
+      /* Map Section */
+      .map-section {
+        margin-top: 2rem;
+      }
+
+      .map-section h3 {
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        text-align: center;
+      }
+
+      .map-container {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+
+      /* Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeInUp {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      /* Success Message */
+      .success-message {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .success-message.show {
+        display: flex;
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      /* MOBILE OPTIMIZATIONS */
+      @media (min-width: 576px) {
+        .page-header {
+          padding: 2rem 1.5rem;
+        }
+
+        .page-header h1 {
+          font-size: 2.2rem;
+        }
+
+        .contact-info,
+        .contact-form {
+          padding: 2rem;
+        }
+
+        .btn-smartfarm-primary {
+          width: auto;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .main-content {
+          padding-top: 2rem;
+          padding-bottom: 3rem;
+        }
+
+        .page-header {
+          margin-bottom: 3rem;
+          padding: 2.5rem 2rem;
+        }
+
+        .page-header h1 {
+          font-size: 2.5rem;
+        }
+
+        .page-header .subtitle {
+          font-size: 1.2rem;
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+        }
+
+        .contact-info {
+          order: 1;
+        }
+
+        .contact-form {
+          order: 2;
+        }
+
+        .contact-info h3,
+        .contact-form h3,
+        .map-section h3 {
+          font-size: 1.8rem;
+        }
+
+        .info-list li i {
+          width: 50px;
+          height: 50px;
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .navbar-brand img {
+          height: 40px;
+        }
+
+        .contact-info,
+        .contact-form {
+          padding: 2.5rem;
+        }
+      }
+
+      /* Touch-friendly improvements for mobile */
+      @media (max-width: 767px) {
+        .navbar-nav .nav-link {
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #f0f0f0;
+        }
+
+        .navbar-nav .nav-link:last-child {
+          border-bottom: none;
+        }
+
+        .info-list li {
+          flex-direction: column;
+          text-align: center;
+          padding: 1.25rem;
+        }
+
+        .info-list li i {
+          margin-right: 0;
+          margin-bottom: 0.75rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          padding: 0.875rem;
+          font-size: 16px; /* Prevents zoom on iOS */
+        }
+
+        .map-container iframe {
+          height: 350px;
+        }
+
+        /* Improve button tap targets */
+        .btn-smartfarm-primary {
+          min-height: 50px;
+        }
+      }
+
+      /* Extra small devices */
+      @media (max-width: 375px) {
+        .page-header {
+          padding: 1.25rem 0.75rem;
+        }
+
+        .page-header h1 {
+          font-size: 1.75rem;
+        }
+
+        .contact-info,
+        .contact-form {
+          padding: 1.25rem;
+        }
+
+        .info-list li {
+          padding: 1rem 0.75rem;
+        }
+
+        .map-container iframe {
+          height: 300px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="preloader">
       <div class="spinner"></div>
     </div>
-    
-    <div id="header-placeholder"></div>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img
+              src="https://via.placeholder.com/150x50?text=SmartFarm"
+              alt="SmartFarm Logo"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="#">Beranda</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Tentang</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Produk</a></li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Hubungi Kami</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
 
     <main class="main-content">
-      <div class="container page-header">
+      <div class="container page-header animate-fadeInUp">
         <h1>Punya Pertanyaan?</h1>
         <p class="subtitle">
           Jangan ragu untuk menghubungi kami. Tim SmartFarm siap membantu!
@@ -35,7 +509,10 @@
 
       <div class="container contact-content">
         <div class="contact-grid">
-          <div class="contact-info">
+          <div
+            class="contact-info animate-fadeInUp"
+            style="animation-delay: 0.2s"
+          >
             <h3>Informasi Kontak</h3>
             <p>
               Kami senang mendengar darimu! Pilih cara yang paling nyaman untuk
@@ -77,9 +554,13 @@
             </ul>
           </div>
 
-          <div class="contact-form">
+          <div
+            class="contact-form animate-fadeInUp"
+            style="animation-delay: 0.4s"
+          >
             <h3>Kirim Pesan Langsung</h3>
-            <form action="#" method="POST" data-contact> <div class="form-group">
+            <form id="contactForm" action="#" method="POST">
+              <div class="form-group">
                 <label for="name">Nama Lengkap</label>
                 <input type="text" id="name" name="name" required />
               </div>
@@ -100,12 +581,19 @@
                   required
                 ></textarea>
               </div>
-              <button type="submit" class="btn-smartfarm-primary">Kirim Pesan</button>
+              <button type="submit" class="btn-smartfarm-primary">
+                <i class="fas fa-paper-plane"></i>
+                Kirim Pesan
+              </button>
+              <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                Pesan Anda berhasil dikirim! Kami akan segera merespons.
+              </div>
             </form>
           </div>
         </div>
 
-        <div class="map-section">
+        <div class="map-section animate-fadeInUp" style="animation-delay: 0.6s">
           <h3>Temukan Lokasi Kami</h3>
           <div class="map-container">
             <iframe
@@ -122,8 +610,52 @@
       </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <div id="footer-placeholder"></div>
-
     <script src="assets/js/public_script.js"></script>
+
+    <script>
+      // Preloader
+      window.addEventListener("load", function () {
+        const preloader = document.getElementById("preloader");
+        setTimeout(function () {
+          preloader.style.display = "none";
+        }, 800);
+      });
+
+      // Form submission
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Simulate form submission
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+          submitBtn.disabled = true;
+
+          setTimeout(function () {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+
+            // Show success message
+            const successMessage = document.getElementById("successMessage");
+            successMessage.classList.add("show");
+
+            // Reset form
+            document.getElementById("contactForm").reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(function () {
+              successMessage.classList.remove("show");
+            }, 5000);
+          }, 2000);
+        });
+    </script>
   </body>
 </html>
