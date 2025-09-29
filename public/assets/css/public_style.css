@@ -207,31 +207,48 @@ body {
 /* RESPONSIVE NAVBAR */
 /* =================================================================== */
 @media (max-width: 991px) {
-  body {
-    padding-top: 75px; /* Padding lebih kecil di mobile */
-  }
-  .top-header {
-    display: none; /* Sembunyikan top header di mobile */
-  }
+  /*
+    Karena struktur HTML sudah benar (nav di atas banner),
+    CSS-nya menjadi jauh lebih sederhana.
+  */
+
+  /* 1. Atur posisi navigasi utama agar tetap menempel di paling atas layar. */
   .main-header {
-    top: 0; /* Navbar nempel paling atas di mobile */
+    top: 0;
   }
+
+  /* 2. Atur posisi banner promo agar menempel TEPAT DI BAWAH navigasi utama. */
+  .top-header {
+    display: block !important; /* Paksa banner untuk selalu tampil */
+    text-align: center; /* Teks promo jadi di tengah */
+    position: fixed;
+    top: 75px; /* Jarak dari atas seukuran tinggi navbar. Sesuaikan jika perlu. */
+    left: 0;
+    width: 100%;
+    z-index: 999; /* Pastikan z-index lebih rendah dari navbar utama */
+  }
+  
+  /* 3. Beri ruang di atas konten halaman agar tidak tertutup oleh DUA header tersebut. */
+  body {
+    padding-top: 112px !important; /* Total tinggi navbar (75px) + banner (37px) */
+  }
+
+  /* --- Style lain yang sudah ada agar tetap berfungsi --- */
   .navbar-collapse {
     margin-top: 15px;
     border-top: 1px solid var(--border-color);
     padding-top: 10px;
   }
   .header-icons {
-    margin-left: auto; /* Pindahin ikon ke paling kanan di mobile */
+    margin-left: auto;
   }
   .navbar-nav .nav-link::after {
-    left: 16px; /* Atur posisi dari kiri, sesuaikan dengan padding */
-    transform: translateX(0); /* Hapus transform yang membuatnya ke tengah */
+    left: 16px;
+    transform: translateX(0);
   }
-
   .navbar-nav .nav-link:hover::after,
   .navbar-nav .nav-link.active::after {
-    width: 25px; /* Pastikan lebarnya tetap sama */
+    width: 25px;
   }
 }
 /* =================================================================== */
@@ -1348,7 +1365,7 @@ p.product-price {
 .hero-product-focused {
   background-color: var(
     --primary-light
-  ); /* Latar belakang pakai hijau paling muda */
+  ); /* Latar belakang pakai hijau paling muda */ 
 }
 
 .hero-product-focused .hero-image-full {
