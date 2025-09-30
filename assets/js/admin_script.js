@@ -793,5 +793,6 @@ setInterval(() => {
     });
 }, 5000); // Update setiap 5 detik
 
+
 // --- [SELESAI] KODE FINAL ANTI-FRUSTRASI (GAYA SUBSCRIBE COUNT) ---
 
