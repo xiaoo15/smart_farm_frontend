@@ -258,7 +258,7 @@ const observerOptions = {
     document.querySelectorAll('.stat-card-modern, .dashboard-card').forEach(card => {
         observer.observe(card);
     });
-    // --- FUNGSI SEARCH INTERAKTIF ---
+
     const searchableSections = {
       "sales statistics": "sales-statistics-card",
       sales: "sales-statistics-card",
@@ -730,13 +730,7 @@ const observerOptions = {
 
 // --- [MULAI] KODE FINAL ANTI-FRUSTRASI (GAYA SUBSCRIBE COUNT) ---
 
-/**
- * Menganimasikan angka dari nilai awal ke nilai akhir dengan cepat.
- * @param {HTMLElement} element - Elemen h3 yang menampilkan angka.
- * @param {number} start - Angka awal.
- * @param {number} end - Angka tujuan.
- * @param {number} duration - Durasi animasi dalam milidetik.
- */
+
 function animateCounter(element, start, end, duration) {
     let startTime = null;
 
