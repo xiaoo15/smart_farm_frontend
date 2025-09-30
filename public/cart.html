@@ -291,6 +291,12 @@
 
       /* --- Mobile (Layar Kecil, < 768px) --- */
       @media (max-width: 767.98px) {
+        main.container {
+    /* Beri padding langsung ke container utama, bukan ke body */
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
         .cart-header {
           flex-direction: column;
           align-items: flex-start;

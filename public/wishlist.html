@@ -208,7 +208,7 @@
       </div>
 
       <div
-        class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"
+        class="row row-cols-2 row-cols-lg-4 g-4"
         id="wishlist-container"
       >
         <div class="col">
@@ -286,60 +286,63 @@
 
           wishlistedProducts.forEach((product) => {
             // Kita pakai template dari product-card-offer biar konsisten
-            const cardHTML = `
-                    <div class="col d-flex">
-                        <div class="product-card-offer h-100">
-                            <div class="product-image-wrapper">
-                                <a href="product_detail.html?id=${product.id}">
-                                    <img src="${product.image}" alt="${
-              product.name
-            }" loading="lazy"/>
-                                </a>
-                                ${
-                                  product.badge
-                                    ? `<div class="product-badge ${product.badge.class}">${product.badge.text}</div>`
-                                    : ""
-                                }
-                                <div class="product-actions">
-                                    <button class="action-btn remove-from-wishlist" title="Hapus dari Wishlist" data-product-id="${
-                                      product.id
-                                    }" data-product-name="${product.name}">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <p class="product-category">${
-                                  product.category
-                                }</p>
-                                <h3 class="product-title"><a href="product_detail.html?id=${
-                                  product.id
-                                }">${product.name}</a></h3>
-                                <div class="product-price-action mt-auto">
-                                    <p class="product-price">
-                                        ${
-                                          product.originalPrice
-                                            ? `<span class="price-original">Rp ${product.originalPrice.toLocaleString(
-                                                "id-ID"
-                                              )}</span>`
-                                            : ""
-                                        }
-                                        Rp ${product.price.toLocaleString(
-                                          "id-ID"
-                                        )}
-                                    </p>
-                                    <button class="btn-add-cart-icon" title="Tambah ke Keranjang" 
-                                        data-product-id="${product.id}" 
-                                        data-product-name="${product.name}" 
-                                        data-product-price="${product.price}" 
-                                        data-product-image="${product.image}">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+            // GANTI cardHTML YANG LAMA DENGAN INI:
+
+const cardHTML = `
+    <div class="col d-flex">
+        <div class="product-card-offer h-100">
+            <div class="product-image-wrapper">
+                <a href="product_detail.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy"/>
+                </a>
+                ${
+                  product.badge
+                    ? `<div class="product-badge ${product.badge.class}">${product.badge.text}</div>`
+                    : ""
+                }
+                <div class="product-actions">
+                    <button class="action-btn remove-from-wishlist" title="Hapus dari Wishlist" data-product-id="${
+                      product.id
+                    }" data-product-name="${product.name}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button class="btn-add-cart-icon btn-cart-mobile" title="Tambah ke Keranjang" 
+                    data-product-id="${product.id}" 
+                    data-product-name="${product.name}" 
+                    data-product-price="${product.price}" 
+                    data-product-image="${product.image}">
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </div>
+            <div class="product-info">
+                <p class="product-category">${product.category}</p>
+                <h3 class="product-title"><a href="product_detail.html?id=${
+                  product.id
+                }">${product.name}</a></h3>
+                <div class="product-price-action mt-auto">
+                    <p class="product-price">
+                        ${
+                          product.originalPrice
+                            ? `<span class="price-original">Rp ${product.originalPrice.toLocaleString(
+                                "id-ID"
+                              )}</span>`
+                            : ""
+                        }
+                        Rp ${product.price.toLocaleString("id-ID")}
+                    </p>
+                    <button class="btn-add-cart-icon btn-cart-desktop" title="Tambah ke Keranjang" 
+                        data-product-id="${product.id}" 
+                        data-product-name="${product.name}" 
+                        data-product-price="${product.price}" 
+                        data-product-image="${product.image}">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
             wishlistContainer.innerHTML += cardHTML;
           });
         }

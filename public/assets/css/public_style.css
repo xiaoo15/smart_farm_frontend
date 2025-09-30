@@ -25,9 +25,7 @@
   --font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-html, body {
-    overflow-x: hidden;
-}
+
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -4023,12 +4021,17 @@ body {
     url("https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070")
       center/cover no-repeat fixed; /* Efek parallax 'fixed' */
   border-radius: 0 0 50px 50px;
-  margin-bottom: 3rem;
   color: #fff;
 }
+
+.main-content {
+  overflow-x: hidden;
+}
+
 .page-hero .subtitle {
   opacity: 0.9;
 }
+
 
 /* --- Konten Tentang Kami --- */
 .about-section .about-image {
@@ -4667,3 +4670,34 @@ body {
         display: flex;
         animation: fadeInUp 0.5s ease-out;
       }
+      
+      .btn-cart-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Sembunyikan tombol versi PC */
+  .btn-cart-desktop {
+    display: none;
+  }
+
+  /* Tampilkan tombol versi HP */
+  .btn-cart-mobile {
+    display: flex; /* atau 'block' */
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Jadikan area gambar sebagai patokan posisi */
+  .product-image-wrapper {
+    position: relative;
+  }
+
+  /* Posisikan tombol HP di pojok kanan bawah gambar */
+  .btn-cart-mobile {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 5;
+  }
+}

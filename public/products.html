@@ -153,7 +153,7 @@
             </div>
           </div>
           <div
-            class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"
+            class="row row-cols-2 row-cols-md-2 row-cols-xl-3 g-4"
             id="product-list"
           ></div>
         </div>
@@ -649,55 +649,59 @@
 
             // [LANGKAH 3] Terapkan class dan style yang sudah kita tentukan ke tombol wishlist
             const productCardHTML = `
-            <div class="col product-item">
-                <div class="product-card-offer h-100">
-                    <div class="product-image-wrapper">
-                        <a href="product_detail.html?id=${
-                          product.id
-                        }"><img src="${product.image}" alt="${
-              product.name
-            }"/></a>
-                        ${badgeHTML}
-                        <div class="product-actions">
-                            <button 
-                                class="action-btn" 
-                                title="Tambah ke Wishlist"
-                                data-product-id="${product.id}"
-                                data-product-name="${product.name}"
-                                ${heartStyle} 
-                            >
-                                <i class="${heartIconClass} fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <p class="product-category">${
-                          product.category.charAt(0).toUpperCase() +
-                          product.category.slice(1)
-                        }</p>
-                        <h3 class="product-title"><a href="product_detail.html?id=${
-                          product.id
-                        }">${product.name}</a></h3>
-                        <div class="d-flex align-items-center mb-2">
-                            <div class="product-rating">${ratingStars}</div>
-                            <small class="product-sold ms-2">(${
-                              product.sold
-                            } terjual)</small>
-                        </div>
-                        <div class="product-price-action mt-auto">
-                            <p class="product-price">${priceHTML}</p>
-                            <button 
-                                class="btn-add-cart-icon" 
-                                title="Tambah ke Keranjang"
-                                data-product-id="${product.id}"
-                                data-product-name="${product.name}"
-                                data-product-price="${product.price}"
-                                data-product-image="${product.image}"
-                            ><i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+<div class="col product-item">
+    <div class="product-card-offer h-100">
+        <div class="product-image-wrapper">
+            <a href="product_detail.html?id=${product.id}"><img src="${product.image}" alt="${product.name}"/></a>
+            ${badgeHTML}
+            <div class="product-actions">
+                <button 
+                    class="action-btn" 
+                    title="Tambah ke Wishlist"
+                    data-product-id="${product.id}"
+                    data-product-name="${product.name}"
+                    ${heartStyle} 
+                >
+                    <i class="${heartIconClass} fa-heart"></i>
+                </button>
+            </div>
+            <button 
+                class="btn-add-cart-icon btn-cart-mobile" 
+                title="Tambah ke Keranjang"
+                data-product-id="${product.id}"
+                data-product-name="${product.name}"
+                data-product-price="${product.price}"
+                data-product-image="${product.image}"
+            ><i class="fas fa-shopping-cart"></i></button>
+        </div>
+        <div class="product-info">
+            <p class="product-category">${
+              product.category.charAt(0).toUpperCase() +
+              product.category.slice(1)
+            }</p>
+            <h3 class="product-title"><a href="product_detail.html?id=${
+              product.id
+            }">${product.name}</a></h3>
+            <div class="d-flex align-items-center mb-2">
+                <div class="product-rating">${ratingStars}</div>
+                <small class="product-sold ms-2">(${
+                  product.sold
+                } terjual)</small>
+            </div>
+            <div class="product-price-action mt-auto">
+                <p class="product-price">${priceHTML}</p>
+                <button 
+                    class="btn-add-cart-icon btn-cart-desktop" 
+                    title="Tambah ke Keranjang"
+                    data-product-id="${product.id}"
+                    data-product-name="${product.name}"
+                    data-product-price="${product.price}"
+                    data-product-image="${product.image}"
+                ><i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+    </div>
+</div>`;
             productListContainer.innerHTML += productCardHTML;
           });
         }
