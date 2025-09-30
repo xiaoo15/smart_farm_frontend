@@ -91,7 +91,7 @@
                 <div class="section-header">
                     <h4 class="mb-0"><i class="fas fa-dollar-sign text-primary me-2"></i>Analisis Pendapatan</h4>
                     <div class="d-flex align-items-center">
-                        <div class="form-check form-switch me-3">
+                        <div class="form-check form-switch me-3 d-none d-md-flex">
                             <input class="form-check-input" type="checkbox" role="switch" id="revenue-chart-toggle">
                             <label class="form-check-label" for="revenue-chart-toggle">Ganti ke Bar</label>
                         </div>
@@ -133,7 +133,7 @@
                 <div class="section-header">
                     <h4 class="mb-0"><i class="fas fa-shopping-cart text-info me-2"></i>Analisis Penjualan</h4>
                     <div class="d-flex align-items-center">
-                         <div class="form-check form-switch me-3">
+                         <div class="form-check form-switch me-3 d-none d-md-flex">
                             <input class="form-check-input" type="checkbox" role="switch" id="sales-chart-toggle">
                             <label class="form-check-label" for="sales-chart-toggle">Ganti ke Bar</label>
                         </div>
@@ -175,7 +175,7 @@
                 <div class="section-header">
                     <h4 class="mb-0"><i class="fas fa-box-open text-warning me-2"></i>Analisis Produk</h4>
                     <div class="d-flex align-items-center">
-                        <div class="form-check form-switch me-3">
+                        <div class="form-check form-switch me-3 d-none d-md-flex">
                             <input class="form-check-input" type="checkbox" role="switch" id="product-chart-toggle">
                             <label class="form-check-label" for="product-chart-toggle">Ganti ke Bar</label>
                         </div>
@@ -206,7 +206,7 @@
                 <div class="section-header">
                     <h4 class="mb-0"><i class="fas fa-chart-bar text-primary me-2"></i>Ringkasan Penjualan Produk</h4>
                     <div class="d-flex align-items-center">
-                        <div class="form-check form-switch me-3">
+                        <div class="form-check form-switch me-3 d-none d-md-flex">
                             <input class="form-check-input" type="checkbox" role="switch" id="dynamic-chart-toggle">
                             <label class="form-check-label" for="dynamic-chart-toggle">Ganti ke Bar</label>
                         </div>
@@ -240,7 +240,7 @@
                 <div class="section-header">
                     <h4 class="mb-0"><i class="fas fa-money-bill-wave text-success me-2"></i>Analisis Pengeluaran</h4>
                     <div class="d-flex align-items-center">
-                        <div class="form-check form-switch me-3">
+                        <div class="form-check form-switch me-3 d-none d-md-flex">
                             <input class="form-check-input" type="checkbox" role="switch" id="expenses-chart-toggle">
                             <label class="form-check-label" for="expenses-chart-toggle">Ganti ke Bar</label>
                         </div>
@@ -351,7 +351,6 @@
                 document.getElementById('revenue-growth').textContent = data.growth;
                 revenueChart.config.type = revenueChartType;
                 const dataset = data.datasets[0];
-                // PERUBAHAN: Warna latar belakang bar atau area line yang lebih transparan
                 dataset.backgroundColor = revenueChartType === 'bar' ? 'rgba(13, 110, 253, 0.6)' : 'rgba(13, 110, 253, 0.2)';
                 revenueChart.data = { labels: data.labels, datasets: [dataset] };
                 revenueChart.update();
@@ -365,7 +364,6 @@
                 document.getElementById('sales-canceled').textContent = data.canceled;
                 salesDetailChart.config.type = salesChartType;
                 const dataset = data.datasets[0];
-                // PERUBAHAN: Warna latar belakang bar atau area line yang lebih transparan
                 dataset.backgroundColor = salesChartType === 'bar' ? 'rgba(13, 202, 240, 0.6)' : 'rgba(13, 202, 240, 0.2)';
                 salesDetailChart.data = { labels: data.labels, datasets: [dataset] };
                 salesDetailChart.update();
@@ -389,7 +387,6 @@
                         label: 'Penjualan',
                         data: data.categories.data,
                         borderColor: '#ffc107',
-                        // PERUBAHAN: Warna latar belakang bar atau area line yang lebih transparan
                         backgroundColor: productChartType === 'bar' ? 'rgba(255, 193, 7, 0.6)' : 'rgba(255, 193, 7, 0.2)',
                         fill: true,
                         tension: 0.4
@@ -415,7 +412,6 @@
                         label: 'Pengeluaran',
                         data: data.chart.data,
                         borderColor: '#198754',
-                        // PERUBAHAN: Warna latar belakang bar atau area line yang lebih transparan
                         backgroundColor: expensesChartType === 'bar' ? 'rgba(25, 135, 84, 0.6)' : 'rgba(25, 135, 84, 0.2)',
                         fill: true,
                         tension: 0.4
@@ -434,7 +430,6 @@
                         label: 'Jumlah Penjualan',
                         data: data.chartData,
                         borderColor: '#0d6efd',
-                        // PERUBAHAN: Warna latar belakang bar atau area line yang lebih transparan
                         backgroundColor: dynamicChartType === 'bar' ? 'rgba(13, 110, 253, 0.6)' : 'rgba(13, 110, 253, 0.2)',
                         fill: true,
                         tension: 0.4
