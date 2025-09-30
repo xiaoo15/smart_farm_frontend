@@ -144,8 +144,8 @@
                                         </select>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="COD" id="paymentCOD">
-                                        <label class="form-check-label" for="paymentCOD">
+                                        <input class="form-check-input" type="checkbox" value="Cash" id="paymentCash">
+                                        <label class="form-check-label" for="paymentCash">
                                             Cash / Tunai
                                         </label>
                                     </div>
@@ -251,7 +251,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="button" class="btn btn-primary-custom" id="mark-as-paid-btn">Tandai sebagai Lunas</button>
                 </div>
             </div>
@@ -313,6 +313,10 @@
         const saveOrderBtn = document.getElementById('save-order-btn');
         const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
         const proofModal = new bootstrap.Modal(document.getElementById('proofModal'));
+
+        const paymentBankSelect = document.getElementById('paymentBank');
+        const paymentEwalletSelect = document.getElementById('paymentEwallet');
+        const paymentCashCheckbox = document.getElementById('paymentCash');
         
         let currentOrderItems = [];
 
@@ -387,6 +391,42 @@
                 renderOrderItems();
             }
         });
+        
+        paymentBankSelect.addEventListener('change', function() {
+            if (this.value !== 'none') {
+                paymentEwalletSelect.value = 'none';
+                paymentCashCheckbox.checked = false;
+                paymentEwalletSelect.disabled = true;
+                paymentCashCheckbox.disabled = true;
+            } else {
+                paymentEwalletSelect.disabled = false;
+                paymentCashCheckbox.disabled = false;
+            }
+        });
+
+        paymentEwalletSelect.addEventListener('change', function() {
+            if (this.value !== 'none') {
+                paymentBankSelect.value = 'none';
+                paymentCashCheckbox.checked = false;
+                paymentBankSelect.disabled = true;
+                paymentCashCheckbox.disabled = true;
+            } else {
+                paymentBankSelect.disabled = false;
+                paymentCashCheckbox.disabled = false;
+            }
+        });
+
+        paymentCashCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                paymentBankSelect.value = 'none';
+                paymentEwalletSelect.value = 'none';
+                paymentBankSelect.disabled = true;
+                paymentEwalletSelect.disabled = true;
+            } else {
+                paymentBankSelect.disabled = false;
+                paymentEwalletSelect.disabled = false;
+            }
+        });
 
         saveOrderBtn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -395,25 +435,18 @@
                 return;
             }
 
-            const selectedBank = document.getElementById('paymentBank').value;
-            const selectedEwallet = document.getElementById('paymentEwallet').value;
-            const isCOD = document.getElementById('paymentCOD').checked;
+            const selectedBank = paymentBankSelect.value;
+            const selectedEwallet = paymentEwalletSelect.value;
+            const isCash = paymentCashCheckbox.checked;
 
-            if (selectedBank === 'none' && selectedEwallet === 'none' && !isCOD) {
-                Swal.fire('Gagal!', 'Pilih salah satu metode pembayaran (Bank, E-wallet, atau COD).', 'error');
+            if (selectedBank === 'none' && selectedEwallet === 'none' && !isCash) {
+                Swal.fire('Gagal!', 'Pilih salah satu metode pembayaran (Bank, E-wallet, atau Tunai).', 'error');
                 return;
             }
             
-            if (isCOD) {
-                 Swal.fire({
-                    title: 'Order COD Dibuat!',
-                    text: 'Order baru dengan metode COD berhasil dibuat.',
-                    icon: 'success',
-                    timer: 2000,
-                    showConfirmButton: false
-                }).then(() => {
-                    window.location.href = 'orders.html';
-                });
+            if (isCash) {
+                prepareProofModal();
+                proofModal.show();
                 return;
             }
 
@@ -452,8 +485,6 @@
 
         document.getElementById('mark-as-paid-btn').addEventListener('click', function() {
             paymentModal.hide();
-            
-            // Siapkan dan tampilkan modal bukti pembayaran
             prepareProofModal();
             proofModal.show();
         });
@@ -463,7 +494,6 @@
             const now = new Date();
             const orderId = `SF-${now.getTime()}`;
             
-            // Isi detail dasar
             let detailsHtml = `
                 <div class="d-flex justify-content-between"><p>ID Pesanan:</p><p>${orderId}</p></div>
                 <div class="d-flex justify-content-between"><p>Tanggal:</p><p>${now.toLocaleDateString('id-ID')}, ${now.toLocaleTimeString('id-ID')}</p></div>
@@ -472,7 +502,6 @@
             `;
             document.getElementById('proof-details').innerHTML = detailsHtml;
 
-            // Isi item
             let itemsHtml = '';
             currentOrderItems.forEach(item => {
                 itemsHtml += `
@@ -484,7 +513,6 @@
             });
             document.getElementById('proof-items').innerHTML = itemsHtml;
 
-            // Isi Total
             const subtotalText = document.getElementById('subtotal-amount').textContent;
             const totalText = document.getElementById('total-amount').textContent;
             let totalsHtml = `
@@ -497,7 +525,6 @@
 
         document.getElementById('close-proof-btn').addEventListener('click', function() {
             proofModal.hide();
-            // Arahkan ke halaman daftar pesanan setelah bukti pembayaran ditutup
             window.location.href = 'orders.html';
         });
 
