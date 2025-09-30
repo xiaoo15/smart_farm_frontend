@@ -20,6 +20,15 @@
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
 
     <style>
+      .content-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding-top: 1.5rem;
+        padding-bottom: 10px;
+        background-color: #ffffff;
+        padding-bottom: 10px;
+      }
       .dropdown-item p {
         white-space: normal;
       }
@@ -58,38 +67,71 @@
           transform: translateY(0);
         }
       }
-      .header-actions > .form-control,
+      .header-actions > .search-wrapper,
       .header-actions > .dropdown {
         opacity: 0;
         animation: fadeInUp 0.5s ease-out forwards;
       }
-      .header-actions > .form-control {
+      .header-actions > .search-wrapper {
         animation-delay: 0.2s;
       }
       .header-actions > .dropdown {
         animation-delay: 0.4s;
         z-index: 10;
       }
+
+      /* === [BARU] CSS untuk Tampilan Mobile === */
+      @media (max-width: 767.98px) {
+        .content-header {
+          padding-top: 1.5rem;
+          padding-bottom: 10px;
+        }
+        .header-actions {
+          width: 100%;
+          margin-top: 1rem; /* Memberi jarak dari sub-judul */
+        }
+        .header-actions .search-wrapper {
+          flex-grow: 1; /* Membuat kolom search memanjang */
+        }
+        .header-actions .dropdown {
+          margin-left: 0.5rem; /* Memberi jarak antara search dan dropdown */
+        }
+      }
+      /* === Selesai CSS Tampilan Mobile === */
+      .dashboard-card .table th,
+      .dashboard-card .table td {
+        text-align: left;
+        vertical-align: middle; /* Memastikan konten selaras di tengah secara vertikal */
+      }
     </style>
   </head>
   <body>
+
+    <div id="preloader">
+    <div class="spinner"></div>
+</div>
+
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
 
       <div class="main-content">
-        <header class="content-header">
+        <header
+          class="content-header d-flex flex-wrap justify-content-between align-items-center"
+        >
           <div class="header-welcome">
             <h2>Dashboard</h2>
             <p>Here's what's happening with your store today.</p>
           </div>
-          <div class="header-actions d-flex align-items-center">
-            <input
-              type="text"
-              class="form-control me-2"
-              placeholder="Cari di dashboard..."
-              id="searchInput"
-            />
+          <div class="header-actions d-flex align-items-center gap-2">
+            <div class="search-wrapper">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Cari di dashboard..."
+                id="searchInput"
+              />
+            </div>
             <div class="dropdown">
               <button
                 class="btn btn-light position-relative"
@@ -176,75 +218,100 @@
         </header>
 
         <div class="row">
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card stat-card-modern">
-            <a href="analytic.html#revenue-filter-group" class="stat-card-link">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <a
+                href="analytic.html#revenue-filter-group"
+                class="stat-card-link"
+              >
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div class="icon-wrapper primary-bg">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                        <span class="badge badge-success-light"><i class="fas fa-arrow-up"></i> 20%</span>
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper primary-bg">
+                      <i class="fas fa-dollar-sign"></i>
                     </div>
-                    <p class="card-title-modern">Total Revenue</p>
-                    <h3 class="card-value-modern" data-value="2635262">$0</h3>
-                    <p class="card-text-modern text-muted">in last week</p>
+                    <span class="badge badge-success-light"
+                      ><i class="fas fa-arrow-up"></i> 20%</span
+                    >
+                  </div>
+                  <p class="card-title-modern">Total Revenue</p>
+                  <h3 class="card-value-modern" data-value="2635262">$0</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card stat-card-modern">
-            <a href="analytic.html#sales-filter-group" class="stat-card-link">
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <a href="analytic.html#sales-filter-group" class="stat-card-link">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div class="icon-wrapper info-bg">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                        </div>
-                        <span class="badge badge-danger-light"><i class="fas fa-arrow-down"></i> 1.8%</span>
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper info-bg">
+                      <i class="fas fa-file-invoice-dollar"></i>
                     </div>
-                    <p class="card-title-modern">Total Sales</p>
-                    <h3 class="card-value-modern" data-value="5635262">$0</h3>
-                    <p class="card-text-modern text-muted">in last week</p>
+                    <span class="badge badge-danger-light"
+                      ><i class="fas fa-arrow-down"></i> 1.8%</span
+                    >
+                  </div>
+                  <p class="card-title-modern">Total Sales</p>
+                  <h3 class="card-value-modern" data-value="5635262">$0</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card stat-card-modern">
-            <a href="analytic.html#dynamic-product-filter" class="stat-card-link">
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <a
+                href="analytic.html#dynamic-product-filter"
+                class="stat-card-link"
+              >
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div class="icon-wrapper warning-bg">
-                            <i class="fas fa-box-open"></i>
-                        </div>
-                        <span class="badge badge-warning-light"><i class="fas fa-arrow-up"></i> 1.8%</span>
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper warning-bg">
+                      <i class="fas fa-box-open"></i>
                     </div>
-                    <p class="card-title-modern">Total Products</p>
-                    <h3 class="card-value-modern" data-value="4262">0</h3>
-                    <p class="card-text-modern text-muted">in last week</p>
+                    <span class="badge badge-warning-light"
+                      ><i class="fas fa-arrow-up"></i> 1.8%</span
+                    >
+                  </div>
+                  <p class="card-title-modern">Total Products</p>
+                  <h3 class="card-value-modern" data-value="4262">0</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card stat-card-modern">
-            <a href="analytic.html#expenses-filter-group" class="stat-card-link">
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card stat-card-modern">
+              <a
+                href="analytic.html#expenses-filter-group"
+                class="stat-card-link"
+              >
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div class="icon-wrapper success-bg">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <span class="badge badge-success-light"><i class="fas fa-arrow-up"></i> 1.2%</span>
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div class="icon-wrapper success-bg">
+                      <i class="fas fa-money-bill-wave"></i>
                     </div>
-                    <p class="card-title-modern">Total Expenses</p>
-                    <h3 class="card-value-modern" data-value="35262">$0</h3>
-                    <p class="card-text-modern text-muted">in last week</p>
+                    <span class="badge badge-success-light"
+                      ><i class="fas fa-arrow-up"></i> 1.2%</span
+                    >
+                  </div>
+                  <p class="card-title-modern">Total Expenses</p>
+                  <h3 class="card-value-modern" data-value="35262">$0</h3>
+                  <p class="card-text-modern text-muted">in last week</p>
                 </div>
-            </a>
+              </a>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
 
         <div class="row g-4 mt-2">
           <div class="col-lg-8">
@@ -452,73 +519,79 @@
                         class="clickable-row"
                         data-href="order/order_detailRevanPutra.html"
                       >
-                        <td class="fw-bold">#876364</td>
-                        <td>Revan Putra</td>
-                        <td>Bibit Cabai</td>
-                        <td>2</td>
-                        <td class="fw-bold">Rp 50.000</td>
+                        <td data-label="Order ID" class="fw-bold">#876364</td>
+                        <td data-label="Customer">Revan Putra</td>
+                        <td data-label="Product">Bibit Cabai</td>
+                        <td data-label="Qty">2</td>
+                        <td data-label="Price" class="fw-bold">Rp 50.000</td>
                         <td>
                           <span class="badge status-badge-completed"
                             >Completed</span
                           >
                         </td>
                       </tr>
+
                       <tr
                         class="clickable-row"
                         data-href="order/order_detailCitraLestari.html"
                       >
-                        <td class="fw-bold">#876365</td>
-                        <td>Citra Lestari</td>
-                        <td>Pupuk Organik</td>
-                        <td>1</td>
-                        <td class="fw-bold">Rp 75.000</td>
+                        <td data-label="Order ID" class="fw-bold">#876365</td>
+                        <td data-label="Customer">Citra Lestari</td>
+                        <td data-label="Product">Pupuk Organik</td>
+                        <td data-label="Qty">1</td>
+                        <td data-label="Price" class="fw-bold">Rp 75.000</td>
                         <td>
                           <span class="badge status-badge-pending"
                             >Pending</span
                           >
                         </td>
                       </tr>
+
                       <tr
                         class="clickable-row"
                         data-href="order/order_detailAndiBudi.html"
                       >
-                        <td class="fw-bold">#876366</td>
-                        <td>Andi Budi</td>
-                        <td>Alat Siram</td>
-                        <td>1</td>
-                        <td class="fw-bold">Rp 120.000</td>
+                        <td data-label="Order ID" class="fw-bold">#876366</td>
+                        <td data-label="Customer">Andi Budi</td>
+                        <td data-label="Product">Alat Siram Modern</td>
+                        <td data-label="Qty">1</td>
+                        <td data-label="Price" class="fw-bold">Rp 120.000</td>
                         <td>
                           <span class="badge status-badge-canceled"
                             >Canceled</span
                           >
                         </td>
                       </tr>
+
                       <tr
                         class="clickable-row"
                         data-href="order/order_detailSiskaAmelia.html"
                       >
-                        <td class="fw-bold">#876367</td>
-                        <td>Siska Amelia</td>
-                        <td>Polybag (x50)</td>
-                        <td>5</td>
-                        <td class="fw-bold">Rp 25.000</td>
+                        <td data-label="Order ID" class="fw-bold">#876367</td>
+                        <td data-label="Customer">Siska Amelia</td>
+                        <td data-label="Product">Polybag (Isi 50)</td>
+                        <td data-label="Qty">5</td>
+                        <td data-label="Price" class="fw-bold">Rp 25.000</td>
                         <td>
                           <span class="badge status-badge-completed"
                             >Completed</span
                           >
                         </td>
                       </tr>
+
                       <tr
                         class="clickable-row"
                         data-href="order/order_detailArsyaAji.html"
                       >
-                        <td class="fw-bold">#876368</td>
-                        <td>Arsya Aji</td>
-                        <td>Benih Selada</td>
-                        <td>10</td>
-                        <td class="fw-bold">Rp 30.000</td>
+                        <td data-label="Order ID" class="fw-bold">#876368</td>
+                        <td data-label="Customer">Arsya Aji</td>
+                        <td data-label="Product">Benih Selada (Hydro)</td>
+                        <td data-label="Qty">10</td>
+                        <td data-label="Price" class="fw-bold">Rp 30.000</td>
                         <td>
-                          <span class="badge status-badge-pending">Pending</span>
+                          <span class="badge status-badge-pending"
+                            >Pending</span
+                          >
                         </td>
                       </tr>
                     </tbody>
@@ -656,6 +729,21 @@
               </div>
             </div>
           </div>
+          <footer class="footer footer-animated">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12 text-center">
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  © Smart Farm.
+                  <span class="d-none d-sm-inline-block"
+                    >- Design & Develop by Smart Farm.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </footer>
         </div>
       </div>
     </div>
@@ -707,6 +795,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/admin_script.js"></script>
-
   </body>
 </html>

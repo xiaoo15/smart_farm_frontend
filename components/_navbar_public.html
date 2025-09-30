@@ -38,9 +38,6 @@
             <a class="nav-link" href="products.html">Produk</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="blog.html">Blog</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="about.html">Tentang Kami</a>
           </li>
           <li class="nav-item">
@@ -48,14 +45,18 @@
           </li>
         </ul>
 
-        <form class="search-form d-none d-lg-block">
-          <input
-            class="form-control"
-            type="search"
-            placeholder="Cari produk..."
-          />
-          <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
+        <div class="search-container">
+          <form class="search-form d-none d-lg-block">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Cari produk..."
+              autocomplete="off"
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+          <div class="search-results-container"></div>
+        </div>
 
         <div class="header-icons ms-lg-3">
           <a href="#" class="header-icon d-lg-none" id="mobile-search-icon">
@@ -67,6 +68,9 @@
           <a href="cart.html" class="header-icon">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-badge">0</span>
+          </a>
+          <a href="../public/login.html " class="header-icon d-lg-none"">
+            <i class="fas fa-sign-in-alt"></i>
           </a>
         </div>
       </div>

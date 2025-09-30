@@ -32,9 +32,28 @@
       .settings-card .card-footer {
         border-top: 1px solid var(--bs-card-border-color);
       }
+      @media (max-width: 767.98px) {
+        .settings-nav {
+          display: flex;
+          flex-wrap: wrap; /* Izinkan item untuk pindah baris */
+          justify-content: space-between;
+          gap: 0.5rem; /* Jarak antar tombol */
+        }
+        .settings-nav .nav-item {
+          /* Setiap item mengambil ~48% lebar agar muat 2 per baris */
+          flex: 1 1 calc(50% - 0.25rem);
+        }
+        .settings-nav .nav-link {
+          width: 100%;
+          text-align: center;
+        }
+      } 
     </style>
   </head>
   <body>
+    <div id="preloader">
+    <div class="spinner"></div>
+</div>
     <div id="announcement-bar-container">
       <span id="announcement-bar-text"></span>
     </div>
@@ -380,6 +399,16 @@
             </div>
           </div>
         </div>
+        <footer class="footer mt-auto py-3 footer-animated">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <script>document.write(new Date().getFullYear())</script> © Smart Farm. 
+                <span class="d-none d-sm-inline-block">- Design & Develop by Smart Farm.</span>
+            </div>
+        </div>
+    </div>
+</footer> 
       </div>
     </div>
 

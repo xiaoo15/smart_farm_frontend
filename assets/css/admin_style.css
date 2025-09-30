@@ -398,7 +398,10 @@ body {
 /* =================================================================== */
 
 .stat-card-modern {
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
@@ -408,6 +411,7 @@ body {
 .stat-card-modern:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .stat-card-modern .card-body {
@@ -423,7 +427,7 @@ body {
   align-items: center;
   font-size: 1.5rem;
   color: #fff;
-  /* Opacity untuk background icon */
+  animation: breathing 5s ease-in-out infinite;
   position: relative;
 }
 
@@ -682,6 +686,80 @@ body {
   }
 }
 
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ring-bell {
+  0% {
+    transform: rotate(0);
+  }
+  10% {
+    transform: rotate(15deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  30% {
+    transform: rotate(10deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(-5deg);
+  }
+  70% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+#notificationDropdown:hover .fa-bell {
+  animation: ring-bell 1s ease-in-out;
+}
+
+.shimmer-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #e0e0e0;
+}
+
+.shimmer-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
 /* Terapkan animasi ke elemen yang kita mau */
 
 /* 1. Animasi untuk Header */
@@ -732,6 +810,34 @@ body {
   animation: fadeInUp 0.7s ease-out forwards;
   /* Muncul setelah semua kartu statistik selesai */
   animation-delay: 0.8s;
+}
+
+/* CSS untuk Animasi Intersection Observer */
+.stat-card-modern,
+.dashboard-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.stat-card-modern.is-visible,
+.dashboard-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efek jeda (staggering) untuk kartu statistik */
+.row .col-lg-3:nth-child(1) .stat-card-modern {
+  transition-delay: 0.1s;
+}
+.row .col-lg-3:nth-child(2) .stat-card-modern {
+  transition-delay: 0.2s;
+}
+.row .col-lg-3:nth-child(3) .stat-card-modern {
+  transition-delay: 0.3s;
+}
+.row .col-lg-3:nth-child(4) .stat-card-modern {
+  transition-delay: 0.4s;
 }
 
 /* =================================================================== */
@@ -816,7 +922,9 @@ body {
 
 .table tbody tr:hover {
   transform: scale(1.02);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  background-color: var(--primary-light);
+  cursor: pointer;
 }
 
 .table tbody td {
@@ -934,113 +1042,6 @@ body {
 .form-select:focus {
   border-color: #0d6efd;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-/* =================================================================== */
-/* TABLES & DATA DISPLAY */
-/* =================================================================== */
-
-.table thead th,
-.table tbody td {
-  vertical-align: middle;
-}
-
-.product-img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* Status badges */
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.3em 0.7em;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border-radius: 50px;
-}
-
-.status-badge::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 6px;
-}
-
-.status-completed {
-  color: #198754;
-  background-color: rgba(25, 135, 84, 0.1);
-}
-
-.status-completed::before {
-  background-color: #198754;
-}
-
-.status-pending {
-  color: #ffc107;
-  background-color: rgba(255, 193, 7, 0.1);
-}
-
-.status-pending::before {
-  background-color: #ffc107;
-}
-
-.status-shipped {
-  color: #0dcaf0;
-  background-color: rgba(13, 202, 240, 0.1);
-}
-
-.status-shipped::before {
-  background-color: #0dcaf0;
-}
-
-.status-failed {
-  color: #dc3545;
-  background-color: rgba(220, 53, 69, 0.1);
-}
-
-.status-failed::before {
-  background-color: #dc3545;
-}
-
-.status-cancelled {
-  color: #dc3545;
-  background-color: rgba(220, 53, 69, 0.1);
-}
-
-.status-cancelled::before {
-  background-color: #dc3545;
-}
-
-.status-delivery {
-  color: #6610f2;
-  background-color: rgba(220, 53, 69, 0.1);
-}
-
-.status-delivery::before {
-  background-color: #6610f2;
-}
-
-/* Role badges */
-.role-badge {
-  padding: 0.3em 0.7em;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border-radius: 50px;
-}
-
-.role-admin {
-  color: #0d6efd;
-  background-color: rgba(13, 110, 253, 0.1);
-}
-
-.role-customer {
-  color: #6c757d;
-  background-color: rgba(108, 117, 125, 0.1);
 }
 
 /* =================================================================== */
@@ -1503,6 +1504,95 @@ body {
 /* =================================================================== */
 /* RESPONSIVE DESIGN */
 /* =================================================================== */
+/* =================================================================== */
+/* RESPONSIVE DESIGN (VERSI PERBAIKAN FINAL) */
+/* =================================================================== */
+
+/* --- Untuk Tablet & HP (Layar di bawah 992px) --- */
+@media (max-width: 991.98px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .desktop-toggle {
+    display: none;
+  }
+
+  .hamburger-btn {
+    display: flex !important;
+  }
+}
+
+/* --- KHUSUS UNTUK HP (Layar di bawah 768px) --- */
+@media (max-width: 767.98px) {
+  /* Perbaiki padding konten utama di HP */
+  .main-content {
+    padding: 1rem;
+  }
+
+  /* --- [INI KUNCINYA] Perbaikan Tabel Orders --- */
+  /* Targetkan spesifik ke tabel order, bukan semua tabel */
+  .orders-table-new thead {
+    display: none; /* Sembunyikan header tabel */
+  }
+
+  .orders-table-new tbody tr {
+    display: block; /* Ubah baris jadi blok (kayak kartu) */
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    background-color: var(--card-bg) !important;
+  }
+
+  .orders-table-new tbody tr:hover {
+    transform: none; /* Matikan efek hover di mobile */
+  }
+
+  .orders-table-new tbody td {
+    display: flex; /* Pakai flexbox biar rapi */
+    justify-content: space-between; /* Label di kiri, value di kanan */
+    align-items: center;
+    padding: 0.6rem 0;
+    border: none;
+    text-align: right !important; /* Pastikan value rata kanan */
+  }
+
+  /* Kasih garis pemisah antar data */
+  .orders-table-new tbody td:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Membuat "pseudo-label" dari atribut data-label di HTML */
+  .orders-table-new tbody td:before {
+    content: attr(data-label); /* Ambil teks dari data-label="" */
+    font-weight: 600;
+    text-align: left;
+    color: var(--text-primary);
+    margin-right: 1rem;
+  }
+
+  /* Bikin kolom Aksi jadi di tengah */
+  .actions-cell {
+    justify-content: center;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: none;
+  }
+
+  .actions-cell::before {
+    display: none; /* Hilangkan label untuk kolom aksi */
+  }
+}
 
 @media (max-width: 992px) {
   .main-content {
@@ -1607,7 +1697,6 @@ body {
     align-items: center;
     padding: 0.5rem 0;
     border: none;
-    text-align: right;
     font-size: 1rem;
   }
 
@@ -2010,123 +2099,6 @@ body {
 }
 
 /* =================================================================== */
-/* HALAMAN ORDERS (DESAIN BARU) */
-/* =================================================================== */
-
-/* Kartu Ringkasan Order */
-.summary-card-order {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-}
-
-.summary-card-order:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.icon-wrapper-order {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.info-wrapper-order p {
-  margin-bottom: 0.25rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.info-wrapper-order h4 {
-  margin-bottom: 0;
-  font-weight: 700;
-  font-size: 1.75rem;
-  color: var(--text-primary);
-}
-
-/* Variasi Warna Kartu */
-.bg-primary-light {
-  background-color: #e3f2fd;
-}
-.bg-primary-dark .fa-box {
-  color: #1e88e5;
-}
-
-.bg-success-light {
-  background-color: #e8f5e9;
-}
-.bg-success-dark .fa-check-circle {
-  color: #43a047;
-}
-
-.bg-warning-light {
-  background-color: #fff8e1;
-}
-.bg-warning-dark .fa-hourglass-half {
-  color: #ffb300;
-}
-
-.bg-danger-light {
-  background-color: #ffebee;
-}
-.bg-danger-dark .fa-times-circle {
-  color: #e53935;
-}
-
-/* Tabel Order Baru */
-.orders-table-new thead th {
-  background-color: #f8f9fa;
-  border-bottom: 2px solid #dee2e6;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.orders-table-new tbody td {
-  vertical-align: middle;
-}
-
-.btn-icon {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f1f1f1;
-  color: #6c757d;
-  border: none;
-  transition: var(--transition);
-}
-
-.btn-icon:hover {
-  background-color: var(--primary);
-  color: #fff;
-}
-
-.input-group-text {
-  background-color: #fff;
-  border-right: 0;
-}
-.form-control {
-  border-left: 0;
-}
-.form-control:focus {
-  box-shadow: none;
-  border-color: #dee2e6;
-}
-
-/* =================================================================== */
 /* HALAMAN PENGATURAN (SETTINGS PAGE) */
 /* =================================================================== */
 
@@ -2233,6 +2205,538 @@ body {
 }
 
 /* =================================================================== */
-/* UPDATE PRODUCT ADMIN */
+/* ANIMASI UNTUK FORM EDIT PRODUCT */
 /* =================================================================== */
 
+/* Sembunyikan elemen form pada awalnya */
+.form-row-animated {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Tampilkan elemen form saat class .is-visible ditambahkan */
+.form-row-animated.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Beri jeda animasi untuk setiap baris agar muncul satu per satu (staggered) */
+.form-row-animated:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.form-row-animated:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.form-row-animated:nth-child(4) {
+  transition-delay: 0.3s;
+}
+.form-row-animated:nth-child(5) {
+  transition-delay: 0.4s;
+}
+.form-row-animated:nth-child(6) {
+  transition-delay: 0.5s;
+}
+
+/* Animasi untuk Footer */
+.footer-animated {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Mulai dari posisi sedikit di bawah */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Kembali ke posisi normal */
+  }
+}
+
+:root {
+  --border-radius: 8px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --border-color: #e0e0e0;
+  --card-bg: #ffffff;
+  --text-primary: #333333;
+  --primary-light: #e3f2fd;
+  --primary-dark: #1976d2;
+  --success-light: #e8f5e9;
+  --success-dark: #388e3c;
+  --warning-light: #fff3e0;
+  --warning-dark: #f57c00;
+  --indigo-light: #e8eaf6;
+  --indigo-dark: #3949ab;
+  --danger-light: #ffebee;
+  --danger-dark: #d32f2f;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fa;
+}
+
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.content-header h2 {
+  font-weight: 700;
+  color: #333;
+}
+
+.content-header p {
+  color: #6c757d;
+}
+
+/* Summary Cards */
+.order-summary-cards .summary-card-order {
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.order-summary-cards .icon-wrapper-order {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.order-summary-cards .info-wrapper-order p {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.order-summary-cards .info-wrapper-order h4 {
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.bg-primary-light {
+  background-color: var(--primary-light);
+}
+.bg-primary-dark {
+  background-color: var(--primary-dark);
+}
+.bg-success-light {
+  background-color: var(--success-light);
+}
+.bg-success-dark {
+  background-color: var(--success-dark);
+}
+.bg-warning-light {
+  background-color: var(--warning-light);
+}
+.bg-warning-dark {
+  background-color: var(--warning-dark);
+}
+.bg-indigo-light {
+  background-color: var(--indigo-light);
+}
+.bg-indigo-dark {
+  background-color: var(--indigo-dark);
+}
+.bg-danger-light {
+  background-color: var(--danger-light);
+}
+.bg-danger-dark {
+  background-color: var(--danger-dark);
+}
+
+/* Table Styling */
+.dashboard-card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.card-title-custom {
+  font-weight: 600;
+  color: #333;
+}
+
+.orders-table-new {
+  margin-bottom: 0;
+}
+
+.orders-table-new thead th {
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  color: #495057;
+  padding: 1rem 0.75rem;
+  background-color: #f8f9fa;
+}
+
+.orders-table-new tbody tr {
+  transition: all 0.2s;
+}
+
+.orders-table-new tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.orders-table-new tbody td {
+  padding: 1rem 0.75rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #eee;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+/* Status Badges */
+.status-badge-completed {
+  background-color: var(--success-light);
+  color: var(--success-dark);
+}
+
+.status-badge-pending {
+  background-color: var(--warning-light);
+  color: var(--warning-dark);
+}
+
+.status-badge-canceled {
+  background-color: var(--danger-light);
+  color: var(--danger-dark);
+}
+
+.status-badge-delivery {
+  background-color: var(--indigo-light);
+  color: var(--indigo-dark);
+}
+
+/* Action Buttons */
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  color: #6c757d;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Pagination */
+#pagination-nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== CSS PERBAIKAN RESPONSIVE ===== */
+/* CSS ini hanya akan aktif di layar kecil (HP) */
+@media (max-width: 767.98px) {
+  .main-content {
+    padding: 15px;
+  }
+
+  /* Header */
+  .content-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .content-header p {
+    font-size: 0.9rem;
+  }
+
+  /* Summary Cards */
+  .order-summary-cards .row {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+
+  .order-summary-cards .col {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 10px;
+  }
+
+  .order-summary-cards .summary-card-order {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .order-summary-cards .icon-wrapper-order {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .order-summary-cards .info-wrapper-order p {
+    font-size: 0.8rem;
+  }
+
+  .order-summary-cards .info-wrapper-order h4 {
+    font-size: 1.25rem;
+  }
+
+  /* Filter dan Search */
+  .card-body .d-flex.flex-wrap {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .card-body .d-flex.flex-wrap > * {
+    width: 100%;
+  }
+
+  .input-group {
+    max-width: 100% !important;
+    margin-bottom: 10px;
+  }
+
+  #order-filters {
+    width: 100% !important;
+  }
+
+  #order-filters .dropdown {
+    width: 100%;
+  }
+
+  #order-filters .dropdown-toggle {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Table Responsive */
+  .orders-table-new thead {
+    display: none;
+  }
+
+  .orders-table-new tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    background-color: var(--card-bg) !important;
+  }
+
+  .orders-table-new tbody tr:hover {
+    transform: none;
+  }
+
+  .orders-table-new tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border: none;
+    text-align: right !important;
+  }
+
+  .orders-table-new tbody td:not(:last-child) {
+    border-bottom: 1px solid #eee;
+  }
+
+  .orders-table-new tbody td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-align: left;
+    color: var(--text-primary);
+    margin-right: 1rem;
+  }
+
+  .actions-cell {
+    justify-content: center !important;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #eee;
+    border-bottom: none !important;
+  }
+
+  .actions-cell::before {
+    display: none;
+  }
+
+  .actions-cell.text-end {
+    text-align: center !important;
+  }
+
+  /* Pagination Responsive */
+  .d-flex.justify-content-between.flex-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  #pagination-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .btn-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-group .btn {
+    margin: 2px;
+  }
+
+  /* Footer */
+  .footer .text-center {
+    font-size: 0.8rem;
+  }
+}
+
+/* Untuk tablet (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .order-summary-cards .row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .order-summary-cards .col {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 15px;
+  }
+
+  .order-summary-cards .summary-card-order {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .card-body .d-flex.flex-wrap {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .card-body .d-flex.flex-wrap > * {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .input-group {
+    max-width: 100% !important;
+  }
+
+  #order-filters {
+    width: 100% !important;
+  }
+
+  #order-filters .dropdown {
+    width: 100%;
+  }
+
+  #order-filters .dropdown-toggle {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* =================================================================== */
+/* PRELOADER STYLES */
+/* =================================================================== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-color: var(--light-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+
+#preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--primary-light);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
