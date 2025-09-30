@@ -12,65 +12,357 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/admin_style.css" />
+    <link href="../assets/css/admin_style.css" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #235347;
+        --primary-light: rgba(142, 182, 155, 0.15);
+        --secondary: #0b2b26;
+        --success: #28a745;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --dark: #051f20;
+        --text-primary: #051f20;
+        --text-secondary: #5a7c6e;
+        --background: #f8faf9;
+        --card-bg: #ffffff;
+        --border-color: #e0eae5;
+        
+        --shadow-sm: 0 1px 3px rgba(5, 31, 32, 0.05);
+        --shadow-md: 0 4px 10px rgba(5, 31, 32, 0.07);
+        --border-radius: 10px;
+        --transition: all 0.3s ease;
+      }
+
+      /* Preloader */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid var(--primary-light);
+        border-top: 5px solid var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* General Styles */
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .admin-wrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 24px;
+        transition: var(--transition);
+      }
+
+      /* Header */
+      .content-header {
+        margin-bottom: 32px;
+      }
+
+      .header-welcome h2 {
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.75rem;
+      }
+
+      .header-welcome p {
+        color: var(--text-secondary);
+        margin-bottom: 0;
+      }
+
+      /* Cards */
+      .dashboard-card {
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-md);
+        background-color: var(--card-bg);
+        overflow: hidden;
+      }
+
+      .section-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+      }
+
+      .summary-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+        height: 100%;
+      }
+
+      /* Table */
+      .table-custom {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      .table-custom thead th {
+        background-color: var(--primary-light);
+        color: var(--text-primary);
+        font-weight: 600;
+        border-bottom: 1px solid var(--border-color);
+        padding: 16px 12px;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .table-custom tbody tr {
+        transition: var(--transition);
+      }
+
+      .table-custom tbody tr:hover {
+        background-color: var(--primary-light);
+      }
+
+      .table-custom tbody td {
+        padding: 16px 12px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-secondary);
+      }
+
+      /* Product Image */
+      .product-image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+      }
+
+      /* Info Cards */
+      .info-card {
+        background-color: var(--primary-light);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid var(--primary);
+      }
+
+      /* Buttons */
+      .btn-success {
+        background-color: var(--success);
+        border-color: var(--success);
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 12px 20px;
+        transition: var(--transition);
+      }
+
+      .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      .btn-outline-danger {
+        color: var(--danger);
+        border-color: var(--danger);
+        border-radius: 8px;
+        font-weight: 500;
+        padding: 12px 20px;
+        transition: var(--transition);
+      }
+
+      .btn-outline-danger:hover {
+        background-color: var(--danger);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 40px;
+        color: var(--text-secondary);
+        padding: 20px 0;
+      }
+
+      /* Typography */
+      .section-title {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .section-title i {
+        margin-right: 10px;
+        color: var(--primary);
+      }
+
+      /* Status Badge */
+      .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 50px;
+        background-color: var(--warning);
+        color: var(--dark);
+      }
+
+      /* Back Button */
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: 24px;
+        transition: var(--transition);
+      }
+
+      .back-button:hover {
+        color: var(--primary);
+      }
+
+      /* Cost Summary */
+      .cost-summary {
+        border-top: 1px solid var(--border-color);
+        padding-top: 16px;
+        margin-top: 16px;
+      }
+
+      .cost-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        color: var(--text-secondary);
+      }
+
+      .cost-total {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border-color);
+        font-weight: 700;
+        color: var(--text-primary);
+        font-size: 1.125rem;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 16px;
+        }
+        
+        .section-card, .summary-card {
+          padding: 16px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="preloader">
-    <div class="spinner"></div>
-</div>
+      <div class="spinner"></div>
+    </div>
     <div class="admin-wrapper">
       <div id="sidebar-container"></div>
       <div id="overlay"></div>
       <div class="main-content" id="mainContent">
         <header class="content-header">
+          <a href="orders.html" class="back-button">
+            <i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Pesanan
+          </a>
           <div class="header-welcome">
-            <h2 class="mb-0" id="main-header">Konfirmasi Pesanan...</h2>
+            <h2 class="mb-2" id="main-header">Konfirmasi Pesanan...</h2>
             <p class="text-muted" id="sub-header">
               Periksa detail dan konfirmasi pesanan...
             </p>
           </div>
         </header>
+        
         <section class="content-section">
-          <div class="card dashboard-card">
-            <div class="card-body p-4">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="section-card">
+                <h5 class="section-title">
+                  <i class="fas fa-shopping-bag"></i>Detail Pesanan
+                </h5>
+                <div class="table-responsive">
+                  <table class="table table-custom">
+                    <thead>
+                      <tr>
+                        <th style="width: 60%">Produk</th>
+                        <th class="text-center">Jumlah</th>
+                        <th class="text-end">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody id="product-details"></tbody>
+                  </table>
+                </div>
+              </div>
+              
               <div class="row">
-                <div class="col-lg-7">
-                  <h5 class="mb-3">Detail Pesanan</h5>
-                  <div class="table-responsive">
-                    <table class="table align-middle">
-                      <thead>
-                        <tr>
-                          <th style="width: 60%">Produk</th>
-                          <th class="text-center">Jumlah</th>
-                          <th class="text-end">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="product-details"></tbody>
-                    </table>
-                  </div>
-                  <hr class="my-4" />
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h6 class="mb-3">Alamat Pengiriman</h6>
-                      <address id="shipping-address"></address>
-                    </div>
-                    <div class="col-md-6">
-                      <h6 class="mb-3">Metode Pembayaran</h6>
-                      <p id="payment-method"></p>
-                    </div>
+                <div class="col-md-6">
+                  <div class="info-card">
+                    <h6 class="mb-3"><i class="fas fa-truck me-2"></i>Alamat Pengiriman</h6>
+                    <address id="shipping-address"></address>
                   </div>
                 </div>
-                <div class="col-lg-5 bg-light p-4 rounded">
-                  <h5 class="mb-3">Ringkasan Biaya</h5>
-                  <ul
-                    class="list-group list-group-flush"
-                    id="cost-summary"
-                  ></ul>
-                  <hr />
+                <div class="col-md-6">
+                  <div class="info-card">
+                    <h6 class="mb-3"><i class="fas fa-credit-card me-2"></i>Metode Pembayaran</h6>
+                    <p id="payment-method"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-4">
+              <div class="summary-card">
+                <h5 class="section-title">
+                  <i class="fas fa-receipt"></i>Ringkasan Biaya
+                </h5>
+                <div id="cost-summary">
+                  <!-- Content will be populated by JavaScript -->
+                </div>
+                
+                <div class="mt-4 pt-3 border-top">
                   <div class="d-grid gap-2">
-                    <button id="confirm-button" class="btn btn-success btn-lg">
-                      <i class="fas fa-check-circle me-2"></i>Konfirmasi &
-                      Proses Pesanan
+                    <button id="confirm-button" class="btn btn-primary-custom btn-lg">
+                      <i class="fas fa-check-circle me-2"></i>Konfirmasi & Proses Pesanan
                     </button>
                     <a href="orders.html" class="btn btn-outline-danger">
                       <i class="fas fa-times-circle me-2"></i>Kembali
@@ -81,28 +373,34 @@
             </div>
           </div>
         </section>
-        <footer class="footer mt-auto py-3 footer-animated">
+        
+        <footer class="footer">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-12 text-center">
+              <div class="col-12 text-center text-muted">
                 <script>
                   document.write(new Date().getFullYear());
                 </script>
-                © Smart Farm.
-                <span class="d-none d-sm-inline-block"
-                  >- Design & Develop by Smart Farm.</span
-                >
+                © Smart Farm - Design & Develop by Smart Farm.
               </div>
             </div>
           </div>
         </footer>
       </div>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/admin_script.js"></script>
+    
     <script>
+      // Preloader
       document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          document.getElementById("preloader").style.display = "none";
+        }, 500);
+        
+        // Kode JavaScript yang sudah ada
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get("orderId");
         const customerName = urlParams.get("customerName");
@@ -123,16 +421,31 @@
 
         document.getElementById(
           "product-details"
-        ).innerHTML = `<tr><td><div class="d-flex align-items-center"><img src="https://via.placeholder.com/60" class="rounded me-3" alt="Produk" /><div><h6 class="mb-0">Item Pesanan (Contoh)</h6><small class="text-muted">SKU: GEN-001</small></div></div></td><td class="text-center">1</td><td class="text-end fw-bold">${orderTotal}</td></tr>`;
+        ).innerHTML = `<tr><td><div class="d-flex align-items-center"><img src="https://via.placeholder.com/60" class="rounded me-3 product-image" alt="Produk" /><div><h6 class="mb-0">Item Pesanan (Contoh)</h6><small class="text-muted">SKU: GEN-001</small></div></div></td><td class="text-center">1</td><td class="text-end fw-bold">${orderTotal}</td></tr>`;
         document.getElementById(
           "shipping-address"
         ).innerHTML = `<strong>${customerName}</strong><br />Alamat Lengkap...<br />Kota, Provinsi, Kodepos...<br /><i class="fas fa-phone me-2"></i>081234567890`;
         document.getElementById(
           "payment-method"
         ).innerHTML = `<i class="fas fa-credit-card me-2"></i>QRIS<br /><span class="text-muted">A/N ${customerName}</span>`;
+        
+        // Update cost summary with better styling
         document.getElementById(
           "cost-summary"
-        ).innerHTML = `<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0">Subtotal <span>${orderTotal}</span></li><li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0">Pengiriman <span>Rp 0</span></li><li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0 border-top pt-3"><strong class="h5">Total</strong><strong class="h5">${orderTotal}</strong></li>`;
+        ).innerHTML = `
+          <div class="cost-item">
+            <span>Subtotal</span>
+            <span>${orderTotal}</span>
+          </div>
+          <div class="cost-item">
+            <span>Pengiriman</span>
+            <span>Rp 15.000</span>
+          </div>
+          <div class="cost-total">
+            <span>Total</span>
+            <span>Rp 175.000</span>
+          </div>
+        `;
 
         const confirmButton = document.getElementById("confirm-button");
         confirmButton.addEventListener("click", function (event) {
