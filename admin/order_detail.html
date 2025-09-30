@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Detail Pesanan</title>
-    <link
+     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
@@ -12,33 +12,233 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../assets/css/admin_style.css" />
-  </head>
-  <style>
-    @keyframes fadeInUp {
-      from {
+    <style>
+      :root {
+        /* PALET WARNA BARU KAMU */
+        --primary: #235347; /* Hijau Tua untuk tombol, link aktif, dan highlight */
+        --primary-light: rgba(142, 182, 155, 0.2); /* Versi terang dari card-bg untuk hover */
+        --secondary: #0b2b26; /* Hijau Sangat Tua untuk sidebar/header */
+        --success: #28a745; /* Tetap pakai hijau standar untuk notif sukses */
+        --info: #17a2b8;
+        --warning: #ffc107;
+        --danger: #dc3545; /* Tetap pakai merah standar untuk notif error */
+        --light: #f8f9fa;
+        --dark: #051f20; /* Hijau Paling Gelap untuk Teks */
+        --text-primary: #051f20; /* Teks utama jadi hijau paling gelap */
+        --text-secondary: #163832; /* Teks sekunder/abu-abu jadi hijau lebih terang */
+        --background: #ffffff; /* Latar Belakang Utama (Hijau Paling Terang) */
+        --card-bg: #ffffff; /* Kartu kita buat putih bersih agar konten menonjol */
+        --border-color: #8eb69b; /* Warna Border (Hijau Abu-abu) */
+
+        /* Properti lainnya tetap sama */
+        --shadow-sm: 0 1px 3px rgba(5, 31, 32, 0.05);
+        --shadow-md: 0 4px 10px rgba(5, 31, 32, 0.07);
+        --shadow-lg: 0 10px 15px rgba(5, 31, 32, 0.1);
+        --border-radius: 12px;
+        --transition: all 0.3s ease;
+        --sidebar-width: 250px;
+        --sidebar-collapsed-width: 64px;
+      }
+
+      
+
+      /* Gaya Umum */
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .admin-wrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 20px;
+        transition: var(--transition);
+      }
+
+      /* Header */
+      .content-header {
+        margin-bottom: 30px;
+        
+      }
+
+      .header-welcome h2 {
+        color: var(--text-primary);
+        font-weight: 700;
+      }
+
+      .header-welcome p {
+        color: var(--text-secondary);
+      }
+
+      /* Dashboard Card */
+      .dashboard-card {
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-sm);
+        background-color: var(--card-bg);
+      }
+
+      /* Tabel */
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      table thead th {
+        background-color: var(--primary-light);
+        color: var(--text-primary);
+        font-weight: 600;
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px 15px;
+      }
+
+      table tbody tr {
+        transition: var(--transition);
+      }
+
+      table tbody tr:hover {
+        background-color: var(--primary-light);
+      }
+
+      table tbody td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-secondary);
+      }
+
+      
+
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      /* Tombol */
+      .btn-outline-danger {
+        color: var(--danger);
+        border-color: var(--danger);
+        transition: var(--transition);
+      }
+
+      .btn-outline-danger:hover {
+        background-color: var(--danger);
+        color: white;
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 30px;
+        color: var(--text-secondary);
+      }
+
+      /* Animasi */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .content-section,
+      .btn-outline-danger {
         opacity: 0;
-        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .btn-outline-danger {
+        animation-delay: 0.2s;
       }
-    }
 
-    /* Terapkan animasi ke elemen pembungkus utama dan tombol */
-    .content-section,
-    .btn-outline-danger {
-      opacity: 0;
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
+      /* Custom untuk halaman detail */
+      .order-status-badge {
+        display: inline-block;
+        padding: 0.35em 0.65em;
+        font-size: 0.75em;
+        font-weight: 600;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 50rem;
+        color: white;
+      }
 
-    /* Beri sedikit jeda agar tombol muncul setelah card */
-    .btn-outline-danger {
-      animation-delay: 0.2s;
-    }
-    /* --- AKHIR STYLE ANIMASI --- */
-  </style>
+      .status-completed {
+        background-color: var(--success);
+      }
+
+      .status-pending {
+        background-color: var(--warning);
+        color: var(--dark);
+      }
+
+      .status-canceled {
+        background-color: var(--danger);
+      }
+
+      .status-delivery {
+        background-color: var(--primary);
+      }
+
+      .cost-summary-card {
+        background-color: var(--primary-light);
+        border-radius: var(--border-radius);
+        padding: 20px;
+      }
+
+      .product-image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .address-card {
+        background-color: var(--primary-light);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .payment-method-card {
+        background-color: var(--primary-light);
+        border-radius: var(--border-radius);
+        padding: 20px;
+      }
+
+      .section-title {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
   <body>
     <div id="preloader">
       <div class="spinner"></div>
@@ -48,89 +248,107 @@
       <div id="overlay"></div>
       <div class="main-content" id="mainContent">
         <header class="content-header">
-          <div class="header-welcome">
-            <h2 class="mb-0" id="main-header">Detail Pesanan...</h2>
-            <p class="text-muted" id="sub-header">
-              Detail pesanan atas nama...
-            </p>
+          <div class="header-welcome d-flex justify-content-between align-items-start">
+            <div>
+              <h2 class="mb-0" id="main-header">Detail Pesanan...</h2>
+              <p class="text-muted" id="sub-header">
+                Detail pesanan atas nama...
+              </p>
+            </div>
+           
           </div>
-          <a href="orders.html" class="btn btn-outline-danger mb-4"
-            ><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Pesanan</a
-          >
+           <a href="orders.html"class="btn btn-outline-danger mb-4"
+              ><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Pesanan</a
+            >
         </header>
+        
         <section class="content-section">
           <div class="card dashboard-card">
             <div class="card-body p-4">
               <div class="row">
+                <!-- Kolom kiri: Detail produk dan informasi pengiriman -->
                 <div class="col-lg-7">
-                  <h5 class="mb-3">Item yang Dipesan</h5>
-                  <div class="table-responsive">
-                    <table class="table align-middle">
-                      <thead>
-                        <tr>
-                          <th style="width: 60%">Produk</th>
-                          <th class="text-center">Jumlah</th>
-                          <th class="text-end">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="product-details"></tbody>
-                    </table>
+                  <!-- Detail Produk -->
+                  <div class="mb-5">
+                    <h5 class="section-title">Item yang Dipesan</h5>
+                    <div class="table-responsive">
+                      <table class="table align-middle">
+                        <thead>
+                          <tr>
+                            <th style="width: 60%">Produk</th>
+                            <th class="text-center">Jumlah</th>
+                            <th class="text-end">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody id="product-details"></tbody>
+                      </table>
+                    </div>
                   </div>
-                  <hr class="my-4" />
+                  
+                  <!-- Informasi Pengiriman dan Pembayaran -->
                   <div class="row">
                     <div class="col-md-6">
-                      <h6 class="mb-3">Alamat Pengiriman</h6>
-                      <address id="shipping-address"></address>
+                      <div class="address-card">
+                        <h6 class="mb-3"><i class="fas fa-truck me-2"></i>Alamat Pengiriman</h6>
+                        <address id="shipping-address"></address>
+                      </div>
                     </div>
                     <div class="col-md-6">
-                      <h6 class="mb-3">Metode Pembayaran</h6>
-                      <p id="payment-method"></p>
+                      <div class="payment-method-card">
+                        <h6 class="mb-3"><i class="fas fa-credit-card me-2"></i>Metode Pembayaran</h6>
+                        <p id="payment-method"></p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-5 bg-light p-4 rounded">
-                  <h5 class="mb-3">Ringkasan Biaya</h5>
-                  <ul
-                    class="list-group list-group-flush"
-                    id="cost-summary"
-                  ></ul>
+                
+                <!-- Kolom kanan: Ringkasan biaya -->
+                <div class="col-lg-5">
+                  <div class="cost-summary-card h-100">
+                    <h5 class="section-title">Ringkasan Biaya</h5>
+                    <ul class="list-group list-group-flush" id="cost-summary"></ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <footer class="footer mt-auto py-3 footer-animated">
+        
+        <footer class="footer mt-auto py-3">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-12 text-center">
+              <div class="col-12 text-center text-muted">
                 <script>
                   document.write(new Date().getFullYear());
                 </script>
-                © Smart Farm.
-                <span class="d-none d-sm-inline-block"
-                  >- Design & Develop by Smart Farm.</span
-                >
+                © Smart Farm - Design & Develop by Smart Farm.
               </div>
             </div>
           </div>
         </footer>
       </div>
     </div>
+    
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="../assets/js/admin_script.js"></script>
+    
     <script>
+      // Preloader
       document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          document.getElementById("preloader").style.display = "none";
+        }, 500);
+        
+        // Kode JavaScript yang sudah ada
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get("orderId");
         const customerName = urlParams.get("customerName");
         const orderDate = urlParams.get("orderDate");
         const orderTotal = urlParams.get("orderTotal");
         const status = urlParams.get("status");
-
-        if (!orderId) {
-          window.location.href = "orders.html";
-          return;
-        }
 
         // --- Memperbarui Tampilan dengan Data Dinamis ---
         document.getElementById(
@@ -142,7 +360,7 @@
 
         document.getElementById(
           "product-details"
-        ).innerHTML = `<tr><td><div class="d-flex align-items-center"><img src="https://via.placeholder.com/60" class="rounded me-3" alt="Produk" /><div><h6 class="mb-0">Item Pesanan (Contoh)</h6><small class="text-muted">SKU: GEN-001</small></div></div></td><td class="text-center">1</td><td class="text-end fw-bold">${orderTotal}</td></tr>`;
+        ).innerHTML = `<tr><td><div class="d-flex align-items-center"><img src="https://via.placeholder.com/60" class="rounded me-3 product-image" alt="Produk" /><div><h6 class="mb-0">Item Pesanan (Contoh)</h6><small class="text-muted">SKU: GEN-001</small></div></div></td><td class="text-center">1</td><td class="text-end fw-bold">${orderTotal}</td></tr>`;
         document.getElementById(
           "shipping-address"
         ).innerHTML = `<strong>${customerName}</strong><br />Alamat Lengkap Pelanggan...<br />Kota, Provinsi, Kodepos...<br /><i class="fas fa-phone me-2"></i>081234567890`;

@@ -5,26 +5,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 :root {
-  /* PALET WARNA BARU KAMU */
   --primary: #235347; /* Hijau Tua untuk tombol, link aktif, dan highlight */
   --primary-light: rgba(
     142,
     182,
     155,
     0.2
-  ); /* Versi terang dari card-bg untuk hover */
-  --secondary: #0b2b26; /* Hijau Sangat Tua untuk sidebar/header */
-  --success: #28a745; /* Tetap pakai hijau standar untuk notif sukses */
+  ); 
+  --secondary: #0b2b26; 
+  --success: #28a745;
   --info: #17a2b8;
   --warning: #ffc107;
-  --danger: #dc3545; /* Tetap pakai merah standar untuk notif error */
+  --danger: #dc3545; 
   --light: #f8f9fa;
-  --dark: #051f20; /* Hijau Paling Gelap untuk Teks */
-  --text-primary: #051f20; /* Teks utama jadi hijau paling gelap */
-  --text-secondary: #163832; /* Teks sekunder/abu-abu jadi hijau lebih terang */
-  --background: #ffffff; /* Latar Belakang Utama (Hijau Paling Terang) */
-  --card-bg: #ffffff; /* Kartu kita buat putih bersih agar konten menonjol */
-  --border-color: #8eb69b; /* Warna Border (Hijau Abu-abu) */
+  --dark: #051f20; 
+  --text-primary: #051f20; 
+  --text-secondary: #163832; 
+  --background: #ffffff; 
+  --card-bg: #ffffff; 
+  --border-color: #8eb69b; 
 
   /* Properti lainnya tetap sama */
   --shadow-sm: 0 1px 3px rgba(5, 31, 32, 0.05);
