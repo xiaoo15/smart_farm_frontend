@@ -395,87 +395,54 @@
     <script src="../assets/js/admin_script.js"></script>
     
     <script>
-      // Preloader
-      document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-          document.getElementById("preloader").style.display = "none";
-        }, 500);
-        
-        // Kode JavaScript yang sudah ada
+    // SEMUA KODE LAMA DIGANTI DENGAN INI
+    document.addEventListener("DOMContentLoaded", function () {
+        // Ambil data dari URL
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get("orderId");
         const customerName = urlParams.get("customerName");
-        const orderDate = urlParams.get("orderDate");
-        const orderTotal = urlParams.get("orderTotal");
-
+        
         if (!orderId) {
-          window.location.href = "orders.html";
-          return;
+            window.location.href = "orders.html";
+            return;
         }
 
-        document.getElementById(
-          "main-header"
-        ).textContent = `Konfirmasi Pesanan ${orderId}`;
-        document.getElementById(
-          "sub-header"
-        ).textContent = `Periksa detail pesanan dari ${customerName}.`;
-
-        document.getElementById(
-          "product-details"
-        ).innerHTML = `<tr><td><div class="d-flex align-items-center"><img src="https://i.pinimg.com/736x/6f/53/d3/6f53d305e8360ac42ed9f689b2b6e14a.jpg" class="rounded me-3 product-image" alt="Produk" /><div><h6 class="mb-0">Item Pesanan (Contoh)</h6><small class="text-muted">SKU: GEN-001</small></div></div></td><td class="text-center">1</td><td class="text-end fw-bold">${orderTotal}</td></tr>`;
-        document.getElementById(
-          "shipping-address"
-        ).innerHTML = `<strong>${customerName}</strong><br />Alamat Lengkap...<br />Kota, Provinsi, Kodepos...<br /><i class="fas fa-phone me-2"></i>081234567890`;
-        document.getElementById(
-          "payment-method"
-        ).innerHTML = `<i class="fas fa-credit-card me-2"></i>QRIS<br /><span class="text-muted">A/N ${customerName}</span>`;
+        // Update tampilan header
+        document.getElementById("main-header").textContent = `Konfirmasi Pesanan ${orderId}`;
+        document.getElementById("sub-header").textContent = `Periksa detail pesanan dari ${customerName}.`;
         
-        // Update cost summary with better styling
-        document.getElementById(
-          "cost-summary"
-        ).innerHTML = `
-          <div class="cost-item">
-            <span>Subtotal</span>
-            <span>${orderTotal}</span>
-          </div>
-          <div class="cost-item">
-            <span>Pengiriman</span>
-            <span>Rp 15.000</span>
-          </div>
-          <div class="cost-total">
-            <span>Total</span>
-            <span>Rp 175.000</span>
-          </div>
-        `;
-
+        // --- INI BAGIAN PENTINGNYA ---
         const confirmButton = document.getElementById("confirm-button");
         confirmButton.addEventListener("click", function (event) {
-          event.preventDefault();
+            event.preventDefault();
 
-          // Simpan pembaruan status ke localStorage agar halaman orders.html tahu
-          localStorage.setItem("adminUpdatedOrderId", orderId);
-          localStorage.setItem("adminUpdatedOrderStatus", "delivery");
+            // 1. Ambil semua data order dari localStorage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            
+            // 2. Cari order yang mau kita update berdasarkan ID-nya
+            const orderIndex = orders.findIndex(order => order.id === orderId);
 
-          Swal.fire({
-            title: "Berhasil!",
-            text: `Pesanan ${orderId} telah dikonfirmasi.`,
-            icon: "success",
-            confirmButtonText: "OK, Lihat Struk",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // Buat URL untuk struk dengan semua data yang diperlukan
-              const strukParams = new URLSearchParams({
-                orderId: orderId,
-                customerName: customerName,
-                orderDate: orderDate,
-                orderTotal: orderTotal,
-              });
-              // Arahkan ke halaman struk
-              window.location.href = `struk.html?${strukParams.toString()}`;
+            // 3. Kalo ketemu, UPDATE statusnya jadi "delivery"
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = "delivery";
             }
-          });
+
+            // 4. Simpen lagi data yang udah di-update ke localStorage
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // 5. Tampilkan notif sukses dan redirect ke halaman struk (seperti kode lama)
+            Swal.fire({
+                title: "Berhasil Dikonfirmasi!",
+                text: `Status pesanan ${orderId} telah diubah menjadi "Delivery".`,
+                icon: "success",
+                confirmButtonText: "OK, Lanjutkan",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `struk.html?${urlParams.toString()}`;
+                }
+            });
         });
-      });
-    </script>
+    });
+</script>
   </body>
 </html>

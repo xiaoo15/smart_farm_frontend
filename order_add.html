@@ -446,6 +446,122 @@
     <script src="assets/js/admin_script.js"></script>
 
     <script>
+      
+    // SEMUA KODE LAMA DIGANTI DENGAN INI
+    document.addEventListener("DOMContentLoaded", function() {
+        // Inisialisasi data produk dan elemen-elemen form
+        const allProducts = [{ id: 1, name: "HydroKit Mini Starter", price: 185000 }, { id: 7, name: "HydroTower Vertical Garden", price: 750000 }, { id: 8, name: "Dutch Bucket System (5 Pot)", price: 450000 }, { id: 15, name: "Window Farm Kit", price: 250000 }, { id: 2, name: "Caladium Red Star", price: 75000 }, { id: 6, name: "Monstera Deliciosa", price: 125000 }, { id: 9, name: "Sansevieria Trifasciata", price: 60000 }, { id: 10, name: "Alocasia Black Velvet", price: 150000 }, { id: 3, name: "Bibit Selada Romaine (Hydro)", price: 25000 }, { id: 11, name: "Benih Kangkung Bangkok", price: 12000 }, { id: 12, name: "Benih Tomat Cherry Super", price: 30000 }, { id: 18, name: "Bibit Strawberry California", price: 45000 }, { id: 4, name: "Nutrisi AB Mix Premium", price: 45000 }, { id: 13, name: "Pupuk Organik Cair (POC)", price: 35000 }, { id: 14, name: "Root Booster Super", price: 55000 }, { id: 20, name: "Kalsium Nitrat (KNO3)", price: 28000 }, { id: 5, name: "Rockwool Cultilene", price: 15000 }, { id: 16, name: "Hydroton Jerman", price: 35000 }, { id: 17, name: "Cocopeat Blok Premium", price: 22000 }, { id: 19, name: "Sekam Bakar Fermentasi", price: 18000 }];
+        const productSelect = document.getElementById("product-select");
+        const addProductBtn = document.getElementById("add-product-btn");
+        const orderItemsTable = document.getElementById("order-items-table");
+        const noItemsRow = document.getElementById("no-items-row");
+        const saveOrderBtn = document.getElementById("save-order-btn");
+        let currentOrderItems = [];
+
+        // Isi dropdown produk
+        productSelect.innerHTML = "<option selected disabled>Pilih sebuah produk...</option>";
+        allProducts.forEach(p => {
+            productSelect.innerHTML += `<option value="${p.id}">${p.name} - Rp ${p.price.toLocaleString("id-ID")}</option>`;
+        });
+
+        document.getElementById("orderDate").valueAsDate = new Date();
+
+        function renderOrderItems() {
+            if (currentOrderItems.length === 0) {
+                noItemsRow.style.display = "table-row";
+                orderItemsTable.innerHTML = "";
+                orderItemsTable.appendChild(noItemsRow);
+            } else {
+                noItemsRow.style.display = "none";
+                orderItemsTable.innerHTML = "";
+                currentOrderItems.forEach((item, index) => {
+                    const subtotal = item.price * item.quantity;
+                    const row = `<tr><td><div class="fw-bold">${item.name}</div><small class="text-muted">@ Rp ${item.price.toLocaleString("id-ID")}</small></td><td class="text-center" style="width: 80px;">${item.quantity}</td><td class="text-end fw-bold" style="width: 150px;">Rp ${subtotal.toLocaleString("id-ID")}</td><td class="text-end" style="width: 50px;"><button type="button" class="btn btn-icon btn-sm text-danger remove-item-btn" data-index="${index}" title="Hapus item"><i class="fas fa-trash-alt"></i></button></td></tr>`;
+                    orderItemsTable.innerHTML += row;
+                });
+            }
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const isCash = document.getElementById("paymentCash").checked;
+            const subtotal = currentOrderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const shipping = isCash ? 0 : 15000;
+            const total = subtotal + shipping;
+            document.getElementById("subtotal-amount").textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
+            document.getElementById("shipping-amount").textContent = `Rp ${shipping.toLocaleString("id-ID")}`;
+            document.getElementById("total-amount").textContent = `Rp ${total.toLocaleString("id-ID")}`;
+        }
+
+        addProductBtn.addEventListener("click", function() {
+            const productId = parseInt(productSelect.value);
+            const quantity = parseInt(document.getElementById("product-quantity").value);
+            if (isNaN(productId) || isNaN(quantity) || quantity < 1) {
+                Swal.fire("Oops!", "Pilih produk dan tentukan jumlahnya dulu ya.", "warning");
+                return;
+            }
+            const product = allProducts.find(p => p.id === productId);
+            const existingItem = currentOrderItems.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                currentOrderItems.push({ id: product.id, name: product.name, price: product.price, quantity: quantity });
+            }
+            renderOrderItems();
+        });
+
+        orderItemsTable.addEventListener("click", function(e) {
+            const removeBtn = e.target.closest(".remove-item-btn");
+            if (removeBtn) {
+                const indexToRemove = parseInt(removeBtn.dataset.index);
+                currentOrderItems.splice(indexToRemove, 1);
+                renderOrderItems();
+            }
+        });
+        
+        // --- INI BAGIAN PENTINGNYA ---
+        saveOrderBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const customerName = document.getElementById("customerName").value;
+            const orderDate = new Date(document.getElementById("orderDate").value);
+            const orderStatus = document.getElementById("orderStatus").value;
+
+            if (!customerName || currentOrderItems.length === 0) {
+                Swal.fire("Gagal!", "Nama customer dan minimal 1 produk wajib diisi!", "error");
+                return;
+            }
+
+            // 1. Ambil data order yang ada dari localStorage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            // 2. Buat objek order baru
+            const newOrder = {
+                id: `#${Math.floor(100000 + Math.random() * 900000)}`, // ID Acak
+                customer: customerName,
+                date: orderDate.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/\./g, ''),
+                total: document.getElementById('total-amount').textContent,
+                status: orderStatus
+            };
+
+            // 3. Tambahkan order baru ke daftar
+            orders.push(newOrder);
+
+            // 4. Simpen lagi daftarnya ke localStorage
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // 5. Kasih notifikasi sukses dan redirect
+            Swal.fire({
+                title: "Berhasil Dibuat!",
+                text: `Order baru untuk ${customerName} telah disimpan.`,
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = "orders.html";
+            });
+        });
+    });
+
       function getSampleProducts() {
         return [
           { id: 1, name: "HydroKit Mini Starter", price: 185000 },
@@ -782,6 +898,8 @@
             window.location.href = "orders.html";
           });
       });
+
+      
     </script>
   </body>
 </html>

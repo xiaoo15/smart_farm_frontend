@@ -153,6 +153,91 @@
         </div>
       </div>
     </div>
-    <script src="assets/js/admin_script.js"></script>
+<script src="assets/js/admin_script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addProductForm = document.querySelector('form');
+
+        addProductForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // 1. Ambil semua data dari form
+            const productCode = document.getElementById('productCode').value;
+            const productName = document.getElementById('productName').value;
+            const productStock = document.getElementById('productStock').value;
+            const productUnitValue = document.getElementById('productUnitValue').value;
+            const productUnitType = document.getElementById('productUnitType').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const productCategory = document.getElementById('productCategory').value;
+            const productStatus = document.querySelector('input[name="productStatus"]:checked').value;
+            const productDescription = document.getElementById('productDescription').value;
+            const productImageInput = document.getElementById('productImage');
+
+            // 2. Validasi simpel, biar ga ada yang kosong
+            if (!productCode || !productName || !productStock || !productPrice || productCategory === 'Pilih Kategori...') {
+                Swal.fire('Waduh!', 'Kode, Nama, Stok, Harga, dan Kategori wajib diisi ya!', 'error');
+                return;
+            }
+
+            // Fungsi buat nyimpen data (termasuk gambar)
+            const saveData = (imgSrc) => {
+                // Konversi kategori biar sesuai sama data-category di tabel
+                const categoryValue = {
+                    'Tanaman': 'plant',
+                    'Bibit': 'seed',
+                    'Alat': 'vegetables' // Asumsi 'Alat' pakai kategori 'vegetables'
+                }[productCategory] || 'plant';
+
+                // 3. Bikin object produk baru
+                const newProduct = {
+                    code: productCode,
+                    name: productName,
+                    jumblah: `${productStock} ${productUnitType}`,
+                    satuan: productUnitValue,
+                    price: `Rp ${parseInt(productPrice).toLocaleString('id-ID')}`,
+                    category: categoryValue,
+                    categoryDisplay: productCategory,
+                    imgSrc: imgSrc,
+                    description: productDescription,
+                    status: productStatus
+                };
+
+                // 4. Ambil data produk lama dari localStorage, tambahin yang baru, terus simpen lagi
+                let products = JSON.parse(localStorage.getItem('products')) || [];
+                // Cek dulu, jangan sampe kodenya sama
+                if (products.some(p => p.code === newProduct.code)) {
+                    Swal.fire('Oops!', `Produk dengan kode ${newProduct.code} sudah ada!`, 'error');
+                    return;
+                }
+                products.push(newProduct);
+                localStorage.setItem('products', JSON.stringify(products));
+
+                // 5. Kasih notif sukses dan lempar ke halaman produk
+                Swal.fire({
+                    title: 'Mantap!',
+                    text: 'Produk baru berhasil ditambahin.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'products.html';
+                });
+            };
+
+            // 6. Proses file gambar
+            if (productImageInput.files && productImageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    saveData(e.target.result); // Simpen data kalo gambar berhasil dibaca
+                };
+                reader.readAsDataURL(productImageInput.files[0]);
+            } else {
+                // Kalo ga ada gambar, pake gambar placeholder
+                saveData('https://via.placeholder.com/56');
+            }
+        });
+    });
+</script>
   </body>
 </html>
